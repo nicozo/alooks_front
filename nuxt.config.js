@@ -1,3 +1,5 @@
+import { EnvironmentPlugin } from "webpack";
+
 export default {
   // Disable server-side rendering: https://go.nuxtjs.dev/ssr-mode
   ssr: false,
@@ -19,12 +21,18 @@ export default {
     ]
   },
 
+  // Railsアプリのポート番号との重複を避ける
+  server: {
+    port: process.env.FRONT_PORT
+  },
+
   // Global CSS: https://go.nuxtjs.dev/config-css
   css: [
   ],
 
   // Plugins to run before rendering page: https://go.nuxtjs.dev/config-plugins
   plugins: [
+    'plugins/axios'
   ],
 
   // Auto import components: https://go.nuxtjs.dev/config-components
@@ -39,16 +47,29 @@ export default {
   // Modules: https://go.nuxtjs.dev/config-modules
   modules: [
     // https://go.nuxtjs.dev/axios
-    '@nuxtjs/axios'
+    '@nuxtjs/axios',
+    '@nuxtjs/proxy'
   ],
 
   // Axios module configuration: https://go.nuxtjs.dev/config-axios
   axios: {
     // Workaround to avoid enforcing hard-coded localhost:3000: https://github.com/nuxt-community/axios-module/issues/308
-    baseURL: '/'
+  },
+
+  proxy: {
+    '/api': {
+      target: 'http://localhost:3000',
+      pathRewrite: {
+        '^/api' : '/v1'
+      }
+    }
   },
 
   // Build Configuration: https://go.nuxtjs.dev/config-build
   build: {
+  },
+
+  env: {
+    apiUrl: process.env.API_URL
   }
 }
