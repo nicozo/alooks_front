@@ -1,34 +1,17 @@
 <template>
-  <div>
-    <button
-      type="button"
-      name="button"
-      @click="getMsg"
-    >
-      RailsからAPIを取得する
-    </button>
-    <div
-      v-for="(msg, i) in msgs"
-      :key="i"
-    >
-      {{ msg }}
-    </div>
-  </div>
+  <v-container>
+    <v-row justify="center">
+      <v-col cols="6">
+        <v-card>
+          <v-card-title>Hello, Vuetify!</v-card-title>
+        </v-card>
+      </v-col>
+    </v-row>
+  </v-container>
 </template>
 
 <script>
 export default {
-  name: 'IndexPage',
-  data () {
-    return {
-      msgs: []
-    }
-  },
-  methods: {
-    getMsg () {
-      this.$axios.$get('/api/v1/hello')
-        .then(res => this.msgs.push(res))
-    }
-  }
+  name: 'IndexPage'
 }
 </script>
