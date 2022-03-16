@@ -41,13 +41,15 @@ export default {
   // Modules for dev and build (recommended): https://go.nuxtjs.dev/config-modules
   buildModules: [
     // https://go.nuxtjs.dev/eslint
-    '@nuxtjs/eslint-module'
+    '@nuxtjs/eslint-module',
+    '@nuxtjs/vuetify'
   ],
 
   // Modules: https://go.nuxtjs.dev/config-modules
   modules: [
     // https://go.nuxtjs.dev/axios
     '@nuxtjs/axios',
+    // いらないかも
     '@nuxtjs/proxy'
   ],
 
@@ -56,6 +58,7 @@ export default {
     // Workaround to avoid enforcing hard-coded localhost:3000: https://github.com/nuxt-community/axios-module/issues/308
   },
 
+  // いらないかも
   proxy: {
     '/api': {
       target: 'http://localhost:3000',
@@ -71,5 +74,8 @@ export default {
 
   env: {
     apiUrl: process.env.API_URL
+  },
+
+  vuetify: {
   }
 }
