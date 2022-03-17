@@ -1,6 +1,8 @@
 <template>
-  <v-footer>
-    Footer
+  <v-footer
+    absolute
+  >
+    AppFooter.vue
   </v-footer>
 </template>
 
