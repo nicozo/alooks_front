@@ -1,26 +1,19 @@
 <template>
   <div>
-    <home-header
-      :appName="appName"
-    />
+    <home-header :appName="appName"/>
 
     <v-container
       fluid
       fill-height
       class="hero-img"
     >
-
-      <home-title
-        :appName="appName"
-      />
+      <home-title :appName="appName"/>
     </v-container>
 
     <v-main
       class="main"
     >
-      <v-container
-        fluid
-      >
+      <v-container fluid>
         <v-row
           v-for="(item, i) in homeItems"
           :key="i"
