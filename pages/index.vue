@@ -9,22 +9,10 @@
       fill-height
       class="hero-img"
     >
-      <div class="ml-16">
-        <div class="text-h3 mb-5">
-          {{ appName }}
-        </div>
-        <div class="text-h5">
-          Apex Legendsでスクワッドを募集・参加しよう！
-        </div>
-        <div class="mt-5">
-          <v-btn
-            color="success"
-            to="/"
-          >
-            スクワッドを探す
-          </v-btn>
-        </div>
-      </div>
+
+      <home-title
+        :appName="appName"
+      />
     </v-container>
 
     <v-main
@@ -36,6 +24,7 @@
         <v-row
           v-for="(item, i) in homeItems"
           :key="i"
+          align="center"
         >
           <v-card flat>
             <v-card-title>
