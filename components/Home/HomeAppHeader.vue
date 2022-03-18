@@ -3,11 +3,10 @@
     app
     dark
     color="rgba(51, 51, 51, .7)"
-    absolute
   >
   <Nuxtlink to="/">
     <v-app-bar-title>
-      Apex Looks
+      {{ appName }}
     </v-app-bar-title>
   </Nuxtlink>
 
@@ -20,6 +19,12 @@
 
 <script>
 export default {
-  name: 'HomeAppHeader'
+  name: 'HomeHeader',
+  props: {
+    appName: {
+      type: String,
+      required: true
+    }
+  }
 }
 </script>

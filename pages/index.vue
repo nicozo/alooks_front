@@ -1,6 +1,8 @@
 <template>
   <div>
-    <home-app-header />
+    <home-app-header
+      :appName="appName"
+    />
 
     <v-container
       fluid
@@ -8,9 +10,13 @@
       class="hero-img"
     >
       <div class="ml-16">
-        <div class="text-h3 mb-3">Apex Legends</div>
-        <div class="text-h5">Apex Legendsでスクワッドを募集・参加しよう！</div>
-        <div class="mt-7">
+        <div class="text-h3 mb-5">
+          {{ appName }}
+        </div>
+        <div class="text-h5">
+          Apex Legendsでスクワッドを募集・参加しよう！
+        </div>
+        <div class="mt-5">
           <v-btn
             color="success"
             to="/"
@@ -31,12 +37,17 @@
           v-for="(item, i) in homeItems"
           :key="i"
         >
-          <v-col>
-            <div
-              :is="`home-${item.title}`"
-              :id="`${item.title}`"
-            />
-          </v-col>
+          <v-card flat>
+            <v-card-title>
+              {{ item.title }}
+            </v-card-title>
+            <v-col>
+              <div
+                :is="`home-${item.title}`"
+                :id="`${item.title}`"
+              />
+            </v-col>
+          </v-card>
         </v-row>
       </v-container>
     </v-main>
@@ -52,8 +63,9 @@ import HomeUsage from '../components/Home/HomeUsage'
 export default {
   name: 'IndexPage',
   components: { HomeAbout, HomeUsage },
-  data () {
+  data ({ $config: { appName } }) {
     return {
+      appName,
       imgHeight: '500',
       homeItems: [
         { title: 'about' },
