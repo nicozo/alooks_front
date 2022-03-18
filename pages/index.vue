@@ -9,19 +9,21 @@
         <v-row
           v-for="(item, i) in homeItems"
           :key="i"
-          align="center"
+          class="mb-13"
         >
-          <v-card flat>
-            <v-card-title>
-              {{ item.title }}
-            </v-card-title>
-            <v-col>
-              <div
-                :is="`home-${item.title}`"
-                :id="`${item.title}`"
-              />
-            </v-col>
-          </v-card>
+          <v-col :id="item.title" cols="12">
+            <v-card flat>
+              <v-card-title class="justify-center text-h4">
+                {{ item.title }}
+              </v-card-title>
+            </v-card>
+          </v-col>
+          <v-col cols="12">
+            <div
+              :is="`home-${item.title}`"
+              :id="`${item.title}`"
+            />
+          </v-col>
         </v-row>
       </v-container>
     </v-main>

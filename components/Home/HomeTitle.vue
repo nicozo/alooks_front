@@ -1,5 +1,5 @@
 <template>
-  <v-row class="ml-10">
+  <v-row class="mx-10">
     <v-col>
       <h1 class="text-h2 mb-3">
         {{ appName }}
