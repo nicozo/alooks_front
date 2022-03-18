@@ -5,11 +5,9 @@
     color="rgba(51, 51, 51, .7)"
     :height="headerHeight"
   >
-  <Nuxtlink to="/">
     <v-app-bar-title>
       {{ appName }}
     </v-app-bar-title>
-  </Nuxtlink>
 
     <v-spacer />
 
