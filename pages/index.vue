@@ -1,6 +1,6 @@
 <template>
   <div>
-    <home-app-header
+    <home-header
       :appName="appName"
     />
 
