@@ -37,14 +37,9 @@
 <script>
 export default {
   name: 'HomeTitle',
-  props: {
-    appName: {
-      type: String,
-      required: true
-    }
-  },
-  data () {
+  data ({ $config: { appName } }) {
     return {
+      appName,
       subTitle: 'Apex Legendsでスクワッドを募集・参加しよう！'
     }
   }
