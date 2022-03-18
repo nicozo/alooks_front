@@ -3,6 +3,7 @@
     app
     dark
     color="rgba(51, 51, 51, .7)"
+    :height="headerHeight"
   >
   <Nuxtlink to="/">
     <v-app-bar-title>
@@ -20,10 +21,10 @@
 <script>
 export default {
   name: 'HomeHeader',
-  props: {
-    appName: {
-      type: String,
-      required: true
+  data ({ $config: { appName } }) {
+    return {
+      appName,
+      headerHeight: 64
     }
   }
 }
