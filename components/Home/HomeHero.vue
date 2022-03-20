@@ -14,7 +14,7 @@ export default {
 }
 </script>
 
-<style  lang="scss" scoped>
+<style lang="scss" scoped>
 .hero-image {
   background: url("../../static/HeroImage.jpeg");
   background-size: cover;
