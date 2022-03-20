@@ -22,51 +22,80 @@
             width="80%"
             max-width="400"
           >
-            <v-form>
+            <form>
               <v-container fluid>
                 <v-row>
                   <v-col>
-                    <v-text-field
-                      v-model="user.name"
-                      label="ユーザー名"
-                      placeholder="あなたのユーザー名"
-                      counter="30"
-                      outlined
+                    <validation-provider
+                      v-slot="{ errors }"
+                      name="ユーザー名"
+                      rules="required|max:30"
                     >
-                    </v-text-field>
+                      <v-text-field
+                        v-model="user.name"
+                        label="ユーザー名"
+                        placeholder="あなたのユーザー名"
+                        counter="30"
+                        :error-messages="errors"
+                        outlined
+                      >
+                      </v-text-field>
+                    </validation-provider>
                   </v-col>
                 </v-row>
                 <v-row>
                   <v-col>
-                    <v-text-field
-                      v-model="user.email"
-                      label="メールアドレス"
-                      placeholder="your@example.com"
-                      outlined
+                    <validation-provider
+                      v-slot="{ errors }"
+                      name="メールアドレス"
+                      rules="required|email"
                     >
-                    </v-text-field>
+                      <v-text-field
+                        v-model="user.email"
+                        label="メールアドレス"
+                        placeholder="your@example.com"
+                        :error-messages="errors"
+                        outlined
+                      >
+                      </v-text-field>
+                    </validation-provider>
                   </v-col>
                 </v-row>
                 <v-row>
                   <v-col>
-                    <v-text-field
-                      v-model="user.password"
-                      label="パスワード"
-                      placeholder="3文字以上"
-                      outlined
+                    <validation-provider
+                      v-slot="{ errors }"
+                      name="パスワード"
+                      rules="required|min:3"
+                      vid="password"
                     >
-                    </v-text-field>
+                      <v-text-field
+                        v-model="user.password"
+                        label="パスワード"
+                        placeholder="3文字以上"
+                        :error-messages="errors"
+                        outlined
+                      >
+                      </v-text-field>
+                    </validation-provider>
                   </v-col>
                 </v-row>
                 <v-row>
                   <v-col>
-                    <v-text-field
-                      v-model="user.password_confirmation"
-                      label="パスワード（確認用）"
-                      placeholder="パスワードを再入力"
-                      outlined
+                    <validation-provider
+                      v-slot="{ errors }"
+                      name="パスワード（確認）"
+                      rules="required|confirmed:password"
                     >
-                    </v-text-field>
+                      <v-text-field
+                        v-model="user.password_confirmation"
+                        label="パスワード（確認）"
+                        placeholder="パスワードを再入力"
+                        :error-messages="errors"
+                        outlined
+                      >
+                      </v-text-field>
+                    </validation-provider>
                   </v-col>
                 </v-row>
 
@@ -78,7 +107,7 @@
                   登録する
                 </v-btn>
               </v-container>
-            </v-form>
+            </form>
           </v-card>
         </v-row>
       </v-container>
