@@ -10,7 +10,7 @@
         >
           <v-col
             cols="12"
-            class="text-center"
+            class="my-8 text-center"
           >
             <h1>
               {{ appName }}に新規登録
@@ -69,13 +69,15 @@
                     </v-text-field>
                   </v-col>
                 </v-row>
-              </v-container>
 
-              <v-btn
-                type="submit"
-              >
-                登録する
-              </v-btn>
+                <v-btn
+                  type="submit"
+                  block
+                  color="primary"
+                >
+                  登録する
+                </v-btn>
+              </v-container>
             </v-form>
           </v-card>
         </v-row>

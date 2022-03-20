@@ -1,5 +1,5 @@
 <template>
-  <v-footer>
+  <v-footer absolute>
     <v-col
       cols="12"
       class="py-0"
