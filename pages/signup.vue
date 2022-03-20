@@ -39,6 +39,8 @@
                           counter="30"
                           :error-messages="errors"
                           outlined
+                          clearable
+                          required
                         >
                         </v-text-field>
                       </validation-provider>
@@ -57,6 +59,8 @@
                           placeholder="your@example.com"
                           :error-messages="errors"
                           outlined
+                          clearable
+                          required
                         >
                         </v-text-field>
                       </validation-provider>
@@ -72,10 +76,15 @@
                       >
                         <v-text-field
                           v-model="user.password"
+                          :append-icon="showPassword ? 'mdi-eye' : 'mdi-eye-off'"
+                          :type="showPassword ? 'text' : 'password'"
                           label="パスワード"
                           placeholder="3文字以上"
                           :error-messages="errors"
                           outlined
+                          clearable
+                          required
+                          @click:append="showPassword = !showPassword"
                         >
                         </v-text-field>
                       </validation-provider>
@@ -90,10 +99,15 @@
                       >
                         <v-text-field
                           v-model="user.password_confirmation"
+                          :append-icon="showPassword ? 'mdi-eye' : 'mdi-eye-off'"
+                          :type="showPassword ? 'text' : 'password'"
                           label="パスワード（確認）"
                           placeholder="パスワードを再入力"
                           :error-messages="errors"
                           outlined
+                          clearable
+                          required
+                          @click:append="showPassword = !showPassword"
                         >
                         </v-text-field>
                       </validation-provider>
@@ -131,7 +145,8 @@ export default {
         email: '',
         password: '',
         password_confirmation: ''
-      }
+      },
+      showPassword: false
     }
   },
   methods: {
