@@ -23,7 +23,7 @@
             max-width="400"
           >
             <validation-observer v-slot="{ invalid }">
-              <form @submit.prevent="console">
+              <form @submit.prevent="createUser">
                 <v-container fluid>
                   <v-row>
                     <v-col>
@@ -114,14 +114,18 @@
                     </v-col>
                   </v-row>
 
-                  <v-btn
-                    type="submit"
-                    block
-                    color="primary"
-                    :disabled="invalid"
-                  >
-                    登録する
-                  </v-btn>
+                  <v-row>
+                    <v-col>
+                      <v-btn
+                        type="submit"
+                        block
+                        color="primary"
+                        :disabled="invalid"
+                      >
+                        登録する
+                      </v-btn>
+                    </v-col>
+                  </v-row>
                 </v-container>
               </form>
             </validation-observer>
@@ -150,8 +154,8 @@ export default {
     }
   },
   methods: {
-    console () {
-      console.log(this.user)
+    createUser () {
+      this.$axios.post('api/v1/users', { user: this.user })
     }
   }
 }
