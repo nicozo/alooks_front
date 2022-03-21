@@ -1,4 +1,4 @@
-import { EnvironmentPlugin } from "webpack";
+import { EnvironmentPlugin } from 'webpack'
 
 export default {
   // Disable server-side rendering: https://go.nuxtjs.dev/ssr-mode
@@ -32,7 +32,8 @@ export default {
 
   // Plugins to run before rendering page: https://go.nuxtjs.dev/config-plugins
   plugins: [
-    'plugins/axios'
+    'plugins/axios',
+    'plugins/vee-validate'
   ],
 
   // Auto import components: https://go.nuxtjs.dev/config-components
@@ -50,7 +51,9 @@ export default {
   modules: [
     // https://go.nuxtjs.dev/axios
     '@nuxtjs/axios',
-    // いらないかも
+    // proxyの設定いらないかも
+    // axiosのbaseURLを環境変数API_URLで振り分けるためにモジュールを導入
+    // proxy: trueとするとbaseURLを明記する必要がある
     '@nuxtjs/proxy'
   ],
 
@@ -68,7 +71,7 @@ export default {
     '/api': {
       target: 'http://localhost:3000',
       pathRewrite: {
-        '^/api' : '/v1'
+        '^/api': '/v1'
       }
     }
   },
@@ -78,6 +81,5 @@ export default {
   },
 
   vuetify: {
-    
   }
 }
