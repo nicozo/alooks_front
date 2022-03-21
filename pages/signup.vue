@@ -31,7 +31,7 @@
 
                   <user-form-password :password.sync="user.password" />
 
-                  <user-form-password-confirmation :password_confirmation.sync="user.password_confirmation" />
+                  <user-form-password-confirmation :passwordConfirmation.sync="user.password_confirmation" />
 
                   <v-row>
                     <v-col>
@@ -47,7 +47,6 @@
                   </v-row>
                 </v-container>
               </form>
-              {{ user }}
             </validation-observer>
           </v-card>
         </v-row>
