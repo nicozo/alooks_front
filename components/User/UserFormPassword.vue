@@ -9,7 +9,6 @@
       >
         <v-text-field
           :value="password"
-          @input="$emit('update:password', $event)"
           :append-icon="showPassword ? 'mdi-eye' : 'mdi-eye-off'"
           :type="showPassword ? 'text' : 'password'"
           label="パスワード"
@@ -18,9 +17,9 @@
           outlined
           clearable
           required
+          @input="$emit('update:password', $event)"
           @click:append="showPassword = !showPassword"
-        >
-        </v-text-field>
+        />
       </validation-provider>
     </v-col>
   </v-row>

@@ -1,4 +1,4 @@
-import { EnvironmentPlugin } from "webpack";
+import { EnvironmentPlugin } from 'webpack'
 
 export default {
   // Disable server-side rendering: https://go.nuxtjs.dev/ssr-mode
@@ -71,7 +71,7 @@ export default {
     '/api': {
       target: 'http://localhost:3000',
       pathRewrite: {
-        '^/api' : '/v1'
+        '^/api': '/v1'
       }
     }
   },

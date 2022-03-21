@@ -8,7 +8,6 @@
       >
         <v-text-field
           :value="name"
-          @input="$emit('update:name', $event)"
           label="ユーザー名"
           placeholder="あなたのユーザー名"
           counter="30"
@@ -16,8 +15,8 @@
           outlined
           clearable
           required
-        >
-        </v-text-field>
+          @input="$emit('update:name', $event)"
+        />
       </validation-provider>
     </v-col>
   </v-row>

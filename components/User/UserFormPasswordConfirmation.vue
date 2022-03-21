@@ -7,8 +7,7 @@
         rules="required|confirmed:password"
       >
         <v-text-field
-          :value="password_confirmation"
-          @input="$emit('update:password_confirmation', $event)"
+          :value="passwordConfirmation"
           :append-icon="showPassword ? 'mdi-eye' : 'mdi-eye-off'"
           :type="showPassword ? 'text' : 'password'"
           label="パスワード（確認）"
@@ -17,9 +16,9 @@
           outlined
           clearable
           required
+          @input="$emit('update:passwordConfirmation', $event)"
           @click:append="showPassword = !showPassword"
-        >
-        </v-text-field>
+        />
       </validation-provider>
     </v-col>
   </v-row>
@@ -29,7 +28,7 @@
 export default {
   name: 'UserFormPasswordConfirmation',
   props: {
-    password_confirmation: {
+    passwordConfirmation: {
       type: String,
       default: ''
     }

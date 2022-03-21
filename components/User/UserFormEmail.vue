@@ -8,15 +8,14 @@
       >
         <v-text-field
           :value="email"
-          @input="$emit('update:email', $event)"
           label="メールアドレス"
           placeholder="your@example.com"
           :error-messages="errors"
           outlined
           clearable
           required
-        >
-        </v-text-field>
+          @input="$emit('update:email', $event)"
+        />
       </validation-provider>
     </v-col>
   </v-row>
