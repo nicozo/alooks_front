@@ -25,94 +25,13 @@
             <validation-observer v-slot="{ invalid }">
               <form @submit.prevent="createUser">
                 <v-container fluid>
-                  <v-row>
-                    <v-col>
-                      <validation-provider
-                        v-slot="{ errors }"
-                        name="ユーザー名"
-                        rules="required|max:30"
-                      >
-                        <v-text-field
-                          v-model="user.name"
-                          label="ユーザー名"
-                          placeholder="あなたのユーザー名"
-                          counter="30"
-                          :error-messages="errors"
-                          outlined
-                          clearable
-                          required
-                        >
-                        </v-text-field>
-                      </validation-provider>
-                    </v-col>
-                  </v-row>
-                  <v-row>
-                    <v-col>
-                      <validation-provider
-                        v-slot="{ errors }"
-                        name="メールアドレス"
-                        rules="required|email"
-                      >
-                        <v-text-field
-                          v-model="user.email"
-                          label="メールアドレス"
-                          placeholder="your@example.com"
-                          :error-messages="errors"
-                          outlined
-                          clearable
-                          required
-                        >
-                        </v-text-field>
-                      </validation-provider>
-                    </v-col>
-                  </v-row>
-                  <v-row>
-                    <v-col>
-                      <validation-provider
-                        v-slot="{ errors }"
-                        name="パスワード"
-                        rules="required|min:3"
-                        vid="password"
-                      >
-                        <v-text-field
-                          v-model="user.password"
-                          :append-icon="showPassword ? 'mdi-eye' : 'mdi-eye-off'"
-                          :type="showPassword ? 'text' : 'password'"
-                          label="パスワード"
-                          placeholder="3文字以上"
-                          :error-messages="errors"
-                          outlined
-                          clearable
-                          required
-                          @click:append="showPassword = !showPassword"
-                        >
-                        </v-text-field>
-                      </validation-provider>
-                    </v-col>
-                  </v-row>
-                  <v-row>
-                    <v-col>
-                      <validation-provider
-                        v-slot="{ errors }"
-                        name="パスワード（確認）"
-                        rules="required|confirmed:password"
-                      >
-                        <v-text-field
-                          v-model="user.password_confirmation"
-                          :append-icon="showPassword ? 'mdi-eye' : 'mdi-eye-off'"
-                          :type="showPassword ? 'text' : 'password'"
-                          label="パスワード（確認）"
-                          placeholder="パスワードを再入力"
-                          :error-messages="errors"
-                          outlined
-                          clearable
-                          required
-                          @click:append="showPassword = !showPassword"
-                        >
-                        </v-text-field>
-                      </validation-provider>
-                    </v-col>
-                  </v-row>
+                  <user-form-name :name.sync="user.name" />
+
+                  <user-form-email :email.sync="user.email" />
+
+                  <user-form-password :password.sync="user.password" />
+
+                  <user-form-password-confirmation :password_confirmation.sync="user.password_confirmation" />
 
                   <v-row>
                     <v-col>
@@ -128,6 +47,7 @@
                   </v-row>
                 </v-container>
               </form>
+              {{ user }}
             </validation-observer>
           </v-card>
         </v-row>
@@ -149,8 +69,7 @@ export default {
         email: '',
         password: '',
         password_confirmation: ''
-      },
-      showPassword: false
+      }
     }
   },
   methods: {

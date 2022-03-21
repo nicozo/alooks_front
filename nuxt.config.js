@@ -51,7 +51,9 @@ export default {
   modules: [
     // https://go.nuxtjs.dev/axios
     '@nuxtjs/axios',
-    // いらないかも
+    // proxyの設定いらないかも
+    // axiosのbaseURLを環境変数API_URLで振り分けるためにモジュールを導入
+    // proxy: trueとするとbaseURLを明記する必要がある
     '@nuxtjs/proxy'
   ],
 
