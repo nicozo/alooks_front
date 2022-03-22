@@ -23,7 +23,7 @@
             max-width="400"
           >
             <validation-observer v-slot="{ invalid }">
-              <form @submit.prevent="loginUser">
+              <form @submit.prevent="login">
                 <v-container fluid>
                   <user-form-email :email.sync="email" />
 
@@ -64,9 +64,8 @@ export default {
     }
   },
   methods: {
-    loginUser () {
-      console.log(this.email)
-      console.log(this.password)
+    login () {
+      this.$axios.post('api/v1/sessions', { email: this.email, password: this.password })
     }
   }
 }
