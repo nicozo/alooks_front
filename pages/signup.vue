@@ -73,7 +73,7 @@ export default {
   },
   methods: {
     createUser () {
-      this.$axios.post('api/v1/users', { user: this.user })
+      this.$axios.post('api/v1/registers', { user: this.user })
     }
   }
 }
