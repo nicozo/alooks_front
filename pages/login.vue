@@ -4,6 +4,16 @@
 
     <v-main>
       <v-container fluid>
+        <v-btn
+          plain
+          to="/"
+        >
+          <v-icon>
+            mdi-chevron-double-left
+          </v-icon>
+          戻る
+        </v-btn>
+
         <v-row
           align="center"
           justify="center"
