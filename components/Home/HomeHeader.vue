@@ -11,7 +11,7 @@
 
     <v-spacer />
 
-    <app-bar-signup-button />
+    <app-bar-register-button />
     <app-bar-login-button />
   </v-app-bar>
 </template>

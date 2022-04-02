@@ -56,7 +56,7 @@
             class="text-center"
           >
             <NuxtLink
-              to="/signup"
+              to="/register"
               class="text-decoration-none"
             >
               アカウントお持ちでないですか？
