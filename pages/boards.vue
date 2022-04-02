@@ -1,6 +1,8 @@
 <template>
   <div>
     <logged-in-header />
+
+    <logged-in-hero />
   </div>
 </template>
 
