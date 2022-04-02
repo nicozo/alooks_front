@@ -50,6 +50,23 @@
             </validation-observer>
           </v-card>
         </v-row>
+
+        <v-row
+          align="center"
+          justify="center"
+        >
+          <v-col
+            cols="12"
+            class="text-center"
+          >
+            <NuxtLink
+              to="/login"
+              class="text-decoration-none"
+            >
+              アカウントをお持ちですか？
+            </NuxtLink>
+          </v-col>
+        </v-row>
       </v-container>
     </v-main>
 

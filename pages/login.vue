@@ -46,6 +46,34 @@
             </validation-observer>
           </v-card>
         </v-row>
+
+        <v-row
+          align="center"
+          justify="center"
+        >
+          <v-col
+            cols="12"
+            class="text-center"
+          >
+            <NuxtLink
+              to="/signup"
+              class="text-decoration-none"
+            >
+              アカウントお持ちでないですか？
+            </NuxtLink>
+          </v-col>
+          <v-col
+            cols="12"
+            class="text-center"
+          >
+            <NuxtLink
+              to="#"
+              class="text-decoration-none"
+            >
+              パスワードをお忘れですか？
+            </NuxtLink>
+          </v-col>
+        </v-row>
       </v-container>
     </v-main>
 
