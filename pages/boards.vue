@@ -1,6 +1,6 @@
 <template>
   <div>
-    boards.vue
+    <logged-in-header />
   </div>
 </template>
 
