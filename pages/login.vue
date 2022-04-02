@@ -13,7 +13,7 @@
             class="my-8 text-center"
           >
             <h1>
-              {{ appName }}に新規登録
+              {{ appName }}にログイン
             </h1>
           </v-col>
 
@@ -23,15 +23,11 @@
             max-width="400"
           >
             <validation-observer v-slot="{ invalid }">
-              <form @submit.prevent="createUser">
+              <form @submit.prevent="login">
                 <v-container fluid>
-                  <user-form-name :name.sync="user.name" />
+                  <user-form-email :email.sync="email" />
 
-                  <user-form-email :email.sync="user.email" />
-
-                  <user-form-password :password.sync="user.password" />
-
-                  <user-form-password-confirmation :passwordConfirmation.sync="user.password_confirmation" />
+                  <user-form-password :password.sync="password" />
 
                   <v-row>
                     <v-col>
@@ -41,7 +37,7 @@
                         color="primary"
                         :disabled="invalid"
                       >
-                        登録する
+                        ログインする
                       </v-btn>
                     </v-col>
                   </v-row>
@@ -49,6 +45,34 @@
               </form>
             </validation-observer>
           </v-card>
+        </v-row>
+
+        <v-row
+          align="center"
+          justify="center"
+        >
+          <v-col
+            cols="12"
+            class="text-center"
+          >
+            <NuxtLink
+              to="/register"
+              class="text-decoration-none"
+            >
+              アカウントお持ちでないですか？
+            </NuxtLink>
+          </v-col>
+          <v-col
+            cols="12"
+            class="text-center"
+          >
+            <NuxtLink
+              to="#"
+              class="text-decoration-none"
+            >
+              パスワードをお忘れですか？
+            </NuxtLink>
+          </v-col>
         </v-row>
       </v-container>
     </v-main>
@@ -63,17 +87,13 @@ export default {
   data ({ $config: { appName } }) {
     return {
       appName,
-      user: {
-        name: '',
-        email: '',
-        password: '',
-        password_confirmation: ''
-      }
+      email: '',
+      password: ''
     }
   },
   methods: {
-    createUser () {
-      this.$axios.post('api/v1/users', { user: this.user })
+    login () {
+      this.$axios.post('api/v1/sessions', { email: this.email, password: this.password })
     }
   }
 }
