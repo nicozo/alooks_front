@@ -4,6 +4,16 @@
 
     <v-main>
       <v-container fluid>
+        <v-btn
+          plain
+          to="/"
+        >
+          <v-icon>
+            mdi-chevron-double-left
+          </v-icon>
+          戻る
+        </v-btn>
+
         <v-row
           align="center"
           justify="center"
@@ -50,6 +60,23 @@
             </validation-observer>
           </v-card>
         </v-row>
+
+        <v-row
+          align="center"
+          justify="center"
+        >
+          <v-col
+            cols="12"
+            class="text-center"
+          >
+            <NuxtLink
+              to="/login"
+              class="text-decoration-none"
+            >
+              アカウントをお持ちですか？
+            </NuxtLink>
+          </v-col>
+        </v-row>
       </v-container>
     </v-main>
 
@@ -73,7 +100,7 @@ export default {
   },
   methods: {
     createUser () {
-      this.$axios.post('api/v1/users', { user: this.user })
+      this.$axios.post('api/v1/registers', { user: this.user })
     }
   }
 }
