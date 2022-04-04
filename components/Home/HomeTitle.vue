@@ -9,7 +9,7 @@
       </h2>
       <v-btn
         color="success"
-        to="/"
+        to="/rooms"
       >
         スクワッドを探す
       </v-btn>
