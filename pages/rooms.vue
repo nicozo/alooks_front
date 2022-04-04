@@ -1,9 +1,5 @@
 <template>
   <div>
-    <logged-in-header />
-
-    <logged-in-hero />
-
     <v-container
       fluid
       fill-height
@@ -36,7 +32,8 @@
                 size="60"
                 color="grey"
                 round
-              ></v-list-item-avatar>
+              >
+              </v-list-item-avatar>
             </v-list-item>
 
             <v-card-text>
@@ -72,6 +69,7 @@
 <script>
 export default {
   name: 'RoomsPage',
+  layout: 'room',
   data () {
     return {
       rooms: [
