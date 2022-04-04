@@ -11,7 +11,10 @@
           :key="i"
           class="mb-13"
         >
-          <v-col :id="item.title" cols="12">
+          <v-col
+            :id="item.title"
+            cols="12"
+          >
             <v-card flat>
               <v-card-title class="justify-center text-h4">
                 {{ item.title }}
