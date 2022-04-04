@@ -71,7 +71,7 @@
 
 <script>
 export default {
-  name: 'BoardsPage',
+  name: 'RoomsPage',
   data () {
     return {
       rooms: [
