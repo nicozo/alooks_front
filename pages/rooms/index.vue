@@ -26,10 +26,21 @@
             </div>
 
             <div class="flex-grow-1">
+              <div class="text-right">
+                スクワッド人数：{{ room.current_squad_member }}
+              </div>
               <v-card-title>
                 {{ room.title }}
               </v-card-title>
-
+              <v-card-text>
+                プラットフォーム：
+              </v-card-text>
+              <v-card-text>
+                ゲームモード：
+              </v-card-text>
+              <v-card-text>
+                ランク帯：
+              </v-card-text>
               <v-card-text>
                 募集時間：{{ room.application_deadline }}
               </v-card-text>
