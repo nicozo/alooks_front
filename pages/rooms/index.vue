@@ -1,121 +1,63 @@
 <template>
-  <div>
-    <v-container
-      fluid
-      fill-height
-    >
-      <v-row
-        justify="center"
-        align-content="center"
+  <v-container
+    fluid
+    fill-height
+  >
+    <v-row>
+      <v-col
+        v-for="(room, i) in rooms"
+        :key="i"
+        cols="6"
       >
-        <v-col
-          v-for="(room, i) in rooms"
-          :key="i"
-          cols="4"
+        <v-card
+          rounded-xl
+          hover
+          raised
+          to="/"
         >
-          <v-card
-            :id="room.id"
-            class="mx-auto"
-            max-width="600"
-            hover
-          >
-            <v-list-item>
-              <v-list-item-content>
-                <v-list-item-title
-                  class="text-h5 mb-1"
+          <div class="d-flex justify-space-around align-center py-6 px-6">
+            <div class="flex-grow-0 mr-6">
+              <v-avatar
+                color="orange"
+                size="100"
+              >
+                <span class="white--text text-h5">100</span>
+              </v-avatar>
+            </div>
+
+            <div class="flex-grow-1">
+              <v-card-title>
+                {{ room.title }}
+              </v-card-title>
+
+              <v-card-text>
+                募集時間：{{ room.application_deadline }}
+              </v-card-text>
+
+              <v-card-actions>
+                <v-btn
+                  color="success"
+                  class="ml-auto"
                 >
-                  {{ room.title }}
-                </v-list-item-title>
-              </v-list-item-content>
-
-              <v-list-item-avatar
-                size="60"
-                color="grey"
-                round
-              >
-              </v-list-item-avatar>
-            </v-list-item>
-
-            <v-card-text>
-              プラットフォーム：{{ room.target_platform }}
-            </v-card-text>
-            <v-card-text>
-              ゲームモード：{{ room.target_game_mode }}
-            </v-card-text>
-            <v-card-text>
-              ランク帯：{{ room.target_rank_rate }}
-            </v-card-text>
-            <v-card-text>
-              締め切り：{{ room.application_deadline }}
-            </v-card-text>
-
-            <v-card-actions>
-              <v-btn
-                color="success"
-                elevation="4"
-              >
-                参加する
-              </v-btn>
-            </v-card-actions>
-          </v-card>
-        </v-col>
-      </v-row>
-    </v-container>
-  </div>
+                  参加リクエスト
+                </v-btn>
+              </v-card-actions>
+            </div>
+          </div>
+        </v-card>
+      </v-col>
+    </v-row>
+  </v-container>
 </template>
 
 <script>
 export default {
   name: 'RoomsIndex',
-  data () {
-    return {
-      rooms: [
-        {
-          id: 1,
-          title: '楽しくダイアランク',
-          target_platform: 'PS4',
-          target_game_mode: 'ランク',
-          current_squad_member: 2,
-          target_rank_rate: 'ダイアモンド',
-          is_draft: false,
-          application_deadline: '24:30',
-          user_id: 1
-        },
-        {
-          id: 2,
-          title: 'キルムーブ！',
-          target_platform: 'PS5',
-          target_game_mode: 'カジュアル',
-          current_squad_member: 1,
-          target_rank_rate: 'なし',
-          is_draft: false,
-          application_deadline: '24:30',
-          user_id: 1
-        },
-        {
-          id: 3,
-          title: 'プレデターランク！',
-          target_platform: 'Steam',
-          target_game_mode: 'ランク',
-          current_squad_member: 1,
-          target_rank_rate: 'プレデター',
-          is_draft: false,
-          application_deadline: '24:30',
-          user_id: 1
-        },
-        {
-          id: 4,
-          title: '楽しくダイアランク',
-          target_platform: 'PS4',
-          target_game_mode: 'ランク',
-          current_squad_member: 2,
-          target_rank_rate: 'ダイアモンド',
-          is_draft: false,
-          application_deadline: '24:30',
-          user_id: 1
-        }
-      ]
-    }
+  async asyncData ({ $axios }) {
+    const rooms = await $axios.$get(
+      'api/v1/rooms'
+    )
+    return { rooms }
   }
 }
 </script>
