@@ -1,7 +1,5 @@
 <template>
   <div>
-    <home-header />
-
     <home-hero />
 
     <v-main>
@@ -30,8 +28,6 @@
         </v-row>
       </v-container>
     </v-main>
-
-    <app-footer />
   </div>
 </template>
 
