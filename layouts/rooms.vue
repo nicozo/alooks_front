@@ -4,12 +4,16 @@
 
     <logged-in-hero />
 
-    <Nuxt />
+    <v-main>
+      <Nuxt />
+    </v-main>
+
+    <app-footer />
   </v-app>
 </template>
 
 <script>
 export default {
-  name: 'RoomLayout'
+  name: 'RoomsLayout'
 }
 </script>
