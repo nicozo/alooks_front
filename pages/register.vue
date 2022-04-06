@@ -38,7 +38,7 @@
 
                 <user-form-password :password.sync="user.password" />
 
-                <user-form-password-confirmation :passwordConfirmation.sync="user.password_confirmation" />
+                <user-form-password-confirmation :password-confirmation.sync="user.password_confirmation" />
 
                 <v-row>
                   <v-col>

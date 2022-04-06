@@ -1,34 +1,39 @@
 <template>
-<div>
-  <v-container
-    fluid
-    fill-height
-  >
-    <v-row>
-      <v-col
-        v-for="(room, i) in displayRooms"
-        :key="i"
-        cols="6"
-      >
-        <RoomItem :room="room"/>
-      </v-col>
-    </v-row>
+  <div>
+    <v-container
+      fluid
+      fill-height
+    >
+      <v-row>
+        <v-col
+          v-for="(room, i) in displayRooms"
+          :key="i"
+          cols="6"
+        >
+          <RoomItem :room="room" />
+        </v-col>
+      </v-row>
+    </v-container>
 
-  </v-container>
-
-  <div class="text-center">
-    <v-pagination
-      v-model="page"
-      :length="length"
-      @input="pageChange"
-    ></v-pagination>
+    <div class="text-center">
+      <v-pagination
+        v-model="page"
+        :length="length"
+        @input="pageChange"
+      />
+    </div>
   </div>
-</div>
 </template>
 
 <script>
 export default {
   name: 'RoomsIndex',
+  async asyncData ({ $axios }) {
+    const rooms = await $axios.$get(
+      'api/v1/rooms'
+    )
+    return { rooms }
+  },
   data () {
     return {
       page: 1,
@@ -36,12 +41,6 @@ export default {
       pageSize: 6,
       displayRooms: []
     }
-  },
-  async asyncData ({ $axios }) {
-    const rooms = await $axios.$get(
-      'api/v1/rooms'
-    )
-    return { rooms }
   },
   mounted () {
     this.length = Math.ceil(this.rooms.length / this.pageSize)
