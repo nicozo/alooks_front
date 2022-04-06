@@ -1,5 +1,8 @@
 <template>
-  <v-footer>
+  <v-footer
+    app
+    absolute
+  >
     <v-col
       cols="12"
       class="py-0"
