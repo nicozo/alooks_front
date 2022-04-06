@@ -1,5 +1,8 @@
 <template>
   <v-container>
+    <div class="text-h3 my-7 text-center">
+      ホスト
+    </div>
     <div class="d-flex align-center">
       <v-avatar
         color="orange"
@@ -21,10 +24,13 @@
       </v-card>
     </div>
 
+    <div class="text-h3 my-7 text-center">
+      募集内容
+    </div>
     <v-sheet
       color="primary"
       max-width="1000"
-      class="mx-auto my-8"
+      class="mx-auto"
     >
       <v-card
         rounded-xl
