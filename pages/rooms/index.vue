@@ -1,28 +1,25 @@
 <template>
-  <div>
-    <v-container
-      fluid
-      fill-height
-    >
-      <v-row>
-        <v-col
-          v-for="(room, i) in displayRooms"
-          :key="i"
-          cols="6"
-        >
-          <RoomItem :room="room" />
-        </v-col>
-      </v-row>
-    </v-container>
+  <v-container>
+    <v-row>
+      <v-col
+        v-for="(room, i) in displayRooms"
+        :key="i"
+        cols="6"
+      >
+        <RoomItem :room="room" />
+      </v-col>
+    </v-row>
 
-    <div class="text-center">
-      <v-pagination
-        v-model="page"
-        :length="length"
-        @input="pageChange"
-      />
-    </div>
-  </div>
+    <v-row>
+      <v-col>
+        <v-pagination
+          v-model="page"
+          :length="length"
+          @input="pageChange"
+        />
+      </v-col>
+    </v-row>
+  </v-container>
 </template>
 
 <script>
