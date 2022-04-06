@@ -6,7 +6,9 @@
         size="150"
         class="flex-grow-0 mr-6"
       >
-        <span class="white--text text-h5">アバター</span>
+        <span class="white--text text-h5">
+          アバター
+        </span>
       </v-avatar>
 
       <v-card
@@ -27,34 +29,56 @@
       <v-card
         rounded-xl
       >
-        <v-list-item width="100%">
-          <v-list-item-content>
-            <v-list-item-title>
-              {{ room.title }}
-            </v-list-item-title>
-            <v-list-item-title>
-              プラットフォーム：
-            </v-list-item-title>
-            <v-list-item-title>
-              ゲームモード：
-            </v-list-item-title>
-            <v-list-item-title>
-              ランク帯：
-            </v-list-item-title>
-            <v-list-item-title>
-              募集時間：{{ room.application_deadline }}
-            </v-list-item-title>
-          </v-list-item-content>
-        </v-list-item>
+        <v-list
+          max-width="900"
+          class="mx-auto"
+        >
+          <!-- Todo: v-forで省略できないか検討 -->
+          <v-list-item>
+            <v-list-item-content>
+              <div class="text-h4">
+                {{ room.title }}
+              </div>
+              <div class="d-flex align-center py-3">
+                <div class="text-subtitle-1 font-weight-bold text-right" style="width: 150px">
+                  プラットフォーム：
+                </div>
+                <div></div>
+              </div>
+              <div class="d-flex align-center py-3">
+                <div class="text-subtitle-1 font-weight-bold text-right" style="width: 150px">
+                  ゲームモード：
+                </div>
+                <div></div>
+              </div>
+              <div class="d-flex align-center py-3">
+                <div class="text-subtitle-1 font-weight-bold text-right" style="width: 150px">
+                  ランク帯：
+                </div>
+                <div></div>
+              </div>
+              <div class="d-flex align-center py-3">
+                <div class="text-subtitle-1 font-weight-bold text-right" style="width: 150px">
+                  募集時間：
+                </div>
+                <div>
+                  {{ room.application_deadline }}
+                </div>
+              </div>
+            </v-list-item-content>
+          </v-list-item>
+        </v-list>
+
+        <v-card-actions>
+          <v-btn
+            color="success"
+            class="mx-auto mb-6 pa-6"
+          >
+            参加リクエスト
+          </v-btn>
+        </v-card-actions>
       </v-card>
     </v-sheet>
-
-    <v-btn
-      color="success"
-      class="ml-auto"
-    >
-      参加リクエスト
-    </v-btn>
   </v-container>
 </template>
 
