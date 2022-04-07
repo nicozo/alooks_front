@@ -5,7 +5,7 @@
         <v-btn
           color="success"
           class="pa-5"
-          to="/"
+          to="/rooms/create"
         >
           <v-icon class="mr-2">
             mdi-human-greeting-variant
@@ -39,7 +39,7 @@
 
 <script>
 export default {
-  name: 'RoomsIndex',
+  name: 'RoomsIndexPage',
   async asyncData ({ $axios }) {
     const rooms = await $axios.$get(
       'api/v1/rooms'

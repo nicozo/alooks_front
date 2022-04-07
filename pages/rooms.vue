@@ -6,7 +6,7 @@
 
 <script>
 export default {
-  name: 'RoomsDefault',
+  name: 'RoomsDefaultPage',
   layout: 'rooms'
 }
 </script>
