@@ -1,0 +1,11 @@
+<template>
+  <v-btn
+    plain
+    @click="$router.back()"
+  >
+    <v-icon>
+      mdi-chevron-double-left
+    </v-icon>
+    戻る
+  </v-btn>
+</template>

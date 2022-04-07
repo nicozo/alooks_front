@@ -1,14 +1,6 @@
 <template>
   <v-container fluid>
-    <v-btn
-      plain
-      to="/"
-    >
-      <v-icon>
-        mdi-chevron-double-left
-      </v-icon>
-      戻る
-    </v-btn>
+    <app-back-previous-page-button />
 
     <v-row
       align="center"
