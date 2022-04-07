@@ -1,6 +1,21 @@
 <template>
   <v-container>
     <v-row>
+      <v-col align="end">
+        <v-btn
+          color="success"
+          class="pa-5"
+          to="/"
+        >
+          <v-icon class="mr-2">
+            mdi-human-greeting-variant
+          </v-icon>
+          スクワッドを募集する
+        </v-btn>
+      </v-col>
+    </v-row>
+
+    <v-row>
       <v-col
         v-for="(room, i) in displayRooms"
         :key="i"
@@ -46,6 +61,9 @@ export default {
   methods: {
     pageChange (pageNumber) {
       this.displayRooms = this.rooms.slice(this.pageSize * (pageNumber - 1), this.pageSize * pageNumber)
+      this.returnTop()
+    },
+    returnTop () {
       window.scroll({ top: 0, behavior: 'smooth' })
     }
   }
