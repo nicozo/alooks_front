@@ -3,7 +3,7 @@
     rounded-xl
     hover
     raised
-    to="/"
+    :to="`rooms/${room.id}`"
   >
     <div class="d-flex justify-space-around align-center py-6 px-6">
       <div class="flex-grow-0 mr-6">
