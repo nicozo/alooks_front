@@ -1,9 +1,7 @@
 <template>
   <v-container>
     <v-row>
-      <v-col class="d-flex justify-space-between">
-        <app-back-previous-page-button />
-
+      <v-col align="end">
         <v-btn
           color="success"
           class="pa-5"
