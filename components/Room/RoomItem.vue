@@ -17,19 +17,19 @@
 
       <div class="flex-grow-1">
         <div class="text-right">
-          スクワッド人数：{{ room.current_squad_member }}
+          参加可能人数：{{ room.current_squad_member }} 
         </div>
         <v-card-title>
           {{ room.title }}
         </v-card-title>
         <v-card-text>
-          プラットフォーム：
+          プラットフォーム：{{ room.platform.name }}
         </v-card-text>
         <v-card-text>
-          ゲームモード：
+          ゲームモード：{{ room.game_mode.name }}
         </v-card-text>
         <v-card-text>
-          ランク帯：
+          ランク帯：{{ room.rank_tier.name }}
         </v-card-text>
         <v-card-text>
           募集時間：{{ room.application_deadline }}
