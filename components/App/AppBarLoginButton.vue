@@ -1,6 +1,7 @@
 <template>
   <v-btn
-    class="success ml-2 font-weight-bold"
+    color="success"
+    class="mr-2"
     to="/login"
   >
     ログイン
