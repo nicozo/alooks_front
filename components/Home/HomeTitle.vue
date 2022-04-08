@@ -1,18 +1,25 @@
 <template>
-  <v-row class="mx-10">
-    <v-col>
-      <h1 class="text-h2 mb-3">
-        {{ appName }}
-      </h1>
-      <h2 class="text-h5 mb-5">
-        {{ subTitle }}
-      </h2>
-      <v-btn
-        color="success"
-        to="/rooms"
-      >
-        スクワッドを探す
-      </v-btn>
+  <v-row
+    align-content="center"
+    :style="{ height: `${imgHeight}` }"
+    class="mx-10"
+  >
+    <v-col cols="12">
+      <div class="d-flex flex-column align-start">
+        <h1 class="text-h2 mb-3">
+          {{ appName }}
+        </h1>
+        <h2 class="subheading mb-4">
+          {{ subTitle }}
+        </h2>
+        <v-btn
+          color="success"
+          class="pa-4"
+          to="/rooms"
+        >
+          スクワッドを探す
+        </v-btn>
+      </div>
     </v-col>
   </v-row>
 
@@ -37,6 +44,11 @@
 <script>
 export default {
   name: 'HomeTitle',
+  props: {
+    imgHeight: {
+      type: Number
+    }
+  },
   data ({ $config: { appName } }) {
     return {
       appName,

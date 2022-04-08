@@ -1,14 +1,6 @@
 <template>
   <v-app>
-    <home-header />
-
-    <home-hero />
-
-    <v-main>
-      <Nuxt />
-    </v-main>
-
-    <app-footer />
+    <Nuxt />
   </v-app>
 </template>
 
