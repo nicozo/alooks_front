@@ -12,13 +12,13 @@
       <v-list-item>
         <v-list-item-icon>
           <v-icon>
-              mdi-pistol
+            mdi-pistol
           </v-icon>
         </v-list-item-icon>
 
         <v-list-content>
           <v-list-title>
-              {{ appName }}
+            {{ appName }}
           </v-list-title>
         </v-list-content>
       </v-list-item>
@@ -45,13 +45,13 @@
       </v-list-item>
 
       <v-list-item
-          v-for="(item, i) in homeItems"
-          :key="i"
-          link
+        v-for="(item, i) in homeItems"
+        :key="i"
+        link
       >
         <v-list-item-content>
           <v-list-title>
-              {{ item.title }}
+            {{ item.title }}
           </v-list-title>
         </v-list-item-content>
       </v-list-item>
