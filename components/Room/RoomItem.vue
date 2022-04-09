@@ -17,7 +17,12 @@
 
       <div class="flex-grow-1">
         <div class="text-right">
-          参加可能人数：{{ room.current_squad_member }} 
+          <v-chip
+            color="red"
+            dark
+          >
+            参加中：{{ room.current_squad_member }}人
+          </v-chip>
         </div>
         <v-card-title>
           {{ room.title }}
