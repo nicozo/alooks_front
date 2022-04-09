@@ -82,8 +82,10 @@ export default {
   data ({ $config: { appName } }) {
     return {
       appName,
-      email: '',
-      password: ''
+      // 開発環境中にログインを行いやすくするためデフォルトの値を設定
+      // auth_userブランチの作業が終わり次第空にすること
+      email: 'test1@example.com',
+      password: 'password'
     }
   },
   methods: {
