@@ -87,8 +87,13 @@ export default {
     }
   },
   methods: {
-    login () {
-      this.$axios.post('api/v1/sessions', { email: this.email, password: this.password })
+    async login () {
+      if (!this.invalid) {
+        await this.$axios.$post(
+          'api/v1/sessions', { email: this.email, password: this.password }
+        )
+        this.$router.push('/rooms')
+      }
     }
   }
 }

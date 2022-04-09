@@ -84,9 +84,29 @@ export default {
     }
   },
   methods: {
-    createUser () {
-      this.$axios.post('api/v1/registers', { user: this.user })
-      this.$router.push('/login')
+    async createUser () {
+      if (!this.invalid) {
+        await this.$axios.$post(
+          'api/v1/registers', { user: this.user }
+        )
+          .then(res => this.authSuccessful(res))
+          .catch(e => this.authFailure(e))
+      }
+    },
+    methods: {
+      authSuccessful (res) {
+        // TODO ログイン処理
+        // TODO リダイレクト
+        console.log('authSuccessful', res)
+        this.$router.push('/login')
+      },
+      authFailure (e) {
+        if (e.res && e.res.status === 404) {
+          // TODO トースター出力
+        }
+        // TODO エラー処理
+        console.log(e)
+      }
     }
   }
 }
