@@ -94,8 +94,22 @@ export default {
         await this.$axios.$post(
           'api/v1/sessions', { email: this.email, password: this.password }
         )
-        this.$router.push('/rooms')
+          .then(res => this.authSuccessful(res))
+          .catch(e => this.authFailure(e))
       }
+    },
+    authSuccessful (res) {
+      // TODO ログイン処理
+      // TODO リダイレクト
+      console.log('authSuccessful', res)
+      this.$router.push('/rooms')
+    },
+    authFailure (e) {
+      if (e.res && e.res.status === 404) {
+        // TODO トースター出力
+      }
+      // TODO エラー処理
+      console.log(e)
     }
   }
 }
