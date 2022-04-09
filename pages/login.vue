@@ -100,9 +100,13 @@ export default {
     },
     authSuccessful (res) {
       // TODO ログイン処理
+      this.$store.dispatch('login', res)
+      console.log('user', this.$store.state.authUser)
+      console.log('token', this.$store.state.authToken)
+      console.log('exp', this.$store.state.authExpires)
+      console.log('payload', this.$store.state.authPayload)
       // TODO リダイレクト
-      console.log('authSuccessful', res)
-      this.$router.push('/rooms')
+      // this.$router.push('/rooms')
     },
     authFailure (e) {
       if (e.res && e.res.status === 404) {
