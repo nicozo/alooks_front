@@ -1,7 +1,5 @@
 <template>
   <v-app>
-    <home-header />
-
     <v-main>
       <Nuxt />
     </v-main>
