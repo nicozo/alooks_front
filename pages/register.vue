@@ -86,6 +86,7 @@ export default {
   methods: {
     createUser () {
       this.$axios.post('api/v1/registers', { user: this.user })
+      this.$router.push('/login')
     }
   }
 }
