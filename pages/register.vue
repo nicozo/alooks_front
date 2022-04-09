@@ -21,7 +21,7 @@
         max-width="400"
       >
         <validation-observer v-slot="{ invalid }">
-          <form @submit.prevent="createUser">
+          <form @submit.prevent="register">
             <v-container fluid>
               <user-form-name :name.sync="user.name" />
 
@@ -84,7 +84,7 @@ export default {
     }
   },
   methods: {
-    async createUser () {
+    async register () {
       if (!this.invalid) {
         await this.$axios.$post(
           'api/v1/registers', { user: this.user }
