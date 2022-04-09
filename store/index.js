@@ -1,16 +1,16 @@
 import jwt_decode from "jwt-decode"
 
-const state = {
+export const state = () => ({
   authUser: null,
   authToken: null,
   authExpires: 0,
   authPayload: {}
-}
+})
 
-const getters = {
-}
+export const getters = () => ({
+})
 
-const mutations = {
+export const mutations = {
   setAuthUser (state, payload) {
     state.authUser = payload
   },
@@ -25,7 +25,7 @@ const mutations = {
   }
 }
 
-const actions = {
+export const actions = {
   login ({ commit }, res) {
     console.log(res)
     let { token, expires, user } = res
@@ -38,12 +38,4 @@ const actions = {
     commit('setAuthExpires', exp)
     commit('setAuthPayload', jwtPayload)
   }
-}
-
-export default {
-  namespaced: true,
-  state,
-  getters,
-  mutations,
-  actions
 }
