@@ -2,6 +2,7 @@
 // Doc: https://axios.nuxtjs.org/helpers
 export default ({ $axios }) => {
   $axios.onRequest((config) => {
+    config.headers.common['X-Requested-With'] = 'XMLHttpRequest'
     console.log(config)
   }),
   $axios.onResponse((response) => {
