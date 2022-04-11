@@ -93,17 +93,14 @@ export default {
   methods: {
     async login () {
       if (!this.invalid) {
-        try {
-          await this.authSuccessful(this.user)
-          // TODO リダイレクト
-          // this.$router.push('/rooms')
-        } catch (error) {
-          this.authFailure(error)
-        }
+        await this.$axios.$post('api/v1/sessions', this.user)
+          .then(res => this.authSuccessful(res))
+          .catch(e => this.authFailure(e))
       }
     },
-    authSuccessful (user) {
-      this.$store.dispatch('login', user)
+    authSuccessful (res) {
+      this.$store.dispatch('login', res)
+      this.$router.push('/rooms')
     },
     authFailure (e) {
       if (e.res && e.res.status === 404) {

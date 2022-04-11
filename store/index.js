@@ -7,7 +7,9 @@ export const state = () => ({
   authPayload: {}
 })
 
-export const getters = {}
+export const getters = {
+  authToken: state => state.authToken
+}
 
 export const mutations = {
   setAuthUser (state, user) {
@@ -25,8 +27,7 @@ export const mutations = {
 }
 
 export const actions = {
-  async login ({ commit }, params) {
-    const res = await this.$axios.$post('api/v1/sessions', params)
+  login ({ commit }, res) {
     const { token, expires, user } = res
     // console.log(token, expires, user)
     const exp = expires * 1000
@@ -38,3 +39,17 @@ export const actions = {
     commit('setAuthPayload', jwtPayload)
   }
 }
+// export const actions = {
+//   async login ({ commit }, params) {
+//     const res = await this.$axios.$post('api/v1/sessions', params)
+//     const { token, expires, user } = res
+//     // console.log(token, expires, user)
+//     const exp = expires * 1000
+//     const jwtPayload = (token) ? jwtDecode(token) : {}
+//     // console.log(jwtPayload)
+//     commit('setAuthUser', user)
+//     commit('setAuthToken', token)
+//     commit('setAuthExpires', exp)
+//     commit('setAuthPayload', jwtPayload)
+//   }
+// }
