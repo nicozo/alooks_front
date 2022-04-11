@@ -7,8 +7,7 @@ export const state = () => ({
   authPayload: {}
 })
 
-export const getters = () => ({
-})
+export const getters = {}
 
 export const mutations = {
   setAuthUser (state, user) {

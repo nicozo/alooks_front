@@ -4,10 +4,10 @@ export default ({ $axios }) => {
   $axios.onRequest((config) => {
     config.headers.common['X-Requested-With'] = 'XMLHttpRequest'
     console.log(config)
-  }),
+  })
   $axios.onResponse((response) => {
     console.log(response)
-  }),
+  })
   $axios.onError((e) => {
     console.log(e.response)
   })
