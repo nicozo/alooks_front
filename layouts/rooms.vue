@@ -1,14 +1,6 @@
 <template>
   <v-app>
-    <logged-in-header />
-
-    <logged-in-hero />
-
-    <v-main>
-      <Nuxt />
-    </v-main>
-
-    <app-footer />
+    <Nuxt />
   </v-app>
 </template>
 

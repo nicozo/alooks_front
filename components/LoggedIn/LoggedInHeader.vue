@@ -1,28 +1,37 @@
 <template>
   <v-app-bar
     app
-    dark
-    color="rgba(51, 51, 51, .7)"
+    color="rgba(255,255,255, 0)"
+    flat
+    class="px-2"
     :height="headerHeight"
+    dark
   >
-    <v-app-bar-title>
+    <v-toolbar-title>
       {{ appName }}
-    </v-app-bar-title>
+    </v-toolbar-title>
 
-    <!-- <v-spacer></v-spacer>
+    <v-spacer />
 
-    <v-btn icon>
-      <v-icon>mdi-magnify</v-icon>
-    </v-btn> -->
+    <v-app-bar-nav-icon @click="$emit('handle-toggle-drawer')" />
   </v-app-bar>
 </template>
 
 <script>
 export default {
   name: 'HomeHeader',
-  data ({ $config: { appName } }) {
+  props: {
+    drawer: {
+      type: Boolean,
+      require: true
+    },
+    appName: {
+      type: String,
+      require: true
+    }
+  },
+  data () {
     return {
-      appName,
       headerHeight: 64
     }
   }
