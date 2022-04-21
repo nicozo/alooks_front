@@ -37,19 +37,10 @@ export const actions = {
     commit('setAuthToken', token)
     commit('setAuthExpires', exp)
     commit('setAuthPayload', jwtPayload)
+  },
+  logout ({ commit }) {
+    commit('setAuthUser', null)
+    commit('setAuthToken', null)
+    commit('setAuthExpires', 0)
   }
 }
-// export const actions = {
-//   async login ({ commit }, params) {
-//     const res = await this.$axios.$post('api/v1/sessions', params)
-//     const { token, expires, user } = res
-//     // console.log(token, expires, user)
-//     const exp = expires * 1000
-//     const jwtPayload = (token) ? jwtDecode(token) : {}
-//     // console.log(jwtPayload)
-//     commit('setAuthUser', user)
-//     commit('setAuthToken', token)
-//     commit('setAuthExpires', exp)
-//     commit('setAuthPayload', jwtPayload)
-//   }
-// }
