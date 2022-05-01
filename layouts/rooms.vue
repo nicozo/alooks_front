@@ -6,6 +6,9 @@
 
 <script>
 export default {
-  name: 'RoomsLayout'
+  name: 'RoomsLayout',
+  middleware: [
+    'authentication'
+  ]
 }
 </script>
