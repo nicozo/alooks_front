@@ -32,7 +32,7 @@
           </v-list-item-avatar>
           <v-list-item-content>
             <v-list-item-subtitle>
-              TEST1でログイン中
+              {{ $auth.user.name }}
             </v-list-item-subtitle>
           </v-list-item-content>
         </v-list-item>

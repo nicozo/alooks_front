@@ -1,5 +1,3 @@
-import jwtDecode from 'jwt-decode'
-
 export const state = () => ({
   authUser: null,
   authToken: null,
@@ -8,7 +6,10 @@ export const state = () => ({
 })
 
 export const getters = {
-  authToken: state => state.authToken
+  authUser: state => state.authUser,
+  authToken: state => state.authToken,
+  authExpires: state => state.authExpires,
+  authPayload: state => state.authPayload
 }
 
 export const mutations = {
@@ -27,20 +28,23 @@ export const mutations = {
 }
 
 export const actions = {
-  login ({ commit }, res) {
-    const { token, expires, user } = res
-    // console.log(token, expires, user)
-    const exp = expires * 1000
-    const jwtPayload = (token) ? jwtDecode(token) : {}
-    // console.log(jwtPayload)
-    commit('setAuthUser', user)
-    commit('setAuthToken', token)
-    commit('setAuthExpires', exp)
-    commit('setAuthPayload', jwtPayload)
-  },
   logout ({ commit }) {
     commit('setAuthUser', null)
     commit('setAuthToken', null)
     commit('setAuthExpires', 0)
+  },
+  getAuthUser ({ commit }, user) {
+    commit('setAuthUser', user)
+  },
+  getAuthToken ({ commit }, token) {
+    commit('setAuthToken', token)
+  },
+  getAuthExpires ({ commit }, exp) {
+    exp = exp || 0
+    commit('setAuthExpires', exp)
+  },
+  getAuthPayload ({ commit }, jwtPayload) {
+    jwtPayload = jwtPayload || {}
+    commit('setAuthPayload', jwtPayload)
   }
 }

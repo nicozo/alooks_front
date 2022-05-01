@@ -99,7 +99,7 @@ export default {
       }
     },
     authSuccessful (res) {
-      this.$store.dispatch('login', res)
+      this.$auth.login(res)
       this.$router.push('/rooms')
     },
     authFailure (e) {

@@ -32,6 +32,7 @@ export default {
 
   // Plugins to run before rendering page: https://go.nuxtjs.dev/config-plugins
   plugins: [
+    'plugins/auth',
     'plugins/axios',
     'plugins/vee-validate',
     'plugins/nuxt-client-init'
@@ -62,12 +63,12 @@ export default {
     appName: process.env.APP_NAME
   },
 
-  router: {
-    // 全てのページでサイレントリフレッシュを最初に実行する
-    middleware: [
-      'silent-refresh-token'
-    ]
-  },
+  // router: {
+  //   // 全てのページでサイレントリフレッシュを最初に実行する
+  //   middleware: [
+  //     'silent-refresh-token'
+  //   ]
+  // },
 
   // Axios module configuration: https://go.nuxtjs.dev/config-axios
   axios: {

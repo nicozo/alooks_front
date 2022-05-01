@@ -1,10 +1,10 @@
 // Doc: https://axios.nuxtjs.org/extend/
 // Doc: https://axios.nuxtjs.org/helpers
-export default ({ $axios, store }) => {
+export default ({ $axios, $auth }) => {
   $axios.onRequest((config) => {
     config.headers.common['X-Requested-With'] = 'XMLHttpRequest'
-    if (store.getters.authToken) {
-      $axios.defaults.headers.common.Authorization = `Baerer ${store.getters.authToken}`
+    if ($auth.token) {
+      $axios.defaults.headers.common.Authorization = `Baerer ${$auth.token}`
     }
     console.log(config)
   })
