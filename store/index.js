@@ -28,11 +28,6 @@ export const mutations = {
 }
 
 export const actions = {
-  logout ({ commit }) {
-    commit('setAuthUser', null)
-    commit('setAuthToken', null)
-    commit('setAuthExpires', 0)
-  },
   getAuthUser ({ commit }, user) {
     commit('setAuthUser', user)
   },

@@ -53,7 +53,7 @@
           <v-list-item-content class="text-center">
             <v-btn
               color="red"
-              @click="logout"
+              to="/logout"
             >
               ログアウト
             </v-btn>
@@ -96,18 +96,6 @@ export default {
     }
   },
   methods: {
-    async logout () {
-      await this.$axios.$delete(
-        '/api/v1/sessions',
-        // ログインしていないユーザーがページを訪れた時404エラーを表示させない（404エラーを許容する）
-        { validateStatus: status => (status >= 200 && status < 300) || (status === 401) }
-      )
-      this.logoutSuccessful()
-    },
-    logoutSuccessful () {
-      this.$store.dispatch('logout')
-      this.$router.push('/login')
-    },
     handleToggleDrawer () {
       this.drawer = !this.drawer
     }

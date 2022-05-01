@@ -36,8 +36,29 @@ class Authentication {
 
   // ログイン
   login (data) {
-    console.log(data)
     this.setAuth(data)
+  }
+
+  // Vuex初期化
+  resetVuex () {
+    this.setAuth({ token: null, expires: 0, user: null })
+  }
+
+  // 401エラーを許容する
+  // https://github.com/axios/axios#request-config
+  allowUnauthorized (status) {
+    return (status >= 200 && status < 300) || (status === 401)
+  }
+
+  // ログアウト
+  async logout () {
+    await this.$axios.delete(
+      '/api/v1/sessions',
+      {
+        validateStatus: status => this.allowUnauthorized(status)
+      }
+    )
+    this.resetVuex()
   }
 }
 
