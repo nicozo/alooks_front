@@ -1,23 +1,13 @@
 // アクセストークンを更新するサイレントリフレッシュ機能
-export default async ({ $axios, store, route, redirect, isDev }) => {
-  // 「アクセストークンが無効」「Vuexにユーザーが存在する(subがあるかどうか)」「ユーザーのsub(user.id)とペイロードのsubが一致する」場合、リフレッシュを行う
-  console.log(store.state.authExpires)
-  console.log(new Date().getTime())
-  console.log(new Date().getTime() > store.state.authExpires)
-  console.log('サイレントリフレッシュの読み込み')
-  if (
-    new Date().getTime() > store.state.authExpires &&
-    store.state.authUser.sub &&
-    store.state.authPayload.sub &&
-    store.state.authUser.sub === store.state.authPayload.sub
-  ) {
+export default async ({ $auth, $axios, store, route, redirect, isDev }) => {
+  if ($auth.isExistUserAndAuthenticated()) {
     // コンソール確認用・削除予定
     if (isDev) {
       console.log('Execute silent refresh!!')
     }
     // サイレントリフレッシュ
     await $axios.$post('/api/v1/sessions/refresh')
-      .then(res => store.dispatch('login', res))
+      .then(res => $auth.login(res))
       // 「アクセストークンとリフレッシュトークンが無効」の場合
       .catch(() => {
         const msg = 'セッションの有効期限が切れました。' +
@@ -29,7 +19,7 @@ export default async ({ $axios, store, route, redirect, isDev }) => {
         // TODO アクセスルート記憶
         // store.dispatch('getRememberPath', route)
         // Vuexの初期化(セッションはサーバで削除済み)
-        store.dispatch('logout')
+        $auth.resetVuex()
         return redirect('/login')
       })
   }

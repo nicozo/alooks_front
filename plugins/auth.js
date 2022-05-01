@@ -60,6 +60,28 @@ class Authentication {
     )
     this.resetVuex()
   }
+
+  // ユーザーが存在する場合にtrueを返す
+  isExistUser () {
+    return this.user.sub &&
+           this.payload.sub &&
+           this.user.sub === this.payload.sub
+  }
+
+  // 有効期限内にtrueを返す
+  isAuthenticated () {
+    return new Date().getTime() < this.expires
+  }
+
+  // ユーザーが存在かつ有効期限切れの場合trueを返す
+  isExistUserAndAuthenticated () {
+    return this.isExistUser() && !this.isAuthenticated()
+  }
+
+  // ユーザーが存在かつ有効期限内の場合にtrueを返す
+  loggedIn () {
+    return this.isExistUser() && this.isAuthenticated()
+  }
 }
 
 // 共通化
