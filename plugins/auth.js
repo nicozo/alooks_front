@@ -1,4 +1,4 @@
-// front/plugins/auth.js
+// ログイン機能をまとめたプラグイン
 import jwtDecode from 'jwt-decode'
 
 class Authentication {
