@@ -1,11 +1,11 @@
 <template>
   <v-btn
     plain
-    @click="$router.back()"
+    to="/"
   >
     <v-icon>
       mdi-chevron-double-left
     </v-icon>
-    戻る
+    トップへ戻る
   </v-btn>
 </template>
