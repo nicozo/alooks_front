@@ -33,7 +33,8 @@ export default {
   // Plugins to run before rendering page: https://go.nuxtjs.dev/config-plugins
   plugins: [
     'plugins/axios',
-    'plugins/vee-validate'
+    'plugins/vee-validate',
+    'plugins/nuxt-client-init'
   ],
 
   // Auto import components: https://go.nuxtjs.dev/config-components
