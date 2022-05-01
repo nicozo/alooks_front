@@ -4,6 +4,7 @@ export default async ({ $axios, store, route, redirect, isDev }) => {
   console.log(store.state.authExpires)
   console.log(new Date().getTime())
   console.log(new Date().getTime() > store.state.authExpires)
+  console.log('サイレントリフレッシュの読み込み')
   if (
     new Date().getTime() > store.state.authExpires &&
     store.state.authUser.sub &&
@@ -28,7 +29,7 @@ export default async ({ $axios, store, route, redirect, isDev }) => {
         // TODO アクセスルート記憶
         // store.dispatch('getRememberPath', route)
         // Vuexの初期化(セッションはサーバで削除済み)
-        store.logout()
+        store.dispatch('logout')
         return redirect('/login')
       })
   }

@@ -62,8 +62,8 @@ export default {
     appName: process.env.APP_NAME
   },
 
-  // サイレントリフレッシュを最初に読み込む
   router: {
+    // 全てのページでサイレントリフレッシュを最初に実行する
     middleware: [
       'silent-refresh-token'
     ]
