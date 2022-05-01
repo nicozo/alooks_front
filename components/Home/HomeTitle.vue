@@ -1,7 +1,7 @@
 <template>
   <v-row
     align-content="center"
-    :style="{ height: `${imgHeight}` }"
+    :style="{ height: `${imgHeight}vh` }"
     class="mx-10"
   >
     <v-col cols="12">

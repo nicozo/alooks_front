@@ -1,8 +1,8 @@
 <template>
   <div>
     <v-navigation-drawer
-      app
       v-model="drawer"
+      app
       absolute
       temporary
       dark
@@ -17,9 +17,9 @@
           </v-list-item-icon>
 
           <v-list-item-content>
-            <v-list-title>
+            <v-list-item-title>
               {{ appName }}
-            </v-list-title>
+            </v-list-item-title>
           </v-list-item-content>
         </v-list-item>
 
@@ -31,9 +31,9 @@
             <img src="" alt="">
           </v-list-item-avatar>
           <v-list-item-content>
-            <v-list-subtitle>
+            <v-list-item-subtitle>
               TEST1でログイン中
-            </v-list-subtitle>
+            </v-list-item-subtitle>
           </v-list-item-content>
         </v-list-item>
 
@@ -43,9 +43,9 @@
           link
         >
           <v-list-item-content>
-            <v-list-title>
+            <v-list-item-title>
               {{ link.title }}
-            </v-list-title>
+            </v-list-item-title>
           </v-list-item-content>
         </v-list-item>
 
@@ -99,6 +99,7 @@ export default {
     async logout () {
       await this.$axios.$delete(
         '/api/v1/sessions',
+        // ログインしていないユーザーがページを訪れた時404エラーを表示させない（404エラーを許容する）
         { validateStatus: status => (status >= 200 && status < 300) || (status === 401) }
       )
       this.logoutSuccessful()

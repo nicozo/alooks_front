@@ -8,7 +8,7 @@
   </v-container> -->
   <v-img
     :src="imgSrc"
-    :height="imgHeight"
+    :style="{ height: `${imgHeight}vh` }"
   >
     <home-title :imgHeight="imgHeight" />
   </v-img>
@@ -19,7 +19,7 @@ export default {
   name: 'HomeHero',
   data () {
     return {
-      imgHeight: '100vh',
+      imgHeight: 100,
       height: 56,
       imgSrc: require('@/static/HeroImage.jpeg')
     }

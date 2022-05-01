@@ -16,11 +16,11 @@
             </v-icon>
           </v-list-item-icon>
 
-          <v-list-content>
-            <v-list-title>
+          <v-list-item-content>
+            <v-list-item-title>
               {{ appName }}
-            </v-list-title>
-          </v-list-content>
+            </v-list-item-title>
+          </v-list-item-content>
         </v-list-item>
 
         <v-list-item>
@@ -50,9 +50,9 @@
           link
         >
           <v-list-item-content>
-            <v-list-title>
+            <v-list-item-title>
               {{ item.title }}
-            </v-list-title>
+            </v-list-item-title>
           </v-list-item-content>
         </v-list-item>
       </v-list>
