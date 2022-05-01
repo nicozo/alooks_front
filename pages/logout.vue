@@ -3,7 +3,7 @@ export default {
   name: 'LogoutPage',
   async middleware ({ $auth, redirect }) {
     await $auth.logout()
-    return redirect('/')
+    return redirect('/login')
   }
 }
 </script>

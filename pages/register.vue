@@ -1,6 +1,6 @@
 <template>
   <v-container fluid>
-    <app-back-previous-page-button />
+    <app-back-home-button />
 
     <v-row
       align="center"
