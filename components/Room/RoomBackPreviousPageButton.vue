@@ -6,7 +6,7 @@
     <v-icon>
       mdi-chevron-double-left
     </v-icon>
-    戻る
+    スクワッド一覧へ戻る
   </v-btn>
 </template>
 
