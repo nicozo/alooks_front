@@ -1,8 +1,8 @@
 <template>
   <div>
     <v-navigation-drawer
-      app
       v-model="drawer"
+      app
       absolute
       temporary
       dark
@@ -103,13 +103,13 @@ import HomeUsage from '../components/Home/HomeUsage'
 
 export default {
   name: 'IndexPage',
-  middleware: [
-    'logged-in-redirect'
-  ],
   components: {
     HomeAbout,
     HomeUsage
   },
+  middleware: [
+    'logged-in-redirect'
+  ],
   data ({ $config: { appName } }) {
     return {
       appName,
