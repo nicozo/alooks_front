@@ -14,8 +14,9 @@ export default async ({ $auth, store, route, redirect }) => {
     const color = 'info'
     // トースター出力
     store.dispatch('getToast', { msg, color })
-    // TODO アクセスルート記憶
-    // store.dispatch('getRememberPath', route)
+    // アクセスルート記憶
+    store.dispatch('getRememberPath', route)
+    console.log(route)
     return redirect('/login')
   }
 }

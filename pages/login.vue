@@ -87,7 +87,9 @@ export default {
       user: {
         email: 'test1@example.com',
         password: 'password'
-      }
+      },
+      redirectPath: this.$store.state.loggedIn.rememberPath,
+      loggedInHomePath: this.$store.state.loggedIn.homePath
     }
   },
   methods: {
@@ -100,7 +102,9 @@ export default {
     },
     authSuccessful (res) {
       this.$auth.login(res)
-      this.$router.push('/rooms')
+      this.$router.push(this.redirectPath)
+      this.$store.dispatch('getRememberPath', this.loggedInHomePath)
+      // this.$router.push('/rooms')
     },
     authFailure ({ response }) {
       if (response && response.status === 404) {

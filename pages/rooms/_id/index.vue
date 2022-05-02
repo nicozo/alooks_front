@@ -43,7 +43,6 @@
 export default {
   name: 'RoomIdIndex',
   async asyncData ({ $axios, params }) {
-    console.log(params)
     const room = await $axios.$get(
       'api/v1/rooms/' + params.id
     )
