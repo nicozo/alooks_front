@@ -64,7 +64,7 @@
 
     <logged-in-header
       :drawer="drawer"
-      :appName="appName"
+      :app-name="appName"
       @handle-toggle-drawer="handleToggleDrawer"
     />
 

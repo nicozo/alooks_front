@@ -1,10 +1,10 @@
 <template>
   <v-btn
-      outlined
-      color="primary"
-      class="mr-3"
-      to="/register"
+    outlined
+    color="primary"
+    class="mr-3"
+    to="/register"
   >
-      新規登録
+    新規登録
   </v-btn>
 </template>

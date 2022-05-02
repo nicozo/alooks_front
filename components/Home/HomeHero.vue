@@ -10,7 +10,7 @@
     :src="imgSrc"
     :style="{ height: `${imgHeight}vh` }"
   >
-    <home-title :imgHeight="imgHeight" />
+    <home-title :img-height="imgHeight" />
   </v-img>
 </template>
 
