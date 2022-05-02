@@ -102,12 +102,13 @@ export default {
       this.$auth.login(res)
       this.$router.push('/rooms')
     },
-    authFailure (e) {
-      if (e.res && e.res.status === 404) {
-        // TODO トースター出力
+    authFailure ({ response }) {
+      if (response && response.status === 404) {
+        const msg = 'メールアドレスまたはパスワードが一致しません'
+        return this.$store.dispatch('getToast', { msg })
       }
       // TODO エラー処理
-      console.log(e)
+      console.log(response)
     }
   }
 }

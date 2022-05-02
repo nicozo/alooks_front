@@ -1,6 +1,7 @@
 <template>
   <v-app>
     <v-main>
+      <app-toaster />
       <Nuxt />
     </v-main>
 
