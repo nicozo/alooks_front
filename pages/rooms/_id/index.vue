@@ -1,6 +1,6 @@
 <template>
   <v-container>
-    <app-back-previous-page-button />
+    <room-back-previous-page-button />
 
     <div class="text-h3 my-7 text-center">
       ホスト

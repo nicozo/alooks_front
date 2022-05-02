@@ -1,6 +1,6 @@
 <template>
   <v-img
-    src="CommonImage.jpg"
+    :src="imgSrc"
     max-height="350"
     dark
   >
@@ -23,7 +23,8 @@ export default {
   name: 'LoggedInHero',
   data () {
     return {
-      title: 'スクワッド一覧'
+      title: 'スクワッド一覧',
+      imgSrc: require('@/static/CommonImage.jpg')
     }
   }
 }
