@@ -103,7 +103,13 @@ import HomeUsage from '../components/Home/HomeUsage'
 
 export default {
   name: 'IndexPage',
-  components: { HomeAbout, HomeUsage },
+  middleware: [
+    'logged-in-redirect'
+  ],
+  components: {
+    HomeAbout,
+    HomeUsage
+  },
   data ({ $config: { appName } }) {
     return {
       appName,

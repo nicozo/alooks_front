@@ -11,6 +11,9 @@
 
 <script>
 export default {
-  name: 'SignupLayout'
+  name: 'SignupLayout',
+  middleware: [
+    'logged-in-redirect'
+  ]
 }
 </script>

@@ -19,8 +19,9 @@ export const state = () => ({
       params: {}
     },
     redirectPaths: [
-      'register',
-      'login'
+      '/',
+      '/register',
+      '/login'
     ]
   }
 })
