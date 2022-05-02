@@ -10,15 +10,20 @@ export default async ({ $auth, $axios, store, route, redirect, isDev }) => {
       .then(res => $auth.login(res))
       // 「アクセストークンとリフレッシュトークンが無効」の場合
       .catch(() => {
-        const msg = 'セッションの有効期限が切れました。' +
-                    'もう一度ログインしてください'
-        // トースター出力
-        store.dispatch('getToast', { msg })
-        // アクセスルート記憶
-        store.dispatch('getRememberPath', route)
         // Vuexの初期化(セッションはサーバで削除済み)
         $auth.resetVuex()
-        return redirect('/login')
+        // セッション切れのままログアウトするとログイン後も一覧画面に遷移しないバグ対策
+        if (route.path === '/logout') {
+          return redirect('/login')
+        } else {
+          const msg = 'セッションの有効期限が切れました。' +
+                      'もう一度ログインしてください'
+          // トースター出力
+          store.dispatch('getToast', { msg })
+          // アクセスルート記憶
+          store.dispatch('getRememberPath', route)
+          return redirect('/login')
+        }
       })
   }
 }
