@@ -23,6 +23,9 @@ export const state = () => ({
       '/register',
       '/login'
     ]
+  },
+  commonStyle: {
+    headerHeight: 64
   }
 })
 
@@ -30,7 +33,8 @@ export const getters = {
   authUser: state => state.authUser,
   authToken: state => state.authToken,
   authExpires: state => state.authExpires,
-  authPayload: state => state.authPayload
+  authPayload: state => state.authPayload,
+  headerHeight: state => state.commonStyle.headerHeight
 }
 
 export const mutations = {
