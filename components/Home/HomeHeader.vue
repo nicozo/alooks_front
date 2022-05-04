@@ -34,7 +34,7 @@ export default {
   },
   data () {
     return {
-      headerHeight: this.$store.getters.headerHeight 
+      headerHeight: this.$store.getters.headerHeight
     }
   }
 }
