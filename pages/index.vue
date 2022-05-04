@@ -3,9 +3,9 @@
     <v-navigation-drawer
       v-model="drawer"
       app
-      absolute
       temporary
       dark
+      fixed
       right
     >
       <v-list>
@@ -115,6 +115,10 @@ export default {
       appName,
       homeItems: [
         { title: 'about' },
+        { title: 'usage' },
+        { title: 'usage' },
+        { title: 'usage' },
+        { title: 'usage' },
         { title: 'usage' }
       ],
       drawer: false

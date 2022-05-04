@@ -3,9 +3,9 @@
     <v-navigation-drawer
       v-model="drawer"
       app
-      absolute
       temporary
       dark
+      fixed
       right
     >
       <v-list>

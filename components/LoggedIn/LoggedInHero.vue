@@ -3,6 +3,7 @@
     :src="imgSrc"
     max-height="350"
     dark
+    id="logged-in-hero"
   >
     <v-row
       align="center"

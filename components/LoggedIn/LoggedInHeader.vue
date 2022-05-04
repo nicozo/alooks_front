@@ -1,11 +1,12 @@
 <template>
   <v-app-bar
     app
-    color="rgba(255,255,255, 0)"
     flat
     class="px-2"
     :height="headerHeight"
-    dark
+    :dark="!isScrollPoint"
+    :color="appBarStyle.color"
+    :elevation="appBarStyle.elevation"
   >
     <v-toolbar-title>
       {{ appName }}
@@ -27,12 +28,42 @@ export default {
     },
     appName: {
       type: String,
-      require: true
+      require: true,
+      default: ''
     }
   },
   data () {
     return {
-      headerHeight: this.$store.getters.headerHeight
+      headerHeight: this.$store.getters.headerHeight,
+      scrollY: 0
+    }
+  },
+  computed: {
+    isScrollPoint () {
+      console.log('スクロールされた')
+      if (this.scrollY && window.document.getElementById('logged-in-hero')) {
+        console.log(window.document.getElementById('logged-in-hero').clientHeight)
+        return this.scrollY > (window.document.getElementById('logged-in-hero').clientHeight - this.headerHeight)
+      } else {
+        console.log('高さはないよ！')
+        return false
+      }
+    },
+    appBarStyle () {
+      const color = this.isScrollPoint ? 'white' : 'transparent'
+      const elevation = this.isScrollPoint ? 4 : 0
+      return { color, elevation }
+    }
+  },
+  mounted () {
+    window.addEventListener('scroll', this.onScroll)
+  },
+  beforeDestroy () {
+    window.removeEventListener('scroll', this.onScroll)
+  },
+  methods: {
+    onScroll () {
+      this.scrollY = window.scrollY
     }
   }
 }
