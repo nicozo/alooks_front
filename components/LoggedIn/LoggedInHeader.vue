@@ -41,9 +41,10 @@ export default {
   computed: {
     isScrollPoint () {
       console.log('スクロールされた')
-      if (this.scrollY && window.document.getElementById('logged-in-hero')) {
-        console.log(window.document.getElementById('logged-in-hero').clientHeight)
-        return this.scrollY > (window.document.getElementById('logged-in-hero').clientHeight - this.headerHeight)
+      const pixelImgHeight = window.document.getElementById('logged-in-hero')
+      if (this.scrollY && pixelImgHeight) {
+        console.log(pixelImgHeight.clientHeight)
+        return this.scrollY > (pixelImgHeight.clientHeight - this.headerHeight)
       } else {
         console.log('高さはないよ！')
         return false
