@@ -49,7 +49,7 @@
           :key="i"
           link
         >
-          <v-list-item-content>
+          <v-list-item-content @click="toLink(item.title)">
             <v-list-item-title>
               {{ item.title }}
             </v-list-item-title>
@@ -86,7 +86,6 @@
           <v-col cols="12">
             <div
               :is="`home-${item.title}`"
-              :id="`${item.title}`"
             />
           </v-col>
         </v-row>
@@ -115,10 +114,6 @@ export default {
       appName,
       homeItems: [
         { title: 'about' },
-        { title: 'usage' },
-        { title: 'usage' },
-        { title: 'usage' },
-        { title: 'usage' },
         { title: 'usage' }
       ],
       drawer: false
@@ -127,6 +122,11 @@ export default {
   methods: {
     handleToggleDrawer () {
       this.drawer = !this.drawer
+    },
+    toLink (item) {
+      console.log(item)
+      this.$vuetify.goTo(`#${item}`)
+      this.handleToggleDrawer()
     }
   }
 }

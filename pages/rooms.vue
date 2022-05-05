@@ -8,7 +8,7 @@
       fixed
       right
     >
-      <v-list>
+      <v-list flat>
         <v-list-item>
           <v-list-item-icon>
             <v-icon>
@@ -40,7 +40,9 @@
         <v-list-item
           v-for="(link, i) in roomLinks"
           :key="i"
-          link
+          :to="`${link.path}`"
+          nuxt
+          @click="handleToggleDrawer"
         >
           <v-list-item-content>
             <v-list-item-title>
@@ -88,9 +90,9 @@ export default {
     return {
       appName,
       roomLinks: [
-        {
-          title: '参加リクエスト一覧'
-        }
+        { title: 'squadList', path: '/rooms' },
+        { title: 'squadCreate', path: '/rooms/create' },
+        { title: 'invitationList', path: '/' }
       ],
       drawer: false
     }
