@@ -13,7 +13,9 @@
       <v-col
         class="text-left align-center ml-8"
       >
-        <h1>{{ title }}</h1>
+        <h1>
+          {{ $t(`pages.${routeName}`) }}
+        </h1>
       </v-col>
     </v-row>
   </v-img>
@@ -24,8 +26,14 @@ export default {
   name: 'LoggedInHero',
   data () {
     return {
-      title: 'スクワッド一覧',
       imgSrc: require('@/static/CommonImage.jpg')
+    }
+  },
+  props: {
+    routeName: {
+      type: String,
+      require: true,
+      default: ''
     }
   }
 }

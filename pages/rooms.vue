@@ -40,7 +40,7 @@
         <v-list-item
           v-for="(link, i) in roomLinks"
           :key="i"
-          :to="`${link.path}`"
+          :to="{ name: `${link.title}` }"
           nuxt
           @click="handleToggleDrawer"
         >
@@ -70,7 +70,7 @@
       @handle-toggle-drawer="handleToggleDrawer"
     />
 
-    <logged-in-hero />
+    <logged-in-hero :route-name="routeName" />
 
     <v-main>
       <v-container fluid>
@@ -90,11 +90,16 @@ export default {
     return {
       appName,
       roomLinks: [
-        { title: 'squadList', path: '/rooms' },
-        { title: 'squadCreate', path: '/rooms/create' },
-        { title: 'invitationList', path: '/' }
+        { title: 'rooms' },
+        { title: 'rooms-create' },
+        { title: 'invitation-list' }
       ],
       drawer: false
+    }
+  },
+  computed: {
+    routeName () {
+      return this.$route.name
     }
   },
   methods: {
