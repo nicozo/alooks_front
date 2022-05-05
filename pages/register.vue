@@ -11,7 +11,7 @@
         class="my-8 text-center"
       >
         <h1>
-          {{ $t('pages.register') }}
+          {{ pageTitle }}
         </h1>
       </v-col>
 
@@ -72,14 +72,15 @@
 export default {
   name: 'LoginPage',
   layout: 'signup',
-  data () {
+  data ({ $route }) {
     return {
       user: {
         name: '',
         email: '',
         password: '',
         password_confirmation: ''
-      }
+      },
+      pageTitle: this.$t(`pages.${$route.name}`)
     }
   },
   methods: {

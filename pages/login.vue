@@ -11,7 +11,7 @@
         class="my-8 text-center"
       >
         <h1>
-          {{ $t('pages.login') }}
+          {{ pageTitle }}
         </h1>
       </v-col>
 
@@ -79,7 +79,7 @@
 export default {
   name: 'LoginPage',
   layout: 'signup',
-  data () {
+  data ({ $route }) {
     return {
       // 開発環境中にログインを行いやすくするためデフォルトの値を設定
       // auth_userブランチの作業が終わり次第空にすること
@@ -88,7 +88,8 @@ export default {
         password: 'password'
       },
       redirectPath: this.$store.state.loggedIn.rememberPath,
-      loggedInHomePath: this.$store.state.loggedIn.homePath
+      loggedInHomePath: this.$store.state.loggedIn.homePath,
+      pageTitle: this.$t(`pages.${$route.name}`)
     }
   },
   methods: {

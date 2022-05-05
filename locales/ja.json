@@ -3,9 +3,9 @@
     "register": "会員登録（無料）",
     "login": "ログイン",
     "logout": "ログアウト",
-    "squadList": "スクワッド一覧",
-    "squadCreate": "スクワッド作成",
-    "invitationList": "参加リクエスト一覧"
+    "rooms": "スクワッド一覧",
+    "rooms-create": "スクワッド作成",
+    "invitation-list": "参加リクエスト一覧"
   },
   "items": {
     "about": "アプリについて",
