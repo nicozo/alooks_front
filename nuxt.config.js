@@ -56,7 +56,9 @@ export default {
     // proxyの設定いらないかも
     // axiosのbaseURLを環境変数API_URLで振り分けるためにモジュールを導入
     // proxy: trueとするとbaseURLを明記する必要がある
-    '@nuxtjs/proxy'
+    '@nuxtjs/proxy',
+    // https://i18n.nuxtjs.org/setup
+    '@nuxtjs/i18n'
   ],
 
   publicRuntimeConfig: {
@@ -92,5 +94,20 @@ export default {
   },
 
   vuetify: {
+  },
+
+  // Doc: https://i18n.nuxtjs.org/basic-usage
+  i18n: {
+    locales: ['ja', 'en'],
+    defaultLocale: 'ja',
+    // Doc: https://kazupon.github.io/vue-i18n/api/#properties
+    vueI18n: {
+      // silentTranslationWarn: true,
+      silentFallbackWarn: true,
+      messages: {
+        ja: require('./locales/ja.json'),
+        en: require('./locales/en.json')
+      }
+    }
   }
 }
