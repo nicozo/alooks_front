@@ -29,7 +29,7 @@
               color="success"
               to="/login"
             >
-              ログイン
+              {{ $t('pages.login') }}
             </v-btn>
           </v-list-item-content>
         </v-list-item>
@@ -39,7 +39,7 @@
               color="primary"
               to="/register"
             >
-              新規登録
+              {{ $t('pages.register') }}
             </v-btn>
           </v-list-item-content>
         </v-list-item>
@@ -51,7 +51,7 @@
         >
           <v-list-item-content @click="toLink(item.title)">
             <v-list-item-title>
-              {{ item.title }}
+              {{ $t(`items.${item.title}`) }}
             </v-list-item-title>
           </v-list-item-content>
         </v-list-item>
@@ -79,7 +79,7 @@
           >
             <v-card flat>
               <v-card-title class="justify-center text-h4">
-                {{ item.title }}
+                {{ $t(`items.${item.title}`) }}
               </v-card-title>
             </v-card>
           </v-col>

@@ -11,7 +11,7 @@
         class="my-8 text-center"
       >
         <h1>
-          {{ appName }}に新規登録
+          {{ $t('pages.register') }}
         </h1>
       </v-col>
 
@@ -72,9 +72,8 @@
 export default {
   name: 'LoginPage',
   layout: 'signup',
-  data ({ $config: { appName } }) {
+  data () {
     return {
-      appName,
       user: {
         name: '',
         email: '',

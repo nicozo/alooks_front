@@ -46,7 +46,7 @@
         >
           <v-list-item-content>
             <v-list-item-title>
-              {{ link.title }}
+              {{ $t(`pages.${link.title}`) }}
             </v-list-item-title>
           </v-list-item-content>
         </v-list-item>
@@ -57,7 +57,7 @@
               color="red"
               to="/logout"
             >
-              ログアウト
+              {{ $t('pages.logout') }}
             </v-btn>
           </v-list-item-content>
         </v-list-item>

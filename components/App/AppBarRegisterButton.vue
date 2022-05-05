@@ -5,6 +5,6 @@
     class="mr-3"
     to="/register"
   >
-    新規登録
+    {{ $t('pages.register') }}
   </v-btn>
 </template>

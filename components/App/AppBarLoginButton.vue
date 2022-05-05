@@ -4,6 +4,6 @@
     class="mr-2"
     to="/login"
   >
-    ログイン
+    {{ $t('pages.login') }}
   </v-btn>
 </template>

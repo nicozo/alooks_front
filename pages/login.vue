@@ -11,7 +11,7 @@
         class="my-8 text-center"
       >
         <h1>
-          {{ appName }}にログイン
+          {{ $t('pages.login') }}
         </h1>
       </v-col>
 
@@ -79,9 +79,8 @@
 export default {
   name: 'LoginPage',
   layout: 'signup',
-  data ({ $config: { appName } }) {
+  data () {
     return {
-      appName,
       // 開発環境中にログインを行いやすくするためデフォルトの値を設定
       // auth_userブランチの作業が終わり次第空にすること
       user: {
@@ -104,7 +103,6 @@ export default {
       this.$auth.login(res)
       this.$router.push(this.redirectPath)
       this.$store.dispatch('getRememberPath', this.loggedInHomePath)
-      // this.$router.push('/rooms')
     },
     authFailure ({ response }) {
       if (response && response.status === 404) {
