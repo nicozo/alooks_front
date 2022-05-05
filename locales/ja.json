@@ -10,5 +10,11 @@
   "items": {
     "about": "アプリについて",
     "usage": "使い方"
+  },
+  "error": {
+    "Unauthorized": "認証に失敗しました",
+    "Forbidden": "アクセスが拒否されました",
+    "Not Found": "ページが見つかりません",
+    "Network Error": "ネットワークエラーが発生しました"
   }
 }
