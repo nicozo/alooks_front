@@ -81,11 +81,9 @@ export default {
   layout: 'signup',
   data ({ $route }) {
     return {
-      // 開発環境中にログインを行いやすくするためデフォルトの値を設定
-      // auth_userブランチの作業が終わり次第空にすること
       user: {
-        email: 'test1@example.com',
-        password: 'password'
+        email: '',
+        password: ''
       },
       redirectPath: this.$store.state.loggedIn.rememberPath,
       loggedInHomePath: this.$store.state.loggedIn.homePath,
