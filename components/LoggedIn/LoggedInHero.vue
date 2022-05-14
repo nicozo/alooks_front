@@ -1,9 +1,9 @@
 <template>
   <v-img
+    id="logged-in-hero"
     :src="imgSrc"
     max-height="350"
     dark
-    id="logged-in-hero"
   >
     <v-row
       align="center"
@@ -24,16 +24,16 @@
 <script>
 export default {
   name: 'LoggedInHero',
-  data () {
-    return {
-      imgSrc: require('@/static/CommonImage.jpg')
-    }
-  },
   props: {
     routeName: {
       type: String,
       require: true,
       default: ''
+    }
+  },
+  data () {
+    return {
+      imgSrc: require('@/static/CommonImage.jpg')
     }
   }
 }
