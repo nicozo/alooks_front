@@ -21,20 +21,20 @@
             color="red"
             dark
           >
-            参加中：{{ room.current_squad_member }}人
+            あと{{ room.recruitment_number }}人募集
           </v-chip>
         </div>
         <v-card-title>
           {{ room.title }}
         </v-card-title>
         <v-card-text>
-          プラットフォーム：{{ room.platform.name }}
+          プラットフォーム：{{ room.platform }}
         </v-card-text>
         <v-card-text>
-          ゲームモード：{{ room.game_mode.name }}
+          ゲームモード：{{ room.game_mode }}
         </v-card-text>
         <v-card-text>
-          ランク帯：{{ room.rank_tier.name }}
+          ランク帯：{{ room.rank_tier }}
         </v-card-text>
         <v-card-text>
           募集時間：{{ room.application_deadline }}
