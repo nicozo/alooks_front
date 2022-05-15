@@ -37,7 +37,7 @@
           ランク帯：{{ room.rank_tier }}
         </v-card-text>
         <v-card-text>
-          募集時間：{{ room.application_deadline }}
+          募集期間：{{ formattedDate }}
         </v-card-text>
 
         <v-card-actions>
@@ -54,6 +54,8 @@
 </template>
 
 <script>
+import moment from 'moment'
+
 export default {
   name: 'RoomItem',
   props: {
@@ -76,6 +78,35 @@ export default {
         type: Date,
         required: true
       }
+    }
+  },
+  data () {
+    return {
+      formattedDate: ''
+    }
+  },
+  mounted () {
+    this.changeDateFormat()
+  },
+  methods: {
+    changeDateFormat () {
+      const railsDate = this.room.application_deadline
+      const momentDate = moment(railsDate)
+      const momentDateFormatted = momentDate.fromNow()
+      this.formattedDate = this.replaceFormat(momentDateFormatted)
+      // console.log('moment.jsから取得した時刻:', momentDate)
+      // console.log('moment.jsから取得した時刻:', momentDateFormatted)
+      // console.log('文字の変換テスト:', momentDateFormatted.replace('後', 'で締め切り'))
+      // console.log(this.formattedDate)
+    },
+    replaceFormat (str) {
+      console.log('渡された文字列', str)
+      if (str.includes('後')) {
+        str = str.replace('後', 'で締め切り')
+      } else {
+        str = '締め切りました'
+      }
+      return str
     }
   }
 }

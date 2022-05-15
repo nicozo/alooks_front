@@ -14,26 +14,32 @@
             <div class="text-subtitle-1 font-weight-bold text-right" style="width: 150px">
               プラットフォーム：
             </div>
-            <div />
+            <div>
+              {{ room.platform }}
+            </div>
           </div>
           <div class="d-flex align-center py-3">
             <div class="text-subtitle-1 font-weight-bold text-right" style="width: 150px">
               ゲームモード：
             </div>
-            <div />
+            <div>
+              {{ room.game_mode }}
+            </div>
           </div>
           <div class="d-flex align-center py-3">
             <div class="text-subtitle-1 font-weight-bold text-right" style="width: 150px">
               ランク帯：
             </div>
-            <div />
+            <div>
+              {{ room.rank_tier }}
+            </div>
           </div>
           <div class="d-flex align-center py-3">
             <div class="text-subtitle-1 font-weight-bold text-right" style="width: 150px">
-              募集時間：
+              募集期間：
             </div>
             <div>
-              {{ room.application_deadline }}
+              {{ formattedDate }}
             </div>
           </div>
         </v-list-item-content>
@@ -51,6 +57,8 @@
 </template>
 
 <script>
+import moment from 'moment'
+
 export default {
   name: 'RoomDetails',
   props: {
@@ -73,6 +81,35 @@ export default {
         type: Date,
         required: true
       }
+    }
+  },
+  data () {
+    return {
+      formattedDate: ''
+    }
+  },
+  mounted () {
+    this.changeDateFormat()
+  },
+  methods: {
+    changeDateFormat () {
+      const railsDate = this.room.application_deadline
+      const momentDate = moment(railsDate)
+      const momentDateFormatted = momentDate.fromNow()
+      this.formattedDate = this.replaceFormat(momentDateFormatted)
+      // console.log('moment.jsから取得した時刻:', momentDate)
+      // console.log('moment.jsから取得した時刻:', momentDateFormatted)
+      // console.log('文字の変換テスト:', momentDateFormatted.replace('後', 'で締め切り'))
+      // console.log(this.formattedDate)
+    },
+    replaceFormat (str) {
+      console.log('渡された文字列', str)
+      if (str.includes('後')) {
+        str = str.replace('後', 'で締め切り')
+      } else {
+        str = '締め切りました'
+      }
+      return str
     }
   }
 }

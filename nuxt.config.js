@@ -46,7 +46,9 @@ export default {
     // https://go.nuxtjs.dev/eslint
     '@nuxtjs/eslint-module',
     // https://www.npmjs.com/package/@nuxtjs/vuetify
-    '@nuxtjs/vuetify'
+    '@nuxtjs/vuetify',
+    // https://www.npmjs.com/package/@nuxtjs/moment
+    '@nuxtjs/moment'
   ],
 
   // Modules: https://go.nuxtjs.dev/config-modules
@@ -110,5 +112,10 @@ export default {
         en: require('./locales/en.json')
       }
     }
+  },
+
+  // moment.js言語設定
+  moment: {
+    locales: ['ja']
   }
 }
