@@ -44,6 +44,7 @@
           <v-btn
             color="success"
             class="ml-auto"
+            :disabled="invalid"
           >
             参加リクエスト
           </v-btn>
@@ -82,7 +83,8 @@ export default {
   },
   data () {
     return {
-      formattedDate: ''
+      formattedDate: '',
+      invalid: false
     }
   },
   mounted () {
@@ -105,8 +107,12 @@ export default {
         str = str.replace('後', 'で締め切り')
       } else {
         str = '締め切りました'
+        this.isInvalid()
       }
       return str
+    },
+    isInvalid () {
+      this.invalid = true
     }
   }
 }

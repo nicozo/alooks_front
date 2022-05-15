@@ -49,6 +49,7 @@
       <v-btn
         color="success"
         class="mx-auto mb-6 pa-6"
+        :disabled="invalid"
       >
         参加リクエスト
       </v-btn>
@@ -85,7 +86,8 @@ export default {
   },
   data () {
     return {
-      formattedDate: ''
+      formattedDate: '',
+      invalid: false
     }
   },
   mounted () {
@@ -103,13 +105,17 @@ export default {
       // console.log(this.formattedDate)
     },
     replaceFormat (str) {
-      console.log('渡された文字列', str)
+      // console.log('渡された文字列', str)
       if (str.includes('後')) {
         str = str.replace('後', 'で締め切り')
       } else {
         str = '締め切りました'
+        this.isInvalid()
       }
       return str
+    },
+    isInvalid () {
+      this.invalid = true
     }
   }
 }
