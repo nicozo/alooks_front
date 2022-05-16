@@ -21,15 +21,15 @@ export default {
   name: 'RoomFormRecruitmentNumbers',
   props: {
     recruitmentNumber: {
-      type: String,
-      default: ''
+      type: Number,
+      default: 1
     }
   },
   data () {
     return {
       recruitmentNumbers: [
-        '1人',
-        '2人'
+        1,
+        2
       ]
     }
   }
