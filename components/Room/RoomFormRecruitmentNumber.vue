@@ -6,7 +6,6 @@
   >
     <v-select
       :items="recruitmentNumbers"
-      :value="recruitmentNumber"
       label="募集人数"
       :error-messages="errors"
       outlined

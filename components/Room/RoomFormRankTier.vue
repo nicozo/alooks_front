@@ -6,7 +6,6 @@
   >
     <v-select
       :items="rankTiers"
-      :value="rankTier"
       label="ランク帯"
       :error-messages="errors"
       outlined

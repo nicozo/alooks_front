@@ -6,7 +6,8 @@
   >
     <v-select
       :items="applicationDeadlines"
-      :value="applicationDeadline"
+      item-text="label"
+      item-value="minutes"
       label="募集期間"
       :error-messages="errors"
       outlined
@@ -18,19 +19,18 @@
 
 <script>
 export default {
-  name: 'RoomFormGameMode',
+  name: 'RoomFormApplicationDeadline',
   props: {
     applicationDeadline: {
-      type: String,
-      default: ''
+      type: Number
     }
   },
   data () {
     return {
       applicationDeadlines: [
-        '15分間',
-        '30分間',
-        '45分間'
+        { label: '15分間', minutes: 15 },
+        { label: '30分間', minutes: 30 },
+        { label: '45分間', minutes: 45 }
       ]
     }
   }

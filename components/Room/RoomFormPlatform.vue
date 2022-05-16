@@ -6,7 +6,6 @@ z<template>
   >
     <v-select
       :items="platforms"
-      :value="platform"
       label="プラットフォーム"
       :error-messages="errors"
       outlined
