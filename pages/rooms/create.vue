@@ -62,21 +62,33 @@ export default {
         platform: '',
         game_mode: '',
         rank_tier: '',
-        application_deadline: '',
-        recruitment_number: '',
+        application_deadline: null,
+        recruitment_number: null,
         is_draft: false
       },
+      redirectPath: this.$store.state.loggedIn.rememberPath,
       pageTitle: this.$t(`pages.${$route.name}`)
     }
   },
   methods: {
-    recruit () {
-      // if (!this.invalid) {
-      //   await this.$axios.$post(
-      //     'api/v1/rooms', { room: this.room }
-      //   )
-      // }
-      console.log(this.room)
+    async recruit () {
+      if (!this.invalid) {
+        await this.$axios.$post('api/v1/rooms', { room: this.room })
+          .then(res => this.recruitSuccessful(res))
+          .catch(e => this.recruitFailure(e))
+      }
+    },
+    recruitSuccessful (res) {
+      console.log(res)
+      this.$router.push(this.redirectPath)
+    },
+    recruitFailure ({ response }) {
+      if (response && response.status === 404) {
+        const msg = '募集できませんでした。時間を置いて募集してください'
+        return this.$store.dispatch('getToast', { msg })
+      }
+      // TODO エラー処理
+      console.log(response)
     }
   }
 }
