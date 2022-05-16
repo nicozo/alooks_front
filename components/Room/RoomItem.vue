@@ -102,7 +102,7 @@ export default {
       // console.log(this.formattedDate)
     },
     replaceFormat (str) {
-      console.log('渡された文字列', str)
+      // console.log('渡された文字列', str)
       if (str.includes('後')) {
         str = str.replace('後', 'で締め切り')
       } else {
