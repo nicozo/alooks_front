@@ -1,5 +1,6 @@
 <template>
   <v-card
+    :id="'room' + room.id"
     rounded-xl
     hover
     raised

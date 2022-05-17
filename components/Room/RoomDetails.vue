@@ -1,5 +1,8 @@
 <template>
-  <v-card rounded-xl>
+  <v-card
+    :id="'room' + room.id"
+    rounded-xl
+  >
     <v-list
       max-width="900"
       class="mx-auto"
