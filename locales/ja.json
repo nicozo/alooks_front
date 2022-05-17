@@ -5,7 +5,8 @@
     "logout": "ログアウト",
     "rooms": "スクワッド一覧",
     "rooms-create": "スクワッド作成",
-    "invitation-list": "参加リクエスト一覧"
+    "invitation-list": "参加リクエスト一覧",
+    "profile": "プロフィール"
   },
   "items": {
     "about": "アプリについて",

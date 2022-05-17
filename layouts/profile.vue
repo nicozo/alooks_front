@@ -1,5 +1,5 @@
 <template>
-  <div>
+  <v-app>
     <v-navigation-drawer
       v-model="drawer"
       app
@@ -75,19 +75,16 @@
     <logged-in-hero :route-name="routeName" />
 
     <v-main>
-      <v-container fluid>
-        <NuxtChild />
+      <v-container>
+        <Nuxt />
       </v-container>
     </v-main>
-
-    <app-footer />
-  </div>
+  </v-app>
 </template>
 
 <script>
 export default {
-  name: 'RoomsDefaultPage',
-  layout: 'rooms',
+  name: 'ProfileLayout',
   data ({ $config: { appName } }) {
     return {
       appName,
