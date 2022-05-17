@@ -75,16 +75,21 @@
     <logged-in-hero :route-name="routeName" />
 
     <v-main>
-      <v-container>
+      <v-container fluid>
         <Nuxt />
       </v-container>
     </v-main>
+
+    <app-footer />
   </v-app>
 </template>
 
 <script>
 export default {
-  name: 'ProfileLayout',
+  name: 'LoggedInLayout',
+  middleware: [
+    'authentication'
+  ],
   data ({ $config: { appName } }) {
     return {
       appName,
@@ -104,6 +109,7 @@ export default {
   methods: {
     handleToggleDrawer () {
       this.drawer = !this.drawer
+      // console.log('ドロワーリンククリック！', this.drawer)
     }
   }
 }
