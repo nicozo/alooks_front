@@ -1,7 +1,43 @@
 <template>
-  <div>
-    {{ user }}
-  </div>
+  <v-row
+    align="center"
+    justify="center"
+  >
+    <v-card
+      flat
+      width="80%"
+      max-width="400"
+    >
+      <validation-observer v-slot="{ invalid }">
+        <form @submit.prevent="update">
+          <v-container fluid>
+            <user-form-name :name.sync="user.name" />
+
+            <user-form-self-introduction :self-introduction.sync="user.self_introduction" />
+
+            <user-form-date-of-birth :date-of-birth.sync="user.date_of_birth" />
+
+            <user-form-sex :sex.sync="user.sex" />
+
+            <user-form-game-id :game-id.sync="user.game_id" />
+            <v-row>
+              <v-col>
+                <v-btn
+                  type="submit"
+                  block
+                  color="primary"
+                  :disabled="invalid"
+                  @click="update"
+                >
+                  更新する
+                </v-btn>
+              </v-col>
+            </v-row>
+          </v-container>
+        </form>
+      </validation-observer>
+    </v-card>
+  </v-row>
 </template>
 
 <script>
@@ -13,8 +49,8 @@ export default {
       user: {
         name: '',
         self_introduction: '',
-        date_of_birth: null,
-        sex: null,
+        date_of_birth: '',
+        sex: '',
         game_id: ''
       }
     }
@@ -26,6 +62,11 @@ export default {
   },
   created () {
     this.user = Object.assign({}, this.authUser)
+  },
+  methods: {
+    update () {
+      console.log('プロフィール情報：', this.user)
+    }
   }
 }
 </script>
