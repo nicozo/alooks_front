@@ -5,6 +5,7 @@
     rules="required"
   >
     <v-select
+      id="application_deadline"
       :items="applicationDeadlines"
       item-text="label"
       item-value="minutes"

@@ -7,6 +7,7 @@
         rules="required|max:50"
       >
         <v-textarea
+          id="self_introduction"
           :value="selfIntroduction"
           label="自己紹介"
           placeholder="よろしくお願いします！"

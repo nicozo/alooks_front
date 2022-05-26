@@ -1,5 +1,6 @@
 <template>
   <v-footer
+    id="app-footer"
     app
     absolute
   >

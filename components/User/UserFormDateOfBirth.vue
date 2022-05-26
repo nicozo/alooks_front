@@ -16,6 +16,7 @@
             rules="required"
           >
           <v-text-field
+            id="date_of_birth"
             :value="dateOfBirth"
             label="生年月日"
             :error-messages="errors"

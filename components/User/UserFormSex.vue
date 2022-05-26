@@ -7,6 +7,7 @@
         rules="required"
       >
         <v-select
+          id="sex"
           :value="sex"
           :items="gender"
           item-text="label"

@@ -5,6 +5,7 @@
     rules="required"
   >
     <v-select
+      id="game_mode"
       :items="gameModes"
       :value="gameMode"
       label="ゲームモード"

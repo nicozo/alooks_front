@@ -5,6 +5,7 @@
     rules="required"
   >
     <v-select
+      id="rank_tier"
       :items="rankTiers"
       label="ランク帯"
       :error-messages="errors"

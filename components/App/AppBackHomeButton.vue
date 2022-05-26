@@ -1,5 +1,6 @@
 <template>
   <v-btn
+    id="app-back-home-button"
     plain
     to="/"
   >

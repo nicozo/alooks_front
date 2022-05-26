@@ -1,5 +1,6 @@
 <template>
   <v-app-bar
+    id="logged-in-header"
     app
     flat
     class="px-2"

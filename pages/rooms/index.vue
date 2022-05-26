@@ -50,7 +50,7 @@ export default {
     return {
       page: 1,
       length: 0,
-      pageSize: 6,
+      pageSize: 10,
       displayRooms: []
     }
   },

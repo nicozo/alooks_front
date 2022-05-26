@@ -7,6 +7,7 @@
         rules="required|max:30"
       >
         <v-text-field
+          id="name"
           :value="name"
           label="ユーザー名"
           placeholder="あなたのユーザー名"

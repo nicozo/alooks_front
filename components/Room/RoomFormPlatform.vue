@@ -5,6 +5,7 @@ z<template>
     rules="required"
   >
     <v-select
+      id="platform"
       :items="platforms"
       label="プラットフォーム"
       :error-messages="errors"

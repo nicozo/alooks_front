@@ -1,6 +1,7 @@
 <!-- front/components/App/AppToaster.vue -->
 <template>
   <v-snackbar
+    id="app-toaster"
     v-model="setSnackbar"
     app
     top

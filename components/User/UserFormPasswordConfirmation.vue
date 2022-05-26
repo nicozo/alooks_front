@@ -7,6 +7,7 @@
         rules="required|confirmed:password"
       >
         <v-text-field
+          id="password_confirmation"
           :value="passwordConfirmation"
           :append-icon="showPassword ? 'mdi-eye' : 'mdi-eye-off'"
           :type="showPassword ? 'text' : 'password'"

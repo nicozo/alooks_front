@@ -3,6 +3,7 @@
     <app-back-home-button />
 
     <v-row
+      id="login-form"
       align="center"
       justify="center"
     >

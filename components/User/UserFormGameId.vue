@@ -7,6 +7,7 @@
         rules="required"
       >
         <v-text-field
+          id="game_id"
           :value="gameId"
           label="ゲームID"
           placeholder="abcdefg11"

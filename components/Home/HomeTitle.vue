@@ -4,7 +4,10 @@
     :style="{ height: `${imgHeight}vh` }"
     class="mx-10"
   >
-    <v-col cols="12">
+    <v-col
+      id="home-title"
+      cols="12"
+    >
       <div class="d-flex flex-column align-start">
         <h1 class="text-h2 mb-3">
           {{ appName }}

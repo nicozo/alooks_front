@@ -1,5 +1,6 @@
 <template>
   <v-app-bar
+    id="home-header"
     app
     :color="appBarStyle.color"
     :elevation="appBarStyle.elevation"

@@ -1,5 +1,6 @@
 <template>
   <v-row
+    id="profile-form"
     align="center"
     justify="center"
   >
