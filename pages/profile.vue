@@ -9,6 +9,7 @@
       width="80%"
       max-width="400"
     >
+    {{ this.user.avatar_url }}
       <validation-observer v-slot="{ invalid }">
         <form @submit.prevent="updateProfile">
           <v-container fluid>
@@ -49,7 +50,6 @@
                   block
                   color="primary"
                   :disabled="invalid"
-                  @click="updateProfile"
                 >
                   更新する
                 </v-btn>
@@ -80,6 +80,7 @@ export default {
   },
   computed: {
     authUser () {
+      console.log(this.$auth.user)
       return this.$auth.user
     }
   },
