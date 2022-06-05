@@ -8,7 +8,8 @@ import {
 import {
   required,
   email,
-  confirmed
+  confirmed,
+  image
 } from 'vee-validate/dist/rules'
 
 Vue.component('ValidationProvider', ValidationProvider)
@@ -43,4 +44,9 @@ extend('max', {
 extend('confirmed', {
   ...confirmed,
   message: 'パスワードと一致しません'
+})
+
+extend('image', {
+  ...image,
+  message: '{_field_}は画像形式で入力してください'
 })

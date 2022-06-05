@@ -10,8 +10,29 @@
       max-width="400"
     >
       <validation-observer v-slot="{ invalid }">
-        <form @submit.prevent="update">
+        <form @submit.prevent="updateProfile">
           <v-container fluid>
+
+            <v-row>
+              <v-col>
+                <validation-provider
+                  v-slot="{errors}"
+                  name="プロフィール画像"
+                  rules="required|image"
+                >
+                  <v-file-input
+                    id="avatar"
+                    v-model="user.avatar_url"
+                    label="プロフィール画像"
+                    accept="image/png, image/jpeg"
+                    :error-messages="errors"
+                    outlined
+                    required
+                  />
+                </validation-provider>
+              </v-col>
+            </v-row>
+
             <user-form-name :name.sync="user.name" />
 
             <user-form-self-introduction :self-introduction.sync="user.self_introduction" />
@@ -28,7 +49,7 @@
                   block
                   color="primary"
                   :disabled="invalid"
-                  @click="update"
+                  @click="updateProfile"
                 >
                   更新する
                 </v-btn>
@@ -52,7 +73,8 @@ export default {
         self_introduction: '',
         date_of_birth: '',
         sex: '',
-        game_id: ''
+        game_id: '',
+        avatar_url: ''
       }
     }
   },
@@ -65,8 +87,19 @@ export default {
     this.user = Object.assign({}, this.authUser)
   },
   methods: {
-    update () {
-      console.log('プロフィール情報：', this.user)
+    async updateProfile () {
+      const formData = new FormData()
+      formData.append('user[name]', this.user.name)
+      formData.append('user[self_introduction]', this.user.self_introduction)
+      formData.append('user[date_of_birth]', this.user.date_of_birth)
+      formData.append('user[sex]', this.user.sex)
+      formData.append('user[game_id]', this.user.game_id)
+      formData.append('user[avatar]', this.user.avatar_url)
+      console.log(...formData.entries())
+
+      await this.$axios.$patch(`/api/v1/profile/${this.authUser.id}`, formData)
+        .then(res => this.$store.dispatch('getAuthUser', res))
+        .catch(e => console.log(e))
     }
   }
 }
