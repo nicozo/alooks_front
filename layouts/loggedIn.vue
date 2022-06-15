@@ -30,7 +30,7 @@
           @click="handleToggleDrawer"
         >
           <v-list-item-avatar>
-            <img src="" alt="">
+            <img :src="$auth.user.avatar_url" alt="">
           </v-list-item-avatar>
           <v-list-item-content>
             <v-list-item-subtitle>

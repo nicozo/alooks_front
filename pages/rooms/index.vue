@@ -44,6 +44,7 @@ export default {
     const rooms = await $axios.$get(
       'api/v1/rooms'
     )
+    // console.log('部屋情報:', rooms)
     return { rooms }
   },
   data () {

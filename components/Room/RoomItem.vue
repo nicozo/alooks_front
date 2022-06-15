@@ -8,12 +8,22 @@
   >
     <div class="d-flex justify-space-around align-center py-6 px-6">
       <div class="flex-grow-0 mr-6">
-        <v-avatar
-          color="orange"
-          size="100"
-        >
-          <span class="white--text text-h5">100</span>
-        </v-avatar>
+        <div v-if="room.user_avatar">
+          <v-avatar
+            color="primary"
+            size="100"
+          >
+            <img :src="room.user_avatar" alt="プロフィール画像です">
+          </v-avatar>
+        </div>
+        <div v-else>
+          <v-avatar
+            color="orange"
+            size="100"
+          >
+            <span class="white--text text-h5">100</span>
+          </v-avatar>
+        </div>
       </div>
 
       <div class="flex-grow-1">
@@ -78,6 +88,10 @@ export default {
       },
       application_deadline: {
         type: Date,
+        required: true
+      },
+      user_avatar: {
+        type: String,
         required: true
       }
     }
