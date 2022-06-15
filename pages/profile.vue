@@ -9,10 +9,24 @@
       width="80%"
       max-width="400"
     >
-    {{ this.user.avatar_url }}
       <validation-observer v-slot="{ invalid }">
         <form @submit.prevent="updateProfile">
           <v-container fluid>
+
+          <v-row>
+            <v-col>
+              <div v-if="user.avatar_url">
+                <v-layout justify-center>
+                  <v-avatar
+                    color="primary"
+                    size="200"
+                  >
+                    <img :src="user.avatar_url" alt="プロフィール画像です">
+                  </v-avatar>
+                </v-layout>
+              </div>
+            </v-col>
+          </v-row>
 
             <v-row>
               <v-col>
@@ -23,7 +37,7 @@
                 >
                   <v-file-input
                     id="avatar"
-                    v-model="user.avatar_url"
+                    v-model="uploadAvatar"
                     label="プロフィール画像"
                     accept="image/png, image/jpeg"
                     :error-messages="errors"
@@ -75,7 +89,8 @@ export default {
         sex: '',
         game_id: '',
         avatar_url: ''
-      }
+      },
+      uploadAvatar: ''
     }
   },
   computed: {
@@ -86,6 +101,7 @@ export default {
   },
   created () {
     this.user = Object.assign({}, this.authUser)
+    // console.log('ログインユーザー情報：', this.user)
   },
   methods: {
     async updateProfile () {
@@ -95,12 +111,18 @@ export default {
       formData.append('user[date_of_birth]', this.user.date_of_birth)
       formData.append('user[sex]', this.user.sex)
       formData.append('user[game_id]', this.user.game_id)
-      formData.append('user[avatar]', this.user.avatar_url)
+      if (this.uploadAvatar !== null) {
+        formData.append('user[avatar]', this.uploadAvatar)
+      }
       console.log(...formData.entries())
 
       await this.$axios.$patch(`/api/v1/profile/${this.authUser.id}`, formData)
-        .then(res => this.$store.dispatch('getAuthUser', res))
+        .then(res => this.uploadSuccessful(res))
         .catch(e => console.log(e))
+    },
+    uploadSuccessful (res) {
+      this.$store.dispatch('getAuthUser', res)
+      // this.$router.push('/rooms')
     }
   }
 }
