@@ -8,7 +8,6 @@
     <div class="d-flex align-center">
       <div v-if="room.user_avatar">
         <v-avatar
-          color="primary"
           size="100"
           class="flex-grow-0 mr-6"
         >
@@ -17,10 +16,10 @@
       </div>
       <div v-else>
         <v-avatar
-          color="orange"
           size="100"
+          class="flex-grow-0 mr-6"
         >
-          <span class="white--text text-h5">100</span>
+          <img :src="defaultAvatarSrc" alt="プロフィール画像です">
         </v-avatar>
       </div>
 
@@ -57,6 +56,11 @@ export default {
     // console.log('部屋情報:', room)
     // console.log('募集主情報:', room.user)
     return { room }
+  },
+  data () {
+    return {
+      defaultAvatarSrc: require('@/static/DefaultAvatar.png')
+    }
   }
 }
 </script>

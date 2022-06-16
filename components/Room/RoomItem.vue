@@ -21,7 +21,7 @@
             color="orange"
             size="100"
           >
-            <span class="white--text text-h5">100</span>
+            <img :src="defaultAvatarSrc" alt="プロフィール画像です">
           </v-avatar>
         </div>
       </div>
@@ -99,7 +99,8 @@ export default {
   data () {
     return {
       formattedDate: '',
-      invalid: false
+      invalid: false,
+      defaultAvatarSrc: require('@/static/DefaultAvatar.png')
     }
   },
   mounted () {

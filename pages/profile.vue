@@ -15,16 +15,18 @@
 
           <v-row>
             <v-col>
-              <div v-if="user.avatar_url">
-                <v-layout justify-center>
-                  <v-avatar
-                    color="primary"
-                    size="200"
-                  >
+              <v-layout justify-center>
+                <div v-if="user.avatar_url">
+                  <v-avatar size="200">
                     <img :src="user.avatar_url" alt="プロフィール画像です">
                   </v-avatar>
-                </v-layout>
-              </div>
+                </div>
+                <div v-else>
+                  <v-avatar size="200">
+                    <img :src="defaultAvatarSrc" alt="プロフィール画像です">
+                  </v-avatar>
+                </div>
+              </v-layout>
             </v-col>
           </v-row>
 
@@ -42,7 +44,6 @@
                     accept="image/png, image/jpeg"
                     :error-messages="errors"
                     outlined
-                    required
                   />
                 </validation-provider>
               </v-col>
@@ -90,7 +91,8 @@ export default {
         game_id: '',
         avatar_url: ''
       },
-      uploadAvatar: ''
+      uploadAvatar: '',
+      defaultAvatarSrc: require('@/static/DefaultAvatar.png')
     }
   },
   computed: {
