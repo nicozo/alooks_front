@@ -29,9 +29,16 @@
           class="py-3"
           @click="handleToggleDrawer"
         >
-          <v-list-item-avatar>
-            <img :src="$auth.user.avatar_url" alt="">
-          </v-list-item-avatar>
+          <div v-if="$auth.user.avatar_url">
+            <v-list-item-avatar>
+              <img :src="$auth.user.avatar_url" alt="プロフィール画像です">
+            </v-list-item-avatar>
+          </div>
+          <div v-else>
+            <v-list-item-avatar>
+              <img :src="defaultAvatarSrc" alt="プロフィール画像です">
+            </v-list-item-avatar>
+          </div>
           <v-list-item-content>
             <v-list-item-subtitle>
               {{ $auth.user.name }}
@@ -98,7 +105,8 @@ export default {
         { title: 'rooms-create' },
         { title: 'invitation-list' }
       ],
-      drawer: false
+      drawer: false,
+      defaultAvatarSrc: require('@/static/DefaultAvatar.png')
     }
   },
   computed: {

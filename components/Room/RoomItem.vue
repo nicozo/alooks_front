@@ -9,18 +9,12 @@
     <div class="d-flex justify-space-around align-center py-6 px-6">
       <div class="flex-grow-0 mr-6">
         <div v-if="room.user_avatar">
-          <v-avatar
-            color="primary"
-            size="100"
-          >
+          <v-avatar size="100">
             <img :src="room.user_avatar" alt="プロフィール画像です">
           </v-avatar>
         </div>
         <div v-else>
-          <v-avatar
-            color="orange"
-            size="100"
-          >
+          <v-avatar size="100">
             <img :src="defaultAvatarSrc" alt="プロフィール画像です">
           </v-avatar>
         </div>
