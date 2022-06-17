@@ -43,13 +43,13 @@ export default {
   },
   computed: {
     isScrollPoint () {
-      console.log('スクロールされた')
+      // console.log('スクロールされた')
       const pixelImgHeight = window.document.getElementById('home-hero')
       if (this.scrollY && pixelImgHeight) {
-        console.log(pixelImgHeight.clientHeight)
+        // console.log(pixelImgHeight.clientHeight)
         return this.scrollY > (pixelImgHeight.clientHeight - this.headerHeight)
       } else {
-        console.log('高さはないよ！')
+        // console.log('高さはないよ！')
         return false
       }
     },
