@@ -103,6 +103,11 @@ export default {
       this.$auth.login(res)
       this.$router.push(this.redirectPath)
       this.$store.dispatch('getRememberPath', this.loggedInHomePath)
+      // TODO setTimeout以外でログイン後のトースターを表示
+      // setTimeout(() => {
+      //   this.setToaster()
+      // }, 500)
+      this.setToaster()
     },
     authFailure ({ response }) {
       if (response && response.status === 404) {
@@ -111,6 +116,11 @@ export default {
       }
       // TODO エラー処理
       console.log(response)
+    },
+    setToaster () {
+      const msg = 'ログインしました'
+      const color = 'success'
+      return this.$store.dispatch('getToast', { msg, color })
     }
   }
 }

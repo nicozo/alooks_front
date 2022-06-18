@@ -34,10 +34,11 @@ export default {
       set (val) { return this.resetToast() && val }
     }
   },
-  beforeDestroy () {
-    // Vueインスタンスが破棄される直前にVuexのtoast.msgを削除する(timeoutに-1が渡された場合無期限に表示されてしまうための対策)
-    this.resetToast()
-  },
+  // TODO ログイン後のトースター表示のため一旦コメントアウト
+  // beforeDestroy () {
+  //   // Vueインスタンスが破棄される直前にVuexのtoast.msgを削除する(timeoutに-1が渡された場合無期限に表示されてしまうための対策)
+  //   this.resetToast()
+  // },
   methods: {
     // Vuexのtoast.msgの値を変更する
     resetToast () {

@@ -82,6 +82,8 @@
     <logged-in-hero :route-name="routeName" />
 
     <v-main>
+      <app-toaster />
+
       <v-container fluid>
         <Nuxt />
       </v-container>

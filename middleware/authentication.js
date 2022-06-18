@@ -16,7 +16,7 @@ export default async ({ $auth, store, route, redirect }) => {
     store.dispatch('getToast', { msg, color })
     // アクセスルート記憶
     store.dispatch('getRememberPath', route)
-    console.log(route)
+    // console.log(route)
     return redirect('/login')
   }
 }
