@@ -1,6 +1,10 @@
 <template>
   <v-container>
-    <room-back-previous-page-button />
+    <v-row>
+      <v-col>
+        <room-back-previous-page-button />
+      </v-col>
+    </v-row>
 
     <v-row
       align="center"
