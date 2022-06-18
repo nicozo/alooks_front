@@ -91,7 +91,7 @@ export default {
         game_id: '',
         avatar_url: ''
       },
-      uploadAvatar: '',
+      uploadAvatar: null,
       defaultAvatarSrc: require('@/static/DefaultAvatar.png')
     }
   },
