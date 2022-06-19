@@ -83,7 +83,7 @@ export default {
       }
     },
     recruitSuccessful (res) {
-      console.log(res)
+      console.log('作成されたroomオブジェクト', res)
       this.$router.push(this.redirectPath)
     },
     recruitFailure ({ response }) {

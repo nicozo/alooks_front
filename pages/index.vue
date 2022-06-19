@@ -124,7 +124,7 @@ export default {
       this.drawer = !this.drawer
     },
     toLink (item) {
-      console.log(item)
+      // console.log(item)
       this.$vuetify.goTo(`#${item}`)
       this.handleToggleDrawer()
     }

@@ -97,7 +97,6 @@ export default {
   },
   computed: {
     authUser () {
-      console.log(this.$auth.user)
       return this.$auth.user
     }
   },
@@ -116,15 +115,27 @@ export default {
       if (this.uploadAvatar !== null) {
         formData.append('user[avatar]', this.uploadAvatar)
       }
-      console.log(...formData.entries())
+      // console.log(...formData.entries())
 
       await this.$axios.$patch(`/api/v1/profile/${this.authUser.id}`, formData)
         .then(res => this.uploadSuccessful(res))
         .catch(e => console.log(e))
     },
     uploadSuccessful (res) {
+      this.setToaster()
       this.$store.dispatch('getAuthUser', res)
-      // this.$router.push('/rooms')
+      // TODO ログイン状態を維持して/roomsに遷移する実装
+      // 一旦リロードさせる方法を使用
+      // レスポンスにsubを含めていないため、VuexのauthUserのsubの値が保存されずログアウトが走ってしまう。
+      this.$router.go({
+        path: this.$router.currentRoute.path,
+        force: true
+      })
+    },
+    setToaster () {
+      const msg = 'プロフィール画像を更新しました'
+      const color = 'success'
+      return this.$store.dispatch('getToast', { msg, color })
     }
   }
 }
