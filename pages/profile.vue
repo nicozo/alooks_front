@@ -35,7 +35,7 @@
                 <validation-provider
                   v-slot="{errors}"
                   name="プロフィール画像"
-                  rules="required|image"
+                  rules="image"
                 >
                   <v-file-input
                     id="avatar"
