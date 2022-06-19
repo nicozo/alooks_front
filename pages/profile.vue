@@ -44,6 +44,8 @@
                     accept="image/png, image/jpeg"
                     :error-messages="errors"
                     outlined
+                    hint="推奨サイズ:640x590"
+                    persistent-hint
                   />
                 </validation-provider>
               </v-col>
