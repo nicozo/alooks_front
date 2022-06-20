@@ -50,10 +50,12 @@ export default {
       type: String
     }
   },
-  data: () => ({
-    activePicker: null,
-    menu: false
-  }),
+  data () {
+    return {
+      activePicker: null,
+      menu: false
+    }
+  },
   watch: {
     menu (val) {
       val && setTimeout(() => (this.activePicker = 'YEAR'))

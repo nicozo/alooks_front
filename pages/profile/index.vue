@@ -51,6 +51,12 @@
                   性別:{{ authUser.sex }}
                 </v-list-item-subtitle>
               </v-list-item-content>
+
+              <v-list-item-content>
+                <v-list-item-subtitle>
+                  年齢:{{ user.age }}
+                </v-list-item-subtitle>
+              </v-list-item-content>
             </v-list-item-content>
           </v-list-item>
         </v-list>
@@ -73,9 +79,30 @@
 <script>
 export default {
   name: 'ProfileIndex',
+  data () {
+    return {
+      user: {
+        age: ''
+      }
+    }
+  },
   computed: {
     authUser () {
       return this.$auth.user
+    }
+  },
+  created () {
+    this.user.age = this.getUserAge(this.authUser.date_of_birth)
+  },
+  methods: {
+    getUserAge (birthday) {
+      console.log(birthday)
+      const today = new Date()
+      const ymd = birthday.split('-')
+      const thisYearsBirthday = new Date(today.getFullYear(), ymd[1] - 1, ymd[2])
+      const age = today.getFullYear() - ymd[0]
+
+      return today < thisYearsBirthday ? age - 1 : age
     }
   }
 }
