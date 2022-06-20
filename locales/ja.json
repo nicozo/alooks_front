@@ -5,8 +5,10 @@
     "logout": "ログアウト",
     "rooms": "スクワッド一覧",
     "rooms-create": "スクワッド作成",
+    "rooms-id": "スクワッド詳細",
     "invitation-list": "参加リクエスト一覧",
-    "profile": "プロフィール"
+    "profile": "プロフィール",
+    "profile-edit": "プロフィール編集"
   },
   "items": {
     "about": "アプリについて",

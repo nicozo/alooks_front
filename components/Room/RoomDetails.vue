@@ -14,7 +14,10 @@
             {{ room.title }}
           </div>
           <div class="d-flex align-center py-3">
-            <div class="text-subtitle-1 font-weight-bold text-right" style="width: 150px">
+            <div
+              class="text-subtitle-1 font-weight-bold text-right"
+              style="width: 150px"
+            >
               プラットフォーム：
             </div>
             <div>
@@ -22,7 +25,10 @@
             </div>
           </div>
           <div class="d-flex align-center py-3">
-            <div class="text-subtitle-1 font-weight-bold text-right" style="width: 150px">
+            <div
+              class="text-subtitle-1 font-weight-bold text-right"
+              style="width: 150px"
+            >
               ゲームモード：
             </div>
             <div>
@@ -30,7 +36,10 @@
             </div>
           </div>
           <div class="d-flex align-center py-3">
-            <div class="text-subtitle-1 font-weight-bold text-right" style="width: 150px">
+            <div
+              class="text-subtitle-1 font-weight-bold text-right"
+              style="width: 150px"
+            >
               ランク帯：
             </div>
             <div>
@@ -38,7 +47,10 @@
             </div>
           </div>
           <div class="d-flex align-center py-3">
-            <div class="text-subtitle-1 font-weight-bold text-right" style="width: 150px">
+            <div
+              class="text-subtitle-1 font-weight-bold text-right"
+              style="width: 150px"
+            >
               募集期間：
             </div>
             <div>
