@@ -47,15 +47,29 @@
               </v-list-item-content>
 
               <v-list-item-content>
-                <v-list-item-subtitle>
-                  性別:{{ authUser.sex }}
-                </v-list-item-subtitle>
+                <div v-if="authUser.sex">
+                  <v-list-item-subtitle>
+                    性別:{{ authUser.sex }}
+                  </v-list-item-subtitle>
+                </div>
+                <div v-else>
+                  <v-list-item-subtitle>
+                    性別:未登録
+                  </v-list-item-subtitle>
+                </div>
               </v-list-item-content>
 
               <v-list-item-content>
-                <v-list-item-subtitle>
-                  年齢:{{ user.age }}
-                </v-list-item-subtitle>
+                <div v-if="authUser.date_of_birth">
+                  <v-list-item-subtitle>
+                    年齢:{{ user.age }}
+                  </v-list-item-subtitle>
+                </div>
+                <div v-else>
+                  <v-list-item-subtitle>
+                    年齢:未登録
+                  </v-list-item-subtitle>
+                </div>
               </v-list-item-content>
             </v-list-item-content>
           </v-list-item>
