@@ -5,6 +5,10 @@ export default async ({ $axios, $auth }) => {
     '/api/v1/sessions/refresh',
     {},
     // ログインしていないユーザーがページを訪れた時404エラーを表示させない（404エラーを許容する）
-    { validateStatus: status => $auth.allowUnauthorized(status) }
+    {
+      // プリフライトリクエストの回避
+      headers: { 'X-Requested-With': 'XMLHttpRequest' },
+      validateStatus: status => $auth.allowUnauthorized(status)
+    }
   ).then(res => $auth.login(res))
 }

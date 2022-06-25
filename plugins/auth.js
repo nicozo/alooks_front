@@ -55,6 +55,7 @@ class Authentication {
     await this.$axios.delete(
       '/api/v1/sessions',
       {
+        headers: { 'X-Requested-With': 'XMLHttpRequest' },
         validateStatus: status => this.allowUnauthorized(status)
       }
     )

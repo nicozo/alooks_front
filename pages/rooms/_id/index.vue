@@ -49,9 +49,16 @@
 <script>
 export default {
   name: 'RoomIdIndex',
-  async asyncData ({ $axios, params }) {
+  async asyncData ({ $axios, params, $auth }) {
     const room = await $axios.$get(
-      'api/v1/rooms/' + params.id
+      'api/v1/rooms/' + params.id,
+      // プリフライトリクエストの回避
+      {
+        headers: {
+          Authorization: `Baerer ${$auth.token}`,
+          'X-Requested-With': 'XMLHttpRequest'
+        }
+      }
     )
     // console.log('部屋情報:', room)
     // console.log('募集主情報:', room.user)

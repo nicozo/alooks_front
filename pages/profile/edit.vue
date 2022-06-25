@@ -118,7 +118,17 @@ export default {
       }
       // console.log(...formData.entries())
 
-      await this.$axios.$patch(`/api/v1/profile/${this.authUser.id}`, formData)
+      await this.$axios.$patch(
+        `/api/v1/profile/${this.authUser.id}`,
+        formData,
+        // プリフライトリクエストの回避
+        {
+          headers: {
+            Authorization: `Baerer ${this.$auth.token}`,
+            'X-Requested-With': 'XMLHttpRequest'
+          }
+        }
+      )
         .then(res => this.uploadSuccessful(res))
         .catch(e => console.log(e))
     },

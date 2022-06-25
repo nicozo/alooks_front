@@ -88,7 +88,10 @@ export default {
     async register () {
       if (!this.invalid) {
         await this.$axios.$post(
-          'api/v1/registers', { user: this.user }
+          'api/v1/registers',
+          { user: this.user },
+          // プリフライトリクエストの回避
+          { headers: { 'X-Requested-With': 'XMLHttpRequest' } }
         )
           .then(res => this.registerSuccessful(res))
           .catch(e => this.registerFailure(e))

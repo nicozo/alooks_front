@@ -94,7 +94,12 @@ export default {
   methods: {
     async login () {
       if (!this.invalid) {
-        await this.$axios.$post('api/v1/sessions', this.user)
+        await this.$axios.$post(
+          'api/v1/sessions',
+          this.user,
+          // プリフライトリクエストの回避
+          { headers: { 'X-Requested-With': 'XMLHttpRequest' } }
+        )
           .then(res => this.authSuccessful(res))
           .catch(e => this.authFailure(e))
       }
