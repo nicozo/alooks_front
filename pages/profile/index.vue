@@ -121,6 +121,7 @@ export default {
       return today < thisYearsBirthday ? age - 1 : age
     },
     // TODO ユーザー情報に登録されたplatformを代入するよう修正
+    // TODO APIキーを環境変数に持たせるよう修正
     async getGameData () {
       await this.$axios.$get(
         'https://api.mozambiquehe.re/bridge',
