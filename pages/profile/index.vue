@@ -79,9 +79,28 @@
 
     <v-row>
       <v-card class="flex-grow-1">
-        <!-- <v-img :src="">
+        <div v-show="loading">
+          <v-progress-circular
+            :value="100"
+            :size="50"
+            color="primary"
+            indeterminate
+          >
+          </v-progress-circular>
+          <div>
+            Now Getting Your Apex Legends Status...
+          </div>
+        </div>
+        <div v-show="!loading">
+          <div v-if="targetLegend.ImgAssets">
+            <v-img :src="targetLegend.ImgAssets.banner">
 
-        </v-img> -->
+            </v-img>
+          </div>
+          <div v-else>
+            データを取得できませんでした。
+          </div>
+        </div>
       </v-card>
     </v-row>
   </v-container>
@@ -97,7 +116,8 @@ export default {
       },
       defaultAvatarSrc: require('@/static/DefaultAvatar.png'),
       legendData: '',
-      targetLegend: ''
+      targetLegend: '',
+      loading: true
     }
   },
   computed: {
@@ -140,6 +160,7 @@ export default {
       this.legendData = res.legends.all
       if (this.legendData) {
         this.getLegendData()
+        this.loading = false
       }
     },
     getLegendKillData () {
@@ -177,7 +198,7 @@ export default {
       } else {
         console.log('レジェンドデータが存在しません。')
       }
-      // console.log('targetLegend:', this.targetLegend)
+      console.log('targetLegend:', this.targetLegend)
     }
   }
 }
