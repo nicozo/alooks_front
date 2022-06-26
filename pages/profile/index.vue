@@ -40,12 +40,14 @@
                 {{ authUser.name }}
               </v-list-item-title>
 
+              <!-- TODO テキストが長いと見切れてしまう問題を修正 -->
               <v-list-item-content>
                 <v-list-item-subtitle>
                   {{ authUser.self_introduction }}
                 </v-list-item-subtitle>
               </v-list-item-content>
 
+              <!-- TODO 性別を日本語に翻訳 -->
               <v-list-item-content>
                 <div v-if="authUser.sex">
                   <v-list-item-subtitle>
