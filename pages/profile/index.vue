@@ -78,13 +78,10 @@
     </v-row>
 
     <v-row>
-      <v-card
-        height="200"
-        width="600"
-        color="red"
-        class="flex-grow-1"
-      >
-        簡易戦績が入る
+      <v-card class="flex-grow-1">
+        <!-- <v-img :src="">
+
+        </v-img> -->
       </v-card>
     </v-row>
   </v-container>
@@ -99,6 +96,7 @@ export default {
         age: ''
       },
       defaultAvatarSrc: require('@/static/DefaultAvatar.png'),
+      legendData: '',
       targetLegend: ''
     }
   },
@@ -134,8 +132,51 @@ export default {
           }
         }
       )
-        .then(res => console.log(res))
+        .then(res => this.setLegendsData(res))
         .catch(e => console.log(e))
+    },
+    setLegendsData (res) {
+      this.legendData = res.legends.all
+      if (this.legendData) {
+        this.getLegendData()
+      }
+    },
+    getLegendKillData () {
+      const data = this.legendData
+      const legendKillData = []
+      Object.keys(data).forEach((key) => {
+        if (data[key].data !== undefined) {
+          const obj = {
+            name: '',
+            value: ''
+          }
+          obj.name = key
+          obj.value = data[key].data[0].value
+          legendKillData.push(obj)
+        }
+      })
+      // console.log('legendKillData:', legendKillData)
+      return legendKillData
+    },
+    getHighestKillData () {
+      const data = this.getLegendKillData()
+      let hightestKillLegendData = ''
+      data.forEach((el) => {
+        if (!hightestKillLegendData || hightestKillLegendData.value < el.value) {
+          hightestKillLegendData = el
+        }
+      })
+      // console.log('hightestKillLegendData:', hightestKillLegendData)
+      return hightestKillLegendData
+    },
+    getLegendData () {
+      const data = this.getHighestKillData()
+      if (data.name in this.legendData) {
+        this.targetLegend = this.legendData[data.name]
+      } else {
+        console.log('レジェンドデータが存在しません。')
+      }
+      // console.log('targetLegend:', this.targetLegend)
     }
   }
 }
