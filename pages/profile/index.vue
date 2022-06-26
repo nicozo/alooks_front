@@ -167,7 +167,6 @@ export default {
     },
     setLegendsData (data) {
       this.legendData = data.legends.all
-      this.loading = false
       if (this.legendData) {
         this.getLegendData()
       }
@@ -207,6 +206,7 @@ export default {
       } else {
         console.log('レジェンドデータが存在しません。')
       }
+      this.loading = false
       console.log('targetLegend:', this.targetLegend)
     }
   }
