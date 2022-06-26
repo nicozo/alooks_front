@@ -97,7 +97,9 @@ export default {
     return {
       user: {
         age: ''
-      }
+      },
+      defaultAvatarSrc: require('@/static/DefaultAvatar.png'),
+      targetLegend: ''
     }
   },
   computed: {
@@ -107,16 +109,33 @@ export default {
   },
   created () {
     this.user.age = this.getUserAge(this.authUser.date_of_birth)
+    this.getGameData()
   },
   methods: {
     getUserAge (birthday) {
-      console.log(birthday)
+      // console.log(birthday)
+      if (!birthday) { return }
       const today = new Date()
       const ymd = birthday.split('-')
       const thisYearsBirthday = new Date(today.getFullYear(), ymd[1] - 1, ymd[2])
       const age = today.getFullYear() - ymd[0]
 
       return today < thisYearsBirthday ? age - 1 : age
+    },
+    // TODO ユーザー情報に登録されたplatformを代入するよう修正
+    async getGameData () {
+      await this.$axios.$get(
+        'https://api.mozambiquehe.re/bridge',
+        {
+          params: {
+            platform: 'PS4',
+            player: this.authUser.game_id,
+            auth: '7ca10e99dcb9441bc514bbe9892e863f'
+          }
+        }
+      )
+        .then(res => console.log(res))
+        .catch(e => console.log(e))
     }
   }
 }
