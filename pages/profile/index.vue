@@ -155,14 +155,21 @@ export default {
           }
         }
       )
-        .then(res => this.setLegendsData(res))
-        .catch(e => console.log(e))
+        .then(res => this.requestSuccessful(res))
+        .catch(e => this.requestFailure(e))
     },
-    setLegendsData (res) {
-      this.legendData = res.legends.all
+    requestSuccessful (res) {
+      this.setLegendsData(res)
+    },
+    requestFailure (e) {
+      this.loading = false
+      console.log(e)
+    },
+    setLegendsData (data) {
+      this.legendData = data.legends.all
+      this.loading = false
       if (this.legendData) {
         this.getLegendData()
-        this.loading = false
       }
     },
     getLegendKillData () {
