@@ -30,6 +30,7 @@
           align="center"
           justify="center"
         >
+          <!-- バナーブロック -->
           <v-col
             align="center"
             cols="12"
@@ -48,6 +49,7 @@
             </div>
           </v-col>
 
+          <!-- ログインユーザーブロック -->
           <v-col
             align="center"
             cols="12"
@@ -85,6 +87,7 @@
             </v-card>
           </v-col>
 
+          <!-- Apex Legends戦績ブロック -->
           <v-col
             align="center"
             cols="12"
@@ -113,12 +116,38 @@
             </v-card>
           </v-col>
 
+          <!-- Apex Legendsランクブロック -->
           <v-col
             align="center"
             cols="12"
+            sm="4"
+            md="4"
+            lg="4"
           >
+            <v-card>
+              <v-list-item>
+                <template v-for="(data, i) in rankData">
+                  <v-list-item-content :key="i">
+                    <v-list-item-title v-show="isThisArenaRankData(data)">
+                      Arena
+                    </v-list-item-title>
+                    <v-list-item-title v-show="!isThisArenaRankData(data)">
+                      BR
+                    </v-list-item-title>
 
+                    <v-list-item-icon>
+                      <v-img :src="data.rankImg" />
+                    </v-list-item-icon>
+
+                    <v-list-item-subtitle>
+                      {{ data.rankScore }}RP
+                    </v-list-item-subtitle>
+                  </v-list-item-content>
+                </template>
+              </v-list-item>
+            </v-card>
           </v-col>
+
           <v-col
             align="center"
             cols="12"
@@ -150,8 +179,10 @@ export default {
         age: ''
       },
       defaultAvatarSrc: require('@/static/DefaultAvatar.png'),
+      data: '',
       legendData: '',
       targetLegend: '',
+      rankData: [],
       loading: true
     }
   },
@@ -183,7 +214,6 @@ export default {
         {
           params: {
             platform: 'PC',
-            // player: this.authUser.game_id,
             player: this.authUser.game_id,
             auth: '7ca10e99dcb9441bc514bbe9892e863f'
           }
@@ -193,11 +223,14 @@ export default {
         .catch(e => this.requestFailure(e))
     },
     requestSuccessful (res) {
-      if (this.isSameId(res)) {
+      if (!this.isSameId(res)) {
         this.loading = false
         console.log('idが一致しません。')
+        return
       }
-      this.setLegendsData(res.legends)
+      this.data = res
+      this.setLegendsData(this.data.legends)
+      this.setRankData(this.data.global)
     },
     requestFailure (e) {
       this.loading = false
@@ -244,7 +277,14 @@ export default {
       console.log('targetLegend:', this.targetLegend)
     },
     isSameId (data) {
-      return !!this.authUser.game_id === data.global.name
+      return !!this.authUser.game_id !== data.global.name
+    },
+    setRankData (data) {
+      this.rankData.push(data.arena)
+      this.rankData.push(data.rank)
+    },
+    isThisArenaRankData (data) {
+      return !data.rankedSeason.indexOf('arena')
     }
   }
 }
