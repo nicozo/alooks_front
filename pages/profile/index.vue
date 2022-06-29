@@ -53,8 +53,9 @@
           <v-col
             align="center"
             cols="12"
-            md="6"
-            lg="6"
+            sm="8"
+            md="8"
+            lg="8"
           >
             <v-card>
               <v-list-item>
@@ -82,35 +83,6 @@
                   <v-list-item-subtitle class="text-left">
                     {{ authUser.sex }}
                   </v-list-item-subtitle>
-                </v-list-item-content>
-              </v-list-item>
-            </v-card>
-          </v-col>
-
-          <!-- Apex Legends戦績ブロック -->
-          <v-col
-            align="center"
-            cols="12"
-            md="6"
-            lg="6"
-          >
-            <v-card>
-              <v-list-item>
-                <v-list-item-icon>
-                  <img :src="targetLegend.ImgAssets.icon" width="100">
-                </v-list-item-icon>
-
-                <v-list-item-content>
-                  <v-list-item-title
-                    v-for="(data, i) in targetLegend.data"
-                    :key="i"
-                    v-show="data.name === 'BR Kills' ||
-                            data.name === 'BR Damage' ||
-                            data.name === 'BR Wins' ||
-                            data.name === 'BR Headshots'"
-                  >
-                    {{ data.name }} {{ data.value }}
-                  </v-list-item-title>
                 </v-list-item-content>
               </v-list-item>
             </v-card>
@@ -144,6 +116,53 @@
                     </v-list-item-subtitle>
                   </v-list-item-content>
                 </template>
+              </v-list-item>
+            </v-card>
+          </v-col>
+
+          <!-- Apex Legends戦績ブロック -->
+          <v-col
+            align="center"
+            cols="12"
+            md="6"
+            lg="6"
+          >
+            <v-card>
+              <v-card-title>
+                Your Main Legend
+              </v-card-title>
+
+              <v-list-item>
+                <v-list-item-content>
+                  <v-list-item-icon>
+                    <img
+                      :src="targetLegend.ImgAssets.icon"
+                      width="100"
+                    >
+                  </v-list-item-icon>
+                </v-list-item-content>
+
+                <v-list-item-content>
+                  <v-row>
+                    <v-col
+                      cols="6"
+                      v-for="(data, i) in targetLegend.data"
+                      :key="i"
+                      v-show="data.name === 'BR Kills' ||
+                              data.name === 'BR Damage' ||
+                              data.name === 'BR Wins' ||
+                              data.name === 'BR Headshots'"
+                    >
+                      <v-list-item-subtitle>
+                        {{ data.name }}
+                      </v-list-item-subtitle>
+
+                      <v-list-item-title>
+                        {{ data.value }}
+                      </v-list-item-title>
+                    </v-col>
+                  </v-row>
+                </v-list-item-content>
               </v-list-item>
             </v-card>
           </v-col>
@@ -223,7 +242,6 @@ export default {
         .catch(e => this.requestFailure(e))
     },
     requestSuccessful (res) {
-      console.log(this.isDifferentGameId(res))
       if (this.isDifferentGameId(res)) {
         this.loading = false
         console.log('idが一致しません。')
