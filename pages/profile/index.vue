@@ -223,7 +223,8 @@ export default {
         .catch(e => this.requestFailure(e))
     },
     requestSuccessful (res) {
-      if (!this.isSameId(res)) {
+      console.log(this.isDifferentGameId(res))
+      if (this.isDifferentGameId(res)) {
         this.loading = false
         console.log('idが一致しません。')
         return
@@ -276,8 +277,8 @@ export default {
       this.loading = false
       console.log('targetLegend:', this.targetLegend)
     },
-    isSameId (data) {
-      return !!this.authUser.game_id !== data.global.name
+    isDifferentGameId (data) {
+      return !this.authUser.game_id === data.global.name
     },
     setRankData (data) {
       this.rankData.push(data.arena)
