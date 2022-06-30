@@ -264,13 +264,17 @@ export default {
       const legendKillData = []
       Object.keys(data).forEach((key) => {
         if (data[key].data !== undefined) {
-          const obj = {
-            name: '',
-            value: ''
-          }
-          obj.name = key
-          obj.value = data[key].data[0].value
-          legendKillData.push(obj)
+          Object.values(data[key].data).forEach((value) => {
+            if (value.name === 'BR Kills') {
+              const obj = {
+                name: '',
+                value: ''
+              }
+              obj.name = key
+              obj.value = value.value
+              legendKillData.push(obj)
+            }
+          })
         }
       })
       // console.log('legendKillData:', legendKillData)
