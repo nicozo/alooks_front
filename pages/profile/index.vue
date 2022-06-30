@@ -74,7 +74,7 @@
                   <v-list-item-title class="text-h4 text-left">
                     {{ authUser.name }}
                   </v-list-item-title>
-                  <v-list-item-subtitle>
+                  <v-list-item-subtitle class="text-left">
                     {{ authUser.self_introduction }}
                   </v-list-item-subtitle>
                   <v-list-item-subtitle class="text-left">
@@ -124,28 +124,47 @@
           <v-col
             align="center"
             cols="12"
-            md="6"
-            lg="6"
           >
             <v-card>
-              <v-card-title>
-                Your Main Legend
-              </v-card-title>
-
               <v-list-item>
-                <v-list-item-content>
-                  <v-list-item-icon>
-                    <v-img
-                      :src="targetLegend.ImgAssets.icon"
-                      width="100"
-                    />
-                  </v-list-item-icon>
-                </v-list-item-content>
+                <v-list-item-icon>
+                  <v-img
+                    :src="targetLegend.ImgAssets.icon"
+                    max-width="400"
+                  />
+                </v-list-item-icon>
 
                 <v-list-item-content>
+                  <v-card-title>
+                    Total Status
+                  </v-card-title>
                   <v-row>
                     <v-col
                       cols="6"
+                      md="4"
+                      lg="4"
+                      v-for="(data, i) in totalStatusData"
+                      :key="i"
+                      v-show="data.name !== 'KD'"
+                    >
+                      <v-list-item-subtitle>
+                        {{ data.name }}
+                      </v-list-item-subtitle>
+
+                      <v-list-item-title>
+                        {{ data.value }}
+                      </v-list-item-title>
+                    </v-col>
+                  </v-row>
+
+                  <v-card-title>
+                    Legend Status
+                  </v-card-title>
+                  <v-row>
+                    <v-col
+                      cols="6"
+                      md="4"
+                      lg="4"
                       v-for="(data, i) in targetLegend.data"
                       :key="i"
                       v-show="filterStatus(data)"
@@ -168,6 +187,9 @@
             align="center"
             cols="12"
           >
+            <v-card>
+
+            </v-card>
           </v-col>
         </v-row>
       </div>
@@ -189,7 +211,7 @@
 <script>
 export default {
   name: 'ProfileIndex',
-  data () {
+  data ({ $config: { apiKey } }) {
     return {
       user: {
         age: ''
@@ -199,7 +221,9 @@ export default {
       legendData: '',
       targetLegend: '',
       rankData: [],
-      loading: true
+      totalStatusData: '',
+      loading: true,
+      apiKey
     }
   },
   computed: {
@@ -231,7 +255,7 @@ export default {
           params: {
             platform: 'PS4',
             player: this.authUser.game_id,
-            auth: '7ca10e99dcb9441bc514bbe9892e863f'
+            auth: this.apiKey
           }
         }
       )
@@ -245,15 +269,16 @@ export default {
         return
       }
       this.data = res
-      this.setLegendsData(this.data.legends)
-      this.setRankData(this.data.global)
+      this.setLegendsData()
+      this.setRankData()
+      this.setTotalData()
     },
     requestFailure (e) {
       this.loading = false
       console.log(e)
     },
-    setLegendsData (data) {
-      this.legendData = data.all
+    setLegendsData () {
+      this.legendData = this.data.legends.all
       this.getLegendData()
     },
     getLegendKillData () {
@@ -294,24 +319,27 @@ export default {
         this.targetLegend = this.legendData[data.name]
       }
       this.loading = false
-      console.log('targetLegend:', this.targetLegend)
+      // console.log('targetLegend:', this.targetLegend)
     },
     isDifferentGameId (data) {
       return !this.authUser.game_id === data.global.name
     },
-    setRankData (data) {
-      this.rankData.push(data.arena)
-      this.rankData.push(data.rank)
+    setRankData () {
+      this.rankData.push(this.data.global.arena)
+      this.rankData.push(this.data.global.rank)
     },
     isThisArenaRankData (data) {
       return !data.rankedSeason.indexOf('arena')
     },
     filterStatus (data) {
       return data.name === 'BR Kills' ||
-              data.name === 'BR Damage' ||
-              data.name === 'BR Wins' ||
-              data.name === 'BR Headshots' ||
-              data.name.includes('Season')
+             data.name === 'BR Damage' ||
+             data.name === 'BR Wins' ||
+             data.name === 'BR Headshots' ||
+             data.name.includes('Season')
+    },
+    setTotalData () {
+      this.totalStatusData = this.data.total
     }
   }
 }

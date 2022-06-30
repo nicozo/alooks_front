@@ -64,7 +64,8 @@ export default {
   ],
 
   publicRuntimeConfig: {
-    appName: process.env.APP_NAME
+    appName: process.env.APP_NAME,
+    apiKey: process.env.API_KEY
   },
 
   router: {
