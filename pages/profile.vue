@@ -7,6 +7,6 @@
 <script>
 export default {
   name: 'ProfilePage',
-  layout: 'loggedIn'
+  layout: 'profile'
 }
 </script>
