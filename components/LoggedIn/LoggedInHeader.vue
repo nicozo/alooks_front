@@ -21,7 +21,7 @@
 
 <script>
 export default {
-  name: 'HomeHeader',
+  name: 'LoggedInHeader',
   props: {
     drawer: {
       type: Boolean,

@@ -1,6 +1,6 @@
 <template>
   <div>
-    <v-row>
+    <!-- <v-row>
       <v-col align="end">
         <v-btn
           color="success"
@@ -9,18 +9,29 @@
           プロフィールを編集
         </v-btn>
       </v-col>
-    </v-row>
+    </v-row> -->
 
     <div v-show="loading">
-      <div class="text-center">
-        <v-progress-circular
-          indeterminate
-          color="primary"
-        />
-        <div>
-          Now Loading Your Apex Legends Status...
-        </div>
-      </div>
+      <v-row
+        style="height: 100vh;"
+        justify="center"
+        align-content="center"
+      >
+        <v-col>
+          <v-card
+            flat
+            class="text-center"
+          >
+            <v-progress-circular
+              indeterminate
+              color="primary"
+            />
+            <p>
+              Now Loading Your Apex Legends Status...
+            </p>
+          </v-card>
+        </v-col>
+      </v-row>
     </div>
 
     <div v-show="!loading">
@@ -32,17 +43,20 @@
         >
           <!-- バナーブロック -->
           <v-col
+            class="pa-0"
             align="center"
             cols="12"
           >
             <div v-if="targetLegend.ImgAssets">
               <v-img
+                id="profile-banner"
                 :src="targetLegend.ImgAssets.banner"
                 max-height="400"
               />
             </div>
             <div v-else>
               <v-img
+                id="profile-banner"
                 :src="defaultAvatarSrc"
                 max-height="400"
               />
@@ -57,7 +71,7 @@
             md="8"
             lg="8"
           >
-            <v-card>
+            <v-card id="user-profile">
               <v-list-item>
                 <div v-if="authUser.avatar_url">
                   <v-list-item-avatar size="100">
@@ -96,9 +110,9 @@
             md="4"
             lg="4"
           >
-            <v-card>
+            <v-card id="rank-stats">
               <v-list-item>
-                <template v-for="(data, i) in rankData">
+                <template v-for="(data, i) in rankStatsData">
                   <v-list-item-content :key="i">
                     <v-list-item-title v-show="isThisArenaRankData(data)">
                       Arena
@@ -125,7 +139,7 @@
             align="center"
             cols="12"
           >
-            <v-card>
+            <v-card id="player-stats">
               <v-list-item>
                 <v-list-item-icon>
                   <v-img
@@ -136,14 +150,14 @@
 
                 <v-list-item-content>
                   <v-card-title>
-                    Total Status
+                    Total Stats
                   </v-card-title>
                   <v-row>
                     <v-col
                       cols="6"
                       md="4"
                       lg="4"
-                      v-for="(data, i) in totalStatusData"
+                      v-for="(data, i) in totalStatsData"
                       :key="i"
                       v-show="data.name !== 'KD'"
                     >
@@ -158,7 +172,7 @@
                   </v-row>
 
                   <v-card-title>
-                    Legend Status
+                    Legend Stats
                   </v-card-title>
                   <v-row>
                     <v-col
@@ -180,15 +194,6 @@
                   </v-row>
                 </v-list-item-content>
               </v-list-item>
-            </v-card>
-          </v-col>
-
-          <v-col
-            align="center"
-            cols="12"
-          >
-            <v-card>
-
             </v-card>
           </v-col>
         </v-row>
@@ -218,10 +223,10 @@ export default {
       },
       defaultAvatarSrc: require('@/static/DefaultAvatar.png'),
       data: '',
-      legendData: '',
+      legendStatsData: '',
       targetLegend: '',
-      rankData: [],
-      totalStatusData: '',
+      rankStatsData: [],
+      totalStatsData: '',
       loading: true,
       apiKey
     }
@@ -278,11 +283,11 @@ export default {
       console.log(e)
     },
     setLegendsData () {
-      this.legendData = this.data.legends.all
+      this.legendStatsData = this.data.legends.all
       this.getLegendData()
     },
     getLegendKillData () {
-      const data = this.legendData
+      const data = this.legendStatsData
       const legendKillData = []
       Object.keys(data).forEach((key) => {
         if (data[key].data !== undefined) {
@@ -325,8 +330,8 @@ export default {
       return !this.authUser.game_id === data.global.name
     },
     setRankData () {
-      this.rankData.push(this.data.global.arena)
-      this.rankData.push(this.data.global.rank)
+      this.rankStatsData.push(this.data.global.arena)
+      this.rankStatsData.push(this.data.global.rank)
     },
     isThisArenaRankData (data) {
       return !data.rankedSeason.indexOf('arena')
@@ -339,7 +344,7 @@ export default {
              data.name.includes('Season')
     },
     setTotalData () {
-      this.totalStatusData = this.data.total
+      this.totalStatsData = this.data.total
     }
   }
 }
