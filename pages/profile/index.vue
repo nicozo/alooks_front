@@ -135,10 +135,10 @@
               <v-list-item>
                 <v-list-item-content>
                   <v-list-item-icon>
-                    <img
+                    <v-img
                       :src="targetLegend.ImgAssets.icon"
                       width="100"
-                    >
+                    />
                   </v-list-item-icon>
                 </v-list-item-content>
 
@@ -148,10 +148,7 @@
                       cols="6"
                       v-for="(data, i) in targetLegend.data"
                       :key="i"
-                      v-show="data.name === 'BR Kills' ||
-                              data.name === 'BR Damage' ||
-                              data.name === 'BR Wins' ||
-                              data.name === 'BR Headshots'"
+                      v-show="filterStatus(data)"
                     >
                       <v-list-item-subtitle>
                         {{ data.name }}
@@ -232,7 +229,7 @@ export default {
         'https://api.mozambiquehe.re/bridge',
         {
           params: {
-            platform: 'PC',
+            platform: 'PS4',
             player: this.authUser.game_id,
             auth: '7ca10e99dcb9441bc514bbe9892e863f'
           }
@@ -308,6 +305,13 @@ export default {
     },
     isThisArenaRankData (data) {
       return !data.rankedSeason.indexOf('arena')
+    },
+    filterStatus (data) {
+      return data.name === 'BR Kills' ||
+              data.name === 'BR Damage' ||
+              data.name === 'BR Wins' ||
+              data.name === 'BR Headshots' ||
+              data.name.includes('Season')
     }
   }
 }
