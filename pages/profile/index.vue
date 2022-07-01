@@ -320,11 +320,11 @@ export default {
     },
     getLegendData () {
       const data = this.getHighestKillData()
-      if (data.name in this.legendData) {
-        this.targetLegend = this.legendData[data.name]
+      if (data.name in this.legendStatsData) {
+        this.targetLegend = this.legendStatsData[data.name]
       }
       this.loading = false
-      // console.log('targetLegend:', this.targetLegend)
+      console.log('targetLegend:', this.targetLegend)
     },
     isDifferentGameId (data) {
       return !this.authUser.game_id === data.global.name
