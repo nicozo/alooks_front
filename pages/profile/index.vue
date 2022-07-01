@@ -47,20 +47,22 @@
             align="center"
             cols="12"
           >
-            <div v-if="targetLegend.ImgAssets">
-              <v-img
-                id="profile-banner"
-                :src="targetLegend.ImgAssets.banner"
-                max-height="400"
-              />
-            </div>
-            <div v-else>
-              <v-img
-                id="profile-banner"
-                :src="defaultAvatarSrc"
-                max-height="400"
-              />
-            </div>
+            <v-card>
+              <template v-if="targetLegend.ImgAssets">
+                <v-img
+                  id="profile-banner"
+                  :src="targetLegend.ImgAssets.banner"
+                  max-height="400"
+                />
+              </template>
+              <template v-else>
+                <v-img
+                  id="profile-banner"
+                  :src="defaultAvatarSrc"
+                  max-height="400"
+                />
+              </template>
+            </v-card>
           </v-col>
 
           <!-- ログインユーザーブロック -->
@@ -204,8 +206,119 @@
           align="center"
           justify="center"
         >
-          <v-col align="center">
-            データがありません
+          <!-- バナーブロック -->
+          <v-col
+            class="pa-0"
+            align="center"
+            cols="12"
+          >
+            <v-card>
+              <v-img
+                id="profile-banner"
+                :src="heroImageSrc"
+                max-height="400"
+              />
+            </v-card>
+          </v-col>
+
+          <!-- ログインユーザーブロック -->
+          <v-col
+            align="center"
+            cols="12"
+            sm="8"
+            md="8"
+            lg="8"
+          >
+            <v-card id="user-profile">
+              <v-list-item>
+                <div v-if="authUser.avatar_url">
+                  <v-list-item-avatar size="100">
+                    <v-img :src="authUser.avatar_url"/>
+                  </v-list-item-avatar>
+                </div>
+                <div v-else>
+                  <v-list-item-avatar size="100">
+                    <v-img :src="defaultAvatarSrc"/>
+                  </v-list-item-avatar>
+                </div>
+
+                <v-list-item-content>
+                  <v-list-item-title class="text-h4 text-left">
+                    {{ authUser.name }}
+                  </v-list-item-title>
+
+                  <v-list-item-subtitle class="text-left">
+                    {{ authUser.self_introduction }}
+                  </v-list-item-subtitle>
+
+                  <div v-show="user.age">
+                    <v-list-item-subtitle class="text-left">
+                      {{ user.age }}歳
+                    </v-list-item-subtitle>
+                  </div>
+                  <div v-show="!user.age">
+                    <v-list-item-subtitle class="text-left">
+                      未登録
+                    </v-list-item-subtitle>
+                  </div>
+
+                  <v-list-item-subtitle class="text-left">
+                    {{ authUser.sex }}
+                  </v-list-item-subtitle>
+                </v-list-item-content>
+              </v-list-item>
+            </v-card>
+          </v-col>
+
+          <!-- Apex Legendsランクブロック -->
+          <v-col
+            align="center"
+            cols="12"
+            sm="4"
+            md="4"
+            lg="4"
+          >
+            <v-card id="rank-stats">
+              <v-row
+                justify="center"
+                align-content="center"
+              >
+                <v-col>
+                  <v-card
+                    flat
+                    class="text-center"
+                  >
+                    <p>
+                      NO DATA
+                    </p>
+                  </v-card>
+                </v-col>
+              </v-row>
+            </v-card>
+          </v-col>
+
+          <!-- Apex Legends戦績ブロック -->
+          <v-col
+            align="center"
+            cols="12"
+          >
+            <v-card id="player-stats">
+              <v-row
+                justify="center"
+                align-content="center"
+              >
+                <v-col>
+                  <v-card
+                    flat
+                    class="text-center"
+                  >
+                    <p>
+                      NO DATA
+                    </p>
+                  </v-card>
+                </v-col>
+              </v-row>
+            </v-card>
           </v-col>
         </v-row>
       </div>
@@ -215,13 +328,14 @@
 
 <script>
 export default {
-  name: 'ProfileIndex',
+  name: 'ProfileIndexPage',
   data ({ $config: { apiKey } }) {
     return {
       user: {
         age: ''
       },
       defaultAvatarSrc: require('@/static/DefaultAvatar.png'),
+      heroImageSrc: require('@/static/HeroImage.jpeg'),
       data: '',
       legendStatsData: '',
       targetLegend: '',
