@@ -58,7 +58,7 @@
               <template v-else>
                 <v-img
                   id="profile-banner"
-                  :src="defaultAvatarSrc"
+                  :src="commonImageSrc"
                   max-height="400"
                 />
               </template>
@@ -77,12 +77,12 @@
               <v-list-item>
                 <div v-if="authUser.avatar_url">
                   <v-list-item-avatar size="100">
-                    <v-img :src="authUser.avatar_url"/>
+                    <v-img :src="authUser.avatar_url" />
                   </v-list-item-avatar>
                 </div>
                 <div v-else>
                   <v-list-item-avatar size="100">
-                    <v-img :src="defaultAvatarSrc"/>
+                    <v-img :src="defaultAvatarSrc" />
                   </v-list-item-avatar>
                 </div>
 
@@ -156,12 +156,12 @@
                   </v-card-title>
                   <v-row>
                     <v-col
+                      v-for="(data, i) in totalStatsData"
+                      v-show="data.name !== 'KD'"
+                      :key="i"
                       cols="6"
                       md="4"
                       lg="4"
-                      v-for="(data, i) in totalStatsData"
-                      :key="i"
-                      v-show="data.name !== 'KD'"
                     >
                       <v-list-item-subtitle>
                         {{ data.name }}
@@ -178,12 +178,12 @@
                   </v-card-title>
                   <v-row>
                     <v-col
+                      v-for="(data, i) in targetLegend.data"
+                      v-show="filterStatus(data)"
+                      :key="i"
                       cols="6"
                       md="4"
                       lg="4"
-                      v-for="(data, i) in targetLegend.data"
-                      :key="i"
-                      v-show="filterStatus(data)"
                     >
                       <v-list-item-subtitle>
                         {{ data.name }}
@@ -215,7 +215,7 @@
             <v-card>
               <v-img
                 id="profile-banner"
-                :src="heroImageSrc"
+                :src="commonImageSrc"
                 max-height="400"
               />
             </v-card>
@@ -233,12 +233,12 @@
               <v-list-item>
                 <div v-if="authUser.avatar_url">
                   <v-list-item-avatar size="100">
-                    <v-img :src="authUser.avatar_url"/>
+                    <v-img :src="authUser.avatar_url" />
                   </v-list-item-avatar>
                 </div>
                 <div v-else>
                   <v-list-item-avatar size="100">
-                    <v-img :src="defaultAvatarSrc"/>
+                    <v-img :src="defaultAvatarSrc" />
                   </v-list-item-avatar>
                 </div>
 
@@ -335,7 +335,7 @@ export default {
         age: ''
       },
       defaultAvatarSrc: require('@/static/DefaultAvatar.png'),
-      heroImageSrc: require('@/static/HeroImage.jpeg'),
+      commonImageSrc: require('@/static/CommonImage.jpg'),
       data: '',
       legendStatsData: '',
       targetLegend: '',
