@@ -47,22 +47,7 @@
             align="center"
             cols="12"
           >
-            <v-card>
-              <template v-if="targetLegend.ImgAssets">
-                <v-img
-                  id="profile-banner"
-                  :src="targetLegend.ImgAssets.banner"
-                  max-height="400"
-                />
-              </template>
-              <template v-else>
-                <v-img
-                  id="profile-banner"
-                  :src="commonImageSrc"
-                  max-height="400"
-                />
-              </template>
-            </v-card>
+            <profile-banner :target-legend-banner="targetLegend.ImgAssets.banner" />
           </v-col>
 
           <!-- ログインユーザーブロック -->
@@ -73,35 +58,10 @@
             md="8"
             lg="8"
           >
-            <v-card id="user-profile">
-              <v-list-item>
-                <div v-if="authUser.avatar_url">
-                  <v-list-item-avatar size="100">
-                    <v-img :src="authUser.avatar_url" />
-                  </v-list-item-avatar>
-                </div>
-                <div v-else>
-                  <v-list-item-avatar size="100">
-                    <v-img :src="defaultAvatarSrc" />
-                  </v-list-item-avatar>
-                </div>
-
-                <v-list-item-content>
-                  <v-list-item-title class="text-h4 text-left">
-                    {{ authUser.name }}
-                  </v-list-item-title>
-                  <v-list-item-subtitle class="text-left">
-                    {{ authUser.self_introduction }}
-                  </v-list-item-subtitle>
-                  <v-list-item-subtitle class="text-left">
-                    {{ user.age }}歳
-                  </v-list-item-subtitle>
-                  <v-list-item-subtitle class="text-left">
-                    {{ authUser.sex }}
-                  </v-list-item-subtitle>
-                </v-list-item-content>
-              </v-list-item>
-            </v-card>
+            <profile-user-details
+              :auth-user="authUser"
+              :user-age="user.age"
+            />
           </v-col>
 
           <!-- Apex Legendsランクブロック -->
@@ -112,28 +72,7 @@
             md="4"
             lg="4"
           >
-            <v-card id="rank-stats">
-              <v-list-item>
-                <template v-for="(data, i) in rankStatsData">
-                  <v-list-item-content :key="i">
-                    <v-list-item-title v-show="isThisArenaRankData(data)">
-                      Arena
-                    </v-list-item-title>
-                    <v-list-item-title v-show="!isThisArenaRankData(data)">
-                      BR
-                    </v-list-item-title>
-
-                    <v-list-item-icon>
-                      <v-img :src="data.rankImg" />
-                    </v-list-item-icon>
-
-                    <v-list-item-subtitle>
-                      {{ data.rankScore }}RP
-                    </v-list-item-subtitle>
-                  </v-list-item-content>
-                </template>
-              </v-list-item>
-            </v-card>
+            <profile-rank-stats :rank-stats-data="rankStatsData" />
           </v-col>
 
           <!-- Apex Legends戦績ブロック -->
@@ -141,62 +80,10 @@
             align="center"
             cols="12"
           >
-            <v-card id="player-stats">
-              <v-list-item>
-                <v-list-item-icon>
-                  <v-img
-                    :src="targetLegend.ImgAssets.icon"
-                    max-width="400"
-                  />
-                </v-list-item-icon>
-
-                <v-list-item-content>
-                  <v-card-title>
-                    Total Stats
-                  </v-card-title>
-                  <v-row>
-                    <v-col
-                      v-for="(data, i) in totalStatsData"
-                      v-show="data.name !== 'KD'"
-                      :key="i"
-                      cols="6"
-                      md="4"
-                      lg="4"
-                    >
-                      <v-list-item-subtitle>
-                        {{ data.name }}
-                      </v-list-item-subtitle>
-
-                      <v-list-item-title>
-                        {{ data.value }}
-                      </v-list-item-title>
-                    </v-col>
-                  </v-row>
-
-                  <v-card-title>
-                    Legend Stats
-                  </v-card-title>
-                  <v-row>
-                    <v-col
-                      v-for="(data, i) in targetLegend.data"
-                      v-show="filterStatus(data)"
-                      :key="i"
-                      cols="6"
-                      md="4"
-                      lg="4"
-                    >
-                      <v-list-item-subtitle>
-                        {{ data.name }}
-                      </v-list-item-subtitle>
-
-                      <v-list-item-title>
-                        {{ data.value }}
-                      </v-list-item-title>
-                    </v-col>
-                  </v-row>
-                </v-list-item-content>
-              </v-list-item>
-            </v-card>
+            <profile-total-stats
+              :total-stats-data="totalStatsData"
+              :target-legend="targetLegend"
+            />
           </v-col>
         </v-row>
       </div>
@@ -352,6 +239,7 @@ export default {
   },
   created () {
     this.user.age = this.getUserAge(this.authUser.date_of_birth)
+    console.log(this.user.age)
     this.getGameData()
   },
   methods: {
@@ -446,16 +334,6 @@ export default {
     setRankData () {
       this.rankStatsData.push(this.data.global.arena)
       this.rankStatsData.push(this.data.global.rank)
-    },
-    isThisArenaRankData (data) {
-      return !data.rankedSeason.indexOf('arena')
-    },
-    filterStatus (data) {
-      return data.name === 'BR Kills' ||
-             data.name === 'BR Damage' ||
-             data.name === 'BR Wins' ||
-             data.name === 'BR Headshots' ||
-             data.name.includes('Season')
     },
     setTotalData () {
       this.totalStatsData = this.data.total
