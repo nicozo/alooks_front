@@ -1,5 +1,8 @@
 <template>
-  <v-card id="profile-banner">
+  <v-card
+    flat
+    id="profile-banner"
+  >
     <template v-if="targetLegendBanner">
       <v-img
         :src="targetLegendBanner"
@@ -19,10 +22,6 @@
 export default {
   name: 'ProfileBanner',
   props: {
-    // targetLegend: {
-    //   type: Object,
-    //   default: () => {}
-    // }
     targetLegendBanner: {
       type: String,
       default: '',

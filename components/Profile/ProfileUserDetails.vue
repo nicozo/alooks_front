@@ -1,5 +1,8 @@
 <template>
-  <v-card id="user-profile">
+  <v-card
+    flat
+    id="user-profile"
+  >
     <v-list-item>
       <div v-if="authUser.avatar_url">
         <v-list-item-avatar size="100">

@@ -1,16 +1,5 @@
 <template>
   <div>
-    <!-- <v-row>
-      <v-col align="end">
-        <v-btn
-          color="success"
-          to="/profile/edit"
-        >
-          プロフィールを編集
-        </v-btn>
-      </v-col>
-    </v-row> -->
-
     <div v-show="loading">
       <v-row
         style="height: 100vh;"
@@ -48,6 +37,15 @@
             cols="12"
           >
             <profile-banner :target-legend-banner="targetLegend.ImgAssets.banner" />
+          </v-col>
+
+          <v-col cols="12" align="end">
+            <v-btn
+              color="success"
+              to="/profile/edit"
+            >
+              プロフィールを編集
+            </v-btn>
           </v-col>
 
           <!-- ログインユーザーブロック -->
@@ -99,7 +97,7 @@
             align="center"
             cols="12"
           >
-            <v-card>
+            <v-card flat>
               <v-img
                 id="profile-banner"
                 :src="commonImageSrc"
@@ -116,7 +114,10 @@
             md="8"
             lg="8"
           >
-            <v-card id="user-profile">
+            <v-card
+              flat
+              id="user-profile"
+            >
               <v-list-item>
                 <div v-if="authUser.avatar_url">
                   <v-list-item-avatar size="100">
@@ -165,7 +166,10 @@
             md="4"
             lg="4"
           >
-            <v-card id="rank-stats">
+            <v-card
+              flat
+              id="rank-stats"
+            >
               <v-row
                 justify="center"
                 align-content="center"
@@ -189,7 +193,10 @@
             align="center"
             cols="12"
           >
-            <v-card id="player-stats">
+            <v-card
+              flat
+              id="player-stats"
+            >
               <v-row
                 justify="center"
                 align-content="center"

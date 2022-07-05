@@ -1,5 +1,8 @@
 <template>
-  <v-card id="rank-stats">
+  <v-card
+    flat
+    id="rank-stats"
+  >
     <v-list-item>
       <template v-for="(data, i) in rankStatsData">
         <v-list-item-content :key="i">

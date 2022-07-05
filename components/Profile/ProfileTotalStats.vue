@@ -1,5 +1,8 @@
 <template>
-  <v-card id="player-stats">
+  <v-card
+    flat
+    id="player-stats"
+  >
     <v-list-item>
       <v-list-item-icon>
         <v-img
