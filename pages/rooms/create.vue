@@ -77,18 +77,9 @@ export default {
   methods: {
     async recruit () {
       if (!this.invalid) {
-        // console.log(this.$auth.token)
-        // this.$axios.setHeader('Authorization', `Baerer ${this.$auth.token}`)
         await this.$axios.$post(
           'api/v1/rooms',
-          { room: this.room },
-          // プリフライトリクエストの回避
-          {
-            headers: {
-              Authorization: `Baerer ${this.$auth.token}`,
-              'X-Requested-With': 'XMLHttpRequest'
-            }
-          }
+          { room: this.room, game_id: 'Property_0' }
         )
           .then(res => this.recruitSuccessful(res))
           .catch(e => this.recruitFailure(e))

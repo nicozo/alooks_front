@@ -96,9 +96,7 @@ export default {
       if (!this.invalid) {
         await this.$axios.$post(
           'api/v1/sessions',
-          this.user,
-          // プリフライトリクエストの回避
-          { headers: { 'X-Requested-With': 'XMLHttpRequest' } }
+          this.user
         )
           .then(res => this.authSuccessful(res))
           .catch(e => this.authFailure(e))

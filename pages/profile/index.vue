@@ -239,7 +239,6 @@ export default {
   },
   created () {
     this.user.age = this.getUserAge(this.authUser.date_of_birth)
-    console.log(this.user.age)
     this.getGameData()
   },
   methods: {
@@ -254,15 +253,12 @@ export default {
       return today < thisYearsBirthday ? age - 1 : age
     },
     // TODO ユーザー情報に登録されたplatformを代入するよう修正
-    // TODO APIキーを環境変数に持たせるよう修正
     async getGameData () {
       await this.$axios.$get(
-        'https://api.mozambiquehe.re/bridge',
+        'search',
         {
           params: {
-            platform: 'PS4',
-            player: this.authUser.game_id,
-            auth: this.apiKey
+            game_id: this.authUser.game_id
           }
         }
       )

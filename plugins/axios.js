@@ -2,10 +2,10 @@
 // Doc: https://axios.nuxtjs.org/helpers
 export default ({ $axios, $auth, isDev }) => {
   $axios.onRequest((config) => {
-    // config.headers.common['X-Requested-With'] = 'XMLHttpRequest'
-    // if ($auth.token) {
-    //   $axios.defaults.headers.common.Authorization = `Baerer ${$auth.token}`
-    // }
+    config.headers.common['X-Requested-With'] = 'XMLHttpRequest'
+    if ($auth.token) {
+      $axios.defaults.headers.common.Authorization = `Baerer ${$auth.token}`
+    }
     if (isDev) {
       console.log(config)
     }

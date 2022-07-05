@@ -42,14 +42,7 @@ export default {
   name: 'RoomsIndexPage',
   async asyncData ({ $axios, $auth }) {
     const rooms = await $axios.$get(
-      'api/v1/rooms',
-      // プリフライトリクエストの回避
-      {
-        headers: {
-          Authorization: `Baerer ${$auth.token}`,
-          'X-Requested-With': 'XMLHttpRequest'
-        }
-      }
+      'api/v1/rooms'
     )
     // console.log('部屋情報:', rooms)
     return { rooms }
