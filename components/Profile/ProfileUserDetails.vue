@@ -19,7 +19,7 @@
         <v-list-item-title class="text-h4 text-left">
           {{ authUser.name }}
         </v-list-item-title>
-        <v-list-item-subtitle class="text-left">
+        <v-list-item-subtitle class="text-left introduction">
           {{ authUser.self_introduction }}
         </v-list-item-subtitle>
         <div v-show="userAge">
@@ -81,3 +81,9 @@ export default {
   }
 }
 </script>
+
+<style scoped>
+  .introduction {
+    white-space: normal;
+  }
+</style>
