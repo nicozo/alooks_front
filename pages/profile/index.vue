@@ -69,12 +69,18 @@
           md="4"
           lg="4"
         >
-          <div v-if="rankStatsData">
-            <profile-rank-stats :rank-stats-data="rankStatsData" />
-          </div>
-          <div v-else>
-            <p>NO DATA</p>
-          </div>
+          <v-card id="rank-stats">
+            <div class="text-h6 pa-3 text-center">
+              Rank Stats
+            </div>
+
+            <div v-if="totalStatsData">
+              <profile-rank-stats :rank-stats-data="rankStatsData" />
+            </div>
+            <div v-else>
+              <p>NO DATA</p>
+            </div>
+          </v-card>
         </v-col>
 
         <!-- Apex Legends戦績ブロック -->
@@ -82,15 +88,21 @@
           align="center"
           cols="12"
         >
-          <div v-if="totalStatsData">
-            <profile-total-stats
-              :total-stats-data="totalStatsData"
-              :target-legend="targetLegend"
-            />
-          </div>
-          <div v-else>
-            <p>NO DATA</p>
-          </div>
+          <v-card id="player-stats">
+            <div class="text-h6 pa-3 text-center">
+              Player Stats
+            </div>
+
+            <div v-if="totalStatsData">
+              <profile-total-stats
+                :total-stats-data="totalStatsData"
+                :target-legend="targetLegend"
+              />
+            </div>
+            <div v-else>
+              <p>NO DATA</p>
+            </div>
+          </v-card>
         </v-col>
       </v-row>
     </template>
