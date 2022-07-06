@@ -3,9 +3,9 @@
     flat
     id="profile-banner"
   >
-    <template v-if="targetLegendBanner">
+    <template v-if="targetLegend">
       <v-img
-        :src="targetLegendBanner"
+        :src="targetLegend.ImgAssets.banner"
         max-height="400"
       />
     </template>
@@ -22,10 +22,9 @@
 export default {
   name: 'ProfileBanner',
   props: {
-    targetLegendBanner: {
-      type: String,
-      default: '',
-      require: true
+    targetLegend: {
+      type: Object,
+      default: () => {}
     }
   },
   data () {

@@ -1,6 +1,6 @@
 <template>
   <div>
-    <div v-show="loading">
+    <template v-if="loading">
       <v-row
         style="height: 100vh;"
         justify="center"
@@ -21,222 +21,96 @@
           </v-card>
         </v-col>
       </v-row>
-    </div>
+    </template>
 
-    <div v-show="!loading">
-      <div v-if="targetLegend">
-        <v-row
-          id="profile"
+    <template v-else-if="!loading">
+      <v-row
+        id="profile"
+        align="center"
+        justify="center"
+      >
+        <!-- バナーブロック -->
+        <v-col
+          class="pa-0"
           align="center"
-          justify="center"
+          cols="12"
         >
-          <!-- バナーブロック -->
-          <v-col
-            class="pa-0"
-            align="center"
-            cols="12"
-          >
-            <profile-banner :target-legend-banner="targetLegend.ImgAssets.banner" />
-          </v-col>
+          <profile-banner :target-legend="targetLegend" />
+        </v-col>
 
-          <v-col cols="12" align="end">
-            <v-btn
-              color="success"
-              to="/profile/edit"
-            >
-              プロフィールを編集
-            </v-btn>
-          </v-col>
-
-          <!-- ログインユーザーブロック -->
-          <v-col
-            align="center"
-            cols="12"
-            sm="8"
-            md="8"
-            lg="8"
+        <v-col cols="12" align="end">
+          <v-btn
+            color="success"
+            to="/profile/edit"
           >
-            <profile-user-details
-              :auth-user="authUser"
-              :user-age="user.age"
-            />
-          </v-col>
+            プロフィールを編集
+          </v-btn>
+        </v-col>
 
-          <!-- Apex Legendsランクブロック -->
-          <v-col
-            align="center"
-            cols="12"
-            sm="4"
-            md="4"
-            lg="4"
-          >
+        <!-- ログインユーザーブロック -->
+        <v-col
+          align="center"
+          cols="12"
+          sm="8"
+          md="8"
+          lg="8"
+        >
+          <profile-user-details
+            :auth-user="authUser"
+            :user-age="user.age"
+          />
+        </v-col>
+
+        <!-- Apex Legendsランクブロック -->
+        <v-col
+          align="center"
+          cols="12"
+          sm="4"
+          md="4"
+          lg="4"
+        >
+          <div v-if="rankStatsData">
             <profile-rank-stats :rank-stats-data="rankStatsData" />
-          </v-col>
+          </div>
+          <div v-else>
+            <p>NO DATA</p>
+          </div>
+        </v-col>
 
-          <!-- Apex Legends戦績ブロック -->
-          <v-col
-            align="center"
-            cols="12"
-          >
+        <!-- Apex Legends戦績ブロック -->
+        <v-col
+          align="center"
+          cols="12"
+        >
+          <div v-if="totalStatsData">
             <profile-total-stats
               :total-stats-data="totalStatsData"
               :target-legend="targetLegend"
             />
-          </v-col>
-        </v-row>
-      </div>
-      <div v-else>
-        <v-row
-          id="profile"
-          align="center"
-          justify="center"
-        >
-          <!-- バナーブロック -->
-          <v-col
-            class="pa-0"
-            align="center"
-            cols="12"
-          >
-            <v-card flat>
-              <v-img
-                id="profile-banner"
-                :src="commonImageSrc"
-                max-height="400"
-              />
-            </v-card>
-          </v-col>
-
-          <!-- ログインユーザーブロック -->
-          <v-col
-            align="center"
-            cols="12"
-            sm="8"
-            md="8"
-            lg="8"
-          >
-            <v-card
-              flat
-              id="user-profile"
-            >
-              <v-list-item>
-                <div v-if="authUser.avatar_url">
-                  <v-list-item-avatar size="100">
-                    <v-img :src="authUser.avatar_url" />
-                  </v-list-item-avatar>
-                </div>
-                <div v-else>
-                  <v-list-item-avatar size="100">
-                    <v-img :src="defaultAvatarSrc" />
-                  </v-list-item-avatar>
-                </div>
-
-                <v-list-item-content>
-                  <v-list-item-title class="text-h4 text-left">
-                    {{ authUser.name }}
-                  </v-list-item-title>
-
-                  <v-list-item-subtitle class="text-left">
-                    {{ authUser.self_introduction }}
-                  </v-list-item-subtitle>
-
-                  <div v-show="user.age">
-                    <v-list-item-subtitle class="text-left">
-                      {{ user.age }}歳
-                    </v-list-item-subtitle>
-                  </div>
-                  <div v-show="!user.age">
-                    <v-list-item-subtitle class="text-left">
-                      未登録
-                    </v-list-item-subtitle>
-                  </div>
-
-                  <v-list-item-subtitle class="text-left">
-                    {{ authUser.sex }}
-                  </v-list-item-subtitle>
-                </v-list-item-content>
-              </v-list-item>
-            </v-card>
-          </v-col>
-
-          <!-- Apex Legendsランクブロック -->
-          <v-col
-            align="center"
-            cols="12"
-            sm="4"
-            md="4"
-            lg="4"
-          >
-            <v-card
-              flat
-              id="rank-stats"
-            >
-              <v-row
-                justify="center"
-                align-content="center"
-              >
-                <v-col>
-                  <v-card
-                    flat
-                    class="text-center"
-                  >
-                    <p>
-                      NO DATA
-                    </p>
-                  </v-card>
-                </v-col>
-              </v-row>
-            </v-card>
-          </v-col>
-
-          <!-- Apex Legends戦績ブロック -->
-          <v-col
-            align="center"
-            cols="12"
-          >
-            <v-card
-              flat
-              id="player-stats"
-            >
-              <v-row
-                justify="center"
-                align-content="center"
-              >
-                <v-col>
-                  <v-card
-                    flat
-                    class="text-center"
-                  >
-                    <p>
-                      NO DATA
-                    </p>
-                  </v-card>
-                </v-col>
-              </v-row>
-            </v-card>
-          </v-col>
-        </v-row>
-      </div>
-    </div>
+          </div>
+          <div v-else>
+            <p>NO DATA</p>
+          </div>
+        </v-col>
+      </v-row>
+    </template>
   </div>
 </template>
 
 <script>
 export default {
   name: 'ProfileIndexPage',
-  data ({ $config: { apiKey } }) {
+  data () {
     return {
       user: {
         age: ''
       },
-      defaultAvatarSrc: require('@/static/DefaultAvatar.png'),
-      commonImageSrc: require('@/static/CommonImage.jpg'),
       data: '',
       legendStatsData: '',
       targetLegend: '',
       rankStatsData: [],
       totalStatsData: '',
-      loading: true,
-      apiKey
+      loading: true
     }
   },
   computed: {

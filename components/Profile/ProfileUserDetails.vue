@@ -22,9 +22,16 @@
         <v-list-item-subtitle class="text-left">
           {{ authUser.self_introduction }}
         </v-list-item-subtitle>
-        <v-list-item-subtitle class="text-left">
-          {{ userAge }}歳
-        </v-list-item-subtitle>
+        <div v-show="userAge">
+          <v-list-item-subtitle class="text-left">
+            {{ userAge }}歳
+          </v-list-item-subtitle>
+        </div>
+        <div v-show="!userAge">
+          <v-list-item-subtitle class="text-left">
+            未登録
+          </v-list-item-subtitle>
+        </div>
         <v-list-item-subtitle class="text-left">
           {{ authUser.sex }}
         </v-list-item-subtitle>
