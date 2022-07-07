@@ -60,6 +60,8 @@
             <user-form-sex :sex.sync="user.sex" />
 
             <user-form-game-id :game-id.sync="user.game_id" />
+
+            <user-form-platform :platform.sync="user.platform" />
             <v-row>
               <v-col>
                 <v-btn
@@ -90,7 +92,8 @@ export default {
         date_of_birth: '',
         sex: '',
         game_id: '',
-        avatar_url: ''
+        avatar_url: '',
+        platform: ''
       },
       uploadAvatar: null,
       defaultAvatarSrc: require('@/static/DefaultAvatar.png')
@@ -113,6 +116,7 @@ export default {
       formData.append('user[date_of_birth]', this.user.date_of_birth)
       formData.append('user[sex]', this.user.sex)
       formData.append('user[game_id]', this.user.game_id)
+      formData.append('user[platform]', this.user.platform)
       if (this.uploadAvatar !== null) {
         formData.append('user[avatar]', this.uploadAvatar)
       }
