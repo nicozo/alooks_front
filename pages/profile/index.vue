@@ -74,7 +74,7 @@
               Rank Stats
             </div>
 
-            <div v-if="totalStatsData">
+            <div v-if="rankStatsData">
               <profile-rank-stats :rank-stats-data="rankStatsData" />
             </div>
             <div v-else>
@@ -145,7 +145,7 @@ export default {
 
       return today < thisYearsBirthday ? age - 1 : age
     },
-    // TODO ユーザー情報に登録されたplatformを代入するよう修正
+    // TODO room/id/index.vueと同じ表記がある為、クラス化を検討
     async getGameData () {
       await this.$axios.$get(
         'search',
