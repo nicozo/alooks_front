@@ -8,9 +8,9 @@
   >
     <div class="d-flex justify-space-around align-center py-6 px-6">
       <div class="flex-grow-0 mr-6">
-        <div v-if="room.user_avatar">
+        <div v-if="room.host.avatar_url">
           <v-avatar size="100">
-            <img :src="room.user_avatar" alt="プロフィール画像です">
+            <img :src="room.host.avatar_url" alt="プロフィール画像です">
           </v-avatar>
         </div>
         <div v-else>
@@ -84,8 +84,9 @@ export default {
         type: Date,
         required: true
       },
-      user_avatar: {
-        type: String,
+      host: {
+        type: Object,
+        default: () => {},
         required: true
       }
     }
