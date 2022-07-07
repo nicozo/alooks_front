@@ -151,7 +151,8 @@ export default {
         'search',
         {
           params: {
-            game_id: this.authUser.game_id
+            game_id: this.authUser.game_id,
+            platform: this.authUser.platform
           }
         }
       )
