@@ -6,12 +6,12 @@
       ホスト
     </div>
     <div class="d-flex align-center">
-      <div v-if="room.user_avatar">
+      <div v-if="room.host.avatar_url">
         <v-avatar
           size="100"
           class="flex-grow-0 mr-6"
         >
-          <img :src="room.user_avatar" alt="プロフィール画像です">
+          <img :src="room.host.avatar_url" alt="プロフィール画像です">
         </v-avatar>
       </div>
       <div v-else>
@@ -23,13 +23,7 @@
         </v-avatar>
       </div>
 
-      <v-card
-        height="200"
-        width="600"
-        color="red"
-        class="flex-grow-1"
-      >
-        簡易戦績が入る
+      <v-card>
       </v-card>
     </div>
 
