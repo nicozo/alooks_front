@@ -96,7 +96,8 @@ export default {
         platform: ''
       },
       uploadAvatar: null,
-      defaultAvatarSrc: require('@/static/DefaultAvatar.png')
+      defaultAvatarSrc: require('@/static/DefaultAvatar.png'),
+      redirectPath: this.$store.state.loggedIn.rememberPath
     }
   },
   computed: {
@@ -131,14 +132,8 @@ export default {
     },
     uploadSuccessful (res) {
       this.setToaster()
-      this.$store.dispatch('getAuthUser', res)
-      // TODO ログイン状態を維持して/roomsに遷移する実装
-      // 一旦リロードさせる方法を使用
-      // レスポンスにsubを含めていないため、VuexのauthUserのsubの値が保存されずログアウトが走ってしまう。
-      this.$router.go({
-        path: this.$router.currentRoute.path,
-        force: true
-      })
+      this.$auth.login(res)
+      this.$router.push(this.redirectPath)
     },
     setToaster () {
       const msg = 'プロフィール画像を更新しました'

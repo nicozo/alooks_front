@@ -55,7 +55,6 @@ class Authentication {
     await this.$axios.delete(
       '/api/v1/sessions',
       {
-        headers: { 'X-Requested-With': 'XMLHttpRequest' },
         validateStatus: status => this.allowUnauthorized(status)
       }
     )
@@ -81,6 +80,8 @@ class Authentication {
 
   // ユーザーが存在かつ有効期限内の場合にtrueを返す
   loggedIn () {
+    console.log('isExistUser', this.isExistUser())
+    console.log('isAuthenticated', this.isAuthenticated())
     return this.isExistUser() && this.isAuthenticated()
   }
 }
