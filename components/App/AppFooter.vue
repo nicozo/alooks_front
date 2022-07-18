@@ -2,7 +2,6 @@
   <v-footer
     id="app-footer"
     app
-    absolute
   >
     <v-col
       cols="12"

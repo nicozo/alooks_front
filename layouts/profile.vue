@@ -3,12 +3,10 @@
     <v-navigation-drawer
       v-model="drawer"
       app
-      temporary
       dark
-      fixed
       right
     >
-      <v-list flat>
+      <v-container>
         <v-list-item>
           <v-list-item-icon>
             <v-icon>
@@ -17,7 +15,7 @@
           </v-list-item-icon>
 
           <v-list-item-content>
-            <v-list-item-title>
+            <v-list-item-title class="title">
               {{ appName }}
             </v-list-item-title>
           </v-list-item-content>
@@ -31,12 +29,12 @@
         >
           <div v-if="$auth.user.avatar_url">
             <v-list-item-avatar>
-              <img :src="$auth.user.avatar_url" alt="プロフィール画像です">
+              <v-img :src="$auth.user.avatar_url" alt="プロフィール画像です" />
             </v-list-item-avatar>
           </div>
           <div v-else>
             <v-list-item-avatar>
-              <img :src="defaultAvatarSrc" alt="プロフィール画像です">
+              <v-img :src="defaultAvatarSrc" alt="プロフィール画像です" />
             </v-list-item-avatar>
           </div>
           <v-list-item-content>
@@ -46,22 +44,30 @@
           </v-list-item-content>
         </v-list-item>
 
+        <v-divider />
+
+      </v-container>
+      <v-list
+        dense
+        nav
+        flat
+      >
         <v-list-item
-          v-for="(link, i) in roomLinks"
-          :key="i"
-          :to="{ name: `${link.title}` }"
+          v-for="nav_list in nav_lists"
+          :key="nav_list.name"
           nuxt
+          :to="{ name: `${nav_list.name}` }"
           @click="handleToggleDrawer"
         >
           <v-list-item-content>
             <v-list-item-title>
-              {{ $t(`pages.${link.title}`) }}
+              {{ $t(`pages.${nav_list.name}`) }}
             </v-list-item-title>
           </v-list-item-content>
         </v-list-item>
 
         <v-list-item>
-          <v-list-item-content class="text-center">
+          <v-list-item-content>
             <v-btn
               color="red"
               to="/logout"
@@ -106,10 +112,10 @@ export default {
   data ({ $config: { appName } }) {
     return {
       appName,
-      roomLinks: [
-        { title: 'rooms' },
-        { title: 'rooms-create' },
-        { title: 'invitation-list' }
+      nav_lists: [
+        { name: 'rooms' },
+        { name: 'rooms-create' },
+        { name: 'invitation-list' }
       ],
       drawer: false,
       defaultAvatarSrc: require('@/static/DefaultAvatar.png')
