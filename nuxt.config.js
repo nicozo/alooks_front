@@ -35,7 +35,8 @@ export default {
     'plugins/auth',
     'plugins/axios',
     'plugins/vee-validate',
-    'plugins/nuxt-client-init'
+    'plugins/nuxt-client-init',
+    'plugins/day'
   ],
 
   // Auto import components: https://go.nuxtjs.dev/config-components
@@ -46,9 +47,7 @@ export default {
     // https://go.nuxtjs.dev/eslint
     '@nuxtjs/eslint-module',
     // https://www.npmjs.com/package/@nuxtjs/vuetify
-    '@nuxtjs/vuetify',
-    // https://www.npmjs.com/package/@nuxtjs/dayjs
-    '@nuxtjs/dayjs'
+    '@nuxtjs/vuetify'
   ],
 
   // Modules: https://go.nuxtjs.dev/config-modules
@@ -60,7 +59,9 @@ export default {
     // proxy: trueとするとbaseURLを明記する必要がある
     '@nuxtjs/proxy',
     // https://i18n.nuxtjs.org/setup
-    '@nuxtjs/i18n'
+    '@nuxtjs/i18n',
+    // https://www.npmjs.com/package/@nuxtjs/dayjs
+    '@nuxtjs/dayjs'
   ],
 
   publicRuntimeConfig: {
@@ -114,8 +115,16 @@ export default {
     }
   },
 
-  // moment.js言語設定
-  moment: {
-    locales: ['ja']
+  // day.js設定
+  // Doc: https://day.js.org/docs/en/installation/installation
+  dayjs: {
+    locales: ['en', 'ja'],
+    defaultLocale: 'ja',
+    defaultTimeZone: 'Asia/Tokyo',
+    plugins: [
+      'utc', // import 'dayjs/plugin/utc'
+      'timezone', // import 'dayjs/plugin/timezone'
+      'relativeTime' // import 'dayjs/plugin/relativeTime'
+    ]
   }
 }
