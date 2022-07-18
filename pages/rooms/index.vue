@@ -1,28 +1,34 @@
 <template>
   <v-container>
     <v-row>
-      <v-col align="end">
-        <v-btn
-          color="success"
-          class="pa-5"
-          to="/rooms/create"
-        >
-          <v-icon class="mr-2">
-            mdi-human-greeting-variant
-          </v-icon>
-          スクワッドを募集する
-        </v-btn>
-      </v-col>
-    </v-row>
-
-    <v-row>
       <v-col
-        v-for="(room, i) in displayRooms"
+        cols="12"
+        sm="6"
+        md="6"
+        lg="4"
+        xl="4"
+        v-for="(room, i) in rooms"
         :key="i"
-        cols="6"
       >
         <RoomItem :room="room" />
       </v-col>
+
+      <v-fab-transition>
+        <v-btn
+          color="primary"
+          dark
+          fixed
+          bottom
+          right
+          fab
+          style="z-index: 10;"
+          nuxt
+          to="/rooms/create"
+          x-large
+        >
+          <v-icon>mdi-plus</v-icon>
+        </v-btn>
+      </v-fab-transition>
     </v-row>
 
     <v-row>
@@ -40,7 +46,7 @@
 <script>
 export default {
   name: 'RoomsIndexPage',
-  async asyncData ({ $axios, $auth }) {
+  async asyncData ({ $axios }) {
     const rooms = await $axios.$get(
       'api/v1/rooms'
     )

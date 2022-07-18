@@ -1,61 +1,77 @@
 <template>
   <v-card
-    :id="'room' + room.id"
+    :id="`room-${room.id}`"
     rounded-xl
     hover
     raised
+    nuxt
     :to="`rooms/${room.id}`"
   >
-    <div class="d-flex justify-space-around align-center py-6 px-6">
-      <div class="flex-grow-0 mr-6">
-        <div v-if="room.host.avatar_url">
-          <v-avatar size="100">
+    <div v-show="isRoomClosing(room.application_deadline)">
+      <v-overlay
+        absolute
+        opacity="0.9"
+        z-index="2"
+      >
+        <v-card-text class="font-weight-bold">
+          募集を締め切りました
+        </v-card-text>
+      </v-overlay>
+    </div>
+
+    <v-container>
+      <div class="text-right">
+        <v-chip
+          color="red"
+          dark
+        >
+          あと{{ room.recruit_number }}人募集
+        </v-chip>
+      </div>
+
+      <v-card-title>
+        {{ room.title }}
+      </v-card-title>
+
+      <v-divider></v-divider>
+
+      <v-layout justify-center>
+        <template v-if="room.host.avatar_url">
+          <v-avatar size="100" class="my-4">
             <img :src="room.host.avatar_url" alt="プロフィール画像です">
           </v-avatar>
-        </div>
-        <div v-else>
-          <v-avatar size="100">
+        </template>
+        <template v-else>
+          <v-avatar size="100" class="my-4">
             <img :src="defaultAvatarSrc" alt="プロフィール画像です">
           </v-avatar>
-        </div>
-      </div>
+        </template>
+      </v-layout>
 
-      <div class="flex-grow-1">
-        <div class="text-right">
-          <v-chip
-            color="red"
-            dark
-          >
-            あと{{ room.recruitment_number }}人募集
-          </v-chip>
-        </div>
-        <v-card-title>
-          {{ room.title }}
-        </v-card-title>
-        <v-card-text>
-          プラットフォーム：{{ room.platform }}
-        </v-card-text>
-        <v-card-text>
-          ゲームモード：{{ room.game_mode }}
-        </v-card-text>
-        <v-card-text>
-          ランク帯：{{ room.rank_tier }}
-        </v-card-text>
-        <v-card-text>
-          募集期間：{{ formattedDate }}
-        </v-card-text>
+      <v-card-text>
+        プラットフォーム：{{ room.platform }}
+      </v-card-text>
+      <v-card-text>
+        ゲームモード：{{ room.game_mode }}
+      </v-card-text>
+      <v-card-text>
+        ランク帯：{{ room.rank_tier }}
+      </v-card-text>
+      <v-card-text>
+        募集期間：{{ formattedDate }}
+      </v-card-text>
 
-        <v-card-actions>
-          <v-btn
-            color="success"
-            class="ml-auto"
-            :disabled="invalid"
-          >
-            参加リクエスト
-          </v-btn>
-        </v-card-actions>
-      </div>
-    </div>
+      <v-card-actions>
+        <v-btn
+          color="success"
+          class="ml-auto"
+          @click.once="request()"
+          :disabled="invalid"
+        >
+          参加リクエスト
+        </v-btn>
+      </v-card-actions>
+    </v-container>
   </v-card>
 </template>
 
@@ -124,6 +140,17 @@ export default {
     },
     isInvalid () {
       this.invalid = true
+    },
+    request () {
+      const requestBtn = event.currentTarget
+      requestBtn.classList.add('v-btn--disabled')
+      requestBtn.getElementsByClassName('v-btn__content')[0].innerText = 'リクエスト済み'
+      alert('りくえすとしたよ！')
+    },
+    isRoomClosing (roomDeadline) {
+      const railsDateUnixTime = moment(roomDeadline)._d
+      console.log(railsDateUnixTime)
+      return railsDateUnixTime < new Date()
     }
   }
 }
