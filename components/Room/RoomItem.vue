@@ -58,7 +58,7 @@
         ランク帯：{{ room.rank_tier }}
       </v-card-text>
       <v-card-text>
-        募集期間：{{ formattedDate }}
+        募集期間：{{ timeToDeadline }}
       </v-card-text>
 
       <v-card-actions>
@@ -76,8 +76,6 @@
 </template>
 
 <script>
-import moment from 'moment'
-
 export default {
   name: 'RoomItem',
   props: {
@@ -109,7 +107,7 @@ export default {
   },
   data () {
     return {
-      formattedDate: '',
+      timeToDeadline: '',
       invalid: false,
       defaultAvatarSrc: require('@/static/DefaultAvatar.png')
     }
@@ -119,14 +117,9 @@ export default {
   },
   methods: {
     changeDateFormat () {
-      const railsDate = this.room.application_deadline
-      const momentDate = moment(railsDate)
-      const momentDateFormatted = momentDate.fromNow()
-      this.formattedDate = this.replaceFormat(momentDateFormatted)
-      // console.log('moment.jsから取得した時刻:', momentDate)
-      // console.log('moment.jsから取得した時刻:', momentDateFormatted)
-      // console.log('文字の変換テスト:', momentDateFormatted.replace('後', 'で締め切り'))
-      // console.log(this.formattedDate)
+      const roomDeadline = this.room.application_deadline
+      const minutesToDeadline = this.$dayjs(roomDeadline).fromNow()
+      this.timeToDeadline = this.replaceFormat(minutesToDeadline)
     },
     replaceFormat (str) {
       // console.log('渡された文字列', str)
@@ -148,8 +141,7 @@ export default {
       alert('りくえすとしたよ！')
     },
     isRoomClosing (roomDeadline) {
-      const railsDateUnixTime = moment(roomDeadline)._d
-      return railsDateUnixTime < new Date()
+      return roomDeadline < new Date()
     }
   }
 }

@@ -54,7 +54,7 @@
               募集期間：
             </div>
             <div>
-              {{ formattedDate }}
+              {{ timeToDeadline }}
             </div>
           </div>
         </v-list-item-content>
@@ -73,8 +73,6 @@
 </template>
 
 <script>
-import moment from 'moment'
-
 export default {
   name: 'RoomDetails',
   props: {
@@ -101,7 +99,7 @@ export default {
   },
   data () {
     return {
-      formattedDate: '',
+      timeToDeadline: '',
       invalid: false
     }
   },
@@ -110,14 +108,9 @@ export default {
   },
   methods: {
     changeDateFormat () {
-      const railsDate = this.room.application_deadline
-      const momentDate = moment(railsDate)
-      const momentDateFormatted = momentDate.fromNow()
-      this.formattedDate = this.replaceFormat(momentDateFormatted)
-      // console.log('moment.jsから取得した時刻:', momentDate)
-      // console.log('moment.jsから取得した時刻:', momentDateFormatted)
-      // console.log('文字の変換テスト:', momentDateFormatted.replace('後', 'で締め切り'))
-      // console.log(this.formattedDate)
+      const roomDeadline = this.room.application_deadline
+      const minutesToDeadline = this.$dayjs(roomDeadline).fromNow()
+      this.timeToDeadline = this.replaceFormat(minutesToDeadline)
     },
     replaceFormat (str) {
       // console.log('渡された文字列', str)
