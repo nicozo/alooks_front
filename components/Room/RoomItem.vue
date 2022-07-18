@@ -141,7 +141,9 @@ export default {
       alert('りくえすとしたよ！')
     },
     isRoomClosing (roomDeadline) {
-      return roomDeadline < new Date()
+      const now = new Date()
+      const deadline = this.$dayjs(roomDeadline).$d
+      return deadline < now
     }
   }
 }
