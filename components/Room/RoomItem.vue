@@ -25,7 +25,7 @@
           color="red"
           dark
         >
-          あと{{ room.recruit_number }}人募集
+          あと{{ room.recruitment_number }}人募集
         </v-chip>
       </div>
 
@@ -92,7 +92,7 @@ export default {
         type: String,
         required: true
       },
-      current_squad_member: {
+      recruitment_number: {
         type: Number,
         required: true
       },
@@ -149,7 +149,6 @@ export default {
     },
     isRoomClosing (roomDeadline) {
       const railsDateUnixTime = moment(roomDeadline)._d
-      console.log(railsDateUnixTime)
       return railsDateUnixTime < new Date()
     }
   }
