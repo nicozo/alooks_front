@@ -28,12 +28,12 @@
           @click="handleToggleDrawer"
         >
           <div v-if="$auth.user.avatar_url">
-            <v-list-item-avatar>
+            <v-list-item-avatar size="60">
               <v-img :src="$auth.user.avatar_url" alt="プロフィール画像です" />
             </v-list-item-avatar>
           </div>
           <div v-else>
-            <v-list-item-avatar>
+            <v-list-item-avatar size="60">
               <v-img :src="defaultAvatarSrc" alt="プロフィール画像です" />
             </v-list-item-avatar>
           </div>
