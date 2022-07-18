@@ -46,7 +46,9 @@ export default {
     // https://go.nuxtjs.dev/eslint
     '@nuxtjs/eslint-module',
     // https://www.npmjs.com/package/@nuxtjs/vuetify
-    '@nuxtjs/vuetify'
+    '@nuxtjs/vuetify',
+    // https://www.npmjs.com/package/@nuxtjs/dayjs
+    '@nuxtjs/dayjs'
   ],
 
   // Modules: https://go.nuxtjs.dev/config-modules
