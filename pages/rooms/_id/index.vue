@@ -46,7 +46,7 @@
                     </v-list-item-title>
 
                     <v-list-item-title>
-                      {{ room.host.age }}歳
+                      {{ host.age }}歳
                     </v-list-item-title>
                   </v-list-item-content>
                 </v-list-item>
@@ -204,12 +204,16 @@ export default {
       totalStats: '',
       loading: true,
       invalid: false,
-      timeToDeadline: ''
+      timeToDeadline: '',
+      host: {
+        age: ''
+      }
     }
   },
   created () {
     this.getGameData()
     this.changeDateFormat()
+    this.host.age = this.getUserAge(this.room.host.date_of_birth)
   },
   methods: {
     // TODO profile/index.vueと同じ表記がある為、クラス化を検討
@@ -329,6 +333,15 @@ export default {
       requestBtn.classList.add('v-btn--disabled')
       requestBtn.getElementsByClassName('v-btn__content')[0].innerText = 'リクエスト済み'
       alert('りくえすとしたよ！')
+    },
+    getUserAge (birthday) {
+      if (!birthday) { return }
+      const today = new Date()
+      const ymd = birthday.split('-')
+      const thisYearsBirthday = new Date(today.getFullYear(), ymd[1] - 1, ymd[2])
+      const age = today.getFullYear() - ymd[0]
+
+      return today < thisYearsBirthday ? age - 1 : age
     }
   }
 }
