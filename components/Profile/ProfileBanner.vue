@@ -3,9 +3,9 @@
     flat
     id="profile-banner"
   >
-    <template v-if="targetLegend">
+    <template v-if="hightestKillLegendStats">
       <v-img
-        :src="targetLegend.ImgAssets.banner"
+        :src="hightestKillLegendStats.ImgAssets.banner"
         max-height="400"
       />
     </template>
@@ -22,7 +22,7 @@
 export default {
   name: 'ProfileBanner',
   props: {
-    targetLegend: {
+    hightestKillLegendStats: {
       type: Object,
       default: () => {}
     }

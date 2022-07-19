@@ -2,7 +2,7 @@
   <v-list-item>
     <v-list-item-icon>
       <v-img
-        :src="targetLegend.ImgAssets.icon"
+        :src="hightestKillLegendStats.ImgAssets.icon"
         max-width="400"
       />
     </v-list-item-icon>
@@ -13,7 +13,7 @@
       </v-card-title>
       <v-row>
         <v-col
-          v-for="(data, i) in totalStatsData"
+          v-for="(data, i) in totalStats"
           v-show="data.name !== 'KD'"
           :key="i"
           cols="6"
@@ -35,7 +35,7 @@
       </v-card-title>
       <v-row>
         <v-col
-          v-for="(data, i) in targetLegend.data"
+          v-for="(data, i) in hightestKillLegendStats.data"
           v-show="filterStatus(data)"
           :key="i"
           cols="6"
@@ -59,12 +59,12 @@
 export default {
   name: 'ProfileTotalStats',
   props: {
-    totalStatsData: {
+    totalStats: {
       type: Object,
       default: () => {},
       require: true
     },
-    targetLegend: {
+    hightestKillLegendStats: {
       type: Object,
       default: () => {},
       require: true

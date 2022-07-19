@@ -1,87 +1,186 @@
 <template>
-  <div>
-    <room-back-previous-page-button />
+  <v-container>
+    <v-row dense>
+      <v-col>
+        <room-back-previous-page-button />
+      </v-col>
+    </v-row>
 
-    <v-row
-      align="center"
-      justify="center"
-    >
+    <v-row dense>
       <v-col
         cols="12"
+        sm="6"
+        md="6"
+        lg="6"
+        xl="6"
       >
-        <div class="text-h3 my-7 text-center">
-          ホスト
-        </div>
+        <v-row dense>
+          <v-col
+            id="host-profile"
+            cols="12"
+          >
+            <v-card>
+              <v-container>
+                <v-card-title>
+                  Host Profile
+                </v-card-title>
+
+                <v-divider></v-divider>
+
+                <v-list-item>
+                  <v-list-item-avatar size="70">
+                    <v-img :src="room.host.avatar_url" />
+                  </v-list-item-avatar>
+
+                  <v-list-item-content>
+                    <v-list-item-title class="title">
+                      {{ room.host.name }}
+                    </v-list-item-title>
+
+                    <v-list-item-title style="white-space: normal;">
+                      {{ room.host.self_introduction }}
+                    </v-list-item-title>
+
+                    <v-list-item-title>
+                      {{ room.host.sex }}
+                    </v-list-item-title>
+
+                    <v-list-item-title>
+                      {{ room.host.age }}歳
+                    </v-list-item-title>
+                  </v-list-item-content>
+                </v-list-item>
+              </v-container>
+            </v-card>
+          </v-col>
+
+          <v-col
+            id="host-rank-stats"
+            cols="12"
+          >
+            <v-card
+              :loading="loading"
+              min-height="200"
+            >
+              <v-container>
+                <v-card-title>
+                  Ranked Stats
+                </v-card-title>
+
+                <v-divider></v-divider>
+
+                <v-list-item>
+                  <template v-if="loading">
+                    <v-row
+                      justify="center"
+                      align-content="center"
+                    >
+                      <v-col>
+                        getting stats...
+                      </v-col>
+                    </v-row>
+                  </template>
+
+                  <template v-else>
+                    <template v-if="rankedStats">
+                      <template v-for="(data, i) in rankedStats">
+                        <v-list-item-content :key="i">
+                          <v-list-item-title v-show="!isThisArenaRankStats(data)" class="text-center">
+                            BR
+                          </v-list-item-title>
+                          <v-list-item-title v-show="isThisArenaRankStats(data)" class="text-center">
+                            Arena
+                          </v-list-item-title>
+
+                          <v-list-item-icon>
+                            <v-img :src="data.rankImg" />
+                          </v-list-item-icon>
+
+                          <v-list-item-subtitle class="text-center">
+                            {{ data.rankScore }}RP
+                          </v-list-item-subtitle>
+                        </v-list-item-content>
+                      </template>
+                    </template>
+
+                    <template v-else>
+                      <v-list-item-title>
+                        NO DATA
+                      </v-list-item-title>
+                    </template>
+                  </template>
+                </v-list-item>
+              </v-container>
+            </v-card>
+          </v-col>
+        </v-row>
       </v-col>
 
       <v-col
-        align="center"
         cols="12"
-        sm="8"
-        md="8"
-        lg="8"
+        sm="6"
+        md="6"
+        lg="6"
+        xl="6"
       >
-        <v-card id="host-profile" flat>
+        <v-card min-height="200">
           <v-list-item>
-            <div v-if="this.room.host.avatar_url">
-              <v-list-item-avatar size="150">
-                <v-img :src="this.room.host.avatar_url" />
-              </v-list-item-avatar>
-            </div>
-            <div v-else>
-              <v-list-item-avatar size="150">
-                <v-img :src="defaultAvatarSrc" />
-              </v-list-item-avatar>
+            <div v-show="isRoomClosing(room.application_deadline)">
+              <v-overlay
+                absolute
+                opacity="0.9"
+              >
+                <v-card-text class="font-weight-bold">
+                  募集を締め切りました
+                </v-card-text>
+              </v-overlay>
             </div>
 
-            <v-list-item-content>
-              <v-list-item-title class="text-h4 text-left">
-                {{ this.room.host.name }}
-              </v-list-item-title>
-              <v-list-item-subtitle class="text-left introduction">
-                {{ this.room.host.self_introduction }}
-              </v-list-item-subtitle>
-            </v-list-item-content>
+            <v-container>
+              <div class="text-right">
+                <v-chip
+                  color="red"
+                  dark
+                >
+                  あと{{ room.recruitment_number }}人募集
+                </v-chip>
+              </div>
+
+              <v-card-title>
+                {{ room.title }}
+              </v-card-title>
+
+              <v-divider></v-divider>
+
+              <v-card-text>
+                プラットフォーム：{{ room.platform }}
+              </v-card-text>
+              <v-card-text>
+                ゲームモード：{{ room.game_mode }}
+              </v-card-text>
+              <v-card-text>
+                ランク帯：{{ room.rank_tier }}
+              </v-card-text>
+              <v-card-text>
+                募集期間：{{ timeToDeadline }}
+              </v-card-text>
+
+              <v-card-actions>
+                <v-btn
+                  color="success"
+                  class="ml-auto"
+                  @click.once="request()"
+                  :disabled="invalid"
+                >
+                  参加リクエスト
+                </v-btn>
+              </v-card-actions>
+            </v-container>
           </v-list-item>
         </v-card>
       </v-col>
-
-      <v-col
-        align="center"
-        cols="12"
-        sm="4"
-        md="4"
-        lg="4"
-      >
-        <v-card id="rank-stats" :loading="loading">
-          <div class="text-h6 pa-3 text-center">
-            Rank Stats
-          </div>
-
-          <div v-if="rankStatsData">
-            <profile-rank-stats :rank-stats-data="rankStatsData" />
-          </div>
-          <div v-else>
-            <p>NO DATA</p>
-          </div>
-        </v-card>
-      </v-col>
     </v-row>
-
-    <v-row>
-      <v-col cols="12">
-        <div class="text-h3 my-7 text-center">
-          募集内容
-        </div>
-
-        <v-col>
-          <v-card>
-            <RoomDetails :room="room" />
-          </v-card>
-        </v-col>
-      </v-col>
-    </v-row>
-  </div>
+  </v-container>
 </template>
 
 <script>
@@ -99,15 +198,18 @@ export default {
     return {
       defaultAvatarSrc: require('@/static/DefaultAvatar.png'),
       data: '',
-      legendStatsData: '',
-      targetLegend: '',
-      rankStatsData: [],
-      totalStatsData: '',
-      loading: true
+      allLegendStats: '',
+      hightestKillLegendStats: '',
+      rankedStats: [],
+      totalStats: '',
+      loading: true,
+      invalid: false,
+      timeToDeadline: ''
     }
   },
   created () {
     this.getGameData()
+    this.changeDateFormat()
   },
   methods: {
     // TODO profile/index.vueと同じ表記がある為、クラス化を検討
@@ -126,7 +228,7 @@ export default {
     },
     requestSuccessful (res) {
       if (this.isDifferentGameId(res)) {
-        this.loading = false
+        this.isLoading()
         console.log('idが一致しません。')
         return
       }
@@ -134,17 +236,18 @@ export default {
       this.setLegendsData()
       this.setRankData()
       this.setTotalData()
+      this.isLoading()
     },
     requestFailure (e) {
-      this.loading = false
+      this.isLoading()
       console.log(e)
     },
     setLegendsData () {
-      this.legendStatsData = this.data.legends.all
+      this.allLegendStats = this.data.legends.all
       this.getLegendData()
     },
     getLegendKillData () {
-      const data = this.legendStatsData
+      const data = this.allLegendStats
       const legendKillData = []
       Object.keys(data).forEach((key) => {
         if (data[key].data !== undefined) {
@@ -176,22 +279,56 @@ export default {
       return hightestKillLegendData
     },
     getLegendData () {
-      const data = this.getHighestKillData()
-      if (data.name in this.legendStatsData) {
-        this.targetLegend = this.legendStatsData[data.name]
+      const legend = this.getHighestKillData()
+      if (legend.name in this.allLegendStats) {
+        this.hightestKillLegendStats = this.allLegendStats[legend.name]
       }
-      this.loading = false
-      // console.log('targetLegend:', this.targetLegend)
+      // console.log('hightestKillLegendStats:', this.hightestKillLegendStats)
     },
     isDifferentGameId (data) {
       return !this.room.host.game_id === data.global.name
     },
     setRankData () {
-      this.rankStatsData.push(this.data.global.arena)
-      this.rankStatsData.push(this.data.global.rank)
+      this.rankedStats.push(this.data.global.rank)
+      this.rankedStats.push(this.data.global.arena)
     },
     setTotalData () {
-      this.totalStatsData = this.data.total
+      this.totalStats = this.data.total
+    },
+    isLoading () {
+      this.loading = false
+    },
+    isThisArenaRankStats (data) {
+      return data.rankedSeason.includes('arena')
+    },
+    isRoomClosing (roomDeadline) {
+      const now = new Date()
+      const deadline = this.$dayjs(roomDeadline).$d
+      return deadline < now
+    },
+    changeDateFormat () {
+      const roomDeadline = this.room.application_deadline
+      const minutesToDeadline = this.$dayjs(roomDeadline).fromNow()
+      this.timeToDeadline = this.replaceFormat(minutesToDeadline)
+    },
+    replaceFormat (str) {
+      // console.log('渡された文字列', str)
+      if (str.includes('後')) {
+        str = str.replace('後', 'で締め切り')
+      } else {
+        str = '締め切りました'
+        this.isInvalid()
+      }
+      return str
+    },
+    isInvalid () {
+      this.invalid = true
+    },
+    request () {
+      const requestBtn = event.currentTarget
+      requestBtn.classList.add('v-btn--disabled')
+      requestBtn.getElementsByClassName('v-btn__content')[0].innerText = 'リクエスト済み'
+      alert('りくえすとしたよ！')
     }
   }
 }

@@ -1,6 +1,6 @@
 <template>
   <v-list-item>
-    <template v-for="(data, i) in rankStatsData">
+    <template v-for="(data, i) in rankedStats">
       <v-list-item-content :key="i">
         <v-list-item-title v-show="isThisArenaRankData(data)">
           Arena
@@ -25,7 +25,7 @@
 export default {
   name: 'ProfileRankStats',
   props: {
-    rankStatsData: {
+    rankedStats: {
       type: Array,
       default: () => [],
       require: true

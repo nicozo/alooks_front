@@ -35,7 +35,7 @@
           align="center"
           cols="12"
         >
-          <profile-banner :target-legend="targetLegend" />
+          <profile-banner :hightest-kill-legend-stats="hightestKillLegendStats" />
         </v-col>
 
         <v-col cols="12" align="end">
@@ -74,8 +74,8 @@
               Rank Stats
             </div>
 
-            <div v-if="rankStatsData">
-              <profile-rank-stats :rank-stats-data="rankStatsData" />
+            <div v-if="rankedStats">
+              <profile-rank-stats :ranked-stats="rankedStats" />
             </div>
             <div v-else>
               <p>NO DATA</p>
@@ -93,10 +93,10 @@
               Player Stats
             </div>
 
-            <div v-if="totalStatsData">
+            <div v-if="totalStats">
               <profile-total-stats
-                :total-stats-data="totalStatsData"
-                :target-legend="targetLegend"
+                :total-stats="totalStats"
+                :hightest-kill-legend-stats="hightestKillLegendStats"
               />
             </div>
             <div v-else>
@@ -118,10 +118,10 @@ export default {
         age: ''
       },
       data: '',
-      legendStatsData: '',
-      targetLegend: '',
-      rankStatsData: [],
-      totalStatsData: '',
+      allLegendStats: '',
+      hightestKillLegendStats: '',
+      rankedStats: [],
+      totalStats: '',
       loading: true
     }
   },
@@ -169,17 +169,18 @@ export default {
       this.setLegendsData()
       this.setRankData()
       this.setTotalData()
+      this.isLoading()
     },
     requestFailure (e) {
-      this.loading = false
       console.log(e)
+      this.isLoading()
     },
     setLegendsData () {
-      this.legendStatsData = this.data.legends.all
+      this.allLegendStats = this.data.legends.all
       this.getLegendData()
     },
     getLegendKillData () {
-      const data = this.legendStatsData
+      const data = this.allLegendStats
       const legendKillData = []
       Object.keys(data).forEach((key) => {
         if (data[key].data !== undefined) {
@@ -211,22 +212,24 @@ export default {
       return hightestKillLegendData
     },
     getLegendData () {
-      const data = this.getHighestKillData()
-      if (data.name in this.legendStatsData) {
-        this.targetLegend = this.legendStatsData[data.name]
+      const legend = this.getHighestKillData()
+      if (legend.name in this.allLegendStats) {
+        this.hightestKillLegendStats = this.allLegendStats[legend.name]
       }
-      this.loading = false
-      console.log('targetLegend:', this.targetLegend)
+      console.log('hightestKillLegendStats:', this.hightestKillLegendStats)
     },
     isDifferentGameId (data) {
       return !this.authUser.game_id === data.global.name
     },
     setRankData () {
-      this.rankStatsData.push(this.data.global.arena)
-      this.rankStatsData.push(this.data.global.rank)
+      this.rankedStats.push(this.data.global.rank)
+      this.rankedStats.push(this.data.global.arena)
     },
     setTotalData () {
-      this.totalStatsData = this.data.total
+      this.totalStats = this.data.total
+    },
+    isLoading () {
+      this.loading = false
     }
   }
 }

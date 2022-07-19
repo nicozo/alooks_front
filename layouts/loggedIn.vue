@@ -87,7 +87,7 @@
 
     <logged-in-hero :route-name="routeName" />
 
-    <v-main>
+    <v-main class="pt-3">
       <app-toaster />
 
       <v-container fluid>
