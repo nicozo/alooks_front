@@ -248,15 +248,16 @@ export default {
         .catch(e => this.requestFailure(e))
     },
     requestSuccessful (res) {
-      if (this.isDifferentGameId(res)) {
-        this.isLoading()
+      if (!res.global) {
+        console.log('データがありません')
+      } else if (this.isDifferentGameId(res)) {
         console.log('idが一致しません。')
-        return
+      } else {
+        this.data = res
+        this.setLegendsData()
+        this.setRankData()
+        this.setTotalData()
       }
-      this.data = res
-      this.setLegendsData()
-      this.setRankData()
-      this.setTotalData()
       this.isLoading()
     },
     requestFailure (e) {
