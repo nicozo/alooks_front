@@ -18,7 +18,7 @@
               class="text-subtitle-1 font-weight-bold text-right"
               style="width: 150px"
             >
-              プラットフォーム：
+              {{ $t('room.platform') }}：
             </div>
             <div>
               {{ room.platform }}
@@ -29,7 +29,7 @@
               class="text-subtitle-1 font-weight-bold text-right"
               style="width: 150px"
             >
-              ゲームモード：
+              {{ $t('room.game_mode') }}：
             </div>
             <div>
               {{ room.game_mode }}
@@ -40,7 +40,7 @@
               class="text-subtitle-1 font-weight-bold text-right"
               style="width: 150px"
             >
-              ランク帯：
+              {{ $t('room.rank_tier') }}：
             </div>
             <div>
               {{ room.rank_tier }}
@@ -51,7 +51,7 @@
               class="text-subtitle-1 font-weight-bold text-right"
               style="width: 150px"
             >
-              募集期間：
+              {{ $t('room.rank_tier') }}：
             </div>
             <div>
               {{ timeToDeadline }}
@@ -66,7 +66,7 @@
         class="mx-auto mb-6 pa-6"
         :disabled="invalid"
       >
-        参加リクエスト
+        {{ $t('btn.invitation_request') }}
       </v-btn>
     </v-card-actions>
   </v-card>

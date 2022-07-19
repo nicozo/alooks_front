@@ -14,7 +14,7 @@
         z-index="2"
       >
         <v-card-text class="font-weight-bold">
-          募集を締め切りました
+          {{ $t('message.now_closed') }}
         </v-card-text>
       </v-overlay>
     </div>
@@ -49,16 +49,16 @@
       </v-layout>
 
       <v-card-text>
-        プラットフォーム：{{ room.platform }}
+        {{ $t('room.platform') }}：{{ room.platform }}
       </v-card-text>
       <v-card-text>
-        ゲームモード：{{ room.game_mode }}
+        {{ $t('room.game_mode') }}：{{ room.game_mode }}
       </v-card-text>
       <v-card-text>
-        ランク帯：{{ room.rank_tier }}
+        {{ $t('room.rank_tier') }}：{{ room.rank_tier }}
       </v-card-text>
       <v-card-text>
-        募集期間：{{ timeToDeadline }}
+        {{ $t('room.application_deadline') }}：{{ timeToDeadline }}
       </v-card-text>
 
       <v-card-actions>
@@ -68,7 +68,7 @@
           @click.once="request()"
           :disabled="invalid"
         >
-          参加リクエスト
+          {{ $t('btn.invitation_request') }}
         </v-btn>
       </v-card-actions>
     </v-container>

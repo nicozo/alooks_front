@@ -29,11 +29,11 @@
         </div>
         <div v-show="!userAge">
           <v-list-item-subtitle class="text-left">
-            未登録
+            {{ $t('Unregistered') }}
           </v-list-item-subtitle>
         </div>
         <v-list-item-subtitle class="text-left">
-          {{ authUser.sex }}
+          {{ $t(`gender.${authUser.sex}`) }}
         </v-list-item-subtitle>
       </v-list-item-content>
     </v-list-item>

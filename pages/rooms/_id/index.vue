@@ -22,15 +22,22 @@
             <v-card>
               <v-container>
                 <v-card-title>
-                  Host Profile
+                  {{ $t('title.host_profile') }}
                 </v-card-title>
 
-                <v-divider></v-divider>
+                <v-divider />
 
                 <v-list-item>
-                  <v-list-item-avatar size="70">
-                    <v-img :src="room.host.avatar_url" />
-                  </v-list-item-avatar>
+                  <div v-show="room.host.avatar_url">
+                    <v-list-item-avatar size="70">
+                      <v-img :src="room.host.avatar_url" />
+                    </v-list-item-avatar>
+                  </div>
+                  <div v-show="!room.host.avatar_url">
+                    <v-list-item-avatar size="70">
+                      <v-img :src="defaultAvatarSrc" />
+                    </v-list-item-avatar>
+                  </div>
 
                   <v-list-item-content>
                     <v-list-item-title class="title">
@@ -42,12 +49,19 @@
                     </v-list-item-title>
 
                     <v-list-item-title>
-                      {{ room.host.sex }}
+                      {{ $t(`gender.${room.host.sex}`) }}
                     </v-list-item-title>
 
-                    <v-list-item-title>
-                      {{ host.age }}歳
-                    </v-list-item-title>
+                    <div v-show="room.host.date_of_birth">
+                      <v-list-item-title>
+                        {{ host.age }}歳
+                      </v-list-item-title>
+                    </div>
+                    <div v-show="!room.host.date_of_birth">
+                      <v-list-item-title>
+                        {{ $t('Unregistered') }}
+                      </v-list-item-title>
+                    </div>
                   </v-list-item-content>
                 </v-list-item>
               </v-container>
@@ -64,10 +78,10 @@
             >
               <v-container>
                 <v-card-title>
-                  Ranked Stats
+                  {{ $t('title.current_ranked_stats') }}
                 </v-card-title>
 
-                <v-divider></v-divider>
+                <v-divider />
 
                 <v-list-item>
                   <template v-if="loading">
@@ -123,7 +137,10 @@
         lg="6"
         xl="6"
       >
-        <v-card min-height="200">
+        <v-card
+          :id="'room' + room.id"
+          min-height="200"
+        >
           <v-list-item>
             <div v-show="isRoomClosing(room.application_deadline)">
               <v-overlay
@@ -131,7 +148,7 @@
                 opacity="0.9"
               >
                 <v-card-text class="font-weight-bold">
-                  募集を締め切りました
+                  {{ $t('message.now_closed') }}
                 </v-card-text>
               </v-overlay>
             </div>
@@ -150,29 +167,29 @@
                 {{ room.title }}
               </v-card-title>
 
-              <v-divider></v-divider>
+              <v-divider />
 
               <v-card-text>
-                プラットフォーム：{{ room.platform }}
+                {{ $t('room.platform') }}：{{ room.platform }}
               </v-card-text>
               <v-card-text>
-                ゲームモード：{{ room.game_mode }}
+                {{ $t('room.game_mode') }}：{{ room.game_mode }}
               </v-card-text>
               <v-card-text>
-                ランク帯：{{ room.rank_tier }}
+                {{ $t('room.rank_tier') }}：{{ room.rank_tier }}
               </v-card-text>
               <v-card-text>
-                募集期間：{{ timeToDeadline }}
+                {{ $t('room.application_deadline') }}：{{ timeToDeadline }}
               </v-card-text>
 
               <v-card-actions>
                 <v-btn
                   color="success"
                   class="ml-auto"
-                  @click.once="request()"
                   :disabled="invalid"
+                  @click.once="request()"
                 >
-                  参加リクエスト
+                  {{ $t('btn.invitation_request') }}
                 </v-btn>
               </v-card-actions>
             </v-container>

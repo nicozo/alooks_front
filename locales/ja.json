@@ -1,4 +1,5 @@
 {
+  "Unregistered": "未登録",
   "pages": {
     "register": "会員登録（無料）",
     "login": "ログイン",
@@ -19,5 +20,35 @@
     "Forbidden": "アクセスが拒否されました",
     "Not Found": "ページが見つかりません",
     "Network Error": "ネットワークエラーが発生しました"
+  },
+  "user": {
+    "name": "ユーザー名",
+    "self_introduction": "自己紹介",
+    "date_of_birth": "生年月日",
+    "platform": "プラットフォーム",
+    "sex": "性別",
+    "game_id": "ゲームID"
+  },
+  "room": {
+    "title": "タイトル",
+    "platform": "プラットフォーム",
+    "game_mode": "ゲームモード",
+    "rank_tier": "ランク帯",
+    "recruitment_number": "募集人数",
+    "application_deadline": "募集期間"
+  },
+  "btn": {
+    "invitation_request": "参加リクエスト"
+  },
+  "gender": {
+    "male": "男性",
+    "female": "女性"
+  },
+  "message": {
+    "now_closed": "募集を締め切りました"
+  },
+  "title": {
+    "host_profile": "募集主",
+    "current_ranked_stats": "ランク進行度"
   }
 }
