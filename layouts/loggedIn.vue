@@ -45,8 +45,8 @@
         </v-list-item>
 
         <v-divider />
-
       </v-container>
+
       <v-list
         dense
         nav
