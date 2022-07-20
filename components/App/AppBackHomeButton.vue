@@ -7,6 +7,6 @@
     <v-icon>
       mdi-chevron-double-left
     </v-icon>
-    トップページへ戻る
+    {{ $t('btn.to_top_page') }}
   </v-btn>
 </template>

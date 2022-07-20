@@ -43,7 +43,8 @@
     "register": "新規登録",
     "password_forget": "パスワードをお忘れですか？",
     "do_not_have_account": "アカウントお持ちでないですか？",
-    "to_rooms_page": "スクワッドを探す"
+    "to_rooms_page": "スクワッドを探す",
+    "to_top_page": "トップページへ戻る"
   },
   "gender": {
     "male": "男性",
