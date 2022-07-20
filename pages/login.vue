@@ -36,7 +36,7 @@
                     color="primary"
                     :disabled="invalid"
                   >
-                    ログインする
+                    {{ $t('btn.login') }}
                   </v-btn>
                 </v-col>
               </v-row>
@@ -58,7 +58,7 @@
           to="/register"
           class="text-decoration-none"
         >
-          アカウントお持ちでないですか？
+          {{ $t('btn.do_not_have_account') }}
         </NuxtLink>
       </v-col>
       <v-col
@@ -69,7 +69,7 @@
           to="#"
           class="text-decoration-none"
         >
-          パスワードをお忘れですか？
+          {{ $t('btn.password_forget') }}
         </NuxtLink>
       </v-col>
     </v-row>

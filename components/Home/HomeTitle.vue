@@ -20,7 +20,7 @@
           class="pa-4"
           to="/rooms"
         >
-          スクワッドを探す
+          {{ $t('btn.to_rooms_page') }}
         </v-btn>
       </div>
     </v-col>
@@ -49,7 +49,8 @@ export default {
   name: 'HomeTitle',
   props: {
     imgHeight: {
-      type: Number
+      type: Number,
+      default: 0
     }
   },
   data ({ $config: { appName } }) {
