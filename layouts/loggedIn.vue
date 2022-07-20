@@ -69,6 +69,7 @@
         <v-list-item>
           <v-list-item-content>
             <v-btn
+              nuxt
               color="red"
               to="/logout"
             >

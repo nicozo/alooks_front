@@ -18,6 +18,7 @@
         <v-btn
           color="success"
           class="pa-4"
+          nuxt
           to="/rooms"
         >
           {{ $t('btn.to_rooms_page') }}

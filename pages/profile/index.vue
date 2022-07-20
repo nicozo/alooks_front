@@ -40,6 +40,7 @@
 
         <v-col cols="12" align="end">
           <v-btn
+            nuxt
             color="success"
             to="/profile/edit"
           >

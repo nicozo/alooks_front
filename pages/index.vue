@@ -26,6 +26,7 @@
         <v-list-item>
           <v-list-item-content>
             <v-btn
+              nuxt
               color="success"
               to="/login"
             >
@@ -36,6 +37,7 @@
         <v-list-item>
           <v-list-item-content>
             <v-btn
+              nuxt
               color="primary"
               to="/register"
             >
