@@ -12,7 +12,7 @@
                 <v-col>
                   <v-text-field
                     id="search-keyword"
-                    v-model="keyword"
+                    v-model="search.keyword"
                     hide-details
                     rounded
                     outlined
@@ -26,7 +26,7 @@
 
               <v-radio-group
                 id="search-platform"
-                v-model="platform"
+                v-model="search.platform"
                 hide-details
                 class="mt-2"
                 dense
@@ -41,7 +41,7 @@
               </v-radio-group>
               <v-radio-group
                 id="search-game-mode"
-                v-model="game_mode"
+                v-model="search.game_mode"
                 hide-details
                 class="mt-2"
                 dense
@@ -56,7 +56,7 @@
               </v-radio-group>
               <v-radio-group
                 id="search-rank_tier"
-                v-model="rank_tier"
+                v-model="search.rank_tier"
                 hide-details
                 class="mt-2"
                 dense
@@ -69,6 +69,11 @@
                   :value="rank_tier"
                 />
               </v-radio-group>
+
+              <v-checkbox
+                v-model="search.opening"
+                label="募集中のみ表示"
+              />
             </v-container>
           </form>
         </v-card>
@@ -134,10 +139,13 @@ export default {
       length: 0,
       pageSize: 10,
       displayRooms: [],
-      keyword: '',
-      platform: '',
-      game_mode: '',
-      rank_tier: '',
+      search: {
+        keyword: '',
+        platform: '',
+        game_mode: '',
+        rank_tier: '',
+        opening: ''
+      },
       platforms: [
         'PlayStation',
         'Xbox',
@@ -168,13 +176,17 @@ export default {
 
       for (const i in this.rooms) {
         const room = this.rooms[i]
-        if (room.title.includes(this.keyword)) {
-          if (room.platform.includes(this.platform)) {
-            if (room.game_mode.includes(this.game_mode)) {
-              if (room.rank_tier.includes(this.rank_tier)) {
-                rooms.push(room)
-              }
+        if (room.title.includes(this.search.keyword) &&
+            room.platform.includes(this.search.platform) &&
+            room.game_mode.includes(this.search.game_mode) &&
+            room.rank_tier.includes(this.search.rank_tier)
+        ) {
+          if (this.search.opening && this.isOpening(room.application_deadline)) {
+            if (this.isOpening(room.application_deadline)) {
+              rooms.push(room)
             }
+          } else {
+            rooms.push(room)
           }
         }
       }
@@ -184,7 +196,6 @@ export default {
   mounted () {
     this.length = Math.ceil(this.rooms.length / this.pageSize)
     this.displayRooms = this.rooms.slice(0, this.pageSize)
-    this.test()
   },
   methods: {
     pageChange (pageNumber) {
@@ -194,17 +205,11 @@ export default {
     returnTop () {
       window.scroll({ top: 0, behavior: 'smooth' })
     },
-    test () {
-      const filter = {
-        keyword: '楽',
-        platform: 'Xbox'
-      }
-
-      const rooms = this.rooms.filter(room =>
-        room.title.includes(filter.keyword) &&
-        room.platform === filter.platform
-      )
-      console.log(rooms)
+    isOpening (roomDeadline) {
+      const now = new Date()
+      const deadline = this.$dayjs(roomDeadline).$d
+      console.log(now < deadline)
+      return now < deadline
     }
   }
 }
