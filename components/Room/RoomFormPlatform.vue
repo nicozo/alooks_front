@@ -30,8 +30,7 @@ export default {
       platforms: [
         'PlayStation',
         'Xbox',
-        'PC',
-        'Switch'
+        'PC'
       ]
     }
   }

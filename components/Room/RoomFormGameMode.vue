@@ -29,10 +29,10 @@ export default {
   data () {
     return {
       gameModes: [
-        'ランク',
         'カジュアル',
+        'ランク',
         'アリーナ',
-        'コントロール'
+        'イベント'
       ]
     }
   }
