@@ -137,7 +137,7 @@ export default {
     return {
       page: 1,
       length: 0,
-      pageSize: 10,
+      pageSize: 12,
       displayRooms: [],
       search: {
         keyword: '',
@@ -181,7 +181,7 @@ export default {
             room.game_mode.includes(this.search.game_mode) &&
             room.rank_tier.includes(this.search.rank_tier)
         ) {
-          if (this.search.opening && this.isOpening(room.application_deadline)) {
+          if (this.search.opening) {
             if (this.isOpening(room.application_deadline)) {
               rooms.push(room)
             }
@@ -208,7 +208,6 @@ export default {
     isOpening (roomDeadline) {
       const now = new Date()
       const deadline = this.$dayjs(roomDeadline).$d
-      console.log(now < deadline)
       return now < deadline
     }
   }
