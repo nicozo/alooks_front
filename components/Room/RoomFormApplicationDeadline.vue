@@ -23,7 +23,8 @@ export default {
   name: 'RoomFormApplicationDeadline',
   props: {
     applicationDeadline: {
-      type: Number
+      type: Number,
+      default: 0
     }
   },
   data () {
