@@ -82,7 +82,7 @@
 
     <v-row>
       <v-col
-        v-for="(room, i) in filteredRooms"
+        v-for="(room, i) in displayRooms"
         :key="i"
         cols="12"
         sm="6"
@@ -115,8 +115,8 @@
       <v-col>
         <v-pagination
           v-model="page"
-          :length="length"
-          @input="pageChange"
+          :length="pageLength"
+          @input="setPageNumber"
         />
       </v-col>
     </v-row>
@@ -136,9 +136,8 @@ export default {
   data () {
     return {
       page: 1,
-      length: 0,
       pageSize: 12,
-      displayRooms: [],
+      pageNumber: 0,
       search: {
         keyword: '',
         platform: '',
@@ -191,16 +190,18 @@ export default {
         }
       }
       return rooms
+    },
+    pageLength () {
+      return Math.ceil(this.filteredRooms.length / this.pageSize)
+    },
+    displayRooms () {
+      this.returnTop()
+      return this.pageNumber !== 0 ? this.filteredRooms.slice(this.pageSize * (this.pageNumber - 1), this.pageSize * this.pageNumber) : this.filteredRooms.slice(0, this.pageSize)
     }
   },
-  mounted () {
-    this.length = Math.ceil(this.rooms.length / this.pageSize)
-    this.displayRooms = this.rooms.slice(0, this.pageSize)
-  },
   methods: {
-    pageChange (pageNumber) {
-      this.displayRooms = this.rooms.slice(this.pageSize * (pageNumber - 1), this.pageSize * pageNumber)
-      this.returnTop()
+    setPageNumber (number) {
+      this.pageNumber = number
     },
     returnTop () {
       window.scroll({ top: 0, behavior: 'smooth' })
