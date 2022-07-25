@@ -8,67 +8,13 @@
             @submit.prevent
           >
             <v-container>
-              <v-row dense>
-                <v-col>
-                  <v-text-field
-                    id="search-keyword"
-                    v-model="search.keyword"
-                    hide-details
-                    rounded
-                    outlined
-                    dense
-                    placeholder="スクワッドを検索"
-                    prepend-inner-icon="mdi-magnify"
-                    type="search"
-                  />
-                </v-col>
-              </v-row>
+              <room-form-search-keyword :keyword.sync="search.keyword" />
 
-              <v-radio-group
-                id="search-platform"
-                v-model="search.platform"
-                hide-details
-                class="mt-2"
-                dense
-                row
-              >
-                <v-radio
-                  v-for="platform in platforms"
-                  :key="platform"
-                  :label="platform"
-                  :value="platform"
-                />
-              </v-radio-group>
-              <v-radio-group
-                id="search-game-mode"
-                v-model="search.game_mode"
-                hide-details
-                class="mt-2"
-                dense
-                row
-              >
-                <v-radio
-                  v-for="game_mode in gameModes"
-                  :key="game_mode"
-                  :label="game_mode"
-                  :value="game_mode"
-                />
-              </v-radio-group>
-              <v-radio-group
-                id="search-rank_tier"
-                v-model="search.rank_tier"
-                hide-details
-                class="mt-2"
-                dense
-                row
-              >
-                <v-radio
-                  v-for="rank_tier in rankTiers"
-                  :key="rank_tier"
-                  :label="rank_tier"
-                  :value="rank_tier"
-                />
-              </v-radio-group>
+              <room-form-search-platform :platform.sync="search.platform" />
+
+              <room-form-search-game-mode :game-mode.sync="search.game_mode" />
+
+              <room-form-search-rank-tier :rank-tier.sync="search.rank_tier" />
 
               <v-checkbox
                 v-model="search.opening"
@@ -144,29 +90,7 @@ export default {
         game_mode: '',
         rank_tier: '',
         opening: ''
-      },
-      platforms: [
-        'PlayStation',
-        'Xbox',
-        'PC'
-      ],
-      rankTiers: [
-        'なし（カジュアル）',
-        'ルーキー',
-        'ブロンズ',
-        'シルバー',
-        'ゴールド',
-        'プラチナ',
-        'ダイアモンド',
-        'マスター',
-        'プレデター'
-      ],
-      gameModes: [
-        'カジュアル',
-        'ランク',
-        'アリーナ',
-        'イベント'
-      ]
+      }
     }
   },
   computed: {
