@@ -6,13 +6,15 @@
     <template v-if="hightestKillLegendStats">
       <v-img
         :src="hightestKillLegendStats.ImgAssets.banner"
-        max-height="400"
+        :max-height="maxHeight"
+        :min-height="minHeight"
       />
     </template>
     <template v-else>
       <v-img
         :src="commonImageSrc"
-        max-height="400"
+        :max-height="maxHeight"
+        :min-height="minHeight"
       />
     </template>
   </v-card>
@@ -29,7 +31,9 @@ export default {
   },
   data () {
     return {
-      commonImageSrc: require('@/static/CommonImage.jpg')
+      commonImageSrc: require('@/static/CommonImage.jpg'),
+      maxHeight: 400,
+      minHeight: 180
     }
   }
 }

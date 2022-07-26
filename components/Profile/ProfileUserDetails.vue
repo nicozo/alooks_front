@@ -5,36 +5,35 @@
   >
     <v-list-item>
       <div v-if="authUser.avatar_url">
-        <v-list-item-avatar size="100">
+        <v-list-item-avatar :size="breakPointAvatarSize">
           <v-img :src="authUser.avatar_url" />
         </v-list-item-avatar>
       </div>
       <div v-else>
-        <v-list-item-avatar size="100">
+        <v-list-item-avatar :size="breakPointAvatarSize">
           <v-img :src="defaultAvatarSrc" />
         </v-list-item-avatar>
       </div>
 
       <v-list-item-content>
-        <v-list-item-title class="text-h4 text-left">
+        <v-list-item-title class="text-h4 text-left mb-3">
           {{ authUser.name }}
         </v-list-item-title>
-        <v-list-item-subtitle class="text-left introduction">
+
+        <v-list-item-title class="text-left introduction mb-3">
           {{ authUser.self_introduction }}
-        </v-list-item-subtitle>
+        </v-list-item-title>
+
         <div v-show="userAge">
-          <v-list-item-subtitle class="text-left">
-            {{ userAge }}歳
-          </v-list-item-subtitle>
+          <v-list-item-title class="text-left">
+            {{ userAge }}歳 {{ $t(`gender.${authUser.sex}`) }}
+          </v-list-item-title>
         </div>
         <div v-show="!userAge">
-          <v-list-item-subtitle class="text-left">
-            {{ $t('Unregistered') }}
-          </v-list-item-subtitle>
+          <v-list-item-title class="text-left">
+            年齢{{ $t('Unregistered') }} {{ $t(`gender.${authUser.sex}`) }}
+          </v-list-item-title>
         </div>
-        <v-list-item-subtitle class="text-left">
-          {{ $t(`gender.${authUser.sex}`) }}
-        </v-list-item-subtitle>
       </v-list-item-content>
     </v-list-item>
   </v-card>
@@ -72,6 +71,11 @@ export default {
     userAge: {
       type: Number,
       default: 0
+    }
+  },
+  computed: {
+    breakPointAvatarSize () {
+      return this.$vuetify.breakpoint.xs ? 120 : 170
     }
   },
   data () {
