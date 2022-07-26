@@ -57,15 +57,26 @@
     "no_data": "No Data"
   },
   "title": {
-    "host_profile": "募集主",
-    "current_player_stats": "プレイヤー戦績"
+    "host_profile": "募集主"
   },
   "profile": {
+    "legend": {
+      "title": {
+        "main_legend": "Your Main Legend"
+      }
+    },
     "ranked_stats": {
       "title": {
         "current_ranked_stats": "Ranked Stats",
         "battle_royale": "BR",
         "arena": "Arena"
+      }
+    },
+    "total_stats": {
+      "title": {
+        "current_player_stats": "Player Stats",
+        "total_stats": "Total Stats",
+        "legend_stats": "Main Legend Stats"
       }
     }
   }

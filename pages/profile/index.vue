@@ -11,13 +11,15 @@
             flat
             class="text-center"
           >
-            <v-progress-circular
-              indeterminate
-              color="primary"
-            />
-            <p>
-              Now Loading Your Apex Legends Status...
-            </p>
+            <v-container>
+              <v-progress-circular
+                indeterminate
+                color="primary"
+              />
+              <p>
+                {{ $t('message.loading') }}
+              </p>
+            </v-container>
           </v-card>
         </v-col>
       </v-row>
@@ -25,87 +27,140 @@
 
     <template v-else-if="!loading">
       <v-row
-        id="profile"
         align="center"
         justify="center"
+        class="mb-4"
       >
-        <!-- バナーブロック -->
         <v-col
           class="pa-0"
           align="center"
           cols="12"
         >
-          <profile-banner :hightest-kill-legend-stats="hightestKillLegendStats" />
-        </v-col>
-
-        <v-col cols="12" align="end">
-          <v-btn
-            nuxt
-            color="success"
-            to="/profile/edit"
+          <v-card
+            id="profile-banner"
+            flat
           >
-            プロフィールを編集
-          </v-btn>
-        </v-col>
-
-        <!-- ログインユーザーブロック -->
-        <v-col
-          align="center"
-          cols="12"
-          sm="8"
-          md="8"
-          lg="8"
-        >
-          <profile-user-details
-            :auth-user="authUser"
-            :user-age="user.age"
-          />
-        </v-col>
-
-        <!-- Apex Legendsランクブロック -->
-        <v-col
-          align="center"
-          cols="12"
-          sm="4"
-          md="4"
-          lg="4"
-        >
-          <v-card id="rank-stats">
-            <div class="text-h6 pa-3 text-center">
-              Rank Stats
-            </div>
-
-            <div v-if="rankedStats">
-              <profile-rank-stats :ranked-stats="rankedStats" />
-            </div>
-            <div v-else>
-              <p>NO DATA</p>
-            </div>
-          </v-card>
-        </v-col>
-
-        <!-- Apex Legends戦績ブロック -->
-        <v-col
-          align="center"
-          cols="12"
-        >
-          <v-card id="player-stats">
-            <div class="text-h6 pa-3 text-center">
-              Player Stats
-            </div>
-
-            <div v-if="totalStats">
-              <profile-total-stats
-                :total-stats="totalStats"
-                :hightest-kill-legend-stats="hightestKillLegendStats"
+            <template v-if="hightestKillLegendStats">
+              <v-img
+                :src="hightestKillLegendStats.ImgAssets.banner"
+                :max-height="maxHeight"
+                :min-height="minHeight"
               />
-            </div>
-            <div v-else>
-              <p>NO DATA</p>
-            </div>
+            </template>
+            <template v-else>
+              <v-img
+                :src="commonImageSrc"
+                :max-height="maxHeight"
+                :min-height="minHeight"
+              />
+            </template>
           </v-card>
         </v-col>
       </v-row>
+
+      <v-container>
+        <v-row
+          align="center"
+          justify="center"
+        >
+          <!-- ログインユーザーブロック -->
+          <v-col
+            align="center"
+            cols="12"
+            sm="8"
+            md="8"
+            lg="8"
+          >
+            <profile-user-details
+              :auth-user="authUser"
+              :user-age="user.age"
+            />
+          </v-col>
+
+          <!-- Apex Legendsランクブロック -->
+          <v-col
+            align="center"
+            cols="12"
+            sm="4"
+            md="4"
+            lg="4"
+          >
+            <v-card id="rank-stats">
+              <v-container>
+                <div class="text-h6 pa-3 text-center">
+                  {{ $t('profile.ranked_stats.title.current_ranked_stats') }}
+                </div>
+
+                <v-divider />
+
+                <div v-if="isRankedStatsExist">
+                  <profile-ranked-stats :ranked-stats="rankedStats" />
+                </div>
+                <div v-else>
+                  <div>
+                    {{ $t('message.no_data') }}
+                  </div>
+                </div>
+              </v-container>
+            </v-card>
+          </v-col>
+
+          <!-- Apex Legends戦績ブロック -->
+          <v-col
+            align="center"
+            cols="12"
+          >
+            <v-card id="player-stats">
+              <v-container>
+                <div class="text-h6 pa-3 text-center">
+                  {{ $t('profile.total_stats.title.current_player_stats') }}
+                </div>
+
+                <v-divider />
+
+                <div v-if="totalStats">
+                  <profile-total-stats
+                    :total-stats="totalStats"
+                    :hightest-kill-legend-stats="hightestKillLegendStats"
+                  />
+                </div>
+                <div v-else>
+                  <div>
+                    {{ $t('message.no_data') }}
+                  </div>
+                </div>
+              </v-container>
+            </v-card>
+          </v-col>
+
+          <v-tooltip
+            left
+            color="primary"
+          >
+            <template #activator="{ on, attrs }">
+              <v-fab-transition>
+                <v-btn
+                  color="primary"
+                  dark
+                  fixed
+                  bottom
+                  right
+                  fab
+                  style="z-index: 10;"
+                  nuxt
+                  to="/profile/edit"
+                  x-large
+                  v-bind="attrs"
+                  v-on="on"
+                >
+                  <v-icon>mdi-pencil</v-icon>
+                </v-btn>
+              </v-fab-transition>
+            </template>
+            <span>{{ $t('pages.profile-edit') }}</span>
+          </v-tooltip>
+        </v-row>
+      </v-container>
     </template>
   </div>
 </template>
@@ -123,12 +178,18 @@ export default {
       hightestKillLegendStats: '',
       rankedStats: [],
       totalStats: '',
-      loading: true
+      loading: true,
+      commonImageSrc: require('@/static/CommonImage.jpg'),
+      maxHeight: 400,
+      minHeight: 180
     }
   },
   computed: {
     authUser () {
       return this.$auth.user
+    },
+    isRankedStatsExist () {
+      return this.rankedStats.length !== 0
     }
   },
   created () {
