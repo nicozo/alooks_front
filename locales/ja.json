@@ -44,14 +44,16 @@
     "password_forget": "パスワードをお忘れですか？",
     "do_not_have_account": "アカウントお持ちでないですか？",
     "to_rooms_page": "スクワッドを探す",
-    "to_top_page": "トップページへ戻る"
+    "to_top_page": "トップページへ戻る",
+    "back_to_rooms_page": "スクワッド一覧へ戻る"
   },
   "gender": {
     "male": "男性",
     "female": "女性"
   },
   "message": {
-    "now_closed": "募集を締め切りました"
+    "now_closed": "募集を締め切りました",
+    "loading": "Now Loading Your Apex Legends Stats..."
   },
   "title": {
     "host_profile": "募集主",

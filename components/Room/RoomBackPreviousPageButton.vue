@@ -7,7 +7,7 @@
     <v-icon>
       mdi-chevron-double-left
     </v-icon>
-    スクワッド一覧へ戻る
+    {{ $t('btn.back_to_rooms_page') }}
   </v-btn>
 </template>
 

@@ -43,7 +43,7 @@
         left
         color="primary"
       >
-        <template v-slot:activator="{ on, attrs }">
+        <template #activator="{ on, attrs }">
           <v-fab-transition>
             <v-btn
               color="primary"
@@ -63,7 +63,7 @@
             </v-btn>
           </v-fab-transition>
         </template>
-        <span>スクワッド募集</span>
+        <span>{{ $t('pages.rooms-create') }}</span>
       </v-tooltip>
     </v-row>
 
