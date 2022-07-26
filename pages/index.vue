@@ -92,7 +92,7 @@
             </v-card>
           </v-col>
           <v-col cols="12">
-            <div :is="`home-${item.title}`"/>
+            <div :is="`home-${item.title}`" />
           </v-col>
         </v-row>
       </v-container>

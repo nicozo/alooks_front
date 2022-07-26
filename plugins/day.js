@@ -1,5 +1,5 @@
 import dayjs from 'dayjs'
 
 export default ({ app }, inject) => {
-    inject('dayjs', ((string) => dayjs(string)))
+  inject('dayjs', string => dayjs(string))
 }

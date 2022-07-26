@@ -12,23 +12,22 @@
       <validation-observer v-slot="{ invalid }">
         <form @submit.prevent="updateProfile">
           <v-container fluid>
-
-          <v-row>
-            <v-col>
-              <v-layout justify-center>
-                <div v-if="user.avatar_url">
-                  <v-avatar size="200">
-                    <img :src="user.avatar_url" alt="プロフィール画像です">
-                  </v-avatar>
-                </div>
-                <div v-else>
-                  <v-avatar size="200">
-                    <img :src="defaultAvatarSrc" alt="プロフィール画像です">
-                  </v-avatar>
-                </div>
-              </v-layout>
-            </v-col>
-          </v-row>
+            <v-row>
+              <v-col>
+                <v-layout justify-center>
+                  <div v-if="user.avatar_url">
+                    <v-avatar size="200">
+                      <img :src="user.avatar_url" alt="プロフィール画像です">
+                    </v-avatar>
+                  </div>
+                  <div v-else>
+                    <v-avatar size="200">
+                      <img :src="defaultAvatarSrc" alt="プロフィール画像です">
+                    </v-avatar>
+                  </div>
+                </v-layout>
+              </v-col>
+            </v-row>
 
             <v-row>
               <v-col>

@@ -33,7 +33,7 @@
         {{ room.title }}
       </v-card-title>
 
-      <v-divider></v-divider>
+      <v-divider />
 
       <v-layout justify-center>
         <template v-if="room.host.avatar_url">
@@ -65,8 +65,8 @@
         <v-btn
           color="success"
           class="ml-auto"
-          @click.once="request()"
           :disabled="invalid"
+          @click.once="request()"
         >
           {{ $t('btn.invitation_request') }}
         </v-btn>

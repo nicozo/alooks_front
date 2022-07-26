@@ -14,7 +14,6 @@
         <!-- <v-subheader class="text-center">
           {{ $t('profile.legend.title.main_legend') }}
         </v-subheader> -->
-
         <!-- <div class="text-h6 pt-5 text-center">
           {{ $t('profile.legend.title.main_legend') }}
         </div> -->

@@ -9,22 +9,22 @@
         offset-y
         min-width="auto"
       >
-        <template v-slot:activator="{ on, attrs }">
+        <template #activator="{ on, attrs }">
           <validation-provider
             v-slot="{ errors }"
             name="生年月日"
             rules="required"
           >
-          <v-text-field
-            id="date_of_birth"
-            :value="dateOfBirth"
-            label="生年月日"
-            :error-messages="errors"
-            outlined
-            readonly
-            v-bind="attrs"
-            v-on="on"
-          />
+            <v-text-field
+              id="date_of_birth"
+              :value="dateOfBirth"
+              label="生年月日"
+              :error-messages="errors"
+              outlined
+              readonly
+              v-bind="attrs"
+              v-on="on"
+            />
           </validation-provider>
         </template>
         <v-date-picker
