@@ -1,7 +1,7 @@
 <template>
   <v-card
-    flat
     id="user-profile"
+    flat
   >
     <v-list-item>
       <div v-if="authUser.avatar_url">
@@ -73,14 +73,14 @@ export default {
       default: 0
     }
   },
-  computed: {
-    breakPointAvatarSize () {
-      return this.$vuetify.breakpoint.xs ? 120 : 170
-    }
-  },
   data () {
     return {
       defaultAvatarSrc: require('@/static/DefaultAvatar.png')
+    }
+  },
+  computed: {
+    breakPointAvatarSize () {
+      return this.$vuetify.breakpoint.xs ? 120 : 170
     }
   }
 }

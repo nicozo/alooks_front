@@ -1,7 +1,7 @@
 <template>
   <v-card
-    flat
     id="profile-banner"
+    flat
   >
     <template v-if="hightestKillLegendStats">
       <v-img
