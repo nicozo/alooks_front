@@ -53,10 +53,20 @@
   },
   "message": {
     "now_closed": "募集を締め切りました",
-    "loading": "Now Loading Your Apex Legends Stats..."
+    "loading": "Now Loading Your Apex Legends Stats...",
+    "no_data": "No Data"
   },
   "title": {
     "host_profile": "募集主",
-    "current_ranked_stats": "ランク進行度"
+    "current_player_stats": "プレイヤー戦績"
+  },
+  "profile": {
+    "ranked_stats": {
+      "title": {
+        "current_ranked_stats": "Ranked Stats",
+        "battle_royale": "BR",
+        "arena": "Arena"
+      }
+    }
   }
 }
