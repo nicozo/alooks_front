@@ -39,22 +39,32 @@
         <RoomItem :room="room" />
       </v-col>
 
-      <v-fab-transition>
-        <v-btn
-          color="primary"
-          dark
-          fixed
-          bottom
-          right
-          fab
-          style="z-index: 10;"
-          nuxt
-          to="/rooms/create"
-          x-large
-        >
-          <v-icon>mdi-plus</v-icon>
-        </v-btn>
-      </v-fab-transition>
+      <v-tooltip
+        left
+        color="primary"
+      >
+        <template v-slot:activator="{ on, attrs }">
+          <v-fab-transition>
+            <v-btn
+              color="primary"
+              dark
+              fixed
+              bottom
+              right
+              fab
+              style="z-index: 10;"
+              nuxt
+              to="/rooms/create"
+              x-large
+              v-bind="attrs"
+              v-on="on"
+            >
+              <v-icon>mdi-plus</v-icon>
+            </v-btn>
+          </v-fab-transition>
+        </template>
+        <span>スクワッド募集</span>
+      </v-tooltip>
     </v-row>
 
     <v-row>
