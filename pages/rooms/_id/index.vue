@@ -78,47 +78,28 @@
 
                 <v-divider />
 
-                <v-list-item>
-                  <template v-if="loading">
-                    <v-row
-                      justify="center"
-                      align-content="center"
-                    >
-                      <v-col>
-                        getting stats...
-                      </v-col>
-                    </v-row>
+                <template v-if="loading">
+                  <v-row
+                    justify="center"
+                    align-content="center"
+                  >
+                    <v-col>
+                      getting stats...
+                    </v-col>
+                  </v-row>
+                </template>
+
+                <template v-else>
+                  <template v-if="isRankedStatsExist">
+                    <profile-ranked-stats :ranked-stats="rankedStats" />
                   </template>
 
                   <template v-else>
-                    <template v-if="isRankedStatsExist">
-                      <template v-for="(data, i) in rankedStats">
-                        <v-list-item-content :key="i">
-                          <v-list-item-title v-show="isThisArenaRankStats(data)" class="text-center">
-                            {{ $t('profile.ranked_stats.title.arena') }}
-                          </v-list-item-title>
-                          <v-list-item-title v-show="isThisArenaRankStats(data)" class="text-center">
-                            {{ $t('profile.ranked_stats.title.battle_royale') }}
-                          </v-list-item-title>
-
-                          <v-list-item-icon>
-                            <v-img :src="data.rankImg" />
-                          </v-list-item-icon>
-
-                          <v-list-item-subtitle class="text-center">
-                            {{ data.rankScore }}RP
-                          </v-list-item-subtitle>
-                        </v-list-item-content>
-                      </template>
-                    </template>
-
-                    <template v-else>
-                      <div>
-                        {{ $t('message.no_data') }}
-                      </div>
-                    </template>
+                    <div>
+                      {{ $t('message.no_data') }}
+                    </div>
                   </template>
-                </v-list-item>
+                </template>
               </v-container>
             </v-card>
           </v-col>
