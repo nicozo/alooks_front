@@ -3,6 +3,7 @@
     <app-back-home-button />
 
     <v-row
+      id="register-form"
       align="center"
       justify="center"
     >
@@ -39,7 +40,7 @@
                     color="primary"
                     :disabled="invalid"
                   >
-                    登録する
+                    {{ $t('btn.register') }}
                   </v-btn>
                 </v-col>
               </v-row>
@@ -61,7 +62,7 @@
           to="/login"
           class="text-decoration-none"
         >
-          アカウントをお持ちですか？
+          {{ $t('btn.do_not_have_account') }}
         </NuxtLink>
       </v-col>
     </v-row>
@@ -87,9 +88,31 @@ export default {
     async register () {
       if (!this.invalid) {
         await this.$axios.$post(
-          'api/v1/registers', { user: this.user }
+          'api/v1/registers',
+          { user: this.user }
         )
+          .then(res => this.registerSuccessful(res))
+          .catch(e => this.registerFailure(e))
       }
+    },
+    registerSuccessful (res) {
+      console.log(res)
+      this.$router.push('/login')
+
+      this.setToaster()
+    },
+    registerFailure ({ response }) {
+      if (response && response.status === 400) {
+        const msg = 'ユーザーを作成できませんでした。既に使用されているメールアドレスです。'
+        return this.$store.dispatch('getToast', { msg })
+      }
+      // TODO エラー処理
+      console.log(response)
+    },
+    setToaster () {
+      const msg = 'ユーザーを作成しました'
+      const color = 'success'
+      return this.$store.dispatch('getToast', { msg, color })
     }
   }
 }

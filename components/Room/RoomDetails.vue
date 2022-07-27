@@ -1,5 +1,8 @@
 <template>
-  <v-card rounded-xl>
+  <v-card
+    :id="'room' + room.id"
+    rounded-xl
+  >
     <v-list
       max-width="900"
       class="mx-auto"
@@ -11,35 +14,47 @@
             {{ room.title }}
           </div>
           <div class="d-flex align-center py-3">
-            <div class="text-subtitle-1 font-weight-bold text-right" style="width: 150px">
-              プラットフォーム：
+            <div
+              class="text-subtitle-1 font-weight-bold text-right"
+              style="width: 150px"
+            >
+              {{ $t('room.platform') }}：
             </div>
             <div>
               {{ room.platform }}
             </div>
           </div>
           <div class="d-flex align-center py-3">
-            <div class="text-subtitle-1 font-weight-bold text-right" style="width: 150px">
-              ゲームモード：
+            <div
+              class="text-subtitle-1 font-weight-bold text-right"
+              style="width: 150px"
+            >
+              {{ $t('room.game_mode') }}：
             </div>
             <div>
               {{ room.game_mode }}
             </div>
           </div>
           <div class="d-flex align-center py-3">
-            <div class="text-subtitle-1 font-weight-bold text-right" style="width: 150px">
-              ランク帯：
+            <div
+              class="text-subtitle-1 font-weight-bold text-right"
+              style="width: 150px"
+            >
+              {{ $t('room.rank_tier') }}：
             </div>
             <div>
               {{ room.rank_tier }}
             </div>
           </div>
           <div class="d-flex align-center py-3">
-            <div class="text-subtitle-1 font-weight-bold text-right" style="width: 150px">
-              募集期間：
+            <div
+              class="text-subtitle-1 font-weight-bold text-right"
+              style="width: 150px"
+            >
+              {{ $t('room.rank_tier') }}：
             </div>
             <div>
-              {{ formattedDate }}
+              {{ timeToDeadline }}
             </div>
           </div>
         </v-list-item-content>
@@ -51,15 +66,13 @@
         class="mx-auto mb-6 pa-6"
         :disabled="invalid"
       >
-        参加リクエスト
+        {{ $t('btn.invitation_request') }}
       </v-btn>
     </v-card-actions>
   </v-card>
 </template>
 
 <script>
-import moment from 'moment'
-
 export default {
   name: 'RoomDetails',
   props: {
@@ -86,7 +99,7 @@ export default {
   },
   data () {
     return {
-      formattedDate: '',
+      timeToDeadline: '',
       invalid: false
     }
   },
@@ -95,14 +108,9 @@ export default {
   },
   methods: {
     changeDateFormat () {
-      const railsDate = this.room.application_deadline
-      const momentDate = moment(railsDate)
-      const momentDateFormatted = momentDate.fromNow()
-      this.formattedDate = this.replaceFormat(momentDateFormatted)
-      // console.log('moment.jsから取得した時刻:', momentDate)
-      // console.log('moment.jsから取得した時刻:', momentDateFormatted)
-      // console.log('文字の変換テスト:', momentDateFormatted.replace('後', 'で締め切り'))
-      // console.log(this.formattedDate)
+      const roomDeadline = this.room.application_deadline
+      const minutesToDeadline = this.$dayjs(roomDeadline).fromNow()
+      this.timeToDeadline = this.replaceFormat(minutesToDeadline)
     },
     replaceFormat (str) {
       // console.log('渡された文字列', str)

@@ -1,11 +1,15 @@
 {
+  "Unregistered": "未登録",
   "pages": {
-    "register": "会員登録（無料）",
+    "register": "ユーザー登録（無料）",
     "login": "ログイン",
     "logout": "ログアウト",
     "rooms": "スクワッド一覧",
     "rooms-create": "スクワッド作成",
-    "invitation-list": "参加リクエスト一覧"
+    "rooms-id": "スクワッド詳細",
+    "invitation-list": "参加リクエスト一覧",
+    "profile": "プロフィール",
+    "profile-edit": "プロフィール編集"
   },
   "items": {
     "about": "アプリについて",
@@ -16,5 +20,64 @@
     "Forbidden": "アクセスが拒否されました",
     "Not Found": "ページが見つかりません",
     "Network Error": "ネットワークエラーが発生しました"
+  },
+  "user": {
+    "name": "ユーザー名",
+    "self_introduction": "自己紹介",
+    "date_of_birth": "生年月日",
+    "platform": "プラットフォーム",
+    "sex": "性別",
+    "game_id": "ゲームID"
+  },
+  "room": {
+    "title": "タイトル",
+    "platform": "プラットフォーム",
+    "game_mode": "ゲームモード",
+    "rank_tier": "ランク帯",
+    "recruitment_number": "募集人数",
+    "application_deadline": "募集期間",
+    "host": {
+      "title": "募集主"
+    }
+  },
+  "btn": {
+    "invitation_request": "参加リクエスト",
+    "login": "ログイン",
+    "register": "新規登録",
+    "password_forget": "パスワードをお忘れですか？",
+    "do_not_have_account": "アカウントお持ちでないですか？",
+    "to_rooms_page": "スクワッドを探す",
+    "to_top_page": "トップページへ戻る",
+    "back_to_rooms_page": "スクワッド一覧へ戻る"
+  },
+  "gender": {
+    "male": "男性",
+    "female": "女性"
+  },
+  "message": {
+    "now_closed": "募集を締め切りました",
+    "loading": "Now Loading Your Apex Legends Stats...",
+    "no_data": "No Data"
+  },
+  "profile": {
+    "legend": {
+      "title": {
+        "main_legend": "Your Main Legend"
+      }
+    },
+    "ranked_stats": {
+      "title": {
+        "current_ranked_stats": "Ranked Stats",
+        "battle_royale": "BR",
+        "arena": "Arena"
+      }
+    },
+    "total_stats": {
+      "title": {
+        "current_player_stats": "Player Stats",
+        "total_stats": "Total Stats",
+        "legend_stats": "Main Legend Stats"
+      }
+    }
   }
 }

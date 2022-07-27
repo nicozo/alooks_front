@@ -5,6 +5,7 @@ z<template>
     rules="required"
   >
     <v-select
+      id="platform"
       :items="platforms"
       label="プラットフォーム"
       :error-messages="errors"
@@ -29,8 +30,7 @@ export default {
       platforms: [
         'PlayStation',
         'Xbox',
-        'PC',
-        'Switch'
+        'PC'
       ]
     }
   }

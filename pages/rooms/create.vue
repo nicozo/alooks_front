@@ -1,6 +1,10 @@
 <template>
   <v-container>
-    <room-back-previous-page-button />
+    <v-row>
+      <v-col>
+        <room-back-previous-page-button />
+      </v-col>
+    </v-row>
 
     <v-row
       align="center"
@@ -73,13 +77,16 @@ export default {
   methods: {
     async recruit () {
       if (!this.invalid) {
-        await this.$axios.$post('api/v1/rooms', { room: this.room })
+        await this.$axios.$post(
+          'api/v1/rooms',
+          { room: this.room, game_id: 'Property_0' }
+        )
           .then(res => this.recruitSuccessful(res))
           .catch(e => this.recruitFailure(e))
       }
     },
     recruitSuccessful (res) {
-      console.log(res)
+      console.log('作成されたroomオブジェクト', res)
       this.$router.push(this.redirectPath)
     },
     recruitFailure ({ response }) {

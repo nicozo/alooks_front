@@ -4,7 +4,10 @@
     :style="{ height: `${imgHeight}vh` }"
     class="mx-10"
   >
-    <v-col cols="12">
+    <v-col
+      id="home-title"
+      cols="12"
+    >
       <div class="d-flex flex-column align-start">
         <h1 class="text-h2 mb-3">
           {{ appName }}
@@ -15,9 +18,10 @@
         <v-btn
           color="success"
           class="pa-4"
+          nuxt
           to="/rooms"
         >
-          スクワッドを探す
+          {{ $t('btn.to_rooms_page') }}
         </v-btn>
       </div>
     </v-col>
@@ -46,7 +50,8 @@ export default {
   name: 'HomeTitle',
   props: {
     imgHeight: {
-      type: Number
+      type: Number,
+      default: 0
     }
   },
   data ({ $config: { appName } }) {

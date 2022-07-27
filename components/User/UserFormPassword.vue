@@ -8,6 +8,7 @@
         vid="password"
       >
         <v-text-field
+          id="password"
           :value="password"
           :append-icon="showPassword ? 'mdi-eye' : 'mdi-eye-off'"
           :type="showPassword ? 'text' : 'password'"

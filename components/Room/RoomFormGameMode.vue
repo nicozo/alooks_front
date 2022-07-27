@@ -5,6 +5,7 @@
     rules="required"
   >
     <v-select
+      id="game_mode"
       :items="gameModes"
       :value="gameMode"
       label="ゲームモード"
@@ -28,10 +29,10 @@ export default {
   data () {
     return {
       gameModes: [
-        'ランク',
         'カジュアル',
+        'ランク',
         'アリーナ',
-        'コントロール'
+        'イベント'
       ]
     }
   }

@@ -1,24 +1,24 @@
 <template>
-  <validation-provider
-    v-slot="{ errors }"
-    name="ランク帯"
-    rules="required"
+  <v-radio-group
+    id="search-rank_tier"
+    hide-details
+    class="mt-2"
+    dense
+    row
+    @change="$emit('update:rankTier', $event)"
   >
-    <v-select
-      id="rank_tier"
-      :items="rankTiers"
-      label="ランク帯"
-      :error-messages="errors"
-      outlined
-      required
-      @input="$emit('update:rankTier', $event)"
+    <v-radio
+      v-for="rank_tier in rankTiers"
+      :key="rank_tier"
+      :label="rank_tier"
+      :value="rank_tier"
     />
-  </validation-provider>
+  </v-radio-group>
 </template>
 
 <script>
 export default {
-  name: 'RoomFormRankTier',
+  name: 'RoomFormSearchRankTier',
   props: {
     rankTier: {
       type: String,

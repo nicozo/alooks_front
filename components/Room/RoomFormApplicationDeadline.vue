@@ -5,6 +5,7 @@
     rules="required"
   >
     <v-select
+      id="application_deadline"
       :items="applicationDeadlines"
       item-text="label"
       item-value="minutes"
@@ -22,7 +23,8 @@ export default {
   name: 'RoomFormApplicationDeadline',
   props: {
     applicationDeadline: {
-      type: Number
+      type: Number,
+      default: 0
     }
   },
   data () {

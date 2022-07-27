@@ -7,6 +7,7 @@
         rules="required|email"
       >
         <v-text-field
+          id="email"
           :value="email"
           label="メールアドレス"
           placeholder="your@example.com"

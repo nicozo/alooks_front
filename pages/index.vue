@@ -3,12 +3,10 @@
     <v-navigation-drawer
       v-model="drawer"
       app
-      temporary
       dark
-      fixed
       right
     >
-      <v-list>
+      <v-container>
         <v-list-item>
           <v-list-item-icon>
             <v-icon>
@@ -26,16 +24,7 @@
         <v-list-item>
           <v-list-item-content>
             <v-btn
-              color="success"
-              to="/login"
-            >
-              {{ $t('pages.login') }}
-            </v-btn>
-          </v-list-item-content>
-        </v-list-item>
-        <v-list-item>
-          <v-list-item-content>
-            <v-btn
+              nuxt
               color="primary"
               to="/register"
             >
@@ -44,18 +33,37 @@
           </v-list-item-content>
         </v-list-item>
 
-        <v-list-item
-          v-for="(item, i) in homeItems"
-          :key="i"
-          link
-        >
-          <v-list-item-content @click="toLink(item.title)">
-            <v-list-item-title>
-              {{ $t(`items.${item.title}`) }}
-            </v-list-item-title>
+        <v-list-item>
+          <v-list-item-content>
+            <v-btn
+              nuxt
+              color="success"
+              to="/login"
+            >
+              {{ $t('pages.login') }}
+            </v-btn>
           </v-list-item-content>
         </v-list-item>
-      </v-list>
+
+        <v-list
+          dense
+          nav
+          flat
+        >
+          <v-list-item
+            v-for="(item, i) in homeItems"
+            :key="i"
+            nuxt
+            @click="toLink(item.title)"
+          >
+            <v-list-item-content>
+              <v-list-item-title>
+                {{ $t(`items.${item.title}`) }}
+              </v-list-item-title>
+            </v-list-item-content>
+          </v-list-item>
+        </v-list>
+      </v-container>
     </v-navigation-drawer>
 
     <home-header
@@ -84,9 +92,7 @@
             </v-card>
           </v-col>
           <v-col cols="12">
-            <div
-              :is="`home-${item.title}`"
-            />
+            <div :is="`home-${item.title}`" />
           </v-col>
         </v-row>
       </v-container>
@@ -124,7 +130,7 @@ export default {
       this.drawer = !this.drawer
     },
     toLink (item) {
-      console.log(item)
+      // console.log(item)
       this.$vuetify.goTo(`#${item}`)
       this.handleToggleDrawer()
     }

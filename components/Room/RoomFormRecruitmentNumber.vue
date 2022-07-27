@@ -5,6 +5,7 @@
     rules="required"
   >
     <v-select
+      id="recruit_number"
       :items="recruitmentNumbers"
       label="募集人数"
       :error-messages="errors"

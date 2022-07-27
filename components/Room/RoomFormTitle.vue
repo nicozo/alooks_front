@@ -5,6 +5,7 @@
     rules="required|max:15"
   >
     <v-text-field
+      id="title"
       :value="title"
       label="募集タイトル"
       placeholder="募集タイトル"

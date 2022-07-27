@@ -1,5 +1,6 @@
 <template>
   <v-app-bar
+    id="logged-in-header"
     app
     flat
     class="px-2"
@@ -20,7 +21,7 @@
 
 <script>
 export default {
-  name: 'HomeHeader',
+  name: 'LoggedInHeader',
   props: {
     drawer: {
       type: Boolean,
