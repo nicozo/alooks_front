@@ -69,7 +69,6 @@
             <v-card
               id="host-rank-stats"
               :loading="loading"
-              min-height="200"
             >
               <v-container>
                 <v-card-title>
@@ -79,14 +78,7 @@
                 <v-divider />
 
                 <template v-if="loading">
-                  <v-row
-                    justify="center"
-                    align-content="center"
-                  >
-                    <v-col>
-                      getting stats...
-                    </v-col>
-                  </v-row>
+                  <app-loading />
                 </template>
 
                 <template v-else>
@@ -115,7 +107,6 @@
       >
         <v-card
           :id="'room' + room.id"
-          min-height="200"
         >
           <v-list-item>
             <div v-show="isRoomClosing(room.application_deadline)">
