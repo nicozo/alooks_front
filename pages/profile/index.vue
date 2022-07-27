@@ -93,14 +93,14 @@
 
                 <v-divider />
 
-                <div v-if="isRankedStatsExist">
+                <template v-if="isRankedStatsExist">
                   <profile-ranked-stats :ranked-stats="rankedStats" />
-                </div>
-                <div v-else>
+                </template>
+                <template v-else>
                   <div>
                     {{ $t('message.no_data') }}
                   </div>
-                </div>
+                </template>
               </v-container>
             </v-card>
           </v-col>
@@ -118,17 +118,17 @@
 
                 <v-divider />
 
-                <div v-if="totalStats">
+                <template v-if="totalStats">
                   <profile-total-stats
                     :total-stats="totalStats"
                     :hightest-kill-legend-stats="hightestKillLegendStats"
                   />
-                </div>
-                <div v-else>
+                </template>
+                <template v-else>
                   <div>
                     {{ $t('message.no_data') }}
                   </div>
-                </div>
+                </template>
               </v-container>
             </v-card>
           </v-col>

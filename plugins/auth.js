@@ -80,8 +80,8 @@ class Authentication {
 
   // ユーザーが存在かつ有効期限内の場合にtrueを返す
   loggedIn () {
-    console.log('isExistUser', this.isExistUser())
-    console.log('isAuthenticated', this.isAuthenticated())
+    // console.log('isExistUser', this.isExistUser())
+    // console.log('isAuthenticated', this.isAuthenticated())
     return this.isExistUser() && this.isAuthenticated()
   }
 }

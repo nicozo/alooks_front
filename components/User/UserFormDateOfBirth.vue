@@ -47,7 +47,8 @@ export default {
   name: 'UserFormDateOfBirth',
   props: {
     dateOfBirth: {
-      type: String
+      type: String,
+      default: ''
     }
   },
   data () {

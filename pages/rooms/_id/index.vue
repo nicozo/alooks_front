@@ -15,14 +15,11 @@
         xl="6"
       >
         <v-row dense>
-          <v-col
-            id="host-profile"
-            cols="12"
-          >
-            <v-card>
+          <v-col cols="12">
+            <v-card id="host-profile">
               <v-container>
                 <v-card-title>
-                  {{ $t('title.host_profile') }}
+                  {{ $t('room.host.title') }}
                 </v-card-title>
 
                 <v-divider />
@@ -68,17 +65,15 @@
             </v-card>
           </v-col>
 
-          <v-col
-            id="host-rank-stats"
-            cols="12"
-          >
+          <v-col cols="12">
             <v-card
+              id="host-rank-stats"
               :loading="loading"
               min-height="200"
             >
               <v-container>
                 <v-card-title>
-                  {{ $t('title.current_ranked_stats') }}
+                  {{ $t('profile.ranked_stats.title.current_ranked_stats') }}
                 </v-card-title>
 
                 <v-divider />
@@ -96,14 +91,14 @@
                   </template>
 
                   <template v-else>
-                    <template v-if="rankedStats">
+                    <template v-if="isRankedStatsExist">
                       <template v-for="(data, i) in rankedStats">
                         <v-list-item-content :key="i">
-                          <v-list-item-title v-show="!isThisArenaRankStats(data)" class="text-center">
-                            BR
+                          <v-list-item-title v-show="isThisArenaRankStats(data)" class="text-center">
+                            {{ $t('profile.ranked_stats.title.arena') }}
                           </v-list-item-title>
                           <v-list-item-title v-show="isThisArenaRankStats(data)" class="text-center">
-                            Arena
+                            {{ $t('profile.ranked_stats.title.battle_royale') }}
                           </v-list-item-title>
 
                           <v-list-item-icon>
@@ -118,9 +113,9 @@
                     </template>
 
                     <template v-else>
-                      <v-list-item-title>
-                        NO DATA
-                      </v-list-item-title>
+                      <div>
+                        {{ $t('message.no_data') }}
+                      </div>
                     </template>
                   </template>
                 </v-list-item>
@@ -225,6 +220,11 @@ export default {
       host: {
         age: ''
       }
+    }
+  },
+  computed: {
+    isRankedStatsExist () {
+      return this.rankedStats.length !== 0
     }
   },
   created () {

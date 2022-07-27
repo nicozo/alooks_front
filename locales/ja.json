@@ -35,7 +35,10 @@
     "game_mode": "ゲームモード",
     "rank_tier": "ランク帯",
     "recruitment_number": "募集人数",
-    "application_deadline": "募集期間"
+    "application_deadline": "募集期間",
+    "host": {
+      "title": "募集主"
+    }
   },
   "btn": {
     "invitation_request": "参加リクエスト",
@@ -55,9 +58,6 @@
     "now_closed": "募集を締め切りました",
     "loading": "Now Loading Your Apex Legends Stats...",
     "no_data": "No Data"
-  },
-  "title": {
-    "host_profile": "募集主"
   },
   "profile": {
     "legend": {
