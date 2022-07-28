@@ -9,11 +9,13 @@ export default ({ $axios, $auth, isDev }) => {
     if (isDev) {
       console.log(config)
     }
+    console.log(config)
   })
   $axios.onResponse((response) => {
     if (isDev) {
       console.log(response)
     }
+    console.log(response)
   })
   $axios.onError((e) => {
     console.log(e.response)
