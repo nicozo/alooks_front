@@ -6,14 +6,15 @@ export default async ({ $auth, store, route, redirect }) => {
   // }
 
   console.log('authenticationミドルウェア発火')
-  // console.log('ログインユーザー情報', $auth.user)
-  // console.log('ユーザーのsub:', $auth.user.sub)
-  // console.log('ユーザーのpayload:', $auth.payload.sub)
-  // console.log('ユーザーは存在する？', $auth.isExistUser())
-  // console.log('有効期限内？', $auth.isAuthenticated())
+  console.log('ログインユーザー情報', $auth.user)
+  console.log('ユーザーのsub:', $auth.user.sub)
+  console.log('ユーザーのpayload:', $auth.payload.sub)
+  console.log('ユーザーは存在する？', $auth.isExistUser())
+  console.log('有効期限内？', $auth.isAuthenticated())
   // ログイン前ユーザー処理
   if (!$auth.loggedIn()) {
     // ユーザー以外の値が存在する可能性があるので全てを削除する
+    console.log('ユーザーが存在せず、有効期限でないためログアウト')
     await $auth.logout()
 
     const msg = 'ログインしてください'

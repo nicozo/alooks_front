@@ -36,6 +36,7 @@ class Authentication {
 
   // ログイン
   login (data) {
+    console.log('ログイン情報', data)
     this.setAuth(data)
   }
 
