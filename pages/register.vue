@@ -71,7 +71,7 @@
 
 <script>
 export default {
-  name: 'LoginPage',
+  name: 'RegisterPage',
   layout: 'signup',
   data ({ $route }) {
     return {
