@@ -228,9 +228,9 @@ export default {
         console.log('idが一致しません。')
       } else {
         this.data = res
-        this.setLegendsData()
-        this.setRankData()
-        this.setTotalData()
+        this.setAllLegendStats()
+        this.setRankStats()
+        this.setPlayerTotalStats()
       }
       this.isLoading()
     },
@@ -238,16 +238,17 @@ export default {
       console.log(e)
       this.isLoading()
     },
-    setLegendsData () {
+    setAllLegendStats () {
       this.allLegendStats = this.data.legends.all
-      this.getLegendData()
+      this.getLegendStats()
     },
     getLegendKillData () {
       const data = this.allLegendStats
-      const legendKillData = []
+      const allLegendKillData = []
       Object.keys(data).forEach((key) => {
         if (data[key].data !== undefined) {
           Object.values(data[key].data).forEach((value) => {
+            console.log('value', value)
             if (value.name === 'BR Kills') {
               const obj = {
                 name: '',
@@ -255,15 +256,15 @@ export default {
               }
               obj.name = key
               obj.value = value.value
-              legendKillData.push(obj)
+              allLegendKillData.push(obj)
             }
           })
         }
       })
-      // console.log('legendKillData:', legendKillData)
-      return legendKillData
+      // console.log('allLegendKillData:', allLegendKillData)
+      return allLegendKillData
     },
-    getHighestKillData () {
+    getHighestKillLegendData () {
       const data = this.getLegendKillData()
       let hightestKillLegendData = ''
       data.forEach((el) => {
@@ -274,8 +275,8 @@ export default {
       // console.log('hightestKillLegendData:', hightestKillLegendData)
       return hightestKillLegendData
     },
-    getLegendData () {
-      const legend = this.getHighestKillData()
+    getLegendStats () {
+      const legend = this.getHighestKillLegendData()
       if (legend.name in this.allLegendStats) {
         this.hightestKillLegendStats = this.allLegendStats[legend.name]
       }
@@ -284,11 +285,11 @@ export default {
     isDifferentGameId (data) {
       return !this.authUser.game_id === data.global.name
     },
-    setRankData () {
+    setRankStats () {
       this.rankedStats.push(this.data.global.rank)
       this.rankedStats.push(this.data.global.arena)
     },
-    setTotalData () {
+    setPlayerTotalStats () {
       this.totalStats = this.data.total
     },
     isLoading () {
