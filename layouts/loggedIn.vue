@@ -112,7 +112,7 @@ export default {
       nav_lists: [
         { name: 'rooms' },
         { name: 'rooms-create' },
-        { name: 'invitation-list' }
+        { name: 'applications' }
       ],
       drawer: false,
       defaultAvatarSrc: require('@/static/DefaultAvatar.png')
