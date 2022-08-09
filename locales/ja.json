@@ -48,7 +48,8 @@
     "do_not_have_account": "アカウントお持ちでないですか？",
     "to_rooms_page": "スクワッドを探す",
     "to_top_page": "トップページへ戻る",
-    "back_to_rooms_page": "スクワッド一覧へ戻る"
+    "back_to_rooms_page": "スクワッド一覧へ戻る",
+    "accept_request": "リクエスト承諾"
   },
   "gender": {
     "male": "男性",
