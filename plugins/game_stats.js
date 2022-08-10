@@ -60,7 +60,7 @@ class GameStats {
       this.setData(res)
       this.setHighestKillLegendStats()
     } else {
-      this.store.dispatch('game_stats/getMessage', res.Error)
+      this.store.dispatch('game_stats/getErrorMessage', res.Error)
     }
     this.isLoading()
     this.isDisabled()
