@@ -19,7 +19,7 @@
         </div> -->
 
         <v-img
-          :src="hightestKillLegendStats.ImgAssets.icon"
+          :src="highestKillLegendStats.ImgAssets.icon"
           :max-width="breakPointLegendImgWidth"
         />
       </v-col>
@@ -37,19 +37,19 @@
 
         <v-row>
           <v-col
-            v-for="(data, i) in totalStats"
-            v-show="data.name !== 'KD'"
+            v-for="(data, i) in playerTotalStats"
+            v-show="data.value.name !== 'KD'"
             :key="i"
             cols="6"
             md="4"
             lg="4"
           >
             <v-list-item-subtitle class="stats-name">
-              {{ data.name }}
+              {{ data.value.name }}
             </v-list-item-subtitle>
 
             <v-list-item-title>
-              {{ data.value }}
+              {{ data.value.value }}
             </v-list-item-title>
           </v-col>
         </v-row>
@@ -60,7 +60,7 @@
 
         <v-row>
           <v-col
-            v-for="(data, i) in hightestKillLegendStats.data"
+            v-for="(data, i) in highestKillLegendStats.data"
             v-show="filterStatus(data)"
             :key="i"
             cols="6"
@@ -85,12 +85,12 @@
 export default {
   name: 'ProfileTotalStats',
   props: {
-    totalStats: {
-      type: Object,
-      default: () => {},
+    playerTotalStats: {
+      type: Array,
+      default: () => [],
       require: true
     },
-    hightestKillLegendStats: {
+    highestKillLegendStats: {
       type: Object,
       default: () => {},
       require: true
