@@ -26,7 +26,8 @@ export const state = () => ({
   },
   commonStyle: {
     headerHeight: 64
-  }
+  },
+  defaultAvatarSrc: require('@/static/DefaultAvatar.png')
 })
 
 export const getters = {
@@ -34,7 +35,8 @@ export const getters = {
   authToken: state => state.authToken,
   authExpires: state => state.authExpires,
   authPayload: state => state.authPayload,
-  headerHeight: state => state.commonStyle.headerHeight
+  headerHeight: state => state.commonStyle.headerHeight,
+  defaultAvatarSrc: state => state.defaultAvatarSrc
 }
 
 export const mutations = {
