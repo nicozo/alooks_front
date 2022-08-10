@@ -69,7 +69,7 @@
                       </template>
 
                       <template v-else>
-                        <template v-if="isArenaRankedStats">
+                        <template v-if="isRankedStatsExist">
                           <profile-ranked-stats :ranked-stats="rankedStats" />
                         </template>
 
@@ -220,7 +220,7 @@ export default {
     disabled () {
       return this.$game.disabled
     },
-    isArenaRankedStats () {
+    isRankedStatsExist () {
       return this.rankedStats.length !== 0
     },
     isPlayerTotalStatsExist () {

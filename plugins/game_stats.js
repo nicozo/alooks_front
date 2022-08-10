@@ -167,7 +167,7 @@ class GameStats {
     this.store.dispatch('game_stats/getDisabled', !this.disabled)
   }
 
-  isArenaRankedStats () {
+  isRankedStatsExist () {
     return this.rankedStats.length !== 0
   }
 }
