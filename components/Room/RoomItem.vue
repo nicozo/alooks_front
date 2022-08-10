@@ -105,11 +105,15 @@ export default {
       }
     }
   },
+  computed: {
+    defaultAvatarSrc () {
+      return this.$store.getters.defaultAvatarSrc
+    }
+  },
   data () {
     return {
       timeToDeadline: '',
-      invalid: false,
-      defaultAvatarSrc: require('@/static/DefaultAvatar.png')
+      invalid: false
     }
   },
   mounted () {

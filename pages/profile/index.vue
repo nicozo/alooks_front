@@ -217,7 +217,11 @@ export default {
   },
   methods: {
     async requestApi (authUser) {
-      await this.$game.getStats(authUser.game_id, authUser.platform)
+      try {
+        await this.$game.getStats(authUser.game_id, authUser.platform)
+      } catch (error) {
+        console.log(error)
+      }
     },
     getUserAge (birthday) {
       // console.log(birthday)
@@ -228,9 +232,6 @@ export default {
       const age = today.getFullYear() - ymd[0]
 
       return today < thisYearsBirthday ? age - 1 : age
-    },
-    isDifferentGameId (data) {
-      return !this.authUser.game_id === data.global.name
     }
   }
 }

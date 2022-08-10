@@ -95,13 +95,15 @@ export default {
         platform: ''
       },
       uploadAvatar: null,
-      defaultAvatarSrc: require('@/static/DefaultAvatar.png'),
       redirectPath: this.$store.state.loggedIn.rememberPath
     }
   },
   computed: {
     authUser () {
       return this.$auth.user
+    },
+    defaultAvatarSrc () {
+      return this.$store.getters.defaultAvatarSrc
     }
   },
   created () {

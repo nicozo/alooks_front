@@ -36,7 +36,7 @@ export const mutations = {
   setPlayerTotalStats (state, totalData) {
     state.playerTotalStats = totalData
   },
-  setMessage (state, message) {
+  setErrorMessage (state, message) {
     state.errorMessage = message
   },
   setLoading (state, boolean) {
@@ -63,8 +63,8 @@ export const actions = {
   getPlayerTotalStats ({ commit }, totalData) {
     commit('setPlayerTotalStats', totalData)
   },
-  getMessage ({ commit }, message) {
-    commit('setPlayerTotalStats', message)
+  getErrorMessage ({ commit }, message) {
+    commit('setErrorMessage', message)
   },
   getLoading ({ commit }, boolean) {
     commit('setLoading', boolean)
