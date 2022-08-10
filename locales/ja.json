@@ -58,7 +58,8 @@
   "message": {
     "now_closed": "募集を締め切りました",
     "loading": "Now Loading Your Apex Legends Stats...",
-    "no_data": "No Data"
+    "no_data": "No Data",
+    "no_requests": "参加リクエストはありません。"
   },
   "profile": {
     "legend": {
