@@ -49,7 +49,9 @@
     "to_rooms_page": "スクワッドを探す",
     "to_top_page": "トップページへ戻る",
     "back_to_rooms_page": "スクワッド一覧へ戻る",
-    "accept_request": "リクエスト承諾"
+    "accept_request": "リクエスト承諾",
+    "cancel": "取り消し",
+    "submit": "送信" 
   },
   "gender": {
     "male": "男性",

@@ -36,7 +36,10 @@
         lg="4"
         xl="4"
       >
-        <RoomItem :room="room" />
+        <RoomItem
+          :room="room"
+          :applications="applications"
+        />
       </v-col>
 
       <v-tooltip
@@ -86,8 +89,15 @@ export default {
     const rooms = await $axios.$get(
       'api/v1/rooms'
     )
+
+    const applications = await $axios.$get(
+      'api/v1/applies/my_applies'
+    )
+
     // console.log('部屋情報:', rooms)
-    return { rooms }
+    // console.log('参加リクエスト一覧:', applications)
+
+    return { rooms, applications }
   },
   data () {
     return {

@@ -62,14 +62,12 @@
       </v-card-text>
 
       <v-card-actions>
-        <v-btn
-          color="success"
-          class="ml-auto"
-          :disabled="invalid"
-          @click.once="request()"
-        >
-          {{ $t('btn.invitation_request') }}
-        </v-btn>
+        <app-join-request-button
+          :room="room"
+          :authUser="authUser"
+          :invalid="invalid"
+          :applications="applications"
+        />
       </v-card-actions>
     </v-container>
   </v-card>
@@ -103,11 +101,19 @@ export default {
         default: () => {},
         required: true
       }
+    },
+    applications: {
+      type: Array,
+      default: () => [],
+      required: true
     }
   },
   computed: {
     defaultAvatarSrc () {
       return this.$store.getters.defaultAvatarSrc
+    },
+    authUser () {
+      return this.$auth.user
     }
   },
   data () {

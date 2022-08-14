@@ -150,14 +150,21 @@
               </v-card-text>
 
               <v-card-actions>
-                <v-btn
+                <!-- <v-btn
                   color="success"
                   class="ml-auto"
                   :disabled="invalid"
                   @click.once="request()"
                 >
                   {{ $t('btn.invitation_request') }}
-                </v-btn>
+                </v-btn> -->
+
+                <app-join-request-button
+                  :room="room"
+                  :authUser="authUser"
+                  :invalid="invalid"
+                  :applications="applications"
+                />
               </v-card-actions>
             </v-container>
           </v-list-item>
@@ -174,9 +181,14 @@ export default {
     const room = await $axios.$get(
       'api/v1/rooms/' + params.id
     )
+
+    const applications = await $axios.$get(
+      'api/v1/applies/my_applies'
+    )
+
     // console.log('部屋情報:', room)
     // console.log('募集主情報:', room.host)
-    return { room }
+    return { room, applications }
   },
   data () {
     return {
@@ -188,6 +200,9 @@ export default {
     }
   },
   computed: {
+    authUser () {
+      return this.$auth.user
+    },
     data () {
       return this.$game.data
     },
@@ -251,12 +266,6 @@ export default {
     },
     isInvalid () {
       this.invalid = true
-    },
-    request () {
-      const requestBtn = event.currentTarget
-      requestBtn.classList.add('v-btn--disabled')
-      requestBtn.getElementsByClassName('v-btn__content')[0].innerText = 'リクエスト済み'
-      alert('りくえすとしたよ！')
     },
     getUserAge (birthday) {
       if (!birthday) { return }
