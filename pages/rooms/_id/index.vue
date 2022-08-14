@@ -183,7 +183,7 @@ export default {
     )
 
     const applications = await $axios.$get(
-      'api/v1/applies/my_applies'
+      'api/v1/applies/my_applications'
     )
 
     // console.log('部屋情報:', room)
