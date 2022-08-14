@@ -80,6 +80,7 @@ export default {
     room: {
       type: Object,
       default: () => {},
+      required: true,
       id: {
         type: Number,
         required: true

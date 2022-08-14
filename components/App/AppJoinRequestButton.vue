@@ -97,6 +97,7 @@ export default {
   },
   mounted () {
     this.appliedForThis()
+    this.isMyRoom()
   },
   data () {
     return {
@@ -131,10 +132,8 @@ export default {
       this.message = ''
     },
     appliedForThis () {
-      console.log('appliedForThis')
       if (this.isAlreadyAppliedFor()) {
         const applyBtn = document.getElementById(`room-${this.room.id}-btn`)
-        console.log('dom', applyBtn)
 
         applyBtn.classList.add('v-btn--disabled')
         applyBtn.getElementsByClassName('v-btn__content')[0].innerText = 'リクエスト済み'
@@ -148,6 +147,16 @@ export default {
       )
 
       return result
+    },
+    roomIsOwn () {
+      return this.authUser.id === this.room.user_id
+    },
+    isMyRoom () {
+      if (this.roomIsOwn()) {
+        const applyBtn = document.getElementById(`room-${this.room.id}-btn`)
+
+        applyBtn.classList.add('v-btn--disabled')
+      }
     }
   }
 }
