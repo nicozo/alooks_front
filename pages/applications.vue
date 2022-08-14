@@ -37,6 +37,18 @@
                       {{ application.body }}
                     </div>
                   </v-list-item-content>
+
+                  <div
+                    v-show="isUnread(application)"
+                    class="ml-2"
+                  >
+                    <v-chip
+                      color="red darken-3"
+                      dark
+                    >
+                      New
+                    </v-chip>
+                  </div>
                 </v-list-item>
               </v-expansion-panel-header>
 
@@ -208,12 +220,9 @@
 export default {
   name: 'SamplePage',
   layout: 'loggedIn',
-  async asyncData ({ $axios }) {
-    const applications = await $axios.$get(
-      'api/v1/applies'
-    )
-    // console.log('参加リクエスト一覧:', applications)
-    return { applications }
+  async fetch () {
+    const res = await await this.$axios.$get('api/v1/applies')
+    await this.$store.dispatch('applications/getApplications', res)
   },
   data () {
     return {
@@ -223,6 +232,9 @@ export default {
   computed: {
     authUser () {
       return this.$auth.user
+    },
+    applications () {
+      return this.$store.getters['applications/applications']
     },
     data () {
       return this.$game.data
@@ -266,19 +278,14 @@ export default {
     },
     defaultAvatarSrc () {
       return this.$store.getters.defaultAvatarSrc
+    },
+    isUnread () {
+      return function (application) {
+        return application.is_read === false
+      }
     }
   },
   methods: {
-    onExpansionPanelClick (application) {
-      if (event.currentTarget.classList.contains('v-expansion-panel-header--active')) {
-        console.log('Panel is closing/now closed.')
-      } else {
-        console.log('Panel is opening/now open.')
-        if (this.data === '' || application.applicant.game_id !== this.data.global.name) {
-          this.requestApi(application)
-        }
-      }
-    },
     async requestApi (application) {
       try {
         await this.$game.getStats(application.applicant.game_id, application.applicant.platform)
@@ -289,6 +296,37 @@ export default {
     accept (application) {
       console.log(application)
       alert('Accept!')
+    },
+    async read (application) {
+      console.log('既読')
+
+      await this.$axios.$patch(
+        `api/v1/applies/${application.id}/read`
+      )
+        .then(res => this.requestSuccessful(res))
+        .catch(e => console.log(e))
+    },
+    requestSuccessful (res) {
+      console.log(res)
+      console.log(this.applications)
+      this.$store.dispatch('applications/getReadApplication', res)
+    },
+    onExpansionPanelClick (application) {
+      if (event.currentTarget.classList.contains('v-expansion-panel-header--active')) {
+        console.log('Panel is closing/now closed.')
+      } else {
+        console.log('Panel is opening/now open.')
+        if (this.dataNullOrCheckAnotherApplication(application)) {
+          this.requestApi(application)
+          console.log('未読？', this.isUnread(application))
+          if (this.isUnread(application)) {
+            this.read(application)
+          }
+        }
+      }
+    },
+    dataNullOrCheckAnotherApplication (application) {
+      return this.data === '' || application.applicant.game_id !== this.data.global.name
     }
   }
 }
