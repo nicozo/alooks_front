@@ -120,19 +120,30 @@ export default {
         }
       )
         .then(res => this.requestSuccessful(res))
-        .catch(e => console.log(e))
+        .catch(e => this.requestFailure(e))
     },
     requestSuccessful (res) {
       console.log('res', res)
       this.appliedForThis()
       this.closeDialog()
+      this.setToaster()
+    },
+    requestFailure ({ response }) {
+      if (response && response.status === 400) {
+        const msg = '参加リクエストに失敗しました'
+
+        return this.$store.dispatch('getToast', { msg })
+      }
+      console.log(response)
     },
     closeDialog () {
       this.dialog = false
       this.message = ''
     },
     appliedForThis () {
+      // console.log('appliedForThis')
       if (this.isAlreadyAppliedFor()) {
+        // console.log('ボタン無効化')
         const applyBtn = document.getElementById(`room-${this.room.id}-btn`)
 
         applyBtn.classList.add('v-btn--disabled')
@@ -140,12 +151,14 @@ export default {
       }
     },
     isAlreadyAppliedFor () {
+      // console.log('リクエスト調査')
       const result = this.applications.find(application =>
         application.room_id === this.room.id &&
         application.user_id === this.authUser.id &&
         application.host_id === this.room.user_id
       )
 
+      // console.log('result', result)
       return result
     },
     roomIsOwn () {
@@ -157,6 +170,11 @@ export default {
 
         applyBtn.classList.add('v-btn--disabled')
       }
+    },
+    setToaster () {
+      const msg = '参加リクエストしました'
+      const color = 'success'
+      return this.$store.dispatch('getToast', { msg, color })
     }
   }
 }
