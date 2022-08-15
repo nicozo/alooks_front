@@ -71,7 +71,7 @@
         :room="room"
         :authUser="authUser"
         :invalid="invalid"
-        :applications="applications"
+        :myApplications="myApplications"
       />
     </v-card-actions>
   </v-card>
@@ -107,7 +107,7 @@ export default {
         required: true
       }
     },
-    applications: {
+    myApplications: {
       type: Array,
       default: () => [],
       required: true
@@ -148,12 +148,6 @@ export default {
     },
     isInvalid () {
       this.invalid = true
-    },
-    request () {
-      const requestBtn = event.currentTarget
-      requestBtn.classList.add('v-btn--disabled')
-      requestBtn.getElementsByClassName('v-btn__content')[0].innerText = 'リクエスト済み'
-      alert('りくえすとしたよ！')
     },
     isRoomClosing (roomDeadline) {
       const now = new Date()

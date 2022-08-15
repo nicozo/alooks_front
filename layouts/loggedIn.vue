@@ -122,7 +122,7 @@ export default {
     'authentication'
   ],
   async fetch () {
-    const res = await await this.$axios.$get('api/v1/applies')
+    const res = await this.$axios.$get('api/v1/applies')
     await this.$store.dispatch('applications/getApplications', res)
   },
   data ({ $config: { appName } }) {

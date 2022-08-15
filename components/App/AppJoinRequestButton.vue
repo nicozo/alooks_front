@@ -79,7 +79,7 @@ export default {
       default: () => {},
       require: true
     },
-    applications: {
+    myApplications: {
       type: Array,
       default: () => [],
       require: true
@@ -141,9 +141,7 @@ export default {
       this.message = ''
     },
     appliedForThis () {
-      // console.log('appliedForThis')
       if (this.isAlreadyAppliedFor()) {
-        // console.log('ボタン無効化')
         const applyBtn = document.getElementById(`room-${this.room.id}-btn`)
 
         applyBtn.classList.add('v-btn--disabled')
@@ -151,14 +149,12 @@ export default {
       }
     },
     isAlreadyAppliedFor () {
-      // console.log('リクエスト調査')
-      const result = this.applications.find(application =>
-        application.room_id === this.room.id &&
-        application.user_id === this.authUser.id &&
-        application.host_id === this.room.user_id
+      const result = this.myApplications.find(myApplication =>
+        myApplication.room_id === this.room.id &&
+        myApplication.user_id === this.authUser.id &&
+        myApplication.host_id === this.room.user_id
       )
 
-      // console.log('result', result)
       return result
     },
     roomIsOwn () {

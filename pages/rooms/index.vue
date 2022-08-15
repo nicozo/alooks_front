@@ -38,7 +38,7 @@
       >
         <RoomItem
           :room="room"
-          :applications="applications"
+          :myApplications="myApplications"
         />
       </v-col>
 
@@ -90,14 +90,14 @@ export default {
       'api/v1/rooms'
     )
 
-    const applications = await $axios.$get(
+    const myApplications = await $axios.$get(
       'api/v1/applies/my_applications'
     )
 
     // console.log('部屋情報:', rooms)
-    // console.log('参加リクエスト一覧:', applications)
+    // console.log('参加リクエスト一覧:', myApplications)
 
-    return { rooms, applications }
+    return { rooms, myApplications }
   },
   data () {
     return {
