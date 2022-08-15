@@ -220,10 +220,12 @@
 export default {
   name: 'SamplePage',
   layout: 'loggedIn',
-  async fetch () {
-    const res = await await this.$axios.$get('api/v1/applies')
-    await this.$store.dispatch('applications/getApplications', res)
-  },
+  // async fetch () {
+  //   // console.log('--------fetch--------')
+
+  //   const res = await await this.$axios.$get('api/v1/applies')
+  //   await this.$store.dispatch('applications/getApplications', res)
+  // },
   data () {
     return {
       minWidth: 200
@@ -298,7 +300,7 @@ export default {
       alert('Accept!')
     },
     async read (application) {
-      console.log('既読')
+      // console.log('既読')
 
       await this.$axios.$patch(
         `api/v1/applies/${application.id}/read`
@@ -308,7 +310,7 @@ export default {
     },
     requestSuccessful (res) {
       console.log(res)
-      console.log(this.applications)
+      // console.log(this.applications)
       this.$store.dispatch('applications/getReadApplication', res)
     },
     onExpansionPanelClick (application) {
@@ -318,7 +320,7 @@ export default {
         console.log('Panel is opening/now open.')
         if (this.dataNullOrCheckAnotherApplication(application)) {
           this.requestApi(application)
-          console.log('未読？', this.isUnread(application))
+          // console.log('未読？', this.isUnread(application))
           if (this.isUnread(application)) {
             this.read(application)
           }

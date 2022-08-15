@@ -59,11 +59,26 @@
           :to="{ name: `${nav_list.name}` }"
           @click="handleToggleDrawer"
         >
-          <v-list-item-content>
-            <v-list-item-title>
-              {{ $t(`pages.${nav_list.name}`) }}
-            </v-list-item-title>
-          </v-list-item-content>
+          <template v-if="isApplicationsLink(nav_list.name)">
+            <v-badge
+              :content="countNewApplications"
+              :value="countNewApplications"
+            >
+              <v-list-item-content>
+                <v-list-item-title>
+                  {{ $t(`pages.${nav_list.name}`) }}
+                </v-list-item-title>
+              </v-list-item-content>
+            </v-badge>
+          </template>
+
+          <template v-else>
+            <v-list-item-content>
+              <v-list-item-title>
+                {{ $t(`pages.${nav_list.name}`) }}
+              </v-list-item-title>
+            </v-list-item-content>
+          </template>
         </v-list-item>
 
         <v-list-item>
@@ -106,6 +121,10 @@ export default {
   middleware: [
     'authentication'
   ],
+  async fetch () {
+    const res = await await this.$axios.$get('api/v1/applies')
+    await this.$store.dispatch('applications/getApplications', res)
+  },
   data ({ $config: { appName } }) {
     return {
       appName,
@@ -123,12 +142,23 @@ export default {
     },
     defaultAvatarSrc () {
       return this.$store.getters.defaultAvatarSrc
+    },
+    applications () {
+      return this.$store.getters['applications/applications']
+    },
+    countNewApplications () {
+      const newApplications = this.applications.filter(application => application.is_read === false)
+
+      return newApplications.length
     }
   },
   methods: {
     handleToggleDrawer () {
       this.drawer = !this.drawer
       // console.log('ドロワーリンククリック！', this.drawer)
+    },
+    isApplicationsLink (navName) {
+      return navName === 'applications'
     }
   }
 }
