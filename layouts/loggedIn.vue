@@ -119,12 +119,9 @@
 export default {
   name: 'LoggedInLayout',
   middleware: [
-    'authentication'
+    'authentication',
+    'applications'
   ],
-  async fetch () {
-    const res = await this.$axios.$get('api/v1/applies')
-    await this.$store.dispatch('applications/getApplications', res)
-  },
   data ({ $config: { appName } }) {
     return {
       appName,
