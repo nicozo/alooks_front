@@ -1,9 +1,11 @@
 export const state = () => ({
-  applications: []
+  applications: [],
+  myApplications: []
 })
 
 export const getters = {
-  applications: state => state.applications
+  applications: state => state.applications,
+  myApplications: state => state.myApplications
 }
 
 export const mutations = {
@@ -16,6 +18,13 @@ export const mutations = {
     if (index !== -1) {
       state.applications.splice(index, 1, readApplication)
     }
+  },
+  setMyApplications (state, myApplications) {
+    console.log('---store---')
+    state.myApplications = myApplications
+  },
+  addMyApplication (state, myApplication) {
+    state.myApplications.push(myApplication)
   }
 }
 
@@ -25,5 +34,11 @@ export const actions = {
   },
   getReadApplication ({ commit }, readApplication) {
     commit('read', readApplication)
+  },
+  getMyApplications ({ commit }, myApplications) {
+    commit('setMyApplications', myApplications)
+  },
+  getMyApplication ({ commit }, myApplication) {
+    commit('addMyApplication', myApplication)
   }
 }
