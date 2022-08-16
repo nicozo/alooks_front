@@ -1,10 +1,6 @@
 const homePath = '/rooms'
 
 export const state = () => ({
-  authUser: null,
-  authToken: null,
-  authExpires: 0,
-  authPayload: {},
   toast: {
     msg: null,
     color: 'error',
@@ -26,30 +22,18 @@ export const state = () => ({
   },
   commonStyle: {
     headerHeight: 64
-  }
+  },
+  defaultAvatarSrc: require('@/static/DefaultAvatar.png'),
+  commonImageSrc: require('@/static/CommonImage.jpg')
 })
 
 export const getters = {
-  authUser: state => state.authUser,
-  authToken: state => state.authToken,
-  authExpires: state => state.authExpires,
-  authPayload: state => state.authPayload,
-  headerHeight: state => state.commonStyle.headerHeight
+  headerHeight: state => state.commonStyle.headerHeight,
+  defaultAvatarSrc: state => state.defaultAvatarSrc,
+  commonImageSrc: state => state.commonImageSrc
 }
 
 export const mutations = {
-  setAuthUser (state, user) {
-    state.authUser = user
-  },
-  setAuthToken (state, token) {
-    state.authToken = token
-  },
-  setAuthExpires (state, exp) {
-    state.authExpires = exp
-  },
-  setAuthPayload (state, payload) {
-    state.authPayload = payload
-  },
   setToast (state, payload) {
     state.toast = payload
   },
@@ -59,20 +43,6 @@ export const mutations = {
 }
 
 export const actions = {
-  getAuthUser ({ commit }, user) {
-    commit('setAuthUser', user)
-  },
-  getAuthToken ({ commit }, token) {
-    commit('setAuthToken', token)
-  },
-  getAuthExpires ({ commit }, exp) {
-    exp = exp || 0
-    commit('setAuthExpires', exp)
-  },
-  getAuthPayload ({ commit }, jwtPayload) {
-    jwtPayload = jwtPayload || {}
-    commit('setAuthPayload', jwtPayload)
-  },
   getToast ({ commit }, { msg, color, timeout }) {
     color = color || 'error'
     timeout = timeout || 4000

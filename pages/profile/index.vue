@@ -40,9 +40,9 @@
             id="profile-banner"
             flat
           >
-            <template v-if="hightestKillLegendStats">
+            <template v-if="highestKillLegendStats">
               <v-img
-                :src="hightestKillLegendStats.ImgAssets.banner"
+                :src="highestKillLegendStats.ImgAssets.banner"
                 :max-height="maxHeight"
                 :min-height="minHeight"
               />
@@ -96,6 +96,7 @@
                 <template v-if="isRankedStatsExist">
                   <profile-ranked-stats :ranked-stats="rankedStats" />
                 </template>
+
                 <template v-else>
                   <div>
                     {{ $t('message.no_data') }}
@@ -118,10 +119,10 @@
 
                 <v-divider />
 
-                <template v-if="totalStats">
+                <template v-if="isPlayerTotalStatsExist">
                   <profile-total-stats
-                    :total-stats="totalStats"
-                    :hightest-kill-legend-stats="hightestKillLegendStats"
+                    :player-total-stats="playerTotalStats"
+                    :highest-kill-legend-stats="highestKillLegendStats"
                   />
                 </template>
                 <template v-else>
@@ -173,13 +174,6 @@ export default {
       user: {
         age: ''
       },
-      data: '',
-      allLegendStats: '',
-      hightestKillLegendStats: '',
-      rankedStats: [],
-      totalStats: '',
-      loading: true,
-      commonImageSrc: require('@/static/CommonImage.jpg'),
       maxHeight: 400,
       minHeight: 180
     }
@@ -188,15 +182,47 @@ export default {
     authUser () {
       return this.$auth.user
     },
+    data () {
+      return this.$game.data
+    },
+    highestKillLegendStats () {
+      return this.$game.highestKillLegendStats
+    },
+    rankedStats () {
+      return this.$game.rankedStats
+    },
+    playerTotalStats () {
+      console.log('playerTotalStats', this.$game.playerTotalStats)
+      return this.$game.playerTotalStats
+    },
+    loading () {
+      return this.$game.loading
+    },
     isRankedStatsExist () {
       return this.rankedStats.length !== 0
+    },
+    isPlayerTotalStatsExist () {
+      return this.playerTotalStats.length !== 0
+    },
+    defaultAvatarSrc () {
+      return this.$store.getters.defaultAvatarSrc
+    },
+    commonImageSrc () {
+      return this.$store.getters.commonImageSrc
     }
   },
   created () {
     this.user.age = this.getUserAge(this.authUser.date_of_birth)
-    this.getGameData()
+    this.requestApi(this.authUser)
   },
   methods: {
+    async requestApi (authUser) {
+      try {
+        await this.$game.getStats(authUser.game_id, authUser.platform)
+      } catch (error) {
+        console.log(error)
+      }
+    },
     getUserAge (birthday) {
       // console.log(birthday)
       if (!birthday) { return }
@@ -206,93 +232,6 @@ export default {
       const age = today.getFullYear() - ymd[0]
 
       return today < thisYearsBirthday ? age - 1 : age
-    },
-    // TODO room/id/index.vueと同じ表記がある為、クラス化を検討
-    async getGameData () {
-      await this.$axios.$get(
-        'search',
-        {
-          params: {
-            game_id: this.authUser.game_id,
-            platform: this.authUser.platform
-          }
-        }
-      )
-        .then(res => this.requestSuccessful(res))
-        .catch(e => this.requestFailure(e))
-    },
-    requestSuccessful (res) {
-      if (!res.global) {
-        console.log('データがありません')
-      } else if (this.isDifferentGameId(res)) {
-        console.log('idが一致しません。')
-      } else {
-        this.data = res
-        this.setLegendsData()
-        this.setRankData()
-        this.setTotalData()
-      }
-      this.isLoading()
-    },
-    requestFailure (e) {
-      console.log(e)
-      this.isLoading()
-    },
-    setLegendsData () {
-      this.allLegendStats = this.data.legends.all
-      this.getLegendData()
-    },
-    getLegendKillData () {
-      const data = this.allLegendStats
-      const legendKillData = []
-      Object.keys(data).forEach((key) => {
-        if (data[key].data !== undefined) {
-          Object.values(data[key].data).forEach((value) => {
-            if (value.name === 'BR Kills') {
-              const obj = {
-                name: '',
-                value: ''
-              }
-              obj.name = key
-              obj.value = value.value
-              legendKillData.push(obj)
-            }
-          })
-        }
-      })
-      // console.log('legendKillData:', legendKillData)
-      return legendKillData
-    },
-    getHighestKillData () {
-      const data = this.getLegendKillData()
-      let hightestKillLegendData = ''
-      data.forEach((el) => {
-        if (!hightestKillLegendData || hightestKillLegendData.value < el.value) {
-          hightestKillLegendData = el
-        }
-      })
-      // console.log('hightestKillLegendData:', hightestKillLegendData)
-      return hightestKillLegendData
-    },
-    getLegendData () {
-      const legend = this.getHighestKillData()
-      if (legend.name in this.allLegendStats) {
-        this.hightestKillLegendStats = this.allLegendStats[legend.name]
-      }
-      console.log('hightestKillLegendStats:', this.hightestKillLegendStats)
-    },
-    isDifferentGameId (data) {
-      return !this.authUser.game_id === data.global.name
-    },
-    setRankData () {
-      this.rankedStats.push(this.data.global.rank)
-      this.rankedStats.push(this.data.global.arena)
-    },
-    setTotalData () {
-      this.totalStats = this.data.total
-    },
-    isLoading () {
-      this.loading = false
     }
   }
 }

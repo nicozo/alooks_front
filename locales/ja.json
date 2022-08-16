@@ -7,7 +7,7 @@
     "rooms": "スクワッド一覧",
     "rooms-create": "スクワッド作成",
     "rooms-id": "スクワッド詳細",
-    "invitation-list": "参加リクエスト一覧",
+    "applications": "参加リクエスト一覧",
     "profile": "プロフィール",
     "profile-edit": "プロフィール編集"
   },
@@ -48,7 +48,10 @@
     "do_not_have_account": "アカウントお持ちでないですか？",
     "to_rooms_page": "スクワッドを探す",
     "to_top_page": "トップページへ戻る",
-    "back_to_rooms_page": "スクワッド一覧へ戻る"
+    "back_to_rooms_page": "スクワッド一覧へ戻る",
+    "accept_request": "リクエスト承諾",
+    "cancel": "取り消し",
+    "submit": "送信" 
   },
   "gender": {
     "male": "男性",
@@ -57,7 +60,8 @@
   "message": {
     "now_closed": "募集を締め切りました",
     "loading": "Now Loading Your Apex Legends Stats...",
-    "no_data": "No Data"
+    "no_data": "No Data",
+    "no_requests": "参加リクエストはありません。"
   },
   "profile": {
     "legend": {
@@ -79,5 +83,11 @@
         "legend_stats": "Main Legend Stats"
       }
     }
+  },
+  "application": {
+    "form": {
+      "title": "リクエストフォーム"
+    },
+    "unread": "New!!"
   }
 }

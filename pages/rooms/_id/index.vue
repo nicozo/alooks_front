@@ -150,14 +150,11 @@
               </v-card-text>
 
               <v-card-actions>
-                <v-btn
-                  color="success"
-                  class="ml-auto"
-                  :disabled="invalid"
-                  @click.once="request()"
-                >
-                  {{ $t('btn.invitation_request') }}
-                </v-btn>
+                <app-join-request-button
+                  :room="room"
+                  :auth-user="authUser"
+                  :invalid="invalid"
+                />
               </v-card-actions>
             </v-container>
           </v-list-item>
@@ -174,19 +171,13 @@ export default {
     const room = await $axios.$get(
       'api/v1/rooms/' + params.id
     )
+
     // console.log('部屋情報:', room)
     // console.log('募集主情報:', room.host)
     return { room }
   },
   data () {
     return {
-      defaultAvatarSrc: require('@/static/DefaultAvatar.png'),
-      data: '',
-      allLegendStats: '',
-      hightestKillLegendStats: '',
-      rankedStats: [],
-      totalStats: '',
-      loading: true,
       invalid: false,
       timeToDeadline: '',
       host: {
@@ -195,105 +186,49 @@ export default {
     }
   },
   computed: {
+    authUser () {
+      return this.$auth.user
+    },
+    data () {
+      return this.$game.data
+    },
+    highestKillLegendStats () {
+      return this.$game.highestKillLegendStats
+    },
+    rankedStats () {
+      return this.$game.rankedStats
+    },
+    playerTotalStats () {
+      return this.$game.playerTotalStats
+    },
+    loading () {
+      return this.$game.loading
+    },
     isRankedStatsExist () {
       return this.rankedStats.length !== 0
+    },
+    isPlayerTotalStatsExist () {
+      return this.playerTotalStats.length !== 0
+    },
+    defaultAvatarSrc () {
+      return this.$store.getters.defaultAvatarSrc
     }
   },
   created () {
-    this.getGameData()
+    this.requestApi(this.room.host)
     this.changeDateFormat()
     this.host.age = this.getUserAge(this.room.host.date_of_birth)
   },
   methods: {
-    // TODO profile/index.vueと同じ表記がある為、クラス化を検討
-    async getGameData () {
-      await this.$axios.$get(
-        'search',
-        {
-          params: {
-            game_id: this.room.host.game_id,
-            platform: this.room.host.platform
-          }
-        }
-      )
-        .then(res => this.requestSuccessful(res))
-        .catch(e => this.requestFailure(e))
-    },
-    requestSuccessful (res) {
-      if (!res.global) {
-        console.log('データがありません')
-      } else if (this.isDifferentGameId(res)) {
-        console.log('idが一致しません。')
-      } else {
-        this.data = res
-        this.setLegendsData()
-        this.setRankData()
-        this.setTotalData()
+    async requestApi (host) {
+      try {
+        await this.$game.getStats(host.game_id, host.platform)
+      } catch (error) {
+        console.log(error)
       }
-      this.isLoading()
-    },
-    requestFailure (e) {
-      this.isLoading()
-      console.log(e)
-    },
-    setLegendsData () {
-      this.allLegendStats = this.data.legends.all
-      this.getLegendData()
-    },
-    getLegendKillData () {
-      const data = this.allLegendStats
-      const legendKillData = []
-      Object.keys(data).forEach((key) => {
-        if (data[key].data !== undefined) {
-          Object.values(data[key].data).forEach((value) => {
-            if (value.name === 'BR Kills') {
-              const obj = {
-                name: '',
-                value: ''
-              }
-              obj.name = key
-              obj.value = value.value
-              legendKillData.push(obj)
-            }
-          })
-        }
-      })
-      // console.log('legendKillData:', legendKillData)
-      return legendKillData
-    },
-    getHighestKillData () {
-      const data = this.getLegendKillData()
-      let hightestKillLegendData = ''
-      data.forEach((el) => {
-        if (!hightestKillLegendData || hightestKillLegendData.value < el.value) {
-          hightestKillLegendData = el
-        }
-      })
-      // console.log('hightestKillLegendData:', hightestKillLegendData)
-      return hightestKillLegendData
-    },
-    getLegendData () {
-      const legend = this.getHighestKillData()
-      if (legend.name in this.allLegendStats) {
-        this.hightestKillLegendStats = this.allLegendStats[legend.name]
-      }
-      // console.log('hightestKillLegendStats:', this.hightestKillLegendStats)
     },
     isDifferentGameId (data) {
       return !this.room.host.game_id === data.global.name
-    },
-    setRankData () {
-      this.rankedStats.push(this.data.global.rank)
-      this.rankedStats.push(this.data.global.arena)
-    },
-    setTotalData () {
-      this.totalStats = this.data.total
-    },
-    isLoading () {
-      this.loading = false
-    },
-    isThisArenaRankStats (data) {
-      return data.rankedSeason.includes('arena')
     },
     isRoomClosing (roomDeadline) {
       const now = new Date()
@@ -304,6 +239,7 @@ export default {
       const roomDeadline = this.room.application_deadline
       const minutesToDeadline = this.$dayjs(roomDeadline).fromNow()
       this.timeToDeadline = this.replaceFormat(minutesToDeadline)
+      // console.log('締め切り', this.timeToDeadline)
     },
     replaceFormat (str) {
       // console.log('渡された文字列', str)
@@ -317,12 +253,6 @@ export default {
     },
     isInvalid () {
       this.invalid = true
-    },
-    request () {
-      const requestBtn = event.currentTarget
-      requestBtn.classList.add('v-btn--disabled')
-      requestBtn.getElementsByClassName('v-btn__content')[0].innerText = 'リクエスト済み'
-      alert('りくえすとしたよ！')
     },
     getUserAge (birthday) {
       if (!birthday) { return }

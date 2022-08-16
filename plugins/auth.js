@@ -8,19 +8,19 @@ class Authentication {
   }
 
   get user () {
-    return this.store.getters.authUser || {}
+    return this.store.getters['auth-user/authUser'] || {}
   }
 
   get token () {
-    return this.store.getters.authToken
+    return this.store.getters['auth-user/authToken']
   }
 
   get expires () {
-    return this.store.getters.authExpires
+    return this.store.getters['auth-user/authExpires']
   }
 
   get payload () {
-    return this.store.getters.authPayload
+    return this.store.getters['auth-user/authPayload']
   }
 
   // 認証情報をVuexに保存
@@ -28,10 +28,10 @@ class Authentication {
     const exp = expires * 1000
     const jwtPayload = (token) ? jwtDecode(token) : {}
 
-    this.store.dispatch('getAuthUser', user)
-    this.store.dispatch('getAuthToken', token)
-    this.store.dispatch('getAuthExpires', exp)
-    this.store.dispatch('getAuthPayload', jwtPayload)
+    this.store.dispatch('auth-user/getAuthUser', user)
+    this.store.dispatch('auth-user/getAuthToken', token)
+    this.store.dispatch('auth-user/getAuthExpires', exp)
+    this.store.dispatch('auth-user/getAuthPayload', jwtPayload)
   }
 
   // ログイン

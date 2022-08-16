@@ -31,9 +31,13 @@ export default {
   },
   data () {
     return {
-      commonImageSrc: require('@/static/CommonImage.jpg'),
       maxHeight: 400,
       minHeight: 180
+    }
+  },
+  computed: {
+    commonImageSrc () {
+      return this.$store.getters.commonImageSrc
     }
   }
 }

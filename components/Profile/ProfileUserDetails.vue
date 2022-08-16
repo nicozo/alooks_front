@@ -73,14 +73,12 @@ export default {
       default: 0
     }
   },
-  data () {
-    return {
-      defaultAvatarSrc: require('@/static/DefaultAvatar.png')
-    }
-  },
   computed: {
     breakPointAvatarSize () {
       return this.$vuetify.breakpoint.xs ? 120 : 170
+    },
+    defaultAvatarSrc () {
+      return this.$store.getters.defaultAvatarSrc
     }
   }
 }

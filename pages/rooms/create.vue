@@ -88,14 +88,20 @@ export default {
     recruitSuccessful (res) {
       console.log('作成されたroomオブジェクト', res)
       this.$router.push(this.redirectPath)
+      this.setToaster()
     },
     recruitFailure ({ response }) {
       if (response && response.status === 404) {
-        const msg = '募集できませんでした。時間を置いて募集してください'
+        const msg = '投稿に失敗しました'
         return this.$store.dispatch('getToast', { msg })
       }
       // TODO エラー処理
       console.log(response)
+    },
+    setToaster () {
+      const msg = 'スクワッドを投稿しました'
+      const color = 'success'
+      return this.$store.dispatch('getToast', { msg, color })
     }
   }
 }

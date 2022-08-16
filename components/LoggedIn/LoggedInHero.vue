@@ -1,7 +1,7 @@
 <template>
   <v-img
     id="logged-in-hero"
-    :src="imgSrc"
+    :src="commonImageSrc"
     max-height="350"
     dark
   >
@@ -31,9 +31,9 @@ export default {
       default: ''
     }
   },
-  data () {
-    return {
-      imgSrc: require('@/static/CommonImage.jpg')
+  computed: {
+    commonImageSrc () {
+      return this.$store.getters.commonImageSrc
     }
   }
 }

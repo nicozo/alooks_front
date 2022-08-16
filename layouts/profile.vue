@@ -116,15 +116,17 @@ export default {
       nav_lists: [
         { name: 'rooms' },
         { name: 'rooms-create' },
-        { name: 'invitation-list' }
+        { name: 'applications' }
       ],
-      drawer: false,
-      defaultAvatarSrc: require('@/static/DefaultAvatar.png')
+      drawer: false
     }
   },
   computed: {
     routeName () {
       return this.$route.name
+    },
+    defaultAvatarSrc () {
+      return this.$store.getters.defaultAvatarSrc
     }
   },
   methods: {
