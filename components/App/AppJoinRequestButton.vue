@@ -4,14 +4,14 @@
     persistent
     max-width="600px"
   >
-    <template v-slot:activator="{ on, attrs }">
+    <template #activator="{ on, attrs }">
       <v-btn
         :id="`room-${room.id}-btn`"
         v-bind="attrs"
-        v-on="on"
         color="success"
         class="ml-auto"
         :disabled="invalid"
+        v-on="on"
       >
         {{ $t('btn.invitation_request') }}
       </v-btn>
@@ -90,12 +90,17 @@ export default {
       require: true
     }
   },
+  data () {
+    return {
+      dialog: false,
+      message: ''
+    }
+  },
   computed: {
     myApplications () {
       return this.$store.getters['applications/myApplications']
     },
     isAlreadyAppliedFor () {
-      console.log('---computed---')
       const result = this.myApplications.find(myApplication =>
         myApplication.room_id === this.room.id &&
         myApplication.user_id === this.authUser.id &&
@@ -108,12 +113,6 @@ export default {
   mounted () {
     this.appliedForThis()
     this.isMyRoom()
-  },
-  data () {
-    return {
-      dialog: false,
-      message: ''
-    }
   },
   methods: {
     async apply () {
@@ -159,15 +158,6 @@ export default {
         applyBtn.getElementsByClassName('v-btn__content')[0].innerText = 'リクエスト済み'
       }
     },
-    // isAlreadyAppliedFor () {
-    //   const result = this.myApplications.find(myApplication =>
-    //     myApplication.room_id === this.room.id &&
-    //     myApplication.user_id === this.authUser.id &&
-    //     myApplication.host_id === this.room.user_id
-    //   )
-
-    //   return result
-    // },
     roomIsOwn () {
       return this.authUser.id === this.room.user_id
     },

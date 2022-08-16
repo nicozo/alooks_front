@@ -150,20 +150,10 @@
               </v-card-text>
 
               <v-card-actions>
-                <!-- <v-btn
-                  color="success"
-                  class="ml-auto"
-                  :disabled="invalid"
-                  @click.once="request()"
-                >
-                  {{ $t('btn.invitation_request') }}
-                </v-btn> -->
-
                 <app-join-request-button
                   :room="room"
-                  :authUser="authUser"
+                  :auth-user="authUser"
                   :invalid="invalid"
-                  :applications="applications"
                 />
               </v-card-actions>
             </v-container>
@@ -182,13 +172,9 @@ export default {
       'api/v1/rooms/' + params.id
     )
 
-    const applications = await $axios.$get(
-      'api/v1/applies/my_applications'
-    )
-
     // console.log('部屋情報:', room)
     // console.log('募集主情報:', room.host)
-    return { room, applications }
+    return { room }
   },
   data () {
     return {
@@ -253,6 +239,7 @@ export default {
       const roomDeadline = this.room.application_deadline
       const minutesToDeadline = this.$dayjs(roomDeadline).fromNow()
       this.timeToDeadline = this.replaceFormat(minutesToDeadline)
+      // console.log('締め切り', this.timeToDeadline)
     },
     replaceFormat (str) {
       // console.log('渡された文字列', str)

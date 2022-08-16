@@ -8,8 +8,8 @@
         <template v-if="isApplicationExist">
           <v-expansion-panels>
             <v-expansion-panel
-              :id="`application-${application.id}`"
               v-for="(application, i) in applications"
+              :id="`application-${application.id}`"
               :key="i"
               class="mb-3"
               :disabled="disabled"

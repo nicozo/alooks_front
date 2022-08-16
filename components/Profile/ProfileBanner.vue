@@ -29,15 +29,15 @@ export default {
       default: () => {}
     }
   },
-  computed: {
-    commonImageSrc () {
-      return this.$store.getters.commonImageSrc
-    }
-  },
   data () {
     return {
       maxHeight: 400,
       minHeight: 180
+    }
+  },
+  computed: {
+    commonImageSrc () {
+      return this.$store.getters.commonImageSrc
     }
   }
 }
