@@ -71,7 +71,6 @@
         :room="room"
         :authUser="authUser"
         :invalid="invalid"
-        :myApplications="myApplications"
       />
     </v-card-actions>
   </v-card>
@@ -106,11 +105,6 @@ export default {
         default: () => {},
         required: true
       }
-    },
-    myApplications: {
-      type: Array,
-      default: () => [],
-      required: true
     }
   },
   computed: {

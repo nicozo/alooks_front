@@ -12,7 +12,7 @@
         color="success"
         class="ml-auto"
         :disabled="invalid"
-        >
+      >
         {{ $t('btn.invitation_request') }}
       </v-btn>
     </template>
@@ -21,7 +21,7 @@
       <v-container>
         <v-card-title>
           <span class="text-h5">
-            リクエストフォーム
+            {{ $t('application.form.title') }}
           </span>
         </v-card-title>
 
@@ -79,11 +79,6 @@ export default {
       default: () => {},
       require: true
     },
-    myApplications: {
-      type: Array,
-      default: () => [],
-      require: true
-    },
     authUser: {
       type: Object,
       default: () => {},
@@ -93,6 +88,21 @@ export default {
       type: Boolean,
       default: false,
       require: true
+    }
+  },
+  computed: {
+    myApplications () {
+      return this.$store.getters['applications/myApplications']
+    },
+    isAlreadyAppliedFor () {
+      console.log('---computed---')
+      const result = this.myApplications.find(myApplication =>
+        myApplication.room_id === this.room.id &&
+        myApplication.user_id === this.authUser.id &&
+        myApplication.host_id === this.room.user_id
+      )
+
+      return result
     }
   },
   mounted () {
@@ -124,6 +134,7 @@ export default {
     },
     requestSuccessful (res) {
       console.log('res', res)
+      this.$store.dispatch('applications/getMyApplication', res)
       this.appliedForThis()
       this.closeDialog()
       this.setToaster()
@@ -141,22 +152,22 @@ export default {
       this.message = ''
     },
     appliedForThis () {
-      if (this.isAlreadyAppliedFor()) {
+      if (this.isAlreadyAppliedFor) {
         const applyBtn = document.getElementById(`room-${this.room.id}-btn`)
 
         applyBtn.classList.add('v-btn--disabled')
         applyBtn.getElementsByClassName('v-btn__content')[0].innerText = 'リクエスト済み'
       }
     },
-    isAlreadyAppliedFor () {
-      const result = this.myApplications.find(myApplication =>
-        myApplication.room_id === this.room.id &&
-        myApplication.user_id === this.authUser.id &&
-        myApplication.host_id === this.room.user_id
-      )
+    // isAlreadyAppliedFor () {
+    //   const result = this.myApplications.find(myApplication =>
+    //     myApplication.room_id === this.room.id &&
+    //     myApplication.user_id === this.authUser.id &&
+    //     myApplication.host_id === this.room.user_id
+    //   )
 
-      return result
-    },
+    //   return result
+    // },
     roomIsOwn () {
       return this.authUser.id === this.room.user_id
     },

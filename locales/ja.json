@@ -83,5 +83,10 @@
         "legend_stats": "Main Legend Stats"
       }
     }
+  },
+  "application": {
+    "form": {
+      "title": "リクエストフォーム"
+    }
   }
 }

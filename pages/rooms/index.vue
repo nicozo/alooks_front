@@ -38,7 +38,6 @@
       >
         <RoomItem
           :room="room"
-          :myApplications="myApplications"
         />
       </v-col>
 
@@ -85,19 +84,15 @@
 <script>
 export default {
   name: 'RoomsIndexPage',
+  middleware: [
+    'applications'
+  ],
   async asyncData ({ $axios }) {
     const rooms = await $axios.$get(
       'api/v1/rooms'
     )
 
-    const myApplications = await $axios.$get(
-      'api/v1/applies/my_applications'
-    )
-
-    // console.log('部屋情報:', rooms)
-    // console.log('参加リクエスト一覧:', myApplications)
-
-    return { rooms, myApplications }
+    return { rooms }
   },
   data () {
     return {
