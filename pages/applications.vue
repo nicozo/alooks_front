@@ -220,12 +220,6 @@
 export default {
   name: 'SamplePage',
   layout: 'loggedIn',
-  // async fetch () {
-  //   // console.log('--------fetch--------')
-
-  //   const res = await await this.$axios.$get('api/v1/applies')
-  //   await this.$store.dispatch('applications/getApplications', res)
-  // },
   data () {
     return {
       minWidth: 200

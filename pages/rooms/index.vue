@@ -84,9 +84,6 @@
 <script>
 export default {
   name: 'RoomsIndexPage',
-  middleware: [
-    'applications'
-  ],
   async asyncData ({ $axios }) {
     const rooms = await $axios.$get(
       'api/v1/rooms'
