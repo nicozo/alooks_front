@@ -5,35 +5,35 @@ class GameStats {
   }
 
   get data () {
-    return this.store.getters['game_stats/data']
+    return this.store.getters['game-stats/data']
   }
 
   get allLegendStats () {
-    return this.store.getters['game_stats/allLegendStats']
+    return this.store.getters['game-stats/allLegendStats']
   }
 
   get highestKillLegendStats () {
-    return this.store.getters['game_stats/highestKillLegendStats']
+    return this.store.getters['game-stats/highestKillLegendStats']
   }
 
   get rankedStats () {
-    return this.store.getters['game_stats/rankedStats']
+    return this.store.getters['game-stats/rankedStats']
   }
 
   get playerTotalStats () {
-    return this.store.getters['game_stats/playerTotalStats']
+    return this.store.getters['game-stats/playerTotalStats']
   }
 
   get errorMessage () {
-    return this.store.getters['game_stats/errorMessage']
+    return this.store.getters['game-stats/errorMessage']
   }
 
   get loading () {
-    return this.store.getters['game_stats/loading']
+    return this.store.getters['game-stats/loading']
   }
 
   get disabled () {
-    return this.store.getters['game_stats/disabled']
+    return this.store.getters['game-stats/disabled']
   }
 
   async getStats (gameId, platform) {
@@ -60,7 +60,7 @@ class GameStats {
       this.setData(res)
       this.setHighestKillLegendStats()
     } else {
-      this.store.dispatch('game_stats/getErrorMessage', res.Error)
+      this.store.dispatch('game-stats/getErrorMessage', res.Error)
     }
     this.isLoading()
     this.isDisabled()
@@ -77,17 +77,17 @@ class GameStats {
   }
 
   setData (res) {
-    this.store.dispatch('game_stats/getData', res)
-    this.store.dispatch('game_stats/getAllLegendStats', this.data.legends.all)
-    this.store.dispatch('game_stats/getRankedStats', this.setRankedStats())
-    this.store.dispatch('game_stats/getPlayerTotalStats', this.setPlayerTotalStats())
+    this.store.dispatch('game-stats/getData', res)
+    this.store.dispatch('game-stats/getAllLegendStats', this.data.legends.all)
+    this.store.dispatch('game-stats/getRankedStats', this.setRankedStats())
+    this.store.dispatch('game-stats/getPlayerTotalStats', this.setPlayerTotalStats())
   }
 
   setHighestKillLegendStats () {
     const targetLegend = this.getHighestKillLegend()
     const legendStats = this.allLegendStats[targetLegend.name]
 
-    this.store.dispatch('game_stats/getHighestKillLegendStats', legendStats)
+    this.store.dispatch('game-stats/getHighestKillLegendStats', legendStats)
     // console.log('highestKillLegendStats', this.highestKillLegendStats)
   }
 
@@ -155,16 +155,16 @@ class GameStats {
   }
 
   resetStats () {
-    this.store.dispatch('game_stats/getRankedStats', [])
-    this.store.dispatch('game_stats/getPlayerTotalStats', [])
+    this.store.dispatch('game-stats/getRankedStats', [])
+    this.store.dispatch('game-stats/getPlayerTotalStats', [])
   }
 
   isLoading () {
-    this.store.dispatch('game_stats/getLoading', !this.loading)
+    this.store.dispatch('game-stats/getLoading', !this.loading)
   }
 
   isDisabled () {
-    this.store.dispatch('game_stats/getDisabled', !this.disabled)
+    this.store.dispatch('game-stats/getDisabled', !this.disabled)
   }
 
   isRankedStatsExist () {
