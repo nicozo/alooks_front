@@ -37,7 +37,7 @@ export default {
     'plugins/vee-validate',
     'plugins/nuxt-client-init',
     'plugins/day',
-    'plugins/game_stats'
+    'plugins/game-stats'
   ],
 
   // Auto import components: https://go.nuxtjs.dev/config-components
