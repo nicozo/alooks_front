@@ -129,7 +129,7 @@ export default {
       const roomDeadline = this.room.application_deadline
       const minutesToDeadline = this.$dayjs(roomDeadline).fromNow()
       this.timeToDeadline = this.replaceFormat(minutesToDeadline)
-      console.log('締め切り', this.timeToDeadline)
+      // console.log('締め切り', this.timeToDeadline)
     },
     replaceFormat (str) {
       // console.log('渡された文字列', str)

@@ -20,7 +20,6 @@ export const mutations = {
     }
   },
   setMyApplications (state, myApplications) {
-    console.log('---store---')
     state.myApplications = myApplications
   },
   addMyApplication (state, myApplication) {
