@@ -33,9 +33,14 @@
                     <v-list-item-title class="text-h5">
                       {{ application.applicant.name }}
                     </v-list-item-title>
+
                     <div class="text-h6">
                       {{ application.body }}
                     </div>
+
+                    <v-list-item-subtitle>
+                      スクワッド：{{ application.applied_room.title }}
+                    </v-list-item-subtitle>
                   </v-list-item-content>
 
                   <div
@@ -46,7 +51,7 @@
                       color="red darken-3"
                       dark
                     >
-                      New
+                      {{ $t('application.unread') }}
                     </v-chip>
                   </div>
                 </v-list-item>

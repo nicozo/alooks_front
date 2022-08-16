@@ -87,6 +87,7 @@
   "application": {
     "form": {
       "title": "リクエストフォーム"
-    }
+    },
+    "unread": "New!!"
   }
 }
