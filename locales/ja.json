@@ -51,7 +51,8 @@
     "back_to_rooms_page": "スクワッド一覧へ戻る",
     "accept_request": "リクエスト承諾",
     "cancel": "取り消し",
-    "submit": "送信" 
+    "submit": "送信",
+    "create": "スクワッド募集"
   },
   "gender": {
     "male": "男性",

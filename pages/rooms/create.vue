@@ -44,7 +44,7 @@
                     color="primary"
                     :disabled="invalid"
                   >
-                    募集する
+                    {{ $t('btn.create') }}
                   </v-btn>
                 </v-col>
               </v-row>
