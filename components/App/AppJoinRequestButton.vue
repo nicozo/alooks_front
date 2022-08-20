@@ -123,7 +123,6 @@ export default {
         {
           apply: {
             body: this.message,
-            user_id: this.authUser.id,
             room_id: this.room.id
           }
         }
