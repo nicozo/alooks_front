@@ -139,11 +139,10 @@ export default {
     },
     requestFailure ({ response }) {
       if (response && response.status === 400) {
-        const msg = '参加リクエストに失敗しました'
+        const msg = response.data.errors[0]
 
-        return this.$store.dispatch('getToast', { msg })
+        this.$store.dispatch('getToast', { msg })
       }
-      console.log(response)
     },
     closeDialog () {
       this.dialog = false
@@ -168,7 +167,7 @@ export default {
       }
     },
     setToaster () {
-      const msg = '参加リクエストしました'
+      const msg = '参加リクエストを送信しました'
       const color = 'success'
       return this.$store.dispatch('getToast', { msg, color })
     }
