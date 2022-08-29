@@ -92,7 +92,8 @@ export default {
             body: this.message,
             room_id: application.room_id,
             applicant_id: application.user_id
-          }
+          },
+          application_id: application.id
         }
       )
         .then(res => this.requestSuccessful(res))

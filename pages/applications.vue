@@ -299,7 +299,7 @@ export default {
         .catch(e => console.log(e))
     },
     requestSuccessful (res) {
-      console.log(res)
+      // console.log(res)
       // console.log(this.applications)
       this.$store.dispatch('applications/getReadApplication', res)
     },
