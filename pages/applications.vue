@@ -183,12 +183,7 @@
 
                   <v-col cols="12">
                     <div align="end">
-                      <v-btn
-                        color="success"
-                        @click.once="accept(application)"
-                      >
-                        {{ $t('btn.accept_request') }}
-                      </v-btn>
+                      <app-accept-request-button :application="application" />
                     </div>
                   </v-col>
                 </v-row>
@@ -293,10 +288,6 @@ export default {
       } catch (error) {
         console.log(error)
       }
-    },
-    accept (application) {
-      console.log(application)
-      alert('Accept!')
     },
     async read (application) {
       // console.log('既読')

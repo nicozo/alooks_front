@@ -90,5 +90,10 @@
       "title": "リクエストフォーム"
     },
     "unread": "New!!"
+  },
+  "agreement": {
+    "form": {
+      "title": "一言メッセージ"
+    }
   }
 }
