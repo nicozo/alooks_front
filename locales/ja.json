@@ -90,7 +90,8 @@
     "form": {
       "title": "リクエストフォーム"
     },
-    "unread": "New!!"
+    "unread": "New!!",
+    "applied_for": "応募先" 
   },
   "agreement": {
     "form": {

@@ -39,11 +39,11 @@
                     </div>
 
                     <v-list-item-subtitle class="mb-1">
-                      自己紹介：{{ application.applicant.self_introduction }}
+                      {{ $t('user.self_introduction') }}：{{ application.applicant.self_introduction }}
                     </v-list-item-subtitle>
 
                     <v-list-item-subtitle>
-                      募集先：{{ application.applied_room.title }}
+                      {{ $t('application.applied_for') }}：{{ application.applied_room.title }}
                     </v-list-item-subtitle>
                   </v-list-item-content>
 
