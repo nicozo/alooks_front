@@ -38,8 +38,12 @@
                       {{ application.body }}
                     </div>
 
+                    <v-list-item-subtitle class="mb-1">
+                      自己紹介：{{ application.applicant.self_introduction }}
+                    </v-list-item-subtitle>
+
                     <v-list-item-subtitle>
-                      スクワッド：{{ application.applied_room.title }}
+                      募集先スクワッドタイトル：{{ application.applied_room.title }}
                     </v-list-item-subtitle>
                   </v-list-item-content>
 
