@@ -43,7 +43,7 @@
                     </v-list-item-subtitle>
 
                     <v-list-item-subtitle>
-                      募集先スクワッドタイトル：{{ application.applied_room.title }}
+                      募集先：{{ application.applied_room.title }}
                     </v-list-item-subtitle>
                   </v-list-item-content>
 

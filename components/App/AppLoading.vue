@@ -10,7 +10,7 @@
       >
         <v-container>
           <p>
-            getting stats...
+            {{ $t('message.loading_stats') }}
           </p>
         </v-container>
       </v-card>
