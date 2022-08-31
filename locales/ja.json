@@ -52,7 +52,8 @@
     "accept_request": "リクエスト承諾",
     "cancel": "取り消し",
     "submit": "送信",
-    "create": "スクワッド募集"
+    "create": "スクワッド募集",
+    "friend_requested": "送信しました"
   },
   "gender": {
     "male": "男性",
@@ -95,7 +96,8 @@
   },
   "agreement": {
     "form": {
-      "title": "一言メッセージ"
-    }
+      "title": "ひとこと"
+    },
+    "accepted": "リクエスト承諾！"
   }
 }

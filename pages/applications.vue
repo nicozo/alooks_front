@@ -38,11 +38,11 @@
                       {{ application.body }}
                     </div>
 
-                    <v-list-item-subtitle class="mb-1">
+                    <v-list-item-subtitle class="mb-1 white-space">
                       {{ $t('user.self_introduction') }}：{{ application.applicant.self_introduction }}
                     </v-list-item-subtitle>
 
-                    <v-list-item-subtitle>
+                    <v-list-item-subtitle class="white-space">
                       {{ $t('application.applied_for') }}：{{ application.applied_room.title }}
                     </v-list-item-subtitle>
                   </v-list-item-content>
@@ -161,7 +161,7 @@
                                   >
                                     <v-list-item>
                                       <v-list-item-content>
-                                        <v-list-item-subtitle>
+                                        <v-list-item-subtitle class="white-space">
                                           {{ data.value.name }}
                                         </v-list-item-subtitle>
                                         <v-list-item-title>
@@ -327,3 +327,9 @@ export default {
   }
 }
 </script>
+
+<style scoped>
+  .white-space {
+    white-space: normal;
+  }
+</style>
