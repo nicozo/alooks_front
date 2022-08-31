@@ -9,6 +9,7 @@
         :id="`room-${room.id}-btn`"
         v-bind="attrs"
         color="success"
+        class="mb-3"
         block
         :disabled="invalid"
         v-on="on"
