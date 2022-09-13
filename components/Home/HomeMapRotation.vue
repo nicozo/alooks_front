@@ -83,8 +83,8 @@
         :loading="loading"
       >
         <template v-if="isMapDataExist">
-          <!-- <v-img
-            src="#"
+          <v-img
+            :src="mapSrc"
             max-height="150"
             dark
           >
@@ -95,14 +95,7 @@
             <v-card-title>
               {{ nextMap.map }}
             </v-card-title>
-          </v-img> -->
-          <v-card-subtitle>
-            Next Map
-          </v-card-subtitle>
-
-          <v-card-title>
-            {{ nextMap.map }}
-          </v-card-title>
+          </v-img>
         </template>
 
         <template v-else>
@@ -125,7 +118,11 @@ export default {
   data () {
     return {
       timeMin: '00',
-      timeSec: '00'
+      timeSec: '00',
+      kingsCanyonSrc: require('@/static/kings_canyon.jpg'),
+      worldEdgeSrc: require('@/static/world_edge.jpg'),
+      olympusSrc: require('@/static/olympus.jpg'),
+      stormPointSrc: require('@/static/storm_point.jpg')
     }
   },
   computed: {
@@ -146,6 +143,32 @@ export default {
     },
     isMapDataExist () {
       return this.data !== ''
+    },
+    mapSrc () {
+      let src = ''
+
+      switch (this.nextMap.map) {
+        case 'Olympus':
+          src = this.olympusSrc
+          break
+
+        case "World's Edge":
+          src = this.worldEdgeSrc
+          break
+
+        case 'Storm Point':
+          src = this.stormPointSrc
+          break
+
+        case 'Kings Canyon':
+          src = this.kingsCanyonSrc
+          break
+
+        default:
+          break
+      }
+
+      return src
     }
   },
   created () {

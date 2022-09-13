@@ -86,13 +86,18 @@
             cols="12"
           >
             <v-card flat>
-              <v-card-title class="justify-center text-h4">
-                {{ $t(`items.${item.title}`) }}
-              </v-card-title>
+              <v-container>
+                <v-card-title class="justify-center text-h4">
+                  {{ $t(`items.${item.title}`) }}
+                </v-card-title>
+              </v-container>
             </v-card>
           </v-col>
+
           <v-col cols="12">
-            <div :is="`home-${item.title}`" />
+            <v-container>
+              <div :is="`home-${item.title}`" />
+            </v-container>
           </v-col>
         </v-row>
       </v-container>
