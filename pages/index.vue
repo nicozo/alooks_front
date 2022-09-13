@@ -105,12 +105,14 @@
 <script>
 import HomeAbout from '../components/Home/HomeAbout'
 import HomeUsage from '../components/Home/HomeUsage'
+import HomeMapRotation from '../components/Home/HomeMapRotation'
 
 export default {
   name: 'IndexPage',
   components: {
     HomeAbout,
-    HomeUsage
+    HomeUsage,
+    HomeMapRotation
   },
   middleware: [
     'logged-in-redirect'
@@ -120,7 +122,8 @@ export default {
       appName,
       homeItems: [
         { title: 'about' },
-        { title: 'usage' }
+        { title: 'usage' },
+        { title: 'map-rotation' }
       ],
       drawer: false
     }

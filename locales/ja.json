@@ -13,7 +13,8 @@
   },
   "items": {
     "about": "アプリについて",
-    "usage": "使い方"
+    "usage": "使い方",
+    "map-rotation": "マップローテーション"
   },
   "error": {
     "Unauthorized": "認証に失敗しました",

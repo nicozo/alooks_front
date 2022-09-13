@@ -6,7 +6,9 @@ export const state = () => ({
   playerTotalStats: '',
   errorMessage: '',
   loading: false,
-  disabled: false
+  disabled: false,
+  currentMap: '',
+  nextMap: ''
 })
 
 export const getters = {
@@ -17,7 +19,9 @@ export const getters = {
   playerTotalStats: state => state.playerTotalStats,
   errorMessage: state => state.errorMessage,
   loading: state => state.loading,
-  disabled: state => state.disabled
+  disabled: state => state.disabled,
+  currentMap: state => state.currentMap,
+  nextMap: state => state.nextMap
 }
 
 export const mutations = {
@@ -44,6 +48,12 @@ export const mutations = {
   },
   setDisabled (state, boolean) {
     state.disabled = boolean
+  },
+  setCurrentMap (state, currentMap) {
+    state.currentMap = currentMap
+  },
+  setNextMap (state, nextMap) {
+    state.nextMap = nextMap
   }
 }
 
@@ -71,5 +81,11 @@ export const actions = {
   },
   getDisabled ({ commit }, boolean) {
     commit('setDisabled', boolean)
+  },
+  getCurrentMap ({ commit }, currentMap) {
+    commit('setCurrentMap', currentMap)
+  },
+  getNextMap ({ commit }, nextMap) {
+    commit('setNextMap', nextMap)
   }
 }
