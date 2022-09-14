@@ -57,7 +57,7 @@ export default {
   data ({ $config: { appName } }) {
     return {
       appName,
-      subTitle: 'Apex Legendsでスクワッドを募集・参加しよう！'
+      subTitle: 'サクッとApex Legendsをプレイする仲間を募集・検索'
     }
   }
 }
