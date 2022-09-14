@@ -101,5 +101,11 @@
       "title": "ひとこと"
     },
     "accepted": "リクエスト承諾！"
+  },
+  "home": {
+    "map_rotation": {
+      "current_map": "現在のマップ",
+      "next_map": "次のマップ"
+    }
   }
 }

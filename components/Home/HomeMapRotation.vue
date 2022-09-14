@@ -20,7 +20,7 @@
             dark
           >
             <v-card-subtitle>
-              Current Map
+              {{ $t('home.map_rotation.current_map') }}
             </v-card-subtitle>
 
             <v-card-title class="text-h4">
@@ -42,7 +42,7 @@
 
         <template v-else>
           <v-card-subtitle>
-            Current Map
+            {{ $t('home.map_rotation.current_map') }}
           </v-card-subtitle>
 
           <v-card-title class="text-h4">
@@ -89,7 +89,7 @@
             dark
           >
             <v-card-subtitle>
-              Next Map
+              {{ $t('home.map_rotation.next_map') }}
             </v-card-subtitle>
 
             <v-card-title>
@@ -100,7 +100,7 @@
 
         <template v-else>
           <v-card-subtitle>
-            Next Map
+            {{ $t('home.map_rotation.next_map') }}
           </v-card-subtitle>
 
           <v-card-title>
