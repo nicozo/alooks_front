@@ -59,13 +59,13 @@
       lg="1"
       class="text-center"
     >
-      <div v-show="this.isBreakPoint">
+      <div v-show="isBreakPoint">
         <v-icon>
           mdi-chevron-triple-up
         </v-icon>
       </div>
 
-      <div v-show="!this.isBreakPoint">
+      <div v-show="!isBreakPoint">
         <v-icon>
           mdi-chevron-triple-left
         </v-icon>

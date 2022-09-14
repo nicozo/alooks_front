@@ -38,7 +38,7 @@ export default {
     'plugins/nuxt-client-init',
     'plugins/day',
     'plugins/game-stats',
-    { src:'@/plugins/vue-tour', mode: 'client' }
+    { src: '@/plugins/vue-tour', mode: 'client' }
   ],
 
   // Auto import components: https://go.nuxtjs.dev/config-components

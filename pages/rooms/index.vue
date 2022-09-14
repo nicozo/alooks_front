@@ -125,9 +125,6 @@ export default {
       ]
     }
   },
-  mounted () {
-    this.$tours['roomsTour'].start()
-  },
   computed: {
     filteredRooms () {
       const rooms = []
@@ -157,6 +154,9 @@ export default {
       this.returnTop()
       return this.pageNumber !== 0 ? this.filteredRooms.slice(this.pageSize * (this.pageNumber - 1), this.pageSize * this.pageNumber) : this.filteredRooms.slice(0, this.pageSize)
     }
+  },
+  mounted () {
+    this.$tours.roomsTour.start()
   },
   methods: {
     setPageNumber (number) {
