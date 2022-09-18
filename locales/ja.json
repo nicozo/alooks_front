@@ -11,7 +11,8 @@
     "profile": "プロフィール",
     "profile-edit": "プロフィール編集",
     "reset_password-create": "パスワードをリセット",
-    "reset_password-update": "パスワードをリセット"
+    "reset_password-update": "パスワードをリセット",
+    "privacy_policy": "プライバシーポリシー"
   },
   "items": {
     "about": "エペスクとは？",
