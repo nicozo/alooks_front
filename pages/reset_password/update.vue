@@ -18,6 +18,10 @@
         width="80%"
         max-width="400"
       >
+        <v-card-text>
+          新しいパスワードを設定してください
+        </v-card-text>
+
         <validation-observer v-slot="{ invalid }">
           <form @submit.prevent="resetPassword">
             <v-container fluid>
@@ -60,8 +64,23 @@ export default {
   methods: {
     async resetPassword () {
       if (!this.invalid) {
-        await this.$axios.$post
+        await this.$axios.$patch(
+          `api/v1/password_resets/${this.$route.query.id}`,
+          { user: this.user }
+        )
+          .then(res => this.resetSuccessful(res))
       }
+    },
+    resetSuccessful (res) {
+      this.$router.push('/login')
+      this.setToaster()
+
+      console.log(res)
+    },
+    setToaster () {
+      const msg = 'パスワードを更新しました'
+      const color = 'success'
+      return this.$store.dispatch('getToast', { msg, color })
     }
   }
 }
