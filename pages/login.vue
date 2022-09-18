@@ -66,7 +66,7 @@
         class="text-center"
       >
         <NuxtLink
-          to="#"
+          to="/reset_password/create"
           class="text-decoration-none"
         >
           {{ $t('btn.password_forget') }}
