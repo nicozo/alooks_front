@@ -62,7 +62,7 @@
           to="/login"
           class="text-decoration-none"
         >
-          {{ $t('btn.do_not_have_account') }}
+          {{ $t('btn.already_have_account') }}
         </NuxtLink>
       </v-col>
     </v-row>
@@ -107,7 +107,7 @@ export default {
         return this.$store.dispatch('getToast', { msg })
       }
       // TODO エラー処理
-      console.log(response)
+      // console.log(response)
     },
     setToaster () {
       const msg = 'ユーザーを作成しました'
