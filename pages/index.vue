@@ -101,6 +101,34 @@
           </v-col>
         </v-row>
       </v-container>
+
+      <v-bottom-navigation>
+        <v-btn
+          href="https://apexlegendsstatus.com/"
+          target="blank"
+        >
+          トラッカーサイト
+        </v-btn>
+
+        <v-btn
+          href="https://twitter.com/ApexLooks"
+          target="blank"
+        >
+          運営者情報
+        </v-btn>
+
+        <v-btn
+          href="https://twitter.com/ApexLooks"
+        >
+          利用規約
+        </v-btn>
+
+        <v-btn
+          href="https://twitter.com/ApexLooks"
+        >
+          プライバシーポリシー
+        </v-btn>
+      </v-bottom-navigation>
     </v-main>
 
     <app-footer />
