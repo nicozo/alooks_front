@@ -21,7 +21,8 @@
     </v-btn>
 
     <v-btn
-      href="https://twitter.com/ApexLooks"
+      nuxt
+      to="/privacy_policy"
     >
       {{ $t('home.bottom_navigation.privacy_policy') }}
     </v-btn>
