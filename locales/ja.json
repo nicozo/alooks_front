@@ -109,6 +109,12 @@
     "map_rotation": {
       "current_map": "現在のマップ",
       "next_map": "次のマップ"
+    },
+    "bottom_navigation": {
+      "tracker_site": "トラッカーサイト",
+      "administration": "運営者情報",
+      "tos": "利用規約",
+      "privacy_policy": "プライバシーポリシー"
     }
   }
 }
