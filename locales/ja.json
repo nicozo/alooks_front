@@ -9,7 +9,9 @@
     "rooms-id": "スクワッド詳細",
     "applications": "参加リクエスト一覧",
     "profile": "プロフィール",
-    "profile-edit": "プロフィール編集"
+    "profile-edit": "プロフィール編集",
+    "reset_password-create": "パスワードをリセット",
+    "reset_password-update": "パスワードをリセット"
   },
   "items": {
     "about": "エペスクとは？",
@@ -48,6 +50,7 @@
     "register": "新規登録",
     "password_forget": "パスワードをお忘れですか？",
     "do_not_have_account": "アカウントお持ちでないですか？",
+    "already_have_account": "アカウントをお持ちですか？",
     "to_rooms_page": "スクワッドを探す",
     "to_top_page": "トップページへ戻る",
     "back_to_rooms_page": "スクワッド一覧へ戻る",
