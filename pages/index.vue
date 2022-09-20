@@ -86,16 +86,23 @@
             cols="12"
           >
             <v-card flat>
-              <v-card-title class="justify-center text-h4">
-                {{ $t(`items.${item.title}`) }}
-              </v-card-title>
+              <v-container>
+                <v-card-title class="justify-center text-h4">
+                  {{ $t(`items.${item.title}`) }}
+                </v-card-title>
+              </v-container>
             </v-card>
           </v-col>
+
           <v-col cols="12">
-            <div :is="`home-${item.title}`" />
+            <v-container>
+              <div :is="`home-${item.title}`" />
+            </v-container>
           </v-col>
         </v-row>
       </v-container>
+
+      <home-bottom-navigation />
     </v-main>
 
     <app-footer />
@@ -104,13 +111,17 @@
 
 <script>
 import HomeAbout from '../components/Home/HomeAbout'
-import HomeUsage from '../components/Home/HomeUsage'
+// import HomeUsage from '../components/Home/HomeUsage'
+import HomeRooms from '../components/Home/HomeRooms'
+import HomeMapRotation from '../components/Home/HomeMapRotation'
 
 export default {
   name: 'IndexPage',
   components: {
     HomeAbout,
-    HomeUsage
+    // HomeUsage,
+    HomeRooms,
+    HomeMapRotation
   },
   middleware: [
     'logged-in-redirect'
@@ -120,7 +131,9 @@ export default {
       appName,
       homeItems: [
         { title: 'about' },
-        { title: 'usage' }
+        // { title: 'usage' },
+        { title: 'rooms' },
+        { title: 'map-rotation' }
       ],
       drawer: false
     }

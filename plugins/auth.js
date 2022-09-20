@@ -85,6 +85,10 @@ class Authentication {
     // console.log('isAuthenticated', this.isAuthenticated())
     return this.isExistUser() && this.isAuthenticated()
   }
+
+  profileCompleted () {
+    return this.user.game_id
+  }
 }
 
 // 共通化

@@ -1,4 +1,4 @@
-z<template>
+<template>
   <validation-provider
     v-slot="{ errors }"
     name="プラットフォーム"

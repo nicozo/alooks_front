@@ -38,8 +38,12 @@
                       {{ application.body }}
                     </div>
 
-                    <v-list-item-subtitle>
-                      スクワッド：{{ application.applied_room.title }}
+                    <v-list-item-subtitle class="mb-1 white-space">
+                      {{ $t('user.self_introduction') }}：{{ application.applicant.self_introduction }}
+                    </v-list-item-subtitle>
+
+                    <v-list-item-subtitle class="white-space">
+                      {{ $t('application.applied_for') }}：{{ application.applied_room.title }}
                     </v-list-item-subtitle>
                   </v-list-item-content>
 
@@ -157,7 +161,7 @@
                                   >
                                     <v-list-item>
                                       <v-list-item-content>
-                                        <v-list-item-subtitle>
+                                        <v-list-item-subtitle class="white-space">
                                           {{ data.value.name }}
                                         </v-list-item-subtitle>
                                         <v-list-item-title>
@@ -183,12 +187,7 @@
 
                   <v-col cols="12">
                     <div align="end">
-                      <v-btn
-                        color="success"
-                        @click.once="accept(application)"
-                      >
-                        {{ $t('btn.accept_request') }}
-                      </v-btn>
+                      <app-accept-request-button :application="application" />
                     </div>
                   </v-col>
                 </v-row>
@@ -294,10 +293,6 @@ export default {
         console.log(error)
       }
     },
-    accept (application) {
-      console.log(application)
-      alert('Accept!')
-    },
     async read (application) {
       // console.log('既読')
 
@@ -308,7 +303,7 @@ export default {
         .catch(e => console.log(e))
     },
     requestSuccessful (res) {
-      console.log(res)
+      // console.log(res)
       // console.log(this.applications)
       this.$store.dispatch('applications/getReadApplication', res)
     },
@@ -332,3 +327,9 @@ export default {
   }
 }
 </script>
+
+<style scoped>
+  .white-space {
+    white-space: normal;
+  }
+</style>

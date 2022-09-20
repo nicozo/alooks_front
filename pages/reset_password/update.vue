@@ -1,9 +1,6 @@
 <template>
-  <v-container fluid>
-    <app-back-home-button />
-
+  <v-container>
     <v-row
-      id="register-form"
       align="center"
       justify="center"
     >
@@ -21,13 +18,13 @@
         width="80%"
         max-width="400"
       >
+        <v-card-text>
+          新しいパスワードを設定してください
+        </v-card-text>
+
         <validation-observer v-slot="{ invalid }">
-          <form @submit.prevent="register">
+          <form @submit.prevent="resetPassword">
             <v-container fluid>
-              <user-form-name :name.sync="user.name" />
-
-              <user-form-email :email.sync="user.email" />
-
               <user-form-password :password.sync="user.password" />
 
               <user-form-password-confirmation :password-confirmation.sync="user.password_confirmation" />
@@ -40,7 +37,7 @@
                     color="primary"
                     :disabled="invalid"
                   >
-                    {{ $t('btn.register') }}
+                    {{ $t('btn.submit') }}
                   </v-btn>
                 </v-col>
               </v-row>
@@ -49,35 +46,15 @@
         </validation-observer>
       </v-card>
     </v-row>
-
-    <v-row
-      align="center"
-      justify="center"
-    >
-      <v-col
-        cols="12"
-        class="text-center"
-      >
-        <NuxtLink
-          to="/login"
-          class="text-decoration-none"
-        >
-          {{ $t('btn.already_have_account') }}
-        </NuxtLink>
-      </v-col>
-    </v-row>
   </v-container>
 </template>
 
 <script>
 export default {
-  name: 'RegisterPage',
-  layout: 'signup',
+  name: 'ResetPasswordPage',
   data ({ $route }) {
     return {
       user: {
-        name: '',
-        email: '',
         password: '',
         password_confirmation: ''
       },
@@ -85,32 +62,23 @@ export default {
     }
   },
   methods: {
-    async register () {
+    async resetPassword () {
       if (!this.invalid) {
-        await this.$axios.$post(
-          'api/v1/registers',
+        await this.$axios.$patch(
+          `api/v1/password_resets/${this.$route.query.id}`,
           { user: this.user }
         )
-          .then(res => this.registerSuccessful(res))
-          .catch(e => this.registerFailure(e))
+          .then(res => this.resetSuccessful(res))
       }
     },
-    registerSuccessful (res) {
-      console.log(res)
+    resetSuccessful (res) {
       this.$router.push('/login')
-
       this.setToaster()
-    },
-    registerFailure ({ response }) {
-      if (response && response.status === 400) {
-        const msg = 'ユーザーを作成できませんでした。既に使用されているメールアドレスです。'
-        return this.$store.dispatch('getToast', { msg })
-      }
-      // TODO エラー処理
-      // console.log(response)
+
+      console.log(res)
     },
     setToaster () {
-      const msg = 'ユーザーを作成しました'
+      const msg = 'パスワードを更新しました'
       const color = 'success'
       return this.$store.dispatch('getToast', { msg, color })
     }

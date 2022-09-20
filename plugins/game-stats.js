@@ -36,6 +36,14 @@ class GameStats {
     return this.store.getters['game-stats/disabled']
   }
 
+  get currentMap () {
+    return this.store.getters['game-stats/currentMap']
+  }
+
+  get nextMap () {
+    return this.store.getters['game-stats/nextMap']
+  }
+
   async getStats (gameId, platform) {
     this.resetStats()
     this.isLoading()
@@ -72,8 +80,39 @@ class GameStats {
     this.isDisabled()
   }
 
+  async getMapData () {
+    this.isLoading()
+    console.log('loading map data')
+
+    await this.$axios.$get(
+      'map_rotation'
+    )
+      .then(res => this.mapRotationRequestSuccessful(res))
+      .catch(e => this.mapRotationRequestFailure(e))
+  }
+
+  mapRotationRequestSuccessful (res) {
+    if (!this.responseHasErrorMessage(res)) {
+      this.setMapData(res)
+    } else {
+      this.store.dispatch('game-stats/getErrorMessage', res.Error)
+    }
+    this.isLoading()
+  }
+
+  mapRotationRequestFailure (e) {
+    console.log(e)
+    this.isLoading()
+  }
+
   responseHasErrorMessage (res) {
     return 'Error' in res
+  }
+
+  setMapData (res) {
+    this.store.dispatch('game-stats/getData', res)
+    this.store.dispatch('game-stats/getCurrentMap', this.data.current)
+    this.store.dispatch('game-stats/getNextMap', this.data.next)
   }
 
   setData (res) {
@@ -169,6 +208,10 @@ class GameStats {
 
   isRankedStatsExist () {
     return this.rankedStats.length !== 0
+  }
+
+  isPlayerTotalStatsExist () {
+    return this.playerTotalStats.length !== 0
   }
 }
 

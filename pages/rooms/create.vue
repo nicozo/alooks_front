@@ -22,13 +22,13 @@
 
               <room-form-platform :platform.sync="room.platform" />
 
-              <room-form-game-mode :game-mode.sync="room.game_mode" />
-
               <room-form-rank-tier :rank-tier.sync="room.rank_tier" />
 
               <room-form-application-deadline :application-deadline.sync="room.application_deadline" />
 
               <room-form-recruitment-number :recruitment-number.sync="room.recruitment_number" />
+
+              <room-form-game-mode :game-mode.sync="room.game_mode" />
 
               <!-- TODO 下書き機能 -->
               <!-- <v-switch
@@ -44,7 +44,7 @@
                     color="primary"
                     :disabled="invalid"
                   >
-                    募集する
+                    {{ $t('btn.create') }}
                   </v-btn>
                 </v-col>
               </v-row>
@@ -53,6 +53,8 @@
         </validation-observer>
       </v-card>
     </v-row>
+
+    <app-guide-profile :profile-dialog.sync="profile_dialog" />
   </v-container>
 </template>
 
@@ -71,32 +73,35 @@ export default {
         is_draft: false
       },
       redirectPath: this.$store.state.loggedIn.rememberPath,
-      pageTitle: this.$t(`pages.${$route.name}`)
+      pageTitle: this.$t(`pages.${$route.name}`),
+      profile_dialog: false
     }
   },
   methods: {
     async recruit () {
-      if (!this.invalid) {
+      if (!this.invalid && this.$auth.profileCompleted()) {
         await this.$axios.$post(
           'api/v1/rooms',
-          { room: this.room, game_id: 'Property_0' }
+          { room: this.room }
         )
           .then(res => this.recruitSuccessful(res))
           .catch(e => this.recruitFailure(e))
+      } else {
+        this.profile_dialog = true
+        const msg = 'まずはプロフィールを完成させましょう！'
+        return this.$store.dispatch('getToast', { msg })
       }
     },
     recruitSuccessful (res) {
-      console.log('作成されたroomオブジェクト', res)
+      // console.log('作成されたroomオブジェクト', res)
       this.$router.push(this.redirectPath)
       this.setToaster()
     },
     recruitFailure ({ response }) {
-      if (response && response.status === 404) {
+      if (response && response.status === 400) {
         const msg = '投稿に失敗しました'
         return this.$store.dispatch('getToast', { msg })
       }
-      // TODO エラー処理
-      console.log(response)
     },
     setToaster () {
       const msg = 'スクワッドを投稿しました'

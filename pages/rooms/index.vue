@@ -5,6 +5,7 @@
         <v-card flat>
           <form
             id="search-form"
+            class="step-2"
             @submit.prevent
           >
             <v-container>
@@ -48,6 +49,7 @@
         <template #activator="{ on, attrs }">
           <v-fab-transition>
             <v-btn
+              class="step-1"
               color="primary"
               dark
               fixed
@@ -78,6 +80,8 @@
         />
       </v-col>
     </v-row>
+
+    <v-tour name="roomsTour" :steps="steps" />
   </v-container>
 </template>
 
@@ -102,7 +106,23 @@ export default {
         game_mode: '',
         rank_tier: '',
         opening: ''
-      }
+      },
+      steps: [
+        {
+          target: '.step-1',
+          content: 'スクワッドの募集を作成できます',
+          params: {
+            placement: 'left'
+          }
+        },
+        {
+          target: '.step-2',
+          content: 'スクワッドの検索ができます',
+          params: {
+            placement: 'top'
+          }
+        }
+      ]
     }
   },
   computed: {
@@ -134,6 +154,9 @@ export default {
       this.returnTop()
       return this.pageNumber !== 0 ? this.filteredRooms.slice(this.pageSize * (this.pageNumber - 1), this.pageSize * this.pageNumber) : this.filteredRooms.slice(0, this.pageSize)
     }
+  },
+  mounted () {
+    this.$tours.roomsTour.start()
   },
   methods: {
     setPageNumber (number) {

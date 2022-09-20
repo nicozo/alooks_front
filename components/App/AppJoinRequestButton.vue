@@ -9,7 +9,8 @@
         :id="`room-${room.id}-btn`"
         v-bind="attrs"
         color="success"
-        class="ml-auto"
+        class="mb-3"
+        block
         :disabled="invalid"
         v-on="on"
       >
@@ -67,6 +68,8 @@
         </v-card-actions>
       </v-container>
     </v-card>
+
+    <app-guide-profile :profile-dialog.sync="profile_dialog" />
   </v-dialog>
 </template>
 
@@ -93,7 +96,8 @@ export default {
   data () {
     return {
       dialog: false,
-      message: ''
+      message: '',
+      profile_dialog: false
     }
   },
   computed: {
@@ -118,18 +122,23 @@ export default {
     async apply () {
       console.log('Join Request')
 
-      await this.$axios.$post(
-        'api/v1/applies',
-        {
-          apply: {
-            body: this.message,
-            user_id: this.authUser.id,
-            room_id: this.room.id
+      if (this.$auth.profileCompleted()) {
+        await this.$axios.$post(
+          'api/v1/applies',
+          {
+            apply: {
+              body: this.message,
+              room_id: this.room.id
+            }
           }
-        }
-      )
-        .then(res => this.requestSuccessful(res))
-        .catch(e => this.requestFailure(e))
+        )
+          .then(res => this.requestSuccessful(res))
+          .catch(e => this.requestFailure(e))
+      } else {
+        this.profile_dialog = true
+        const msg = 'まずはプロフィールを完成させましょう！'
+        return this.$store.dispatch('getToast', { msg })
+      }
     },
     requestSuccessful (res) {
       console.log('res', res)
@@ -140,15 +149,17 @@ export default {
     },
     requestFailure ({ response }) {
       if (response && response.status === 400) {
-        const msg = '参加リクエストに失敗しました'
+        const msg = response.data.errors[0]
 
-        return this.$store.dispatch('getToast', { msg })
+        this.$store.dispatch('getToast', { msg })
       }
-      console.log(response)
     },
     closeDialog () {
       this.dialog = false
       this.message = ''
+    },
+    closeProfileDialog () {
+      this.profile_dialog = false
     },
     appliedForThis () {
       if (this.isAlreadyAppliedFor) {
@@ -169,7 +180,7 @@ export default {
       }
     },
     setToaster () {
-      const msg = '参加リクエストしました'
+      const msg = '参加リクエストを送信しました'
       const color = 'success'
       return this.$store.dispatch('getToast', { msg, color })
     }
