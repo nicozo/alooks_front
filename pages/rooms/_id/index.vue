@@ -67,6 +67,104 @@
 
           <v-col cols="12">
             <v-card
+              :id="'room' + room.id"
+            >
+              <v-list-item>
+                <div v-show="isRoomClosing(room.application_deadline)">
+                  <v-overlay
+                    absolute
+                    opacity="0.9"
+                  >
+                    <v-card-text class="font-weight-bold">
+                      {{ $t('message.now_closed') }}
+                    </v-card-text>
+                  </v-overlay>
+                </div>
+
+                <v-container>
+                  <div class="text-right">
+                    <v-chip
+                      color="red"
+                      dark
+                    >
+                      あと{{ room.recruitment_number }}人募集
+                    </v-chip>
+                  </div>
+
+                  <v-card-title>
+                    {{ room.title }}
+                  </v-card-title>
+
+                  <v-divider />
+
+                  <v-card-text>
+                    {{ $t('room.platform') }}：
+                    <v-chip
+                      color="indigo darken-3"
+                      dark
+                      outlined
+                    >
+                      {{ room.platform }}
+                    </v-chip>
+                  </v-card-text>
+
+                  <v-card-text>
+                    {{ $t('room.game_mode') }}：
+                    <v-chip
+                      color="deep-orange darken-3"
+                      dark
+                      outlined
+                    >
+                      {{ room.game_mode }}
+                    </v-chip>
+                  </v-card-text>
+
+                  <v-card-text>
+                    {{ $t('room.rank_tier') }}：
+                    <v-chip
+                      color="teal darken-3"
+                      dark
+                      outlined
+                    >
+                      {{ room.rank_tier }}
+                    </v-chip>
+                  </v-card-text>
+
+                  <v-card-text>
+                    {{ $t('room.application_deadline') }}：
+                    <v-chip
+                      color="pink darken-3"
+                      dark
+                      outlined
+                    >
+                      {{ timeToDeadline }}
+                    </v-chip>
+                  </v-card-text>
+
+                  <v-card-actions>
+                    <app-join-request-button
+                      :room="room"
+                      :auth-user="authUser"
+                      :invalid="invalid"
+                    />
+                  </v-card-actions>
+                </v-container>
+              </v-list-item>
+            </v-card>
+          </v-col>
+        </v-row>
+      </v-col>
+
+      <v-col
+        cols="12"
+        sm="6"
+        md="6"
+        lg="6"
+        xl="6"
+      >
+        <v-row dense>
+          <v-col cols="12">
+            <v-card
               id="host-rank-stats"
               :loading="loading"
             >
@@ -82,7 +180,7 @@
                 </template>
 
                 <template v-else>
-                  <template v-if="isRankedStatsExist">
+                  <template v-if="this.$game.isRankedStatsExist()">
                     <profile-ranked-stats :ranked-stats="rankedStats" />
                   </template>
 
@@ -95,101 +193,79 @@
               </v-container>
             </v-card>
           </v-col>
+
+          <v-col cols="12">
+            <v-card
+              id="host-total-stats"
+              :loading="loading"
+            >
+              <v-container>
+                <v-card-title>
+                  {{ $t('profile.total_stats.title.current_player_stats') }}
+                </v-card-title>
+
+                <v-divider />
+
+                <template v-if="loading">
+                  <app-loading />
+                </template>
+
+                <template v-else>
+                  <template v-if="this.$game.isPlayerTotalStatsExist()">
+                    <v-row dense>
+                      <v-col
+                        cols="12"
+                        sm="5"
+                        md="5"
+                      >
+                        <template v-if="highestKillLegendStats">
+                          <v-img :src="highestKillLegendStats.ImgAssets.icon" :width="isBreakPointImgWidth" />
+                        </template>
+                      </v-col>
+
+                      <v-col
+                        cols="12"
+                        sm="7"
+                        md="7"
+                      >
+                        <v-row
+                          dense
+                          align="center"
+                          justify="center"
+                        >
+                          <v-col
+                            v-for="(data, i) in filteredPlayerTotalStats"
+                            :key="i"
+                            cols="6"
+                            md="4"
+                            lg="4"
+                          >
+                            <v-list-item>
+                              <v-list-item-content>
+                                <v-list-item-subtitle class="white-space">
+                                  {{ data.value.name }}
+                                </v-list-item-subtitle>
+                                <v-list-item-title>
+                                  {{ data.value.value }}
+                                </v-list-item-title>
+                              </v-list-item-content>
+                            </v-list-item>
+                          </v-col>
+                        </v-row>
+                      </v-col>
+                    </v-row>
+                  </template>
+
+                  <template v-else>
+                    <div>
+                      {{ $t('message.no_data') }}
+                    </div>
+                  </template>
+                </template>
+              </v-container>
+            </v-card>
+          </v-col>
         </v-row>
-      </v-col>
-
-      <v-col
-        cols="12"
-        sm="6"
-        md="6"
-        lg="6"
-        xl="6"
-      >
-        <v-card
-          :id="'room' + room.id"
-        >
-          <v-list-item>
-            <div v-show="isRoomClosing(room.application_deadline)">
-              <v-overlay
-                absolute
-                opacity="0.9"
-              >
-                <v-card-text class="font-weight-bold">
-                  {{ $t('message.now_closed') }}
-                </v-card-text>
-              </v-overlay>
-            </div>
-
-            <v-container>
-              <div class="text-right">
-                <v-chip
-                  color="red"
-                  dark
-                >
-                  あと{{ room.recruitment_number }}人募集
-                </v-chip>
-              </div>
-
-              <v-card-title>
-                {{ room.title }}
-              </v-card-title>
-
-              <v-divider />
-
-              <v-card-text>
-                {{ $t('room.platform') }}：
-                <v-chip
-                  color="indigo darken-3"
-                  dark
-                  outlined
-                >
-                  {{ room.platform }}
-                </v-chip>
-              </v-card-text>
-
-              <v-card-text>
-                {{ $t('room.game_mode') }}：
-                <v-chip
-                  color="deep-orange darken-3"
-                  dark
-                  outlined
-                >
-                  {{ room.game_mode }}
-                </v-chip>
-              </v-card-text>
-
-              <v-card-text>
-                {{ $t('room.rank_tier') }}：
-                <v-chip
-                  color="teal darken-3"
-                  dark
-                  outlined
-                >
-                  {{ room.rank_tier }}
-                </v-chip>
-              </v-card-text>
-
-              <v-card-text>
-                {{ $t('room.application_deadline') }}：
-                <v-chip
-                  color="pink darken-3"
-                  dark
-                  outlined
-                >
-                  {{ timeToDeadline }}
-                </v-chip>
-              </v-card-text>
-
-              <v-card-actions>
-                <app-join-request-button
-                  :room="room"
-                  :auth-user="authUser"
-                  :invalid="invalid"
-                />
-              </v-card-actions>
-            </v-container>
-          </v-list-item>
-        </v-card>
       </v-col>
     </v-row>
   </v-container>
@@ -235,14 +311,21 @@ export default {
     loading () {
       return this.$game.loading
     },
-    isRankedStatsExist () {
-      return this.rankedStats.length !== 0
-    },
-    isPlayerTotalStatsExist () {
-      return this.playerTotalStats.length !== 0
-    },
     defaultAvatarSrc () {
       return this.$store.getters.defaultAvatarSrc
+    },
+    filteredPlayerTotalStats () {
+      return this.playerTotalStats.filter((val) => {
+        // console.log(`${val.key}:${val.value.name}-${val.value.value}`)
+        return val.key.includes('kills', 'damage', 'wins', 'headshots')
+        // return val.key === 'specialEvent_kills' ||
+        //        val.key === 'specialEvent_damage' ||
+        //        val.key === 'specialEvent_wins' ||
+        //        val.key === 'headshots'
+      })
+    },
+    isBreakPointImgWidth () {
+      return this.$vuetify.breakpoint.xs ? 100 : 150
     }
   },
   created () {
@@ -299,7 +382,7 @@ export default {
 </script>
 
 <style scoped>
-  .introduction {
+  .white-space {
     white-space: normal;
   }
 </style>
