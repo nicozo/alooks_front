@@ -22,13 +22,13 @@
 
               <room-form-platform :platform.sync="room.platform" />
 
-              <room-form-game-mode :game-mode.sync="room.game_mode" />
-
               <room-form-rank-tier :rank-tier.sync="room.rank_tier" />
 
               <room-form-application-deadline :application-deadline.sync="room.application_deadline" />
 
               <room-form-recruitment-number :recruitment-number.sync="room.recruitment_number" />
+
+              <room-form-game-mode :game-mode.sync="room.game_mode" />
 
               <!-- TODO 下書き機能 -->
               <!-- <v-switch
@@ -95,7 +95,8 @@ export default {
         rank_tier: '',
         application_deadline: null,
         recruitment_number: null,
-        is_draft: false
+        is_draft: false,
+        email: ''
       },
       redirectPath: this.$store.state.loggedIn.rememberPath,
       pageTitle: this.$t(`pages.${$route.name}`),
