@@ -3,7 +3,7 @@
     <app-back-home-button />
 
     <v-row
-      id="login-form"
+      id="privacy-policy"
       align="center"
       justify="center"
     >
