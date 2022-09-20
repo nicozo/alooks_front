@@ -15,7 +15,8 @@
     </v-btn>
 
     <v-btn
-      href="https://twitter.com/ApexLooks"
+      nuxt
+      to="/tos"
     >
       {{ $t('home.bottom_navigation.tos') }}
     </v-btn>
