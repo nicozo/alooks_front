@@ -95,8 +95,7 @@ export default {
         rank_tier: '',
         application_deadline: null,
         recruitment_number: null,
-        is_draft: false,
-        email: ''
+        is_draft: false
       },
       redirectPath: this.$store.state.loggedIn.rememberPath,
       pageTitle: this.$t(`pages.${$route.name}`),
