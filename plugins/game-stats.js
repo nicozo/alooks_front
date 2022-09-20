@@ -209,6 +209,10 @@ class GameStats {
   isRankedStatsExist () {
     return this.rankedStats.length !== 0
   }
+
+  isPlayerTotalStatsExist () {
+    return this.playerTotalStats.length !== 0
+  }
 }
 
 // 共通化
