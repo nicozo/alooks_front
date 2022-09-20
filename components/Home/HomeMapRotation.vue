@@ -197,8 +197,7 @@ export default {
 
       if (remainTime < 0) {
         console.log('cont end')
-        // clearInterval(this.countDown())
-        this.$game.getMapData()
+        this.$router.push('/')
       }
 
       this.timeMin = Math.floor(remainTime / 1000 / 60) % 60
