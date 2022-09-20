@@ -54,32 +54,7 @@
       </v-card>
     </v-row>
 
-    <v-dialog
-      v-model="dialog"
-      persistent
-      max-width="600px"
-    >
-      <v-card>
-        <v-container>
-          <v-card-title class="justify-center">
-            <span class="text-h5">
-              まずはプロフィールを完成させよう！
-            </span>
-          </v-card-title>
-
-          <v-card-actions class="justify-center">
-            <v-btn
-              color="success"
-              @click="closeDialog"
-              nuxt
-              to="/profile"
-            >
-              プロフィールへ
-            </v-btn>
-          </v-card-actions>
-        </v-container>
-      </v-card>
-    </v-dialog>
+    <app-guide-profile :profile-dialog.sync="profile_dialog" />
   </v-container>
 </template>
 
@@ -99,17 +74,12 @@ export default {
       },
       redirectPath: this.$store.state.loggedIn.rememberPath,
       pageTitle: this.$t(`pages.${$route.name}`),
-      dialog: false
-    }
-  },
-  computed: {
-    profileCompleted () {
-      return this.$auth.user.game_id
+      profile_dialog: false
     }
   },
   methods: {
     async recruit () {
-      if (!this.invalid && this.profileCompleted) {
+      if (!this.invalid && this.$auth.profileCompleted()) {
         await this.$axios.$post(
           'api/v1/rooms',
           { room: this.room, game_id: 'Property_0' }
@@ -117,8 +87,8 @@ export default {
           .then(res => this.recruitSuccessful(res))
           .catch(e => this.recruitFailure(e))
       } else {
-        this.dialog = true
-        const msg = 'プロフィールを完成させましょう！'
+        this.profile_dialog = true
+        const msg = 'まずはプロフィールを完成させましょう！'
         return this.$store.dispatch('getToast', { msg })
       }
     },
@@ -128,7 +98,7 @@ export default {
       this.setToaster()
     },
     recruitFailure ({ response }) {
-      if (response && response.status === 404) {
+      if (response && response.status === 400) {
         const msg = '投稿に失敗しました'
         return this.$store.dispatch('getToast', { msg })
       }
@@ -139,9 +109,6 @@ export default {
       const msg = 'スクワッドを投稿しました'
       const color = 'success'
       return this.$store.dispatch('getToast', { msg, color })
-    },
-    closeDialog () {
-      this.dialog = false
     }
   }
 }
