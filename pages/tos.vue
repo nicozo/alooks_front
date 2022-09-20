@@ -29,6 +29,12 @@
 
 <script>
 export default {
-  name: 'TosPage'
+  name: 'TosPage',
+  layout: 'signup',
+  data ({ $route }) {
+    return {
+      pageTitle: this.$t(`pages.${$route.name}`)
+    }
+  }
 }
 </script>
