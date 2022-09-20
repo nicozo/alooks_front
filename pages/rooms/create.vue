@@ -82,7 +82,7 @@ export default {
       if (!this.invalid && this.$auth.profileCompleted()) {
         await this.$axios.$post(
           'api/v1/rooms',
-          { room: this.room, game_id: 'Property_0' }
+          { room: this.room }
         )
           .then(res => this.recruitSuccessful(res))
           .catch(e => this.recruitFailure(e))
@@ -93,7 +93,7 @@ export default {
       }
     },
     recruitSuccessful (res) {
-      console.log('作成されたroomオブジェクト', res)
+      // console.log('作成されたroomオブジェクト', res)
       this.$router.push(this.redirectPath)
       this.setToaster()
     },
@@ -102,8 +102,6 @@ export default {
         const msg = '投稿に失敗しました'
         return this.$store.dispatch('getToast', { msg })
       }
-      // TODO エラー処理
-      console.log(response)
     },
     setToaster () {
       const msg = 'スクワッドを投稿しました'
