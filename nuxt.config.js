@@ -6,7 +6,7 @@ export default {
 
   // Global page headers: https://go.nuxtjs.dev/config-head
   head: {
-    title: 'apex_app_front',
+    title: '【Apex Legends】エペスク|Apex Legendsスクワッド募集サイト',
     htmlAttrs: {
       lang: 'en'
     },
