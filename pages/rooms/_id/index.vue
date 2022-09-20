@@ -180,7 +180,7 @@
                 </template>
 
                 <template v-else>
-                  <template v-if="this.$game.isRankedStatsExist()">
+                  <template v-if="$game.isRankedStatsExist()">
                     <profile-ranked-stats :ranked-stats="rankedStats" />
                   </template>
 
@@ -211,7 +211,7 @@
                 </template>
 
                 <template v-else>
-                  <template v-if="this.$game.isPlayerTotalStatsExist()">
+                  <template v-if="$game.isPlayerTotalStatsExist()">
                     <v-row dense>
                       <v-col
                         cols="12"
