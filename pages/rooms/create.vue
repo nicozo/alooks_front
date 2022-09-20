@@ -53,6 +53,33 @@
         </validation-observer>
       </v-card>
     </v-row>
+
+    <v-dialog
+      v-model="dialog"
+      persistent
+      max-width="600px"
+    >
+      <v-card>
+        <v-container>
+          <v-card-title class="justify-center">
+            <span class="text-h5">
+              まずはプロフィールを完成させよう！
+            </span>
+          </v-card-title>
+
+          <v-card-actions class="justify-center">
+            <v-btn
+              color="success"
+              @click="closeDialog"
+              nuxt
+              to="/profile"
+            >
+              プロフィールへ
+            </v-btn>
+          </v-card-actions>
+        </v-container>
+      </v-card>
+    </v-dialog>
   </v-container>
 </template>
 
@@ -71,18 +98,28 @@ export default {
         is_draft: false
       },
       redirectPath: this.$store.state.loggedIn.rememberPath,
-      pageTitle: this.$t(`pages.${$route.name}`)
+      pageTitle: this.$t(`pages.${$route.name}`),
+      dialog: false
+    }
+  },
+  computed: {
+    profileCompleted () {
+      return this.$auth.user.game_id
     }
   },
   methods: {
     async recruit () {
-      if (!this.invalid) {
+      if (!this.invalid && this.profileCompleted) {
         await this.$axios.$post(
           'api/v1/rooms',
           { room: this.room, game_id: 'Property_0' }
         )
           .then(res => this.recruitSuccessful(res))
           .catch(e => this.recruitFailure(e))
+      } else {
+        this.dialog = true
+        const msg = 'プロフィールを完成させましょう！'
+        return this.$store.dispatch('getToast', { msg })
       }
     },
     recruitSuccessful (res) {
@@ -102,6 +139,9 @@ export default {
       const msg = 'スクワッドを投稿しました'
       const color = 'success'
       return this.$store.dispatch('getToast', { msg, color })
+    },
+    closeDialog () {
+      this.dialog = false
     }
   }
 }
