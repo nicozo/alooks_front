@@ -68,6 +68,8 @@
         </v-card-actions>
       </v-container>
     </v-card>
+
+    <app-guide-profile :profile-dialog.sync="profile_dialog" />
   </v-dialog>
 </template>
 
@@ -94,7 +96,8 @@ export default {
   data () {
     return {
       dialog: false,
-      message: ''
+      message: '',
+      profile_dialog: false
     }
   },
   computed: {
@@ -119,17 +122,23 @@ export default {
     async apply () {
       console.log('Join Request')
 
-      await this.$axios.$post(
-        'api/v1/applies',
-        {
-          apply: {
-            body: this.message,
-            room_id: this.room.id
+      if (this.$auth.profileCompleted()) {
+        await this.$axios.$post(
+          'api/v1/applies',
+          {
+            apply: {
+              body: this.message,
+              room_id: this.room.id
+            }
           }
-        }
-      )
-        .then(res => this.requestSuccessful(res))
-        .catch(e => this.requestFailure(e))
+        )
+          .then(res => this.requestSuccessful(res))
+          .catch(e => this.requestFailure(e))
+      } else {
+        this.profile_dialog = true
+        const msg = 'まずはプロフィールを完成させましょう！'
+        return this.$store.dispatch('getToast', { msg })
+      }
     },
     requestSuccessful (res) {
       console.log('res', res)
@@ -148,6 +157,9 @@ export default {
     closeDialog () {
       this.dialog = false
       this.message = ''
+    },
+    closeProfileDialog () {
+      this.profile_dialog = false
     },
     appliedForThis () {
       if (this.isAlreadyAppliedFor) {
