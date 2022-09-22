@@ -24,13 +24,15 @@ export const state = () => ({
     headerHeight: 64
   },
   defaultAvatarSrc: require('@/static/DefaultAvatar.png'),
-  commonImageSrc: require('@/static/CommonImage.jpg')
+  commonImageSrc: require('@/static/CommonImage.jpg'),
+  btnLoading: false
 })
 
 export const getters = {
   headerHeight: state => state.commonStyle.headerHeight,
   defaultAvatarSrc: state => state.defaultAvatarSrc,
-  commonImageSrc: state => state.commonImageSrc
+  commonImageSrc: state => state.commonImageSrc,
+  btnLoading: state => state.btnLoading
 }
 
 export const mutations = {
@@ -39,6 +41,9 @@ export const mutations = {
   },
   setRememberPath (state, payload) {
     state.loggedIn.rememberPath = payload
+  },
+  setBtnLoading (state, boolean) {
+    state.btnLoading = boolean
   }
 }
 
@@ -56,5 +61,8 @@ export const actions = {
     }
     params = params || {}
     commit('setRememberPath', { path, params })
+  },
+  getBtnLoading ({ commit }, boolean) {
+    commit('setBtnLoading', boolean)
   }
 }
