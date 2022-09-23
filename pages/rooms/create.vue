@@ -43,6 +43,7 @@
                     block
                     color="primary"
                     :disabled="invalid"
+                    :loading="btnLoading"
                   >
                     {{ $t('btn.create') }}
                   </v-btn>
@@ -77,9 +78,16 @@ export default {
       profile_dialog: false
     }
   },
+  computed: {
+    btnLoading () {
+      return this.$store.getters.btnLoading
+    }
+  },
   methods: {
     async recruit () {
       if (!this.invalid && this.$auth.profileCompleted()) {
+        this.$store.dispatch('getBtnLoading', true)
+
         await this.$axios.$post(
           'api/v1/rooms',
           { room: this.room }
@@ -96,12 +104,14 @@ export default {
       // console.log('作成されたroomオブジェクト', res)
       this.$router.push(this.redirectPath)
       this.setToaster()
+      this.$store.dispatch('getBtnLoading', false)
     },
     recruitFailure ({ response }) {
       if (response && response.status === 400) {
         const msg = '投稿に失敗しました'
         return this.$store.dispatch('getToast', { msg })
       }
+      this.$store.dispatch('getBtnLoading', false)
     },
     setToaster () {
       const msg = 'スクワッドを投稿しました'

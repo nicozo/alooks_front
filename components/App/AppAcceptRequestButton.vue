@@ -59,6 +59,7 @@
               color="blue darken-1"
               text
               @click="accept(application)"
+              :loading="btnLoading"
             >
               {{ $t('btn.submit') }}
             </v-btn>
@@ -202,8 +203,15 @@ export default {
       message: ''
     }
   },
+  computed: {
+    btnLoading () {
+      return this.$store.getters.btnLoading
+    }
+  },
   methods: {
     async accept (application) {
+      this.$store.dispatch('getBtnLoading', true)
+
       await this.$axios.$post(
         '/api/v1/agreements',
         {
@@ -222,6 +230,7 @@ export default {
       this.closeDialog()
       this.setToaster()
       this.openDialog2()
+      this.$store.dispatch('getBtnLoading', false)
     },
     requestFailure ({ response }) {
       if (response && response.status === 400) {
@@ -229,6 +238,7 @@ export default {
 
         this.$store.dispatch('getToast', { msg })
       }
+      this.$store.dispatch('getBtnLoading', false)
     },
     closeDialog () {
       this.dialog = false

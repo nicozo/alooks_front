@@ -68,6 +68,7 @@
                   block
                   color="primary"
                   :disabled="invalid"
+                  :loading="btnLoading"
                 >
                   更新する
                 </v-btn>
@@ -104,6 +105,9 @@ export default {
     },
     defaultAvatarSrc () {
       return this.$store.getters.defaultAvatarSrc
+    },
+    btnLoading () {
+      return this.$store.getters.btnLoading
     }
   },
   created () {
@@ -112,29 +116,34 @@ export default {
   },
   methods: {
     async updateProfile () {
-      const formData = new FormData()
-      formData.append('user[name]', this.user.name)
-      formData.append('user[self_introduction]', this.user.self_introduction)
-      formData.append('user[date_of_birth]', this.user.date_of_birth)
-      formData.append('user[sex]', this.user.sex)
-      formData.append('user[game_id]', this.user.game_id)
-      formData.append('user[platform]', this.user.platform)
-      if (this.uploadAvatar !== null) {
-        formData.append('user[avatar]', this.uploadAvatar)
-      }
-      // console.log(...formData.entries())
+      if (!this.invalid) {
+        this.$store.dispatch('getBtnLoading', true)
 
-      await this.$axios.$patch(
-        `/api/v1/profile/${this.authUser.id}`,
-        formData
-      )
-        .then(res => this.uploadSuccessful(res))
-        .catch(e => console.log(e))
+        const formData = new FormData()
+        formData.append('user[name]', this.user.name)
+        formData.append('user[self_introduction]', this.user.self_introduction)
+        formData.append('user[date_of_birth]', this.user.date_of_birth)
+        formData.append('user[sex]', this.user.sex)
+        formData.append('user[game_id]', this.user.game_id)
+        formData.append('user[platform]', this.user.platform)
+        if (this.uploadAvatar !== null) {
+          formData.append('user[avatar]', this.uploadAvatar)
+        }
+        // console.log(...formData.entries())
+
+        await this.$axios.$patch(
+          `/api/v1/profile/${this.authUser.id}`,
+          formData
+        )
+          .then(res => this.uploadSuccessful(res))
+          .catch(e => console.log(e))
+      }
     },
     uploadSuccessful (res) {
       this.setToaster()
       this.$auth.login(res)
       this.$router.push(this.redirectPath)
+      this.$store.dispatch('getBtnLoading', false)
     },
     setToaster () {
       const msg = 'プロフィール画像を更新しました'

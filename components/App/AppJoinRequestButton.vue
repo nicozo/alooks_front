@@ -62,6 +62,7 @@
             color="blue darken-1"
             text
             @click="apply(room)"
+            :loading="btnLoading"
           >
             {{ $t('btn.submit') }}
           </v-btn>
@@ -112,6 +113,9 @@ export default {
       )
 
       return result
+    },
+    btnLoading () {
+      return this.$store.getters.btnLoading
     }
   },
   mounted () {
@@ -123,6 +127,8 @@ export default {
       console.log('Join Request')
 
       if (this.$auth.profileCompleted()) {
+        this.$store.dispatch('getBtnLoading', true)
+
         await this.$axios.$post(
           'api/v1/applies',
           {
@@ -141,11 +147,12 @@ export default {
       }
     },
     requestSuccessful (res) {
-      console.log('res', res)
+      // console.log('res', res)
       this.$store.dispatch('applications/getMyApplication', res)
       this.appliedForThis()
       this.closeDialog()
       this.setToaster()
+      this.$store.dispatch('getBtnLoading', false)
     },
     requestFailure ({ response }) {
       if (response && response.status === 400) {
@@ -153,6 +160,7 @@ export default {
 
         this.$store.dispatch('getToast', { msg })
       }
+      this.$store.dispatch('getBtnLoading', false)
     },
     closeDialog () {
       this.dialog = false

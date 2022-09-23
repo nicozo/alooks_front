@@ -35,6 +35,7 @@
                     block
                     color="primary"
                     :disabled="invalid"
+                    :loading="btnLoading"
                   >
                     {{ $t('btn.login') }}
                   </v-btn>
@@ -61,6 +62,7 @@
           {{ $t('btn.do_not_have_account') }}
         </NuxtLink>
       </v-col>
+
       <v-col
         cols="12"
         class="text-center"
@@ -91,9 +93,16 @@ export default {
       pageTitle: this.$t(`pages.${$route.name}`)
     }
   },
+  computed: {
+    btnLoading () {
+      return this.$store.getters.btnLoading
+    }
+  },
   methods: {
     async login () {
       if (!this.invalid) {
+        this.$store.dispatch('getBtnLoading', true)
+
         await this.$axios.$post(
           'api/v1/sessions',
           this.user
@@ -106,19 +115,15 @@ export default {
       this.$auth.login(res)
       this.$router.push(this.redirectPath)
       this.$store.dispatch('getRememberPath', this.loggedInHomePath)
-      // TODO setTimeout以外でログイン後のトースターを表示
-      // setTimeout(() => {
-      //   this.setToaster()
-      // }, 500)
       this.setToaster()
+      this.$store.dispatch('getBtnLoading', false)
     },
     authFailure ({ response }) {
       if (response && response.status === 404) {
         const msg = 'メールアドレスまたはパスワードが一致しません'
         return this.$store.dispatch('getToast', { msg })
       }
-      // TODO エラー処理
-      console.log(response)
+      this.$store.dispatch('getBtnLoading', false)
     },
     setToaster () {
       const msg = 'ログインしました'

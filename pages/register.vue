@@ -39,6 +39,7 @@
                     block
                     color="primary"
                     :disabled="invalid"
+                    :loading="btnLoading"
                   >
                     {{ $t('btn.register') }}
                   </v-btn>
@@ -84,9 +85,16 @@ export default {
       pageTitle: this.$t(`pages.${$route.name}`)
     }
   },
+  computed: {
+    btnLoading () {
+      return this.$store.getters.btnLoading
+    }
+  },
   methods: {
     async register () {
       if (!this.invalid) {
+        this.$store.dispatch('getBtnLoading', true)
+
         await this.$axios.$post(
           'api/v1/registers',
           { user: this.user }
@@ -100,14 +108,14 @@ export default {
       this.$router.push('/login')
 
       this.setToaster()
+      this.$store.dispatch('getBtnLoading', false)
     },
     registerFailure ({ response }) {
       if (response && response.status === 400) {
         const msg = 'ユーザーを作成できませんでした。既に使用されているメールアドレスです。'
         return this.$store.dispatch('getToast', { msg })
       }
-      // TODO エラー処理
-      // console.log(response)
+      this.$store.dispatch('getBtnLoading', false)
     },
     setToaster () {
       const msg = 'ユーザーを作成しました'
