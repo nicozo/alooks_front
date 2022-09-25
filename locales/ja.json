@@ -4,7 +4,7 @@
     "register": "ユーザー登録（無料）",
     "login": "ログイン",
     "logout": "ログアウト",
-    "rooms": "スクワッド一覧",
+    "rooms": "スクワッド募集一覧",
     "rooms-create": "スクワッド作成",
     "rooms-id": "スクワッド詳細",
     "applications": "参加リクエスト一覧",
@@ -13,7 +13,8 @@
     "reset_password-create": "パスワードをリセット",
     "reset_password-update": "パスワードをリセット",
     "privacy_policy": "プライバシーポリシー",
-    "tos": "利用規約"
+    "tos": "利用規約",
+    "clans": "クラン募集一覧"
   },
   "items": {
     "about": "エペスクとは？",
