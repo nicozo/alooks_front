@@ -59,12 +59,15 @@
         cols="12"
         class="text-center"
       >
-        <NuxtLink
+        <v-btn
+          plain
+          text
+          nuxt
+          color="primary"
           :to="{ name: 'login' }"
-          class="text-decoration-none"
         >
           {{ $t('btn.already_have_account') }}
-        </NuxtLink>
+        </v-btn>
       </v-col>
     </v-row>
   </v-container>

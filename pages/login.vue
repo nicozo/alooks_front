@@ -55,24 +55,30 @@
         cols="12"
         class="text-center"
       >
-        <NuxtLink
+        <v-btn
+          plain
+          text
+          nuxt
+          color="primary"
           :to="{ name: 'register' }"
-          class="text-decoration-none"
         >
           {{ $t('btn.do_not_have_account') }}
-        </NuxtLink>
+        </v-btn>
       </v-col>
 
       <v-col
         cols="12"
         class="text-center"
       >
-        <NuxtLink
+        <v-btn
+          plain
+          text
+          nuxt
+          color="primary"
           :to="{ name: 'reset_password-create' }"
-          class="text-decoration-none"
         >
           {{ $t('btn.password_forget') }}
-        </NuxtLink>
+        </v-btn>
       </v-col>
     </v-row>
   </v-container>
