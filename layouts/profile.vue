@@ -116,7 +116,8 @@ export default {
       nav_lists: [
         { name: 'rooms' },
         { name: 'rooms-create' },
-        { name: 'applications' }
+        { name: 'applications' },
+        { name: 'clans' }
       ],
       drawer: false
     }
