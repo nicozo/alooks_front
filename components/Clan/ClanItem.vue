@@ -48,55 +48,6 @@ export default {
       prohibited_matters: {
         type: String,
         required: true
-      },
-      enrollment: {
-        type: String,
-        required: true
-      },
-      activity_time: {
-        type: String,
-        required: true
-      },
-      enrollment_age: {
-        type: String,
-        required: true
-      },
-      snipe: {
-        type: String,
-        required: true
-      },
-      contact_means: {
-        type: String,
-        required: true
-      },
-      platform: {
-        type: String,
-        required: true
-      },
-      age: {
-        type: String,
-        required: true
-      },
-      required_login: {
-        type: String,
-        required: true
-      },
-      required_ranked: {
-        type: String,
-        required: true
-      },
-      required_vc: {
-        type: Boolean,
-        required: true
-      },
-      personality: {
-        type: String,
-        required: true
-      },
-      host: {
-        type: Object,
-        default: () => {},
-        required: true
       }
     }
   }
