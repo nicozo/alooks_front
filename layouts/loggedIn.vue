@@ -120,8 +120,7 @@ export default {
   name: 'LoggedInLayout',
   middleware: [
     'authentication',
-    'applications',
-    'clans'
+    'applications'
   ],
   data ({ $config: { appName } }) {
     return {

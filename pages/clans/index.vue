@@ -56,6 +56,7 @@
 <script>
 export default {
   name: 'ClansIndexPage',
+  middleware: ['clans'],
   data () {
     return {
       page: 1,
