@@ -39,14 +39,37 @@
   },
   "room": {
     "title": "タイトル",
-    "platform": "プラットフォーム",
-    "game_mode": "ゲームモード",
-    "rank_tier": "ランク帯",
     "recruitment_number": "募集人数",
     "application_deadline": "募集期間",
     "host": {
       "title": "募集主"
+    },
+    "platform": {
+      "title": "プラットフォーム",
+      "PlayStation": "PlayStation",
+      "Xbox": "Xbox",
+      "PC": "PC"
+    },
+    "game_mode": {
+      "title": "ゲームモード",
+      "casual": "カジュアル",
+      "ranked": "ランク",
+      "arena": "アリーナ",
+      "event": "イベントモード"
+    },
+    "rank_tier": {
+      "title": "ランク帯",
+      "rookie": "ルーキー",
+      "bronze": "ブロンズ",
+      "silver": "シルバー",
+      "gold": "ゴールド",
+      "platinum": "プラチナ",
+      "diamond": "ダイアモンド",
+      "master": "マスター",
+      "predator": "プレデター",
+      "casual": "なし（カジュアル）"
     }
+
   },
   "btn": {
     "invitation_request": "参加リクエスト",
