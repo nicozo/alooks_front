@@ -6,7 +6,10 @@
   >
     <v-select
       id="platform"
+      :value="platform"
       :items="platforms"
+      item-text="label"
+      item-value="data"
       label="プラットフォーム"
       :error-messages="errors"
       outlined
@@ -28,9 +31,9 @@ export default {
   data () {
     return {
       platforms: [
-        'PlayStation',
-        'Xbox',
-        'PC'
+        { label: 'PlayStation', data: 'PlayStation' },
+        { label: 'Xbox', data: 'Xbox' },
+        { label: 'PC(Origin)', data: 'PC' }
       ]
     }
   }

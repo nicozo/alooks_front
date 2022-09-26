@@ -8,6 +8,8 @@
       id="game_mode"
       :items="gameModes"
       :value="gameMode"
+      item-text="label"
+      item-value="data"
       label="ゲームモード"
       :error-messages="errors"
       outlined
@@ -29,10 +31,10 @@ export default {
   data () {
     return {
       gameModes: [
-        'カジュアル',
-        'ランク',
-        'アリーナ',
-        'イベント'
+        { label: 'カジュアル', data: 'casual' },
+        { label: 'ランク', data: 'ranked' },
+        { label: 'アリーナ', data: 'arena' },
+        { label: 'イベント', data: 'event' }
       ]
     }
   }
