@@ -52,35 +52,35 @@
         </v-layout>
 
         <v-card-text>
-          {{ $t('room.platform') }}：
+          {{ $t('room.platform.title') }}：
           <v-chip
             color="indigo darken-3"
             dark
             outlined
           >
-            {{ room.platform }}
+            {{ $t(`room.platform.${room.platform}`) }}
           </v-chip>
         </v-card-text>
 
         <v-card-text>
-          {{ $t('room.game_mode') }}：
+          {{ $t('room.game_mode.title') }}：
           <v-chip
             color="deep-orange darken-3"
             dark
             outlined
           >
-            {{ room.game_mode }}
+            {{ $t(`room.game_mode.${room.game_mode}`) }}
           </v-chip>
         </v-card-text>
 
         <v-card-text>
-          {{ $t('room.rank_tier') }}：
+          {{ $t('room.rank_tier.title') }}：
           <v-chip
             color="teal darken-3"
             dark
             outlined
           >
-            {{ room.rank_tier }}
+            {{ $t(`room.rank_tier.${room.rank_tier}`) }}
           </v-chip>
         </v-card-text>
 

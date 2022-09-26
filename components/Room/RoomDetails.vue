@@ -18,10 +18,10 @@
               class="text-subtitle-1 font-weight-bold text-right"
               style="width: 150px"
             >
-              {{ $t('room.platform') }}：
+              {{ $t('room.platform.title') }}：
             </div>
             <div>
-              {{ room.platform }}
+              {{ $t(`room.platform.${room.platform}`) }}
             </div>
           </div>
           <div class="d-flex align-center py-3">
@@ -29,10 +29,10 @@
               class="text-subtitle-1 font-weight-bold text-right"
               style="width: 150px"
             >
-              {{ $t('room.game_mode') }}：
+              {{ $t('room.game_mode.title') }}：
             </div>
             <div>
-              {{ room.game_mode }}
+              {{ $t(`room.game_mode.${room.game_mode}`) }}
             </div>
           </div>
           <div class="d-flex align-center py-3">
@@ -40,10 +40,10 @@
               class="text-subtitle-1 font-weight-bold text-right"
               style="width: 150px"
             >
-              {{ $t('room.rank_tier') }}：
+              {{ $t('room.rank_tier.title') }}：
             </div>
             <div>
-              {{ room.rank_tier }}
+              {{ $t(`room.rank_tier.${room.rank_tier}`) }}
             </div>
           </div>
           <div class="d-flex align-center py-3">
