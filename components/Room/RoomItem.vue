@@ -20,7 +20,7 @@
     <v-card
       flat
       nuxt
-      :to="`rooms/${room.id}`"
+      :to="{ name: 'rooms-id', params: { id: room.id } }"
     >
       <v-container>
         <div class="text-right">
