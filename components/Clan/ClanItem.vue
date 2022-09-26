@@ -4,28 +4,20 @@
     rounded-xl
     hover
     raised
+    nuxt
+    :to="{ name: 'clans-id', params: { id: clan.id } }"
   >
-    <v-card
-      flat
-      nuxt
-      :to="`clans/${clan.id}`"
-    >
-      <v-container>
-        <v-card-title>
-          {{ clan.name }}
-        </v-card-title>
+    <v-container>
+      <v-card-title>
+        {{ clan.name }}クラン
+      </v-card-title>
 
-        <v-divider />
+      <v-divider />
 
-        <v-card-subtitle>
-          クラン活動の目標
-        </v-card-subtitle>
-
-        <v-card-text>
-          {{ clan.concept }}
-        </v-card-text>
-      </v-container>
-    </v-card>
+      <v-card-text>
+        {{ clan.concept }}
+      </v-card-text>
+    </v-container>
   </v-card>
 </template>
 
