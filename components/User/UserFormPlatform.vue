@@ -36,7 +36,7 @@ export default {
     return {
       consoles: [
         { label: 'PlayStation', data: 'PS4' },
-        { label: 'PC(Steam, Origin)', data: 'PC' },
+        { label: 'PC(Origin)', data: 'PC' },
         { label: 'Xbox', data: 'X1' }
       ]
     }
