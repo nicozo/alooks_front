@@ -149,7 +149,7 @@
                   fab
                   style="z-index: 10;"
                   nuxt
-                  to="/profile/edit"
+                  :to="{ name: 'profile-edit' }"
                   x-large
                   v-bind="attrs"
                   v-on="on"

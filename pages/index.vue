@@ -26,7 +26,7 @@
             <v-btn
               nuxt
               color="primary"
-              to="/register"
+              :to="{ name: 'register' }"
             >
               {{ $t('pages.register') }}
             </v-btn>
@@ -38,7 +38,7 @@
             <v-btn
               nuxt
               color="success"
-              to="/login"
+              :to="{ name: 'login' }"
             >
               {{ $t('pages.login') }}
             </v-btn>

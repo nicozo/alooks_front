@@ -4,7 +4,7 @@
     color="success"
     class="mr-2"
     nuxt
-    to="/login"
+    :to="{ name: 'login' }"
   >
     {{ $t('pages.login') }}
   </v-btn>

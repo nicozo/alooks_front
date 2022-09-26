@@ -16,14 +16,14 @@
 
     <v-btn
       nuxt
-      to="/tos"
+      :to="{ name: 'tos' }"
     >
       {{ $t('home.bottom_navigation.tos') }}
     </v-btn>
 
     <v-btn
       nuxt
-      to="/privacy_policy"
+      :to="{ name: 'privacy_policy' }"
     >
       {{ $t('home.bottom_navigation.privacy_policy') }}
     </v-btn>

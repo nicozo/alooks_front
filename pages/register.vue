@@ -60,7 +60,7 @@
         class="text-center"
       >
         <NuxtLink
-          to="/login"
+          :to="{ name: 'login' }"
           class="text-decoration-none"
         >
           {{ $t('btn.already_have_account') }}

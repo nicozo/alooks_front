@@ -56,7 +56,7 @@
         class="text-center"
       >
         <NuxtLink
-          to="/register"
+          :to="{ name: 'register' }"
           class="text-decoration-none"
         >
           {{ $t('btn.do_not_have_account') }}
@@ -68,7 +68,7 @@
         class="text-center"
       >
         <NuxtLink
-          to="/reset_password/create"
+          :to="{ name: 'reset_password-create' }"
           class="text-decoration-none"
         >
           {{ $t('btn.password_forget') }}

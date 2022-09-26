@@ -16,7 +16,7 @@
           <v-btn
             color="success"
             nuxt
-            to="/profile"
+            :to="{ name: 'profile' }"
           >
             プロフィールへ
           </v-btn>
