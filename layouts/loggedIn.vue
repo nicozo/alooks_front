@@ -120,7 +120,8 @@ export default {
   name: 'LoggedInLayout',
   middleware: [
     'authentication',
-    'applications'
+    'applications',
+    'clans'
   ],
   data ({ $config: { appName } }) {
     return {
@@ -128,7 +129,8 @@ export default {
       nav_lists: [
         { name: 'rooms' },
         { name: 'rooms-create' },
-        { name: 'applications' }
+        { name: 'applications' },
+        { name: 'clans' }
       ],
       drawer: false
     }
