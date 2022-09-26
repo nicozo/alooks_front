@@ -1,5 +1,11 @@
 <template>
   <v-container>
+    <v-row dense>
+      <v-col>
+        <clan-back-previous-button />
+      </v-col>
+    </v-row>
+
     <v-row>
       <v-col cols="12">
         <v-card id="clan-details">

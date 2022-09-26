@@ -80,11 +80,12 @@
     "already_have_account": "アカウントをお持ちですか？",
     "to_rooms_page": "スクワッドを探す",
     "to_top_page": "トップページへ戻る",
-    "back_to_rooms_page": "スクワッド一覧へ戻る",
+    "back_to_rooms_page": "スクワッド募集一覧へ戻る",
+    "back_to_clans_page": "クラン募集一覧へ戻る",
     "accept_request": "リクエスト承諾",
     "cancel": "取り消し",
     "submit": "送信",
-    "create": "スクワッド募集",
+    "create": "スクワッドを募集",
     "friend_requested": "送信しました"
   },
   "gender": {
