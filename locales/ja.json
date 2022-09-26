@@ -120,5 +120,38 @@
       "tos": "利用規約",
       "privacy_policy": "プライバシーポリシー"
     }
+  },
+  "clan": {
+    "platform": {
+      "unlimited": "制限なし",
+      "PlayStation": "PlayStation",
+      "Xbox": "Xbox",
+      "PC": "PC"
+    },
+    "age": {
+      "unlimited": "制限なし",
+      "high_school_student": "高校生以上",
+      "adult": "成人以上"
+    },
+    "required_login": {
+      "unlimited": "制限なし",
+      "everyday": "ほぼ毎日",
+      "a_couple_of_times_a_week": "週1~2日",
+      "three_or_four_times_a_week": "週3~4日"
+    },
+    "required_ranked": {
+      "unlimited": "制限なし",
+      "bronze": "ブロンズ",
+      "silver": "シルバー",
+      "gold": "ゴールド",
+      "platinum": "プラチナ",
+      "diamond": "ダイアモンド",
+      "master": "マスター",
+      "predator": "プレデター"
+    },
+    "required_vc": {
+      "true": "VCあり",
+      "false": "VCなし"
+    }
   }
 }

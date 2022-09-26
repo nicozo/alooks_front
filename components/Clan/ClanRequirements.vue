@@ -16,7 +16,7 @@
         dark
         outlined
       >
-        {{ requirements.platform }}
+        {{ $t(`clan.platform.${requirements.platform}`) }}
       </v-chip>
     </v-card-text>
 
@@ -27,7 +27,7 @@
         dark
         outlined
       >
-        {{ requirements.age }}
+        {{ $t(`clan.age.${requirements.age}`) }}
       </v-chip>
     </v-card-text>
 
@@ -38,7 +38,7 @@
         dark
         outlined
       >
-        {{ requirements.required_login }}
+        {{ $t(`clan.required_login.${requirements.required_login}`) }}
       </v-chip>
     </v-card-text>
 
@@ -49,7 +49,7 @@
         dark
         outlined
       >
-        {{ requirements.required_ranked }}
+        {{ $t(`clan.required_ranked.${requirements.required_ranked}`) }}
       </v-chip>
     </v-card-text>
 
@@ -60,7 +60,7 @@
         dark
         outlined
       >
-        {{ requirements.required_vc }}
+        {{ $t(`clan.required_vc.${requirements.required_vc}`) }}
       </v-chip>
     </v-card-text>
 
