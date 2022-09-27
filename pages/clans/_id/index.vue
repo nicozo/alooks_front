@@ -38,7 +38,7 @@
                 md="6"
                 lg="6"
               >
-                <clan-requirements :requirements="clan.requirements"/>
+                <clan-requirements :requirements="clan.requirements" />
               </v-col>
 
               <!-- クラン情報 -->

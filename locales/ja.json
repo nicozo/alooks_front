@@ -5,17 +5,18 @@
     "login": "ログイン",
     "logout": "ログアウト",
     "rooms": "スクワッド募集一覧",
-    "rooms-create": "スクワッド作成",
-    "rooms-id": "スクワッド詳細",
+    "rooms-create": "スクワッドを募集",
+    "rooms-id": "スクワッドの詳細",
     "applications": "参加リクエスト一覧",
     "profile": "プロフィール",
-    "profile-edit": "プロフィール編集",
+    "profile-edit": "プロフィールを編集",
     "reset_password-create": "パスワードをリセット",
     "reset_password-update": "パスワードをリセット",
     "privacy_policy": "プライバシーポリシー",
     "tos": "利用規約",
-    "clans": "クラン募集一覧",
-    "clans-id": "クラン詳細"
+    "clans": "クランメンバー募集一覧",
+    "clans-id": "クランの詳細",
+    "clans-create": "クランメンバーを募集"
   },
   "items": {
     "about": "エペスクとは？",
@@ -69,7 +70,6 @@
       "predator": "プレデター",
       "casual": "なし（カジュアル）"
     }
-
   },
   "btn": {
     "invitation_request": "参加リクエスト",
@@ -81,11 +81,12 @@
     "to_rooms_page": "スクワッドを探す",
     "to_top_page": "トップページへ戻る",
     "back_to_rooms_page": "スクワッド募集一覧へ戻る",
-    "back_to_clans_page": "クラン募集一覧へ戻る",
+    "back_to_clans_page": "クランメンバー募集一覧へ戻る",
     "accept_request": "リクエスト承諾",
     "cancel": "取り消し",
     "submit": "送信",
     "create": "スクワッドを募集",
+    "clan_create": "クランメンバーを募集",
     "friend_requested": "送信しました"
   },
   "gender": {
@@ -146,6 +147,8 @@
     }
   },
   "clan": {
+    "requirements": "募集要項",
+    "information": "クラン情報",
     "platform": {
       "unlimited": "制限なし",
       "PlayStation": "PlayStation",

@@ -28,7 +28,7 @@
               fab
               style="z-index: 10;"
               nuxt
-              :to="{ name: 'rooms-create' }"
+              :to="{ name: 'clans-create' }"
               x-large
               v-bind="attrs"
               v-on="on"
