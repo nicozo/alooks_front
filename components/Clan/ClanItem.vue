@@ -8,8 +8,8 @@
     :to="{ name: 'clans-id', params: { id: clan.id } }"
   >
     <v-container>
-      <v-card-title>
-        {{ clan.name }}クラン
+      <v-card-title class="font-weight-bold">
+        {{ clan.name }}
       </v-card-title>
 
       <v-divider />
