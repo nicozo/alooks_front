@@ -6,78 +6,81 @@
       </v-col>
     </v-row>
 
-    <v-row>
-      <v-col>
-        <v-card
-          flat
-        >
-          <validation-observer v-slot="{ invalid }">
-            <form @submit.prevent="recruit">
-              <v-container>
-                <clan-form-name :name.sync="clan.name" />
+    <v-row
+      align="center"
+      justify="center"
+    >
+      <v-card
+        flat
+        width="80%"
+        max-width="900"
+      >
+        <validation-observer v-slot="{ invalid }">
+          <form @submit.prevent="recruit">
+            <v-container>
+              <clan-form-name :name.sync="clan.name" />
 
-                <clan-form-concept :concept.sync="clan.concept" />
+              <clan-form-concept :concept.sync="clan.concept" />
 
-                <clan-form-prohibited-matters :prohibited_matters.sync="clan.prohibited_matters" />
+              <clan-form-prohibited-matters :prohibited_matters.sync="clan.prohibited_matters" />
 
-                <clan-form-interview :interview.sync="clan.interview" />
+              <clan-form-interview :interview.sync="clan.interview" />
 
-                <v-card-title>
-                  {{ $t('clan.requirements') }}
-                </v-card-title>
+              <v-card-title>
+                {{ $t('clan.requirements') }}
+              </v-card-title>
 
-                <v-card-subtitle>
-                  クランに入るための条件を設定しましょう！
-                </v-card-subtitle>
+              <v-card-subtitle>
+                クランに入るための条件を設定しましょう！
+              </v-card-subtitle>
 
-                <clan-form-platform :platform.sync="clan.platform" />
+              <clan-form-platform :platform.sync="clan.platform" />
 
-                <clan-form-age :age.sync="clan.age" />
+              <clan-form-age :age.sync="clan.age" />
 
-                <clan-form-required-login :required-login.sync="clan.required_login" />
+              <clan-form-required-login :required-login.sync="clan.required_login" />
 
-                <clan-form-required-ranked :required-ranked.sync="clan.required_ranked" />
+              <clan-form-required-ranked :required-ranked.sync="clan.required_ranked" />
 
-                <clan-form-required-vc :required-vc.sync="clan.required_vc" />
+              <clan-form-required-vc :required-vc.sync="clan.required_vc" />
 
-                <clan-form-personality :personality.sync="clan.personality" />
+              <clan-form-personality :personality.sync="clan.personality" />
 
-                <v-card-title>
-                  {{ $t('clan.information') }}
-                </v-card-title>
+              <v-card-title>
+                {{ $t('clan.information') }}
+              </v-card-title>
 
-                <v-card-subtitle>
-                  現在のクラン情報を設定しましょう！
-                </v-card-subtitle>
+              <v-card-subtitle>
+                現在のクラン情報を設定しましょう！
+              </v-card-subtitle>
 
-                <clan-form-enrollment :enrollment.sync="clan.enrollment" />
+              <clan-form-enrollment :enrollment.sync="clan.enrollment" />
 
-                <clan-form-enrollment-age :enrollment-age.sync="clan.enrollment_age" />
+              <clan-form-enrollment-age :enrollment-age.sync="clan.enrollment_age" />
 
-                <clan-form-activity-time :activity-time.sync="clan.activity_time" />
+              <clan-form-activity-time :activity-time.sync="clan.activity_time" />
 
-                <clan-form-snipe :snipe.sync="clan.snipe" />
+              <clan-form-snipe :snipe.sync="clan.snipe" />
 
-                <clan-form-contact-means :contact-means.sync="clan.contact_means" />
+              <clan-form-contact-means :contact-means.sync="clan.contact_means" />
 
-                <v-row>
-                  <v-col>
-                    <v-btn
-                      type="submit"
-                      block
-                      color="primary"
-                      :disabled="invalid"
-                      :loading="btnLoading"
-                    >
-                      {{ $t('btn.create') }}
-                    </v-btn>
-                  </v-col>
-                </v-row>
-              </v-container>
-            </form>
-          </validation-observer>
-        </v-card>
-      </v-col>
+              <v-row>
+                <v-col>
+                  <v-btn
+                    type="submit"
+                    block
+                    color="primary"
+                    :disabled="invalid"
+                    :loading="btnLoading"
+                  >
+                    {{ $t('btn.create') }}
+                  </v-btn>
+                </v-col>
+              </v-row>
+            </v-container>
+          </form>
+        </validation-observer>
+      </v-card>
     </v-row>
   </v-container>
 </template>
