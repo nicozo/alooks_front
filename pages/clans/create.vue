@@ -106,7 +106,8 @@ export default {
         activity_time: '',
         snipe: '',
         contact_means: ''
-      }
+      },
+      redirectPath: this.$store.state.loggedIn.rememberPath
     }
   },
   computed: {
@@ -129,10 +130,17 @@ export default {
     },
     recruitSuccessful (res) {
       console.log(res)
+      this.setToaster()
       this.$store.dispatch('getBtnLoading', false)
+      this.$router.push(this.redirectPath)
     },
     recruitFailure ({ response }) {
       console.log(response)
+      if (response && response.status === 400) {
+        const msg = '投稿に失敗しました'
+
+        return this.$store.dispatch('getToast', { msg })
+      }
       this.$store.dispatch('getBtnLoading', false)
     },
     setToaster () {
