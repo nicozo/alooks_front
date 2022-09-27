@@ -2,14 +2,14 @@
   <validation-provider
     v-slot="{ errors }"
     name="活動時間"
-    rules="required|max:25"
+    rules="required|max:50"
   >
     <v-text-field
       id="activity_time"
       :value="activityTime"
       label="活動時間"
       placeholder="主に18時から24時の間で活動することが多いです！"
-      counter="25"
+      counter="50"
       :error-messages="errors"
       outlined
       clearable

@@ -2,13 +2,13 @@
   <validation-provider
     v-slot="{ errors }"
     name="クラン内連絡手段"
-    rules="required|max:100"
+    rules="required|max:50"
   >
     <v-textarea
       id="contact_means"
       :value="contactMeans"
       label="クラン内連絡手段"
-      counter="100"
+      counter="50"
       :error-messages="errors"
       outlined
       clearable

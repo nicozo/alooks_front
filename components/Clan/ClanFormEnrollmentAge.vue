@@ -2,14 +2,14 @@
   <validation-provider
     v-slot="{ errors }"
     name="年齢層"
-    rules="required|max:25"
+    rules="required|max:50"
   >
     <v-text-field
       id="enrollment_age"
       :value="enrollmentAge"
       label="年齢層"
       placeholder="現在の年齢層は２０代が多いです！"
-      counter="25"
+      counter="50"
       :error-messages="errors"
       outlined
       clearable

@@ -32,8 +32,8 @@ export default {
   data () {
     return {
       vc_items: [
-        { label: 'あり', data: 'true' },
-        { label: 'なし', data: 'false' }
+        { label: 'あり', data: true },
+        { label: 'なし', data: false }
       ]
     }
   }
