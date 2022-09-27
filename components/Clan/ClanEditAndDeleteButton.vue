@@ -6,6 +6,8 @@
           <v-btn
             color="success"
             block
+            nuxt
+            :to="{ name: 'clans-id-update', params: { id: id } }"
           >
             クランを編集
           </v-btn>
@@ -31,6 +33,10 @@ export default {
     user_id: {
       type: Number,
       required: true
+    },
+    id: {
+      type: Number,
+      require: true
     }
   },
   methods: {
