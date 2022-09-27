@@ -129,7 +129,8 @@ export default {
         { name: 'rooms' },
         { name: 'rooms-create' },
         { name: 'applications' },
-        { name: 'clans' }
+        { name: 'clans' },
+        { name: 'clans-create' }
       ],
       drawer: false
     }
