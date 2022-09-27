@@ -74,6 +74,8 @@
           {{ clan.prohibited_matters }}
         </v-card-text>
       </v-card>
+
+      <clan-edit-and-delete-button :user_id="clan.user_id" />
     </v-container>
   </v-card>
 </template>

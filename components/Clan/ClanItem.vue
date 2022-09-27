@@ -4,20 +4,26 @@
     rounded-xl
     hover
     raised
-    nuxt
-    :to="{ name: 'clans-id', params: { id: clan.id } }"
   >
-    <v-container>
-      <v-card-title class="font-weight-bold">
-        {{ clan.name }}
-      </v-card-title>
+    <v-card
+      flat
+      nuxt
+      :to="{ name: 'clans-id', params: { id: clan.id } }"
+    >
+      <v-container>
+        <v-card-title class="font-weight-bold">
+          {{ clan.name }}
+        </v-card-title>
 
-      <v-divider />
+        <v-divider />
 
-      <v-card-text>
-        {{ clan.concept }}
-      </v-card-text>
-    </v-container>
+        <v-card-text>
+          {{ clan.concept }}
+        </v-card-text>
+      </v-container>
+    </v-card>
+
+    <clan-edit-and-delete-button :user_id="clan.user_id" />
   </v-card>
 </template>
 
@@ -47,6 +53,10 @@ export default {
       },
       prohibited_matters: {
         type: String,
+        required: true
+      },
+      user_id: {
+        type: Number,
         required: true
       }
     }
