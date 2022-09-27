@@ -61,8 +61,8 @@
           <v-btn
             color="blue darken-1"
             text
-            @click="apply(room)"
             :loading="btnLoading"
+            @click="apply(room)"
           >
             {{ $t('btn.submit') }}
           </v-btn>

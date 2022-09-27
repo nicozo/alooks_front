@@ -58,8 +58,8 @@
             <v-btn
               color="blue darken-1"
               text
-              @click="accept(application)"
               :loading="btnLoading"
+              @click="accept(application)"
             >
               {{ $t('btn.submit') }}
             </v-btn>
