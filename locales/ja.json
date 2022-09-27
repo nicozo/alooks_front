@@ -94,10 +94,10 @@
     "female": "女性"
   },
   "message": {
-    "now_closed": "募集を締め切りました",
+    "now_closed": "このスクワッドは募集を締め切りました",
     "loading": "Now Loading Your Apex Legends Stats...",
     "no_data": "No Data",
-    "no_requests": "参加リクエストはありません",
+    "no_requests": "現在参加リクエストはありません",
     "loading_stats": "Now Loading..."
   },
   "profile": {
