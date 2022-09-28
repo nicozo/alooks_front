@@ -16,7 +16,7 @@
 
               <clan-form-concept :concept.sync="clan.concept" />
 
-              <clan-form-prohibited-matters :prohibitedMatters.sync="clan.prohibited_matters" />
+              <clan-form-prohibited-matters :prohibited-matters.sync="clan.prohibited_matters" />
 
               <clan-form-interview :interview.sync="clan.interview" />
 

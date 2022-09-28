@@ -76,8 +76,8 @@
       </v-card>
 
       <clan-edit-and-delete-button
-        :user_id="clan.user_id"
         :id="clan.id"
+        :user_id="clan.user_id"
       />
     </v-container>
   </v-card>
