@@ -42,6 +42,23 @@
     </v-card-subtitle>
     <v-card-text>
       {{ information.contact_means }}
+      <br>
+
+      <v-icon
+        v-show="isIncludes(['discord', 'DISCORD', 'Discord', 'ディスコード'], information.contact_means)"
+        large
+        color="indigo"
+      >
+        mdi-discord
+      </v-icon>
+
+      <v-icon
+        v-show="isIncludes(['twitter', 'TWITTER', 'Twitter', 'ツイッター'], information.contact_means)"
+        large
+        color="blue"
+      >
+        mdi-twitter
+      </v-icon>
     </v-card-text>
   </v-card>
 </template>
@@ -71,9 +88,14 @@ export default {
         require: true
       },
       contact_means: {
-        type: Boolean,
+        type: String,
         require: true
       }
+    }
+  },
+  methods: {
+    isIncludes (arr, target) {
+      return arr.some(el => target.includes(el))
     }
   }
 }

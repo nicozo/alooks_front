@@ -13,6 +13,34 @@
       -プラットフォーム-
     </v-card-subtitle>
     <v-card-text>
+      <v-icon
+        v-show="requirements.platform === 'PlayStation'"
+        large
+        color="indigo"
+      >
+        mdi-sony-playstation
+      </v-icon>
+      <v-icon
+        v-show="requirements.platform === 'Xbox'"
+        large
+        color="green"
+      >
+        mdi-microsoft-xbox
+      </v-icon>
+      <v-icon
+        v-show="requirements.platform === 'PC'"
+        large
+        color="orange"
+      >
+        mdi-origin
+      </v-icon>
+      <v-icon
+        v-show="requirements.platform === 'PC'"
+        large
+        color="light-blue darken-4"
+      >
+        mdi-steam
+      </v-icon>
       {{ $t(`clan.platform.${requirements.platform}`) }}
     </v-card-text>
 
@@ -31,7 +59,7 @@
     </v-card-text>
 
     <v-card-subtitle class="font-weight-bold">
-      -最高ランク-
+      -最低ランク-
     </v-card-subtitle>
     <v-card-text>
       {{ $t(`clan.required_ranked.${requirements.required_ranked}`) }}
