@@ -15,6 +15,9 @@ export const mutations = {
   setClan (state, clan) {
     state.clan = clan
   },
+  addClan (state, clan) {
+    state.clans = state.clans.unshift(clan)
+  },
   editClan (state, updatedClan) {
     const index = state.clans.find(clan => clan.id === updatedClan.id)
     if (index !== -1) {
@@ -32,6 +35,9 @@ export const actions = {
   },
   getClan ({ commit }, res) {
     commit('setClan', res)
+  },
+  addClan ({ commit }, res) {
+    commit('addClan', res)
   },
   updateClan ({ commit }, res) {
     commit('editClan', res)

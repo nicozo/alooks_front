@@ -129,7 +129,7 @@ export default {
       }
     },
     recruitSuccessful (res) {
-      console.log(res)
+      this.$store.dispatch('clans/addClan', res)
       this.setToaster()
       this.$store.dispatch('getBtnLoading', false)
       this.$router.push(this.redirectPath)

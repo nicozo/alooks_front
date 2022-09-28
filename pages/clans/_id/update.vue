@@ -129,7 +129,6 @@ export default {
       this.$store.dispatch('clans/updateClan', res)
       this.$store.dispatch('getBtnLoading', false)
       this.setToaster()
-      console.log(this.redirectPath)
       this.$router.push(this.redirectPath)
     },
     updateClanFailure ({ response }) {
