@@ -9,59 +9,39 @@
 
     <v-divider />
 
+    <v-card-subtitle class="font-weight-bold">
+      -在籍人数-
+    </v-card-subtitle>
     <v-card-text>
-      在籍人数：
-      <v-chip
-        color="indigo darken-4"
-        dark
-        outlined
-      >
-        {{ information.enrollment }}
-      </v-chip>
+      {{ information.enrollment }}
     </v-card-text>
 
+    <v-card-subtitle class="font-weight-bold">
+      -年齢層-
+    </v-card-subtitle>
     <v-card-text>
-      年齢層：
-      <v-chip
-        color="indigo darken-4"
-        dark
-        outlined
-      >
-        {{ information.enrollment_age }}
-      </v-chip>
+      {{ information.enrollment_age }}
     </v-card-text>
 
+    <v-card-subtitle class="font-weight-bold">
+      -活動時間-
+    </v-card-subtitle>
     <v-card-text>
-      活動時間：
-      <v-chip
-        color="indigo darken-4"
-        dark
-        outlined
-      >
-        {{ information.activity_time }}
-      </v-chip>
+      {{ information.activity_time }}
     </v-card-text>
 
+    <v-card-subtitle class="font-weight-bold">
+      -スナイプや大会等-
+    </v-card-subtitle>
     <v-card-text>
-      スナイプや大会等
-      <v-chip
-        color="indigo darken-4"
-        dark
-        outlined
-      >
-        {{ information.snipe }}
-      </v-chip>
+      {{ information.snipe }}
     </v-card-text>
 
+    <v-card-subtitle class="font-weight-bold">
+      -クラン内の連絡手段-
+    </v-card-subtitle>
     <v-card-text>
-      クラン内の連絡手段：
-      <v-chip
-        color="indigo darken-4"
-        dark
-        outlined
-      >
-        {{ information.contact_means }}
-      </v-chip>
+      {{ information.contact_means }}
     </v-card-text>
   </v-card>
 </template>

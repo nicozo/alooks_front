@@ -9,70 +9,46 @@
 
     <v-divider />
 
+    <v-card-subtitle class="font-weight-bold">
+      -プラットフォーム-
+    </v-card-subtitle>
     <v-card-text>
-      プラットフォーム：
-      <v-chip
-        color="indigo darken-4"
-        dark
-        outlined
-      >
-        {{ $t(`clan.platform.${requirements.platform}`) }}
-      </v-chip>
+      {{ $t(`clan.platform.${requirements.platform}`) }}
     </v-card-text>
 
+    <v-card-subtitle class="font-weight-bold">
+      -年齢-
+    </v-card-subtitle>
     <v-card-text>
-      年齢：
-      <v-chip
-        color="indigo darken-4"
-        dark
-        outlined
-      >
-        {{ $t(`clan.age.${requirements.age}`) }}
-      </v-chip>
+      {{ $t(`clan.age.${requirements.age}`) }}
     </v-card-text>
 
+    <v-card-subtitle class="font-weight-bold">
+      -ログイン数-
+    </v-card-subtitle>
     <v-card-text>
-      ログイン回数：
-      <v-chip
-        color="indigo darken-4"
-        dark
-        outlined
-      >
-        {{ $t(`clan.required_login.${requirements.required_login}`) }}
-      </v-chip>
+      {{ $t(`clan.required_login.${requirements.required_login}`) }}
     </v-card-text>
 
+    <v-card-subtitle class="font-weight-bold">
+      -最高ランク-
+    </v-card-subtitle>
     <v-card-text>
-      最高ランク：
-      <v-chip
-        color="indigo darken-4"
-        dark
-        outlined
-      >
-        {{ $t(`clan.required_ranked.${requirements.required_ranked}`) }}
-      </v-chip>
+      {{ $t(`clan.required_ranked.${requirements.required_ranked}`) }}
     </v-card-text>
 
+    <v-card-subtitle class="font-weight-bold">
+      -VCの有無-
+    </v-card-subtitle>
     <v-card-text>
-      VCの有無：
-      <v-chip
-        color="indigo darken-4"
-        dark
-        outlined
-      >
-        {{ $t(`clan.required_vc.${requirements.required_vc}`) }}
-      </v-chip>
+      {{ $t(`clan.required_vc.${requirements.required_vc}`) }}
     </v-card-text>
 
+    <v-card-subtitle class="font-weight-bold">
+      -求める人物像-
+    </v-card-subtitle>
     <v-card-text>
-      求める人物像：
-      <v-chip
-        color="indigo darken-4"
-        dark
-        outlined
-      >
-        {{ requirements.personality }}
-      </v-chip>
+      {{ requirements.personality }}
     </v-card-text>
   </v-card>
 </template>
