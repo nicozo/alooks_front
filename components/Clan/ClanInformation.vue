@@ -4,41 +4,41 @@
     flat
   >
     <v-card-title>
-      クラン情報
+      {{ $t('clan.information') }}
     </v-card-title>
 
     <v-divider />
 
     <v-card-subtitle class="font-weight-bold">
-      -在籍人数-
+      {{ $t('clan.enrollment') }}
     </v-card-subtitle>
     <v-card-text>
       {{ information.enrollment }}
     </v-card-text>
 
     <v-card-subtitle class="font-weight-bold">
-      -年齢層-
+      {{ $t('clan.enrollment_age') }}
     </v-card-subtitle>
     <v-card-text>
       {{ information.enrollment_age }}
     </v-card-text>
 
     <v-card-subtitle class="font-weight-bold">
-      -活動時間-
+      {{ $t('clan.activity_time') }}
     </v-card-subtitle>
     <v-card-text>
       {{ information.activity_time }}
     </v-card-text>
 
     <v-card-subtitle class="font-weight-bold">
-      -スナイプや大会等-
+      {{ $t('clan.snipe') }}
     </v-card-subtitle>
     <v-card-text>
       {{ information.snipe }}
     </v-card-text>
 
     <v-card-subtitle class="font-weight-bold">
-      -クラン内の連絡手段-
+      {{ $t('clan.contact_means') }}
     </v-card-subtitle>
     <v-card-text>
       {{ information.contact_means }}

@@ -4,13 +4,13 @@
     flat
   >
     <v-card-title>
-      募集要項
+      {{ $t('clan.requirements') }}
     </v-card-title>
 
     <v-divider />
 
     <v-card-subtitle class="font-weight-bold">
-      -プラットフォーム-
+      {{ $t('clan.platform.title') }}
     </v-card-subtitle>
     <v-card-text>
       <v-icon
@@ -45,35 +45,35 @@
     </v-card-text>
 
     <v-card-subtitle class="font-weight-bold">
-      -年齢-
+      {{ $t('clan.age.title') }}
     </v-card-subtitle>
     <v-card-text>
       {{ $t(`clan.age.${requirements.age}`) }}
     </v-card-text>
 
     <v-card-subtitle class="font-weight-bold">
-      -ログイン数-
+      {{ $t('clan.required_login.title') }}
     </v-card-subtitle>
     <v-card-text>
       {{ $t(`clan.required_login.${requirements.required_login}`) }}
     </v-card-text>
 
     <v-card-subtitle class="font-weight-bold">
-      -最低ランク-
+      {{ $t('clan.required_ranked.title') }}
     </v-card-subtitle>
     <v-card-text>
       {{ $t(`clan.required_ranked.${requirements.required_ranked}`) }}
     </v-card-text>
 
     <v-card-subtitle class="font-weight-bold">
-      -VCの有無-
+      {{ $t('clan.required_vc.title') }}
     </v-card-subtitle>
     <v-card-text>
       {{ $t(`clan.required_vc.${requirements.required_vc}`) }}
     </v-card-text>
 
     <v-card-subtitle class="font-weight-bold">
-      -求める人物像-
+      {{ $t('clan.personality') }}
     </v-card-subtitle>
     <v-card-text>
       {{ requirements.personality }}

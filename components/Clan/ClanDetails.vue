@@ -1,7 +1,7 @@
 <template>
   <v-card id="clan-details">
     <v-container>
-      <v-card-title class="font-weight-bold">
+      <v-card-title class="font-weight-bold text-h5">
         {{ clan.name }}
       </v-card-title>
 
@@ -11,7 +11,7 @@
         flat
       >
         <v-card-title>
-          コンセプト
+          {{ $t('clan.concept') }}
         </v-card-title>
 
         <v-divider />
@@ -49,13 +49,13 @@
         flat
       >
         <v-card-title>
-          面接について
+          {{ $t('clan.interview') }}
         </v-card-title>
 
         <v-divider />
 
         <v-card-text>
-          {{ clan.interview }}
+          {{ $t('clan.interview') }}
         </v-card-text>
       </v-card>
 
@@ -65,7 +65,7 @@
         flat
       >
         <v-card-title>
-          禁止事項
+          {{ $t('clan.prohibited_matters') }}
         </v-card-title>
 
         <v-divider />
