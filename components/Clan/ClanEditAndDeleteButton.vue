@@ -17,6 +17,8 @@
           <v-btn
             color="error"
             block
+            nuxt
+            :to="{ name: 'clans-id-destroy', params: { id: id } }"
           >
             クランを削除
           </v-btn>
