@@ -15,6 +15,11 @@
         width="80%"
         max-width="900"
       >
+        <v-card-text class="br pt-0">
+          ここではクランメンバーを募集するための掲示板を作成できます。
+          さっそく以下のフォームを記入して、クランメンバーを募集しよう！
+        </v-card-text>
+
         <validation-observer v-slot="{ invalid }">
           <form @submit.prevent="recruit">
             <v-container>
@@ -152,3 +157,9 @@ export default {
   }
 }
 </script>
+
+<style scoped>
+  .br{
+    white-space: pre-line;
+  }
+</style>

@@ -54,7 +54,7 @@
 
         <v-divider />
 
-        <v-card-text>
+        <v-card-text class="br pt-0">
           {{ $t('clan.interview') }}
         </v-card-text>
       </v-card>
@@ -70,7 +70,7 @@
 
         <v-divider />
 
-        <v-card-text>
+        <v-card-text class="br pt-0">
           {{ clan.prohibited_matters }}
         </v-card-text>
       </v-card>
@@ -95,3 +95,9 @@ export default {
   }
 }
 </script>
+
+<style scoped>
+  .br{
+    white-space: pre-line;
+  }
+</style>
