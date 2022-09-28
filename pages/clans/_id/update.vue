@@ -126,7 +126,7 @@ export default {
         .catch(e => this.updateClanFailure(e))
     },
     updateClanSuccessful (res) {
-      console.log(res)
+      this.$store.dispatch('clans/updateClan', res)
       this.$store.dispatch('getBtnLoading', false)
       this.setToaster()
       console.log(this.redirectPath)
