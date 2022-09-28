@@ -16,7 +16,8 @@
     "tos": "利用規約",
     "clans": "クランメンバー募集一覧",
     "clans-id": "クランの詳細",
-    "clans-create": "クランメンバーを募集"
+    "clans-create": "クランメンバーを募集",
+    "clans-id-update": "クランを編集"
   },
   "items": {
     "about": "エペスクとは？",
