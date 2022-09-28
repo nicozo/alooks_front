@@ -130,7 +130,8 @@ export default {
         { name: 'rooms-create' },
         { name: 'applications' },
         { name: 'clans' },
-        { name: 'clans-create' }
+        { name: 'clans-create' },
+        { name: 'clans-my_clan' }
       ],
       drawer: false
     }

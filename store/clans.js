@@ -1,11 +1,13 @@
 export const state = () => ({
   clans: [],
-  clan: {}
+  clan: {},
+  myClan: {}
 })
 
 export const getters = {
   clans: state => state.clans,
-  clan: state => state.clan
+  clan: state => state.clan,
+  myClan: state => state.myClan
 }
 
 export const mutations = {
@@ -14,6 +16,9 @@ export const mutations = {
   },
   setClan (state, clan) {
     state.clan = clan
+  },
+  setMyClan (state, myClan) {
+    state.myClan = myClan
   },
   addClan (state, clan) {
     state.clans = state.clans.unshift(clan)
@@ -35,6 +40,9 @@ export const actions = {
   },
   getClan ({ commit }, res) {
     commit('setClan', res)
+  },
+  getMyClan ({ commit }, res) {
+    commit('setMyClan', res)
   },
   addClan ({ commit }, res) {
     commit('addClan', res)

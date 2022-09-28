@@ -16,11 +16,11 @@
       </div>
 
       <v-list-item-content>
-        <v-list-item-title class="text-h4 text-left mb-3">
+        <v-list-item-title class="text-h4 text-left">
           {{ authUser.name }}
         </v-list-item-title>
 
-        <v-list-item-title class="text-left introduction mb-3">
+        <v-list-item-title class="text-left br mb-3">
           {{ authUser.self_introduction }}
         </v-list-item-title>
 
@@ -85,7 +85,7 @@ export default {
 </script>
 
 <style scoped>
-  .introduction {
-    white-space: normal;
+  .br{
+    white-space: pre-line;
   }
 </style>
