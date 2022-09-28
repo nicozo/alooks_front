@@ -107,7 +107,7 @@ export default {
         snipe: '',
         contact_means: ''
       },
-      redirectPath: this.$store.state.loggedIn.rememberPath
+      redirectPath: this.$store.state.loggedIn.clansPath
     }
   },
   computed: {
