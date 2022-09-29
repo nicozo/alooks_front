@@ -9,9 +9,9 @@
   >
     <v-radio
       v-for="gameMode in gameModes"
-      :key="gameMode"
-      :label="gameMode"
-      :value="gameMode"
+      :key="gameMode.label"
+      :label="gameMode.label"
+      :value="gameMode.data"
     />
   </v-radio-group>
 </template>
@@ -28,10 +28,10 @@ export default {
   data () {
     return {
       gameModes: [
-        'カジュアル',
-        'ランク',
-        'アリーナ',
-        'イベント'
+        { label: 'カジュアル', data: 'casual' },
+        { label: 'ランク', data: 'ranked' },
+        { label: 'アリーナ', data: 'arena' },
+        { label: 'イベント', data: 'event' }
       ]
     }
   }
