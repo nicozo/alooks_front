@@ -2,11 +2,13 @@
   <v-radio-group
     id="search-platform"
     hide-details
-    class="mt-2"
     dense
     row
     @change="$emit('update:platform', $event)"
   >
+    <template v-slot:label>
+      <div>-{{ $t('room.platform.title') }}-</div>
+    </template>
     <v-radio
       v-for="platform in platforms"
       :key="platform"

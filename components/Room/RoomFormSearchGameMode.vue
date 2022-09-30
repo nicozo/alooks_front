@@ -2,11 +2,13 @@
   <v-radio-group
     id="search-game-mode"
     hide-details
-    class="mt-2"
     dense
     row
     @change="$emit('update:gameMode', $event)"
   >
+    <template v-slot:label>
+      <div>-{{ $t('room.game_mode.title') }}-</div>
+    </template>
     <v-radio
       v-for="gameMode in gameModes"
       :key="gameMode.label"

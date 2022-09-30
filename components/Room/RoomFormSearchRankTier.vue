@@ -2,11 +2,13 @@
   <v-radio-group
     id="search-rank_tier"
     hide-details
-    class="mt-2"
     dense
     row
     @change="$emit('update:rankTier', $event)"
   >
+    <template v-slot:label>
+      <div>-{{ $t('room.rank_tier.title') }}-</div>
+    </template>
     <v-radio
       v-for="rank_tier in rankTiers"
       :key="rank_tier.label"
