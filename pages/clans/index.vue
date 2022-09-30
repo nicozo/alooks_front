@@ -1,5 +1,30 @@
 <template>
   <v-container>
+    <v-row dense>
+      <v-col>
+        <v-card flat>
+          <form
+            id="search-form"
+            @submit.prevent
+          >
+            <v-container>
+              <clan-form-search-platform :platform.sync="search.platform" />
+
+              <clan-form-search-age :age.sync="search.age" />
+
+              <clan-form-search-required-login :required-login.sync="search.required_login" />
+
+              <clan-form-search-required-ranked :required-ranked.sync="search.required_ranked" />
+
+              <clan-form-search-required-vc :required-vc.sync="search.required_vc" />
+            </v-container>
+          </form>
+        </v-card>
+      </v-col>
+    </v-row>
+
+    <v-divider class="pb-5" />
+
     <v-row>
       <v-col
         v-for="(clan, i) in displayClans"
@@ -54,14 +79,25 @@
 </template>
 
 <script>
+import ClanFormSearchRequiredLogin from '~/components/Clan/ClanFormSearchRequiredLogin.vue'
 export default {
+  components: { ClanFormSearchRequiredLogin },
   name: 'ClansIndexPage',
   middleware: ['clans'],
+
   data () {
     return {
       page: 1,
       pageSize: 12,
-      pageNumber: 0
+      pageNumber: 0,
+      search: {
+        keyword: '',
+        platform: '',
+        age: '',
+        required_login: '',
+        required_ranked: '',
+        required_vc: ''
+      }
     }
   },
   computed: {
@@ -70,6 +106,23 @@ export default {
     },
     pageLength () {
       return Math.ceil(this.clans.length / this.pageSize)
+    },
+    filteredClans () {
+      const clans = []
+
+      for (const i in this.clans) {
+        const clan = this.clans[i]
+        if (clan.platform.includes(this.search.platform) &&
+            clan.age.includes(this.search.age) &&
+            clan.required_login.includes(this.search.required_login) &&
+            clan.required_ranked.includes(this.search.required_ranked) &&
+            clan.required_vc.includes(this.search.required_vc)
+        ) {
+          clans.push(clan)
+        }
+      }
+
+      return clans
     },
     displayClans () {
       this.returnTop()

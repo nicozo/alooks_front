@@ -7,7 +7,7 @@
     <v-select
       id="age"
       :value="age"
-      :items="ages"
+      :items="age_list"
       item-text="label"
       item-value="data"
       label="年齢"
@@ -31,7 +31,7 @@ export default {
   },
   data () {
     return {
-      ages: [
+      age_list: [
         { label: '制限なし', data: 'unlimited' },
         { label: '高校生以上', data: 'high_school_student' },
         { label: '成人以上', data: 'adult' }

@@ -27,6 +27,8 @@
       </v-col>
     </v-row>
 
+    <v-divider class="pb-5" />
+
     <v-row>
       <v-col
         v-for="(room, i) in displayRooms"
@@ -71,7 +73,7 @@
       </v-tooltip>
     </v-row>
 
-    <v-row>
+    <v-row dense>
       <v-col>
         <v-pagination
           v-model="page"
