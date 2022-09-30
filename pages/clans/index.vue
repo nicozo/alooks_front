@@ -61,7 +61,7 @@
             >
               <v-container>
                 <v-card-text>
-                  クランメンバーの募集はありません
+                  {{ $t('message.no_clans') }}
                 </v-card-text>
               </v-container>
             </v-card>

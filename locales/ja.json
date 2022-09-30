@@ -103,7 +103,9 @@
     "loading": "Now Loading Your Apex Legends Stats...",
     "no_data": "No Data",
     "no_requests": "現在参加リクエストはありません",
-    "loading_stats": "Now Loading..."
+    "loading_stats": "Now Loading...",
+    "no_rooms": "スクワッドの募集はありません",
+    "no_clans": "クランメンバーの募集はありません"
   },
   "profile": {
     "legend": {

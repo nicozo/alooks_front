@@ -69,7 +69,7 @@
             >
               <v-container>
                 <v-card-text>
-                  スクワッドの募集はありません
+                  {{ $t('message.no_rooms') }}
                 </v-card-text>
               </v-container>
             </v-card>
