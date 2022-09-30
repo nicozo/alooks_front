@@ -91,7 +91,8 @@
     "clan_create": "クランメンバーを募集",
     "clan-edit": "クランを編集",
     "clan-destroy": "クランを削除",
-    "friend_requested": "送信しました"
+    "friend_requested": "送信しました",
+    "uncheck": "チェックを外す"
   },
   "gender": {
     "male": "男性",
