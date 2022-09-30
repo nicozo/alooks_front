@@ -6,7 +6,7 @@
     row
     @change="$emit('update:login', $event)"
   >
-    <template v-slot:label>
+    <template #label>
       <div>{{ $t('clan.required_login.title') }}</div>
     </template>
     <v-radio

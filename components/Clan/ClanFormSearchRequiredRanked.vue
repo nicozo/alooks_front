@@ -6,7 +6,7 @@
     row
     @change="$emit('update:rankTier', $event)"
   >
-    <template v-slot:label>
+    <template #label>
       <div>{{ $t('clan.required_ranked.title') }}</div>
     </template>
     <v-radio

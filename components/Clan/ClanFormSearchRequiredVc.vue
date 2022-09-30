@@ -6,7 +6,7 @@
     row
     @change="$emit('update:vc', $event)"
   >
-    <template v-slot:label>
+    <template #label>
       <div>{{ $t('clan.required_vc.title') }}</div>
     </template>
     <v-radio

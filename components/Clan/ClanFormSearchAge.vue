@@ -6,7 +6,7 @@
     row
     @change="$emit('update:age', $event)"
   >
-    <template v-slot:label>
+    <template #label>
       <div>{{ $t('clan.age.title') }}</div>
     </template>
     <v-radio

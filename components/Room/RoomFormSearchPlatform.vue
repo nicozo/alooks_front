@@ -6,7 +6,7 @@
     row
     @change="$emit('update:platform', $event)"
   >
-    <template v-slot:label>
+    <template #label>
       <div>-{{ $t('room.platform.title') }}-</div>
     </template>
     <v-radio

@@ -6,7 +6,7 @@
     row
     @change="$emit('update:gameMode', $event)"
   >
-    <template v-slot:label>
+    <template #label>
       <div>-{{ $t('room.game_mode.title') }}-</div>
     </template>
     <v-radio

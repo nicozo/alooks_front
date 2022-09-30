@@ -6,7 +6,7 @@
     row
     @change="$emit('update:rankTier', $event)"
   >
-    <template v-slot:label>
+    <template #label>
       <div>-{{ $t('room.rank_tier.title') }}-</div>
     </template>
     <v-radio
