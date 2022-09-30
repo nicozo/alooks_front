@@ -4,16 +4,16 @@
     hide-details
     dense
     row
-    @change="$emit('update:rankTier', $event)"
+    @change="$emit('update:requiredRanked', $event)"
   >
     <template #label>
       <div>{{ $t('clan.required_ranked.title') }}</div>
     </template>
     <v-radio
-      v-for="rankTier in rankedTiers"
-      :key="rankTier.label"
-      :label="rankTier.label"
-      :value="rankTier.data"
+      v-for="requiredRanked in rankedTiers"
+      :key="requiredRanked.label"
+      :label="requiredRanked.label"
+      :value="requiredRanked.data"
     />
   </v-radio-group>
 </template>

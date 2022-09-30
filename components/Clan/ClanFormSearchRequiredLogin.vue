@@ -4,16 +4,16 @@
     hide-details
     dense
     row
-    @change="$emit('update:login', $event)"
+    @change="$emit('update:requiredLogin', $event)"
   >
     <template #label>
       <div>{{ $t('clan.required_login.title') }}</div>
     </template>
     <v-radio
-      v-for="login in login_list"
-      :key="login.label"
-      :label="login.label"
-      :value="login.data"
+      v-for="requiredLogin in login_list"
+      :key="requiredLogin.label"
+      :label="requiredLogin.label"
+      :value="requiredLogin.data"
     />
   </v-radio-group>
 </template>
