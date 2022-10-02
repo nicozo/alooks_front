@@ -9,7 +9,7 @@
             nuxt
             :to="{ name: 'clans-id-update', params: { id: id } }"
           >
-            {{ $t('btn.clan-edit') }}
+            {{ $t('btn.clan_edit') }}
           </v-btn>
         </v-col>
 
@@ -19,7 +19,7 @@
             block
             @click="deleteClan"
           >
-            {{ $t('btn.clan-destroy') }}
+            {{ $t('btn.clan_destroy') }}
           </v-btn>
         </v-col>
       </v-row>
