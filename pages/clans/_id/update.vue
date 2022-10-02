@@ -18,7 +18,7 @@
 
               <clan-form-prohibited-matters :prohibited-matters.sync="clan.prohibited_matters" />
 
-              <clan-form-interview :interview.sync="clan.interview" />
+              <clan-form-joining-process :joining_process.sync="clan.joining_process" />
 
               <v-card-title>
                 {{ $t('clan.requirements') }}
@@ -89,7 +89,7 @@ export default {
         name: '',
         concept: '',
         prohibited_matters: '',
-        interview: '',
+        joining_process: '',
         platform: '',
         age: '',
         required_login: '',

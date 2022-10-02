@@ -45,17 +45,17 @@
 
       <!-- 面接情報 -->
       <v-card
-        id="clan-interview"
+        id="clan-joining_process"
         flat
       >
         <v-card-title>
-          {{ $t('clan.interview') }}
+          {{ $t('clan.joining_process') }}
         </v-card-title>
 
         <v-divider />
 
         <v-card-text class="br pt-0">
-          {{ $t('clan.interview') }}
+          {{ clan.joining_process }}
         </v-card-text>
       </v-card>
 

@@ -50,7 +50,7 @@ export default {
         type: String,
         required: true
       },
-      interview: {
+      joining_process: {
         type: String,
         required: true
       },

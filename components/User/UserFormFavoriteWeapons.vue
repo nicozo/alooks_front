@@ -4,11 +4,10 @@
     :value="favoriteWeapons"
     :items="guns"
     label="好きな武器"
-    multiple
     outlined
     @change="$emit('update:favoriteWeapons', $event)"
   >
-    <template v-slot:prepend-item>
+    <!-- <template v-slot:prepend-item>
       <v-list-item
         ripple
         @mousedown.prevent
@@ -26,7 +25,7 @@
         </v-list-item-content>
       </v-list-item>
       <v-divider class="mt-2"></v-divider>
-    </template>
+    </template> -->
   </v-select>
 </template>
 
