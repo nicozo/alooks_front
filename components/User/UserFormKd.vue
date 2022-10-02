@@ -11,7 +11,7 @@
     thumb-label="always"
     :thumb-size="24"
   >
-    <template v-slot:append>
+    <template #append>
       <v-text-field
         v-model="changedValue"
         class="mt-0 pt-0"
