@@ -37,28 +37,28 @@
 
         <v-list-item-title class="text-left">
           <div v-show="authUser.kd">
-            KD:{{ authUser.kd }}
+            {{ $t('user.kd') }}:{{ authUser.kd }}
           </div>
           <div v-show="!authUser.kd">
-            KD:{{ $t('Unregistered') }}
+            {{ $t('user.kd') }}:{{ $t('Unregistered') }}
           </div>
         </v-list-item-title>
 
         <v-list-item-title class="text-left">
           <div v-show="authUser.highest_damage">
-            最高ダメージ:{{ authUser.highest_damage }}
+            {{ $t('user.highest_damage') }}:{{ authUser.highest_damage }}
           </div>
           <div v-show="!authUser.highest_damage">
-            最高ダメージ:{{ $t('Unregistered') }}
+            {{ $t('user.highest_damage') }}:{{ $t('Unregistered') }}
           </div>
         </v-list-item-title>
 
         <v-list-item-title class="text-left">
           <div v-show="authUser.favorite_weapons">
-            好きな武器:{{ authUser.favorite_weapons }}
+            {{ $t('user.favorite_weapons') }}:{{ authUser.favorite_weapons }}
           </div>
           <div v-show="!authUser.favorite_weapons">
-            好きな武器:{{ $t('Unregistered') }}
+            {{ $t('user.favorite_weapons') }}:{{ $t('Unregistered') }}
           </div>
         </v-list-item-title>
       </v-list-item-content>

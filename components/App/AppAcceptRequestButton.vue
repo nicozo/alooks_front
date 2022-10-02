@@ -29,12 +29,12 @@
             >
               <validation-provider
                 v-slot="{ errors }"
-                name="ひとこと"
+                name="一言コメント"
                 rules="required|max:25"
               >
                 <v-text-field
                   v-model="message"
-                  label="ひとこと"
+                  label="一言コメント"
                   counter="25"
                   :error-messages="errors"
                   required
