@@ -34,6 +34,33 @@
             年齢{{ $t('Unregistered') }} {{ $t(`gender.${authUser.sex}`) }}
           </v-list-item-title>
         </div>
+
+        <v-list-item-title class="text-left">
+          <div v-show="authUser.kd">
+            KD:{{ authUser.kd }}
+          </div>
+          <div v-show="!authUser.kd">
+            KD:{{ $t('Unregistered') }}
+          </div>
+        </v-list-item-title>
+
+        <v-list-item-title class="text-left">
+          <div v-show="authUser.highest_damage">
+            最高ダメージ:{{ authUser.highest_damage }}
+          </div>
+          <div v-show="!authUser.highest_damage">
+            最高ダメージ:{{ $t('Unregistered') }}
+          </div>
+        </v-list-item-title>
+
+        <v-list-item-title class="text-left">
+          <div v-show="authUser.favorite_weapons">
+            好きな武器:{{ authUser.favorite_weapons }}
+          </div>
+          <div v-show="!authUser.favorite_weapons">
+            好きな武器:{{ $t('Unregistered') }}
+          </div>
+        </v-list-item-title>
       </v-list-item-content>
     </v-list-item>
   </v-card>
