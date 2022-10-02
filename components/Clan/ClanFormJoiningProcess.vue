@@ -8,6 +8,10 @@
       id="joining_process"
       :value="joining_process"
       label="入団までの流れ"
+      placeholder="戦績を見て数戦遊ぶ形で面接をします！希望の場合はこちらのツイッターアカウントまで連絡してください！@sample"
+      persistent-placeholder
+      hint="面接や連絡先などを記入しよう！"
+      persistent-hint
       counter="100"
       :error-messages="errors"
       outlined

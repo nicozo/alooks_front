@@ -10,6 +10,7 @@
       label="クラン内連絡手段"
       counter="50"
       :error-messages="errors"
+      placeholder="クラン内の交流には主にディスコードを使っています！強制ではありませんが、ぜひグループに入っていただけると助かります！"
       outlined
       clearable
       required

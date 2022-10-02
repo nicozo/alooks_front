@@ -9,7 +9,8 @@
       :value="personality"
       label="当クランに適切なプレイヤー"
       placeholder="向上心のある人！常識のある人！"
-      hint="どんな人がクランに来てほしいのかを設定"
+      hint="どんな人がクランに来てほしいのかを設定しよう！"
+      persistent-hint
       counter="100"
       :error-messages="errors"
       outlined

@@ -8,7 +8,7 @@
       id="name"
       :value="name"
       label="クランネーム"
-      placeholder="サンプル"
+      placeholder="エペスククラン"
       counter="15"
       :error-messages="errors"
       outlined

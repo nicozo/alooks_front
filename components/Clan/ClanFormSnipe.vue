@@ -9,7 +9,9 @@
       :value="snipe"
       label="スナイプや大会等"
       counter="100"
-      hint="スナイプや大会への参加などの活動内容を設定"
+      placeholder="週１でスナイプを開催しています！クランメンバーとワイワイ楽しめる一大イベントです！"
+      hint="スナイプや大会に関わる活動内容を設定しよう！"
+      persistent-hint
       :error-messages="errors"
       outlined
       clearable

@@ -9,7 +9,8 @@
       :value="concept"
       label="コンセプト"
       placeholder="お友達を増やしたい人向けのクランです！"
-      hint="クラン活動の目的など簡潔に伝えよう！"
+      hint="クラン活動の目などどんなクランなのかを簡潔に伝えよう！"
+      persistent-hint
       counter="100"
       :error-messages="errors"
       outlined

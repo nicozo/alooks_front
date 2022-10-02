@@ -9,7 +9,9 @@
       :value="prohibitedMatters"
       label="禁止事項"
       counter="100"
-      hint="禁止事項を記載しよう"
+      placeholder="死体撃ち、コンバーターの使用など"
+      hint="禁止事項を記載しよう！"
+      persistent-hint
       :error-messages="errors"
       outlined
       clearable
