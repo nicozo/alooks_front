@@ -1,44 +1,49 @@
 <template>
   <v-container>
     <v-row dense>
-      <v-col>
-        <v-card flat>
-          <form
-            id="search-form"
-            class="step-2"
-          >
-            <v-container>
-              <room-form-search-keyword :keyword.sync="search.keyword" />
-
-              <room-form-search-platform :platform.sync="search.platform" />
-
-              <room-form-search-game-mode :game-mode.sync="search.game_mode" />
-
-              <room-form-search-rank-tier :rank-tier.sync="search.rank_tier" />
-
-              <v-checkbox
-                v-model="search.opening"
-                label="募集中のみ表示"
-              />
-
-              <v-row
-                dense
-                justify="end"
+      <v-expansion-panels accordion>
+        <v-expansion-panel>
+          <v-expansion-panel-header>
+            {{ $t('search_title') }}
+          </v-expansion-panel-header>
+          <v-expansion-panel-content>
+            <v-card flat>
+              <form
+                id="search-form"
+                class="step-2"
               >
-                <v-btn
-                  color="error"
-                  @click="uncheck"
-                >
-                  {{ $t('btn.uncheck') }}
-                </v-btn>
-              </v-row>
-            </v-container>
-          </form>
-        </v-card>
-      </v-col>
-    </v-row>
+                <v-container>
+                  <room-form-search-keyword :keyword.sync="search.keyword" />
 
-    <v-divider class="pb-5" />
+                  <room-form-search-platform :platform.sync="search.platform" />
+
+                  <room-form-search-game-mode :game-mode.sync="search.game_mode" />
+
+                  <room-form-search-rank-tier :rank-tier.sync="search.rank_tier" />
+
+                  <v-checkbox
+                    v-model="search.opening"
+                    label="募集中のみ表示"
+                  />
+
+                  <v-row
+                    dense
+                    justify="end"
+                  >
+                    <v-btn
+                      color="error"
+                      @click="uncheck"
+                    >
+                      {{ $t('btn.uncheck') }}
+                    </v-btn>
+                  </v-row>
+                </v-container>
+              </form>
+            </v-card>
+          </v-expansion-panel-content>
+        </v-expansion-panel>
+      </v-expansion-panels>
+    </v-row>
 
     <v-row>
       <template v-if="displayRoomsExist">
@@ -210,7 +215,8 @@ export default {
     },
     uncheck () {
       // Todo チェックを外した後、同じラジオボタンをクリックできない。
-      const activeButtons = document.querySelectorAll('.v-item--active')
+      const activeButtons = document.querySelectorAll('.v-radio.theme--light.v-item--active')
+      console.log(activeButtons)
       if (activeButtons.length !== 0) {
         for (const activeButton of activeButtons) {
           const activeButtonChild = activeButton.firstChild.firstChild

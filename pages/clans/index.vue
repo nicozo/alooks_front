@@ -1,38 +1,43 @@
 <template>
   <v-container>
     <v-row dense>
-      <v-col>
-        <v-card flat>
-          <form id="search-form">
-            <v-container>
-              <clan-form-search-platform :platform.sync="search.platform" />
+      <v-expansion-panels accordion>
+        <v-expansion-panel>
+          <v-expansion-panel-header>
+            {{ $t('search_title') }}
+          </v-expansion-panel-header>
+          <v-expansion-panel-content>
+            <v-card flat>
+              <form id="search-form">
+                <v-container>
+                  <clan-form-search-platform :platform.sync="search.platform" />
 
-              <clan-form-search-age :age.sync="search.age" />
+                  <clan-form-search-age :age.sync="search.age" />
 
-              <clan-form-search-required-login :required-login.sync="search.required_login" />
+                  <clan-form-search-required-login :required-login.sync="search.required_login" />
 
-              <clan-form-search-required-ranked :required-ranked.sync="search.required_ranked" />
+                  <clan-form-search-required-ranked :required-ranked.sync="search.required_ranked" />
 
-              <!-- <clan-form-search-required-vc :required-vc.sync="search.required_vc" /> -->
+                  <!-- <clan-form-search-required-vc :required-vc.sync="search.required_vc" /> -->
 
-              <v-row
-                dense
-                justify="end"
-              >
-                <v-btn
-                  color="error"
-                  @click="uncheck"
-                >
-                  {{ $t('btn.uncheck') }}
-                </v-btn>
-              </v-row>
-            </v-container>
-          </form>
-        </v-card>
-      </v-col>
+                  <v-row
+                    dense
+                    justify="end"
+                  >
+                    <v-btn
+                      color="error"
+                      @click="uncheck"
+                    >
+                      {{ $t('btn.uncheck') }}
+                    </v-btn>
+                  </v-row>
+                </v-container>
+              </form>
+            </v-card>
+          </v-expansion-panel-content>
+        </v-expansion-panel>
+      </v-expansion-panels>
     </v-row>
-
-    <v-divider class="pb-5" />
 
     <v-row>
       <template v-if="displayClansExist">
@@ -170,7 +175,7 @@ export default {
     },
     uncheck () {
       // Todo チェックを外した後、同じラジオボタンをクリックできない。
-      const activeButtons = document.querySelectorAll('.v-item--active')
+      const activeButtons = document.querySelectorAll('v-radio.theme--light.v-item--active')
       if (activeButtons.length !== 0) {
         for (const activeButton of activeButtons) {
           const activeButtonChild = activeButton.firstChild.firstChild
