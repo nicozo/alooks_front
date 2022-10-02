@@ -6,8 +6,8 @@
   >
     <v-card
       flat
-      width="80%"
-      max-width="400"
+      width="800"
+      max-width="1000"
     >
       <validation-observer v-slot="{ invalid }">
         <form @submit.prevent="updateProfile">
@@ -139,7 +139,6 @@ export default {
   },
   created () {
     this.user = Object.assign({}, this.authUser)
-    this.user.favorite_weapons = ['G7', 'R-99']
     // console.log('ログインユーザー情報：', this.user)
   },
   methods: {
