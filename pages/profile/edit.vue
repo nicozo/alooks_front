@@ -14,18 +14,27 @@
           <v-container fluid>
             <v-row dense>
               <v-col cols="12">
-                <v-layout justify-center>
-                  <div v-if="user.avatar_url">
+                <div v-if="avatar_preview_url">
+                  <v-layout justify-center>
                     <v-avatar size="200">
-                      <img :src="user.avatar_url" alt="プロフィール画像です">
+                      <img :src="avatar_preview_url" alt="プロフィール画像です">
                     </v-avatar>
-                  </div>
-                  <div v-else>
-                    <v-avatar size="200">
-                      <img :src="default_avatar_src" alt="プロフィール画像です">
-                    </v-avatar>
-                  </div>
-                </v-layout>
+                  </v-layout>
+                </div>
+                <div v-else>
+                  <v-layout justify-center>
+                    <div v-if="user.avatar_url">
+                      <v-avatar size="200">
+                        <img :src="user.avatar_url" alt="プロフィール画像です">
+                      </v-avatar>
+                    </div>
+                    <div v-else>
+                      <v-avatar size="200">
+                        <img :src="default_avatar_src" alt="プロフィール画像です">
+                      </v-avatar>
+                    </div>
+                  </v-layout>
+                </div>
               </v-col>
 
               <v-col cols="12">
@@ -43,6 +52,7 @@
                     outlined
                     hint="推奨サイズ:640x590"
                     persistent-hint
+                    @change="setPreview"
                   />
                 </validation-provider>
               </v-col>
@@ -123,6 +133,7 @@ export default {
         favorite_weapons: ''
       },
       upload_avatar: null,
+      avatar_preview_url: null,
       redirect_path: this.$store.state.loggedIn.rememberPath,
       default_avatar_src: this.$store.getters.defaultAvatarSrc
     }
@@ -180,6 +191,10 @@ export default {
     },
     changeKd (newVal) {
       this.user.kd = newVal
+    },
+    setPreview () {
+      const avatarImg = event.target.files[0]
+      this.avatar_preview_url = URL.createObjectURL(avatarImg)
     }
   }
 }
