@@ -23,13 +23,17 @@
       >
         <validation-observer v-slot="{ invalid }">
           <form @submit.prevent="login">
-            <v-container fluid>
-              <user-form-email :email.sync="user.email" />
+            <v-container>
+              <v-row dense>
+                <v-col cols="12">
+                  <user-form-email :email.sync="user.email" />
+                </v-col>
 
-              <user-form-password :password.sync="user.password" />
+                <v-col cols="12">
+                  <user-form-password :password.sync="user.password" />
+                </v-col>
 
-              <v-row>
-                <v-col>
+                <v-col cols="12">
                   <v-btn
                     type="submit"
                     block
