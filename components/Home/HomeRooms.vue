@@ -4,7 +4,7 @@
     justify="center"
   >
     <v-col
-      v-for="(room, i) in recentRooms"
+      v-for="(room, i) in recent_rooms"
       :key="i"
       cols="12"
       sm="6"
@@ -37,7 +37,7 @@
             </template>
             <template v-else>
               <v-avatar size="100" class="my-4">
-                <img :src="defaultAvatarSrc" alt="プロフィール画像です">
+                <img :src="default_avatar_src" alt="プロフィール画像です">
               </v-avatar>
             </template>
           </v-layout>
@@ -85,12 +85,8 @@ export default {
   name: 'HomeRooms',
   data () {
     return {
-      recentRooms: []
-    }
-  },
-  computed: {
-    defaultAvatarSrc () {
-      return this.$store.getters.defaultAvatarSrc
+      recent_rooms: [],
+      default_avatar_src: this.$store.getters.defaultAvatarSrc
     }
   },
   created () {
@@ -107,8 +103,8 @@ export default {
         .catch(e => console.log(e))
     },
     requestSuccessful (res) {
-      this.recentRooms = res
-      console.log('recent rooms', this.recentRooms)
+      this.recent_rooms = res
+      console.log('recent rooms', this.recent_rooms)
     }
   }
 }

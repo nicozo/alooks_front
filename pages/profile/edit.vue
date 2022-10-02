@@ -22,7 +22,7 @@
                   </div>
                   <div v-else>
                     <v-avatar size="200">
-                      <img :src="defaultAvatarSrc" alt="プロフィール画像です">
+                      <img :src="default_avatar_src" alt="プロフィール画像です">
                     </v-avatar>
                   </div>
                 </v-layout>
@@ -123,15 +123,13 @@ export default {
         favorite_weapons: ''
       },
       uploadAvatar: null,
-      redirectPath: this.$store.state.loggedIn.rememberPath
+      redirectPath: this.$store.state.loggedIn.rememberPath,
+      default_avatar_src: this.$store.getters.defaultAvatarSrc
     }
   },
   computed: {
     authUser () {
       return this.$auth.user
-    },
-    defaultAvatarSrc () {
-      return this.$store.getters.defaultAvatarSrc
     },
     btnLoading () {
       return this.$store.getters.btnLoading

@@ -25,7 +25,7 @@
                   </div>
                   <div v-else>
                     <v-list-item-avatar size="70">
-                      <v-img :src="defaultAvatarSrc" />
+                      <v-img :src="default_avatar_src" />
                     </v-list-item-avatar>
                   </div>
 
@@ -77,7 +77,7 @@
                     <v-card
                       id="request-user-ranked-stats"
                       :loading="loading"
-                      :min-width="minWidth"
+                      :min-width="min_width"
                     >
                       <v-container>
                         <v-card-title>
@@ -116,7 +116,7 @@
                     <v-card
                       id="request-user-total-stats"
                       :loading="loading"
-                      :min-width="minWidth"
+                      :min-width="min_width"
                     >
                       <v-container>
                         <v-card-title>
@@ -226,7 +226,8 @@ export default {
   layout: 'loggedIn',
   data () {
     return {
-      minWidth: 200
+      min_width: 200,
+      default_avatar_src: this.$store.getters.defaultAvatarSrc
     }
   },
   computed: {
@@ -275,9 +276,6 @@ export default {
         //        val.key === 'specialEvent_wins' ||
         //        val.key === 'headshots'
       })
-    },
-    defaultAvatarSrc () {
-      return this.$store.getters.defaultAvatarSrc
     },
     isUnread () {
       return function (application) {

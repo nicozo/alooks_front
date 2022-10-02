@@ -11,7 +11,7 @@
       </div>
       <div v-else>
         <v-list-item-avatar :size="breakPointAvatarSize">
-          <v-img :src="defaultAvatarSrc" />
+          <v-img :src="default_avatar_src" />
         </v-list-item-avatar>
       </div>
 
@@ -100,12 +100,14 @@ export default {
       default: 0
     }
   },
+  data () {
+    return {
+      default_avatar_src: this.$store.getters.defaultAvatarSrc
+    }
+  },
   computed: {
     breakPointAvatarSize () {
       return this.$vuetify.breakpoint.xs ? 120 : 170
-    },
-    defaultAvatarSrc () {
-      return this.$store.getters.defaultAvatarSrc
     }
   }
 }

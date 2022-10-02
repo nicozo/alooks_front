@@ -32,7 +32,7 @@
                   </div>
                   <div v-show="!room.host.avatar_url">
                     <v-list-item-avatar size="70">
-                      <v-img :src="defaultAvatarSrc" />
+                      <v-img :src="default_avatar_src" />
                     </v-list-item-avatar>
                   </div>
 
@@ -137,7 +137,7 @@
                       dark
                       outlined
                     >
-                      {{ timeToDeadline }}
+                      {{ time_to_deadline }}
                     </v-chip>
                   </v-card-text>
 
@@ -286,10 +286,11 @@ export default {
   data () {
     return {
       invalid: false,
-      timeToDeadline: '',
+      time_to_deadline: '',
       host: {
         age: ''
-      }
+      },
+      default_avatar_src: this.$store.getters.defaultAvatarSrc
     }
   },
   computed: {
@@ -310,9 +311,6 @@ export default {
     },
     loading () {
       return this.$game.loading
-    },
-    defaultAvatarSrc () {
-      return this.$store.getters.defaultAvatarSrc
     },
     filteredPlayerTotalStats () {
       return this.playerTotalStats.filter((val) => {
@@ -352,8 +350,8 @@ export default {
     changeDateFormat () {
       const roomDeadline = this.room.application_deadline
       const minutesToDeadline = this.$dayjs(roomDeadline).fromNow()
-      this.timeToDeadline = this.replaceFormat(minutesToDeadline)
-      // console.log('締め切り', this.timeToDeadline)
+      this.time_to_deadline = this.replaceFormat(minutesToDeadline)
+      // console.log('締め切り', this.time_to_deadline)
     },
     replaceFormat (str) {
       // console.log('渡された文字列', str)
