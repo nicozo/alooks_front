@@ -13,8 +13,12 @@
       <v-card
         flat
         width="80%"
-        max-width="400"
+        max-width="900"
       >
+          <v-card-text class="br pt-0">
+            ここではスクワッドメンバーを募集するための掲示板を作成できます。
+            さっそく以下のフォームを記入して、スクワッドメンバーを募集しよう！
+          </v-card-text>
         <validation-observer v-slot="{ invalid }">
           <form @submit.prevent="recruit">
             <v-container fluid>
@@ -22,13 +26,13 @@
 
               <room-form-platform :platform.sync="room.platform" />
 
+              <room-form-game-mode :game-mode.sync="room.game_mode" />
+
               <room-form-rank-tier :rank-tier.sync="room.rank_tier" />
 
               <room-form-application-deadline :application-deadline.sync="room.application_deadline" />
 
               <room-form-recruitment-number :recruitment-number.sync="room.recruitment_number" />
-
-              <room-form-game-mode :game-mode.sync="room.game_mode" />
 
               <!-- TODO 下書き機能 -->
               <!-- <v-switch
@@ -121,3 +125,9 @@ export default {
   }
 }
 </script>
+
+<style scoped>
+  .br{
+    white-space: pre-line;
+  }
+</style>
