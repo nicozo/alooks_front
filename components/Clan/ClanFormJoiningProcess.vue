@@ -1,28 +1,28 @@
 <template>
   <validation-provider
     v-slot="{ errors }"
-    name="面接について"
+    name="入団までの流れ"
     rules="required|max:100"
   >
     <v-textarea
-      id="interview"
-      :value="interview"
-      label="面接について"
+      id="joining_process"
+      :value="joining_process"
+      label="入団までの流れ"
       counter="100"
       :error-messages="errors"
       outlined
       clearable
       required
-      @input="$emit('update:interview', $event)"
+      @input="$emit('update:joining_process', $event)"
     />
   </validation-provider>
 </template>
 
 <script>
 export default {
-  name: 'ClanFormInterview',
+  name: 'ClanFormJoiningProcess',
   props: {
-    interview: {
+    joining_process: {
       type: String,
       require: true,
       default: ''
