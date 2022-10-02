@@ -122,8 +122,8 @@ export default {
         highest_damage: null,
         favorite_weapons: ''
       },
-      uploadAvatar: null,
-      redirectPath: this.$store.state.loggedIn.rememberPath,
+      upload_avatar: null,
+      redirect_path: this.$store.state.loggedIn.rememberPath,
       default_avatar_src: this.$store.getters.defaultAvatarSrc
     }
   },
@@ -154,8 +154,8 @@ export default {
         formData.append('user[kd]', this.user.kd)
         formData.append('user[highest_damage]', this.user.highest_damage)
         formData.append('user[favorite_weapons]', this.user.favorite_weapons)
-        if (this.uploadAvatar !== null) {
-          formData.append('user[avatar]', this.uploadAvatar)
+        if (this.upload_avatar !== null) {
+          formData.append('user[avatar]', this.upload_avatar)
         }
         // console.log(...formData.entries())
 
@@ -170,7 +170,7 @@ export default {
     uploadSuccessful (res) {
       this.setToaster()
       this.$auth.login(res)
-      this.$router.push(this.redirectPath)
+      this.$router.push(this.redirect_path)
       this.$store.dispatch('getBtnLoading', false)
     },
     setToaster () {

@@ -73,7 +73,7 @@ export default {
         recruitment_number: null,
         is_draft: false
       },
-      redirectPath: this.$store.state.loggedIn.rememberPath,
+      redirect_path: this.$store.state.loggedIn.rememberPath,
       pageTitle: this.$t(`pages.${$route.name}`),
       profile_dialog: false
     }
@@ -102,7 +102,7 @@ export default {
     },
     recruitSuccessful (res) {
       // console.log('作成されたroomオブジェクト', res)
-      this.$router.push(this.redirectPath)
+      this.$router.push(this.redirect_path)
       this.setToaster()
       this.$store.dispatch('getBtnLoading', false)
     },

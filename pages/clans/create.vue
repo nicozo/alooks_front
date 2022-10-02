@@ -112,7 +112,7 @@ export default {
         snipe: '',
         contact_means: ''
       },
-      redirectPath: this.$store.state.loggedIn.clansPath
+      redirect_path: this.$store.state.loggedIn.clansPath
     }
   },
   computed: {
@@ -137,7 +137,7 @@ export default {
       this.$store.dispatch('clans/addClan', res)
       this.setToaster()
       this.$store.dispatch('getBtnLoading', false)
-      this.$router.push(this.redirectPath)
+      this.$router.push(this.redirect_path)
     },
     recruitFailure ({ response }) {
       console.log(response)

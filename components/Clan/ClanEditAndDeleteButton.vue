@@ -42,7 +42,7 @@ export default {
   },
   data () {
     return {
-      redirectPath: this.$store.state.loggedIn.clansPath
+      redirect_path: this.$store.state.loggedIn.clansPath
     }
   },
   methods: {
@@ -61,7 +61,7 @@ export default {
       this.$store.dispatch('getBtnLoading', false)
       this.setToaster()
       this.$store.dispatch('clans/deleteClan', res)
-      this.$router.push(this.redirectPath)
+      this.$router.push(this.redirect_path)
     },
     setToaster () {
       const msg = 'クランを削除しました'
