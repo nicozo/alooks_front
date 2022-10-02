@@ -77,6 +77,7 @@
     "invitation_request": "参加リクエスト",
     "login": "ログイン",
     "register": "新規登録",
+    "update": "更新する",
     "password_forget": "パスワードをお忘れですか？",
     "do_not_have_account": "アカウントお持ちでないですか？",
     "already_have_account": "アカウントをお持ちですか？",
@@ -89,8 +90,8 @@
     "submit": "送信",
     "create": "スクワッドを募集",
     "clan_create": "クランメンバーを募集",
-    "clan-edit": "クランを編集",
-    "clan-destroy": "クランを削除",
+    "clan_edit": "クランを編集",
+    "clan_destroy": "クランを削除",
     "friend_requested": "送信しました",
     "uncheck": "チェックを外す"
   },

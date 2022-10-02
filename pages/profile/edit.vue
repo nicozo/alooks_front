@@ -12,8 +12,8 @@
       <validation-observer v-slot="{ invalid }">
         <form @submit.prevent="updateProfile">
           <v-container fluid>
-            <v-row>
-              <v-col>
+            <v-row dense>
+              <v-col cols="12">
                 <v-layout justify-center>
                   <div v-if="user.avatar_url">
                     <v-avatar size="200">
@@ -27,10 +27,8 @@
                   </div>
                 </v-layout>
               </v-col>
-            </v-row>
 
-            <v-row>
-              <v-col>
+              <v-col cols="12">
                 <validation-provider
                   v-slot="{errors}"
                   name="プロフィール画像"
@@ -48,21 +46,47 @@
                   />
                 </validation-provider>
               </v-col>
-            </v-row>
 
-            <user-form-name :name.sync="user.name" />
+              <v-col cols="12">
+                <user-form-name :name.sync="user.name" />
+              </v-col>
 
-            <user-form-self-introduction :self-introduction.sync="user.self_introduction" />
+              <v-col cols="12">
+                <user-form-self-introduction :self-introduction.sync="user.self_introduction" />
+              </v-col>
 
-            <user-form-date-of-birth :date-of-birth.sync="user.date_of_birth" />
+              <v-col cols="12">
+                <user-form-date-of-birth :date-of-birth.sync="user.date_of_birth" />
+              </v-col>
 
-            <user-form-sex :sex.sync="user.sex" />
+              <v-col cols="12">
+                <user-form-sex :sex.sync="user.sex" />
+              </v-col>
 
-            <user-form-game-id :game-id.sync="user.game_id" />
+              <v-col cols="12">
+                <user-form-game-id :game-id.sync="user.game_id" />
+              </v-col>
 
-            <user-form-platform :platform.sync="user.platform" />
-            <v-row>
-              <v-col>
+              <v-col cols="12">
+                <user-form-platform :platform.sync="user.platform" />
+              </v-col>
+
+              <v-col cols="12">
+                <user-form-kd
+                  :kd="user.kd"
+                  @change="changeKd"
+                />
+              </v-col>
+
+              <v-col cols="12">
+                <user-form-highest-damage :highest-damage.sync="user.highest_damage" />
+              </v-col>
+
+              <v-col cols="12">
+                <user-form-favorite-weapons :favorite-weapons.sync="user.favorite_weapons" />
+              </v-col>
+
+              <v-col cols="12">
                 <v-btn
                   type="submit"
                   block
@@ -70,7 +94,7 @@
                   :disabled="invalid"
                   :loading="btnLoading"
                 >
-                  更新する
+                  {{ $t('btn.update') }}
                 </v-btn>
               </v-col>
             </v-row>
@@ -93,7 +117,10 @@ export default {
         sex: '',
         game_id: '',
         avatar_url: '',
-        platform: ''
+        platform: '',
+        kd: null,
+        highest_damage: null,
+        favorite_weapons: ''
       },
       uploadAvatar: null,
       redirectPath: this.$store.state.loggedIn.rememberPath
@@ -112,6 +139,7 @@ export default {
   },
   created () {
     this.user = Object.assign({}, this.authUser)
+    this.user.favorite_weapons = ['G7', 'R-99']
     // console.log('ログインユーザー情報：', this.user)
   },
   methods: {
@@ -126,6 +154,9 @@ export default {
         formData.append('user[sex]', this.user.sex)
         formData.append('user[game_id]', this.user.game_id)
         formData.append('user[platform]', this.user.platform)
+        formData.append('user[kd]', this.user.kd)
+        formData.append('user[highest_damage]', this.user.highest_damage)
+        formData.append('user[favorite_weapons]', this.user.favorite_weapons)
         if (this.uploadAvatar !== null) {
           formData.append('user[avatar]', this.uploadAvatar)
         }
@@ -149,6 +180,9 @@ export default {
       const msg = 'プロフィール画像を更新しました'
       const color = 'success'
       return this.$store.dispatch('getToast', { msg, color })
+    },
+    changeKd (newVal) {
+      this.user.kd = newVal
     }
   }
 }
