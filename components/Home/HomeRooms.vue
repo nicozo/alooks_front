@@ -77,6 +77,20 @@
         </v-container>
       </v-card>
     </v-col>
+
+    <div
+      align="center"
+      class="mt-5"
+    >
+      <v-btn
+        color="success"
+        class="pa-5"
+        nuxt
+        :to="{ name: 'rooms' }"
+      >
+        {{ $t('btn.to_rooms_page') }}
+      </v-btn>
+    </div>
   </v-row>
 </template>
 
