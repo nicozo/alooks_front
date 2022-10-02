@@ -45,7 +45,7 @@
                 >
                   <v-file-input
                     id="avatar"
-                    v-model="uploadAvatar"
+                    v-model="upload_avatar"
                     label="プロフィール画像"
                     accept="image/png, image/jpeg"
                     :error-messages="errors"

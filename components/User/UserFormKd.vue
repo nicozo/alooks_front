@@ -19,7 +19,6 @@
         single-line
         type="number"
         style="width: 60px"
-        :error-messages="errors"
         step="0.1"
       />
     </template>
