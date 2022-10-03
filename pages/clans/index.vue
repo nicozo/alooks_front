@@ -50,7 +50,10 @@
           lg="4"
           xl="4"
         >
-          <ClanItem :clan="clan" />
+          <ClanItem
+            :clan="clan"
+            @child-delete-method="deleteClan"
+          />
         </v-col>
       </template>
 
@@ -188,7 +191,7 @@ export default {
       this.search.age = ''
       this.search.required_login = ''
       this.search.required_ranked = ''
-    }
+    },
     // Todo 検索機能をVuexで管理する考えだったが良策が思い浮かばないため一旦コメントアウト
     // searchClans () {
     //   this.$store.dispatch('clans/getFilteredClans', this.search)
@@ -210,6 +213,25 @@ export default {
     //   this.search.required_ranked = ''
     //   this.$store.dispatch('clans/getFilteredClans', this.search)
     // }
+    async deleteClan (clanId) {
+      this.$store.dispatch('getBtnLoading', true)
+
+      await this.$axios.$delete(
+        `api/v1/clans/${clanId}`
+      )
+        .then(res => this.deleteSuccessful(res))
+    },
+    deleteSuccessful (res) {
+      this.$store.dispatch('getBtnLoading', false)
+      this.setToaster()
+      this.$store.dispatch('clans/deleteClan', res)
+    },
+    setToaster () {
+      const msg = 'クランを削除しました'
+      const color = 'success'
+
+      return this.$store.dispatch('getToast', { msg, color })
+    }
   }
 }
 </script>
