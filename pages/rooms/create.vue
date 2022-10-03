@@ -94,7 +94,7 @@ export default {
 
         await this.$axios.$post(
           'api/v1/rooms',
-          { room: this.room }
+          this.room
         )
           .then(res => this.recruitSuccessful(res))
           .catch(e => this.recruitFailure(e))

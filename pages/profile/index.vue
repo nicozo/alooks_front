@@ -43,15 +43,15 @@
             <template v-if="highestKillLegendStats">
               <v-img
                 :src="highestKillLegendStats.ImgAssets.banner"
-                :max-height="max_height"
-                :min-height="min_height"
+                :max-height="maxHeight"
+                :min-height="minHeight"
               />
             </template>
             <template v-else>
               <v-img
-                :src="common_img_src"
-                :max-height="max_height"
-                :min-height="min_height"
+                :src="commonImgSrc"
+                :max-height="maxHeight"
+                :min-height="minHeight"
               />
             </template>
           </v-card>
@@ -174,15 +174,13 @@ export default {
       user: {
         age: ''
       },
-      max_height: 400,
-      min_height: 180,
-      common_img_src: this.$store.getters.commonImageSrc
+      maxHeight: 400,
+      minHeight: 180,
+      commonImgSrc: this.$store.getters.commonImageSrc,
+      authUser: this.$auth.user
     }
   },
   computed: {
-    authUser () {
-      return this.$auth.user
-    },
     data () {
       return this.$game.data
     },
@@ -193,7 +191,6 @@ export default {
       return this.$game.rankedStats
     },
     playerTotalStats () {
-      console.log('playerTotalStats', this.$game.playerTotalStats)
       return this.$game.playerTotalStats
     },
     loading () {
