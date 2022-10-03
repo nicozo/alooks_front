@@ -6,7 +6,7 @@
     >
       <v-col>
         <template v-if="isApplicationExist">
-          <v-expansion-panels>
+          <!-- <v-expansion-panels>
             <v-expansion-panel
               v-for="(application, i) in applications"
               :id="`application-${application.id}`"
@@ -123,7 +123,7 @@
                     <v-card
                       id="request-user-ranked-stats"
                       :loading="loading"
-                      :min-width="min_width"
+                      :min-width="minWidth"
                     >
                       <v-container>
                         <v-card-title>
@@ -162,7 +162,7 @@
                     <v-card
                       id="request-user-total-stats"
                       :loading="loading"
-                      :min-width="min_width"
+                      :min-width="minWidth"
                     >
                       <v-container>
                         <v-card-title>
@@ -239,7 +239,13 @@
                 </v-row>
               </v-expansion-panel-content>
             </v-expansion-panel>
-          </v-expansion-panels>
+          </v-expansion-panels> -->
+          <application-item
+            :applications="applications"
+            :auth-user="authUser"
+            @child-request-event="requestApi"
+            @child-read-event="read"
+          />
         </template>
 
         <template v-else>
@@ -272,61 +278,12 @@ export default {
   layout: 'loggedIn',
   data () {
     return {
-      min_width: 200,
-      defaultAvatarSrc: this.$store.getters.defaultAvatarSrc
+      authUser: this.$auth.user
     }
   },
   computed: {
-    authUser () {
-      return this.$auth.user
-    },
     applications () {
       return this.$store.getters['applications/applications']
-    },
-    data () {
-      return this.$game.data
-    },
-    highestKillLegendStats () {
-      return this.$game.highestKillLegendStats
-    },
-    rankedStats () {
-      return this.$game.rankedStats
-    },
-    playerTotalStats () {
-      return this.$game.playerTotalStats
-    },
-    loading () {
-      return this.$game.loading
-    },
-    disabled () {
-      return this.$game.disabled
-    },
-    isRankedStatsExist () {
-      return this.rankedStats.length !== 0
-    },
-    isPlayerTotalStatsExist () {
-      return this.playerTotalStats.length !== 0
-    },
-    isApplicationExist () {
-      return this.applications.length !== 0
-    },
-    isBreakPointImgWidth () {
-      return this.$vuetify.breakpoint.xs ? 150 : 200
-    },
-    filteredPlayerTotalStats () {
-      return this.playerTotalStats.filter((val) => {
-        // console.log(`${val.key}:${val.value.name}-${val.value.value}`)
-        return val.key.includes('kills', 'damage', 'wins', 'headshots')
-        // return val.key === 'specialEvent_kills' ||
-        //        val.key === 'specialEvent_damage' ||
-        //        val.key === 'specialEvent_wins' ||
-        //        val.key === 'headshots'
-      })
-    },
-    isUnread () {
-      return function (application) {
-        return application.is_read === false
-      }
     }
   },
   methods: {
@@ -351,39 +308,9 @@ export default {
       // console.log(this.applications)
       this.$store.dispatch('applications/getReadApplication', res)
     },
-    onExpansionPanelClick (application) {
-      if (event.currentTarget.classList.contains('v-expansion-panel-header--active')) {
-        console.log('Panel is closing/now closed.')
-      } else {
-        console.log('Panel is opening/now open.')
-        if (this.dataNullOrCheckAnotherApplication(application)) {
-          this.requestApi(application)
-          // console.log('未読？', this.isUnread(application))
-          if (this.isUnread(application)) {
-            this.read(application)
-          }
-        }
-      }
-    },
-    dataNullOrCheckAnotherApplication (application) {
-      return this.data === '' || application.applicant.game_id !== this.data.global.name
-    },
-    getUserAge (birthday) {
-      // console.log(birthday)
-      if (!birthday) { return }
-      const today = new Date()
-      const ymd = birthday.split('-')
-      const thisYearsBirthday = new Date(today.getFullYear(), ymd[1] - 1, ymd[2])
-      const age = today.getFullYear() - ymd[0]
-
-      return today < thisYearsBirthday ? age - 1 : age
+    isApplicationExist () {
+      return this.applications.length !== 0
     }
   }
 }
 </script>
-
-<style scoped>
-  .white-space {
-    white-space: normal;
-  }
-</style>
