@@ -91,6 +91,7 @@
       <template v-if="roomIsOwn()">
         <room-edit-and-delete-button
           :id="room.id"
+          :invalid="invalid"
           @child-delete-method="childDeleteMethod"
         />
       </template>

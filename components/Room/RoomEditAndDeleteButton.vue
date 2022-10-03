@@ -5,6 +5,7 @@
         color="success"
         block
         nuxt
+        :disabled="invalid"
         :to="{ name: 'rooms-id-update', params: { id: id } }"
       >
         {{ $t('btn.room_edit') }}
@@ -23,6 +24,7 @@
           block
           v-bind="attrs"
           v-on="on"
+          :disabled="invalid"
         >
           {{ $t('btn.room_destroy') }}
         </v-btn>
@@ -70,6 +72,11 @@ export default {
     id: {
       type: Number,
       required: true
+    },
+    invalid: {
+      type: Boolean,
+      default: false,
+      require: true
     }
   },
   data () {
