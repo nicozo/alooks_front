@@ -99,7 +99,8 @@
     "friend_requested": "送信しました",
     "uncheck": "チェックを外す",
     "room_edit": "スクワッドを編集",
-    "room_destroy": "スクワッドを削除"
+    "room_destroy": "スクワッドを削除",
+    "delete": "削除"
   },
   "gender": {
     "male": "男性",
