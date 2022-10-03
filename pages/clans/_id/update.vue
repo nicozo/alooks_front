@@ -102,7 +102,7 @@ export default {
         snipe: '',
         contact_means: ''
       },
-      store_clan: this.$store.getters['clans/clan'],
+      storeClan: this.$store.getters['clans/clan'],
       redirectPath: this.$store.state.loggedIn.clansPath
     }
   },
@@ -112,7 +112,7 @@ export default {
     }
   },
   created () {
-    this.clan = Object.assign({}, this.store_clan)
+    this.copyClan()
   },
   methods: {
     async updateClan () {
@@ -144,6 +144,9 @@ export default {
       const color = 'success'
 
       return this.$store.dispatch('getToast', { msg, color })
+    },
+    copyClan () {
+      this.clan = Object.assign({}, this.storeClan)
     }
   }
 }
