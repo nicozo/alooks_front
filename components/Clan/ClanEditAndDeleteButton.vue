@@ -86,6 +86,11 @@ export default {
       redirectPath: this.$store.state.loggedIn.clansPath
     }
   },
+  computed: {
+    btnLoading () {
+      return this.$store.getters.btnLoading
+    }
+  },
   methods: {
     clanIsOwn () {
       return this.$auth.user.id === this.user_id
