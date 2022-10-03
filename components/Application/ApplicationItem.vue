@@ -51,127 +51,136 @@
           align="center"
           justify="center"
         >
-          <v-col cols="12">
+          <v-col
+            cols="12"
+            sm="5"
+            md="5"
+            lg="5"
+            xl="5"
+            align="center"
+          >
             <application-applicant-profile :applicant="application.applicant" />
           </v-col>
 
           <v-col
             cols="12"
-            sm="4"
-            md="4"
-            lg="4"
-            xl="4"
-            align="center"
+            sm="6"
+            md="6"
+            lg="6"
+            xl="6"
           >
-            <v-card
-              id="request-user-ranked-stats"
-              :loading="loading"
-              :min-width="minWidth"
-            >
-              <v-container>
-                <v-card-title>
-                  {{ $t('profile.ranked_stats.title.current_ranked_stats') }}
-                </v-card-title>
+            <v-row>
+              <v-col
+                cols="12"
+                align="center"
+              >
+                <v-card
+                  id="request-user-ranked-stats"
+                  :loading="loading"
+                  :min-width="minWidth"
+                >
+                  <v-container>
+                    <v-card-title>
+                      {{ $t('profile.ranked_stats.title.current_ranked_stats') }}
+                    </v-card-title>
 
-                <v-divider />
+                    <v-divider />
 
-                <template v-if="loading">
-                  <app-loading />
-                </template>
+                    <template v-if="loading">
+                      <app-loading />
+                    </template>
 
-                <template v-else>
-                  <template v-if="isRankedStatsExist">
-                    <profile-ranked-stats :ranked-stats="rankedStats" />
-                  </template>
+                    <template v-else>
+                      <template v-if="isRankedStatsExist">
+                        <profile-ranked-stats :ranked-stats="rankedStats" />
+                      </template>
 
-                  <template v-else>
-                    <div>
-                      {{ $t('message.no_data') }}
-                    </div>
-                  </template>
-                </template>
-              </v-container>
-            </v-card>
-          </v-col>
+                      <template v-else>
+                        <div>
+                          {{ $t('message.no_data') }}
+                        </div>
+                      </template>
+                    </template>
+                  </v-container>
+                </v-card>
+              </v-col>
 
-          <v-col
-            cols="12"
-            sm="8"
-            md="8"
-            lg="8"
-            xl="8"
-            align="center"
-          >
-            <v-card
-              id="request-user-total-stats"
-              :loading="loading"
-              :min-width="minWidth"
-            >
-              <v-container>
-                <v-card-title>
-                  {{ $t('profile.total_stats.title.current_player_stats') }}
-                </v-card-title>
+              <v-col
+                cols="12"
+                align="center"
+              >
+                <v-card
+                  id="request-user-total-stats"
+                  :loading="loading"
+                  :min-width="minWidth"
+                >
+                  <v-container>
+                    <v-card-title>
+                      {{ $t('profile.total_stats.title.current_player_stats') }}
+                    </v-card-title>
 
-                <v-divider />
+                    <v-divider />
 
-                <template v-if="loading">
-                  <app-loading />
-                </template>
+                    <template v-if="loading">
+                      <app-loading />
+                    </template>
 
-                <template v-else>
-                  <template v-if="isPlayerTotalStatsExist">
-                    <v-row dense>
-                      <v-col
-                        cols="12"
-                        sm="5"
-                        md="5"
-                      >
-                        <template v-if="highestKillLegendStats">
-                          <v-img :src="highestKillLegendStats.ImgAssets.icon" :width="isBreakPointImgWidth" />
-                        </template>
-                      </v-col>
-
-                      <v-col
-                        cols="12"
-                        sm="7"
-                        md="7"
-                      >
-                        <v-row
-                          dense
-                          align="center"
-                          justify="center"
-                        >
+                    <template v-else>
+                      <template v-if="isPlayerTotalStatsExist">
+                        <v-row dense>
                           <v-col
-                            v-for="(data, i) in filteredPlayerTotalStats"
-                            :key="i"
-                            cols="6"
-                            md="4"
-                            lg="4"
+                            cols="12"
+                            sm="5"
+                            md="5"
                           >
-                            <v-list-item>
-                              <v-list-item-content>
-                                <v-list-item-subtitle class="white-space">
-                                  {{ data.value.name }}
-                                </v-list-item-subtitle>
-                                <v-list-item-title>
-                                  {{ data.value.value }}
-                                </v-list-item-title>
-                              </v-list-item-content>
-                            </v-list-item>
+                            <template v-if="highestKillLegendStats">
+                              <v-img :src="highestKillLegendStats.ImgAssets.icon" :width="isBreakPointImgWidth" />
+                            </template>
+                          </v-col>
+
+                          <v-col
+                            cols="12"
+                            sm="7"
+                            md="7"
+                          >
+                            <v-row
+                              dense
+                              align="center"
+                              justify="center"
+                            >
+                              <v-col
+                                v-for="(data, i) in filteredPlayerTotalStats"
+                                :key="i"
+                                cols="6"
+                                md="4"
+                                lg="4"
+                              >
+                                <v-list-item>
+                                  <v-list-item-content>
+                                    <v-list-item-subtitle class="white-space">
+                                      {{ data.value.name }}
+                                    </v-list-item-subtitle>
+                                    <v-list-item-title>
+                                      {{ data.value.value }}
+                                    </v-list-item-title>
+                                  </v-list-item-content>
+                                </v-list-item>
+                              </v-col>
+                            </v-row>
                           </v-col>
                         </v-row>
-                      </v-col>
-                    </v-row>
-                  </template>
+                      </template>
 
-                  <template v-else>
-                    <div>
-                      {{ $t('message.no_data') }}
-                    </div>
-                  </template>
-                </template>
-              </v-container>
-            </v-card>
+                      <template v-else>
+                        <div>
+                          {{ $t('message.no_data') }}
+                        </div>
+                      </template>
+                    </template>
+                  </v-container>
+                </v-card>
+              </v-col>
+            </v-row>
           </v-col>
 
           <v-col cols="12">
