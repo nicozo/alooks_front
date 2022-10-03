@@ -5,17 +5,7 @@
     hover
     raised
   >
-    <div v-show="isRoomClosing(room.application_deadline)">
-      <v-overlay
-        absolute
-        opacity="0.9"
-        z-index="2"
-      >
-        <v-card-text class="font-weight-bold">
-          {{ $t('message.now_closed') }}
-        </v-card-text>
-      </v-overlay>
-    </div>
+    <room-item-overlay :application-deadline="room.application_deadline" />
 
     <v-card
       flat

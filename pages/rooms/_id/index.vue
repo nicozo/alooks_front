@@ -70,16 +70,7 @@
               :id="'room' + room.id"
             >
               <v-list-item>
-                <div v-show="isRoomClosing(room.application_deadline)">
-                  <v-overlay
-                    absolute
-                    opacity="0.9"
-                  >
-                    <v-card-text class="font-weight-bold">
-                      {{ $t('message.now_closed') }}
-                    </v-card-text>
-                  </v-overlay>
-                </div>
+                <room-item-overlay :application-deadline="room.application_deadline" />
 
                 <v-container>
                   <div class="text-right">
