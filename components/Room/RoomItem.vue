@@ -98,11 +98,37 @@
     </v-card>
 
     <v-card-actions>
-      <app-join-request-button
-        :room="room"
-        :auth-user="authUser"
-        :invalid="invalid"
-      />
+      <template v-if="roomIsOwn()">
+        <v-row dense>
+          <v-col cols="12">
+            <v-btn
+              color="success"
+              block
+              nuxt
+              :to="{ name: 'rooms-id-update', params: { id: room.id } }"
+            >
+              {{ $t('btn.room_edit') }}
+            </v-btn>
+          </v-col>
+          <v-col cols="12">
+            <v-btn
+              color="error"
+              block
+              @click="deleteRoom"
+            >
+              {{ $t('btn.room_destroy') }}
+            </v-btn>
+          </v-col>
+        </v-row>
+      </template>
+
+      <template v-else>
+        <app-join-request-button
+          :room="room"
+          :auth-user="authUser"
+          :invalid="invalid"
+        />
+      </template>
     </v-card-actions>
   </v-card>
 </template>
@@ -158,7 +184,6 @@ export default {
       const roomDeadline = this.room.application_deadline
       const minutesToDeadline = this.$dayjs(roomDeadline).fromNow()
       this.time_to_deadline = this.replaceFormat(minutesToDeadline)
-      // console.log('締め切り', this.time_to_deadline)
     },
     replaceFormat (str) {
       // console.log('渡された文字列', str)
@@ -174,9 +199,34 @@ export default {
       this.invalid = true
     },
     isRoomClosing (roomDeadline) {
-      const now = new Date()
-      const deadline = this.$dayjs(roomDeadline).$d
-      return deadline < now
+      if (roomDeadline) {
+        const now = new Date()
+        const deadline = this.$dayjs(roomDeadline).$d
+        return deadline < now
+      } else {
+        return true
+      }
+    },
+    roomIsOwn () {
+      return this.$auth.user.id === this.room.user_id
+    },
+    async deleteRoom () {
+      this.$store.dispatch('getBtnLoading', true)
+
+      await this.$axios.$delete(
+        `api/v1/rooms/${this.room.id}`
+      )
+        .then(res => this.deleteSuccessful(res))
+    },
+    deleteSuccessful (res) {
+      this.$store.dispatch('getBtnLoading', false)
+      this.setToaster()
+    },
+    setToaster () {
+      const msg = 'クランを削除しました'
+      const color = 'success'
+
+      return this.$store.dispatch('getToast', { msg, color })
     }
   }
 }
