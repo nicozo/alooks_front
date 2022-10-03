@@ -11,16 +11,16 @@
       </div>
       <div v-else>
         <v-list-item-avatar :size="breakPointAvatarSize">
-          <v-img :src="defaultAvatarSrc" />
+          <v-img :src="default_avatar_src" />
         </v-list-item-avatar>
       </div>
 
       <v-list-item-content>
-        <v-list-item-title class="text-h4 text-left mb-3">
+        <v-list-item-title class="text-h4 text-left">
           {{ authUser.name }}
         </v-list-item-title>
 
-        <v-list-item-title class="text-left introduction mb-3">
+        <v-list-item-title class="text-left br mb-3">
           {{ authUser.self_introduction }}
         </v-list-item-title>
 
@@ -34,6 +34,33 @@
             年齢{{ $t('Unregistered') }} {{ $t(`gender.${authUser.sex}`) }}
           </v-list-item-title>
         </div>
+
+        <v-list-item-title class="text-left">
+          <div v-show="authUser.kd">
+            {{ $t('user.kd') }}:{{ authUser.kd }}
+          </div>
+          <div v-show="!authUser.kd">
+            {{ $t('user.kd') }}:{{ $t('Unregistered') }}
+          </div>
+        </v-list-item-title>
+
+        <v-list-item-title class="text-left">
+          <div v-show="authUser.highest_damage">
+            {{ $t('user.highest_damage') }}:{{ authUser.highest_damage }}
+          </div>
+          <div v-show="!authUser.highest_damage">
+            {{ $t('user.highest_damage') }}:{{ $t('Unregistered') }}
+          </div>
+        </v-list-item-title>
+
+        <v-list-item-title class="text-left">
+          <div v-show="authUser.favorite_weapons">
+            {{ $t('user.favorite_weapons') }}:{{ authUser.favorite_weapons }}
+          </div>
+          <div v-show="!authUser.favorite_weapons">
+            {{ $t('user.favorite_weapons') }}:{{ $t('Unregistered') }}
+          </div>
+        </v-list-item-title>
       </v-list-item-content>
     </v-list-item>
   </v-card>
@@ -73,19 +100,21 @@ export default {
       default: 0
     }
   },
+  data () {
+    return {
+      default_avatar_src: this.$store.getters.defaultAvatarSrc
+    }
+  },
   computed: {
     breakPointAvatarSize () {
       return this.$vuetify.breakpoint.xs ? 120 : 170
-    },
-    defaultAvatarSrc () {
-      return this.$store.getters.defaultAvatarSrc
     }
   }
 }
 </script>
 
 <style scoped>
-  .introduction {
-    white-space: normal;
+  .br{
+    white-space: pre-line;
   }
 </style>

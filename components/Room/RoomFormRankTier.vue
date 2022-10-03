@@ -6,7 +6,10 @@
   >
     <v-select
       id="rank_tier"
+      :value="rankTier"
       :items="rankTiers"
+      item-text="label"
+      item-value="data"
       label="ランク帯"
       :error-messages="errors"
       outlined
@@ -28,15 +31,15 @@ export default {
   data () {
     return {
       rankTiers: [
-        'なし（カジュアル）',
-        'ルーキー',
-        'ブロンズ',
-        'シルバー',
-        'ゴールド',
-        'プラチナ',
-        'ダイアモンド',
-        'マスター',
-        'プレデター'
+        { label: 'なし（カジュアル）', data: 'casual' },
+        { label: 'ルーキー', data: 'rookie' },
+        { label: 'ブロンズ', data: 'bronze' },
+        { label: 'シルバー', data: 'silver' },
+        { label: 'ゴールド', data: 'gold' },
+        { label: 'プラチナ', data: 'platinum' },
+        { label: 'ダイアモンド', data: 'diamond' },
+        { label: 'マスター', data: 'master' },
+        { label: 'プレデター', data: 'predator' }
       ]
     }
   }

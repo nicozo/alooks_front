@@ -30,9 +30,12 @@ export default {
   data () {
     return {
       applicationDeadlines: [
-        { label: '15分間', minutes: 15 },
-        { label: '30分間', minutes: 30 },
-        { label: '45分間', minutes: 45 }
+        { label: '1時間', minutes: 60 },
+        { label: '2時間', minutes: 120 },
+        { label: '3時間', minutes: 180 },
+        { label: '4時間', minutes: 240 },
+        { label: '5時間', minutes: 300 },
+        { label: '6時間', minutes: 360 }
       ]
     }
   }

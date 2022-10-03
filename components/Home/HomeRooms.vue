@@ -4,7 +4,7 @@
     justify="center"
   >
     <v-col
-      v-for="(room, i) in recentRooms"
+      v-for="(room, i) in recent_rooms"
       :key="i"
       cols="12"
       sm="6"
@@ -37,46 +37,60 @@
             </template>
             <template v-else>
               <v-avatar size="100" class="my-4">
-                <img :src="defaultAvatarSrc" alt="プロフィール画像です">
+                <img :src="default_avatar_src" alt="プロフィール画像です">
               </v-avatar>
             </template>
           </v-layout>
 
           <v-card-text>
-            {{ $t('room.platform') }}：
+            {{ $t('room.platform.title') }}：
             <v-chip
               color="indigo darken-3"
               dark
               outlined
             >
-              {{ room.platform }}
+              {{ $t(`room.platform.${room.platform}`) }}
             </v-chip>
           </v-card-text>
 
           <v-card-text>
-            {{ $t('room.game_mode') }}：
+            {{ $t('room.game_mode.title') }}：
             <v-chip
               color="deep-orange darken-3"
               dark
               outlined
             >
-              {{ room.game_mode }}
+              {{ $t(`room.game_mode.${room.game_mode}`) }}
             </v-chip>
           </v-card-text>
 
           <v-card-text>
-            {{ $t('room.rank_tier') }}：
+            {{ $t('room.rank_tier.title') }}：
             <v-chip
               color="teal darken-3"
               dark
               outlined
             >
-              {{ room.rank_tier }}
+              {{ $t(`room.rank_tier.${room.rank_tier}`) }}
             </v-chip>
           </v-card-text>
         </v-container>
       </v-card>
     </v-col>
+
+    <div
+      align="center"
+      class="mt-5"
+    >
+      <v-btn
+        color="success"
+        class="pa-5"
+        nuxt
+        :to="{ name: 'rooms' }"
+      >
+        {{ $t('btn.to_rooms_page') }}
+      </v-btn>
+    </div>
   </v-row>
 </template>
 
@@ -85,12 +99,8 @@ export default {
   name: 'HomeRooms',
   data () {
     return {
-      recentRooms: []
-    }
-  },
-  computed: {
-    defaultAvatarSrc () {
-      return this.$store.getters.defaultAvatarSrc
+      recent_rooms: [],
+      default_avatar_src: this.$store.getters.defaultAvatarSrc
     }
   },
   created () {
@@ -107,8 +117,8 @@ export default {
         .catch(e => console.log(e))
     },
     requestSuccessful (res) {
-      this.recentRooms = res
-      console.log('recent rooms', this.recentRooms)
+      this.recent_rooms = res
+      console.log('recent rooms', this.recent_rooms)
     }
   }
 }

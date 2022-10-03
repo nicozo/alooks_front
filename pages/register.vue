@@ -23,22 +23,31 @@
       >
         <validation-observer v-slot="{ invalid }">
           <form @submit.prevent="register">
-            <v-container fluid>
-              <user-form-name :name.sync="user.name" />
+            <v-container>
+              <v-row dense>
+                <v-col cols="12">
+                  <user-form-name :name.sync="user.name" />
+                </v-col>
 
-              <user-form-email :email.sync="user.email" />
+                <v-col cols="12">
+                  <user-form-email :email.sync="user.email" />
+                </v-col>
 
-              <user-form-password :password.sync="user.password" />
+                <v-col cols="12">
+                  <user-form-password :password.sync="user.password" />
+                </v-col>
 
-              <user-form-password-confirmation :password-confirmation.sync="user.password_confirmation" />
+                <v-col cols="12">
+                  <user-form-password-confirmation :password-confirmation.sync="user.password_confirmation" />
+                </v-col>
 
-              <v-row>
-                <v-col>
+                <v-col cols="12">
                   <v-btn
                     type="submit"
                     block
                     color="primary"
                     :disabled="invalid"
+                    :loading="btnLoading"
                   >
                     {{ $t('btn.register') }}
                   </v-btn>
@@ -58,12 +67,15 @@
         cols="12"
         class="text-center"
       >
-        <NuxtLink
-          to="/login"
-          class="text-decoration-none"
+        <v-btn
+          plain
+          text
+          nuxt
+          color="primary"
+          :to="{ name: 'login' }"
         >
           {{ $t('btn.already_have_account') }}
-        </NuxtLink>
+        </v-btn>
       </v-col>
     </v-row>
   </v-container>
@@ -84,9 +96,16 @@ export default {
       pageTitle: this.$t(`pages.${$route.name}`)
     }
   },
+  computed: {
+    btnLoading () {
+      return this.$store.getters.btnLoading
+    }
+  },
   methods: {
     async register () {
       if (!this.invalid) {
+        this.$store.dispatch('getBtnLoading', true)
+
         await this.$axios.$post(
           'api/v1/registers',
           { user: this.user }
@@ -100,14 +119,14 @@ export default {
       this.$router.push('/login')
 
       this.setToaster()
+      this.$store.dispatch('getBtnLoading', false)
     },
     registerFailure ({ response }) {
       if (response && response.status === 400) {
         const msg = 'ユーザーを作成できませんでした。既に使用されているメールアドレスです。'
         return this.$store.dispatch('getToast', { msg })
       }
-      // TODO エラー処理
-      // console.log(response)
+      this.$store.dispatch('getBtnLoading', false)
     },
     setToaster () {
       const msg = 'ユーザーを作成しました'

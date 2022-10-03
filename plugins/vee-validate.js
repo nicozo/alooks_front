@@ -9,7 +9,8 @@ import {
   required,
   email,
   confirmed,
-  image
+  image,
+  integer
 } from 'vee-validate/dist/rules'
 
 Vue.component('ValidationProvider', ValidationProvider)
@@ -49,4 +50,9 @@ extend('confirmed', {
 extend('image', {
   ...image,
   message: '{_field_}は画像形式で入力してください'
+})
+
+extend('integer', {
+  ...integer,
+  message: '{_field_}は整数で入力してください'
 })

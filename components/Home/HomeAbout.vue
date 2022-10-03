@@ -34,7 +34,7 @@
           color="success"
           class="pa-5"
           nuxt
-          to="/rooms"
+          :to="{ name: 'rooms' }"
         >
           {{ $t('btn.to_rooms_page') }}
         </v-btn>

@@ -1,26 +1,22 @@
 <template>
-  <v-row>
-    <v-col>
-      <validation-provider
-        v-slot="{ errors }"
-        name="性別"
-        rules="required"
-      >
-        <v-select
-          id="sex"
-          :value="sex"
-          :items="gender"
-          item-text="label"
-          item-value="data"
-          label="性別"
-          :error-messages="errors"
-          outlined
-          required
-          @change="$emit('update:sex', $event)"
-        />
-      </validation-provider>
-    </v-col>
-  </v-row>
+  <validation-provider
+    v-slot="{ errors }"
+    name="性別"
+    rules="required"
+  >
+    <v-select
+      id="sex"
+      :value="sex"
+      :items="gender"
+      item-text="label"
+      item-value="data"
+      label="性別"
+      :error-messages="errors"
+      outlined
+      required
+      @change="$emit('update:sex', $event)"
+    />
+  </validation-provider>
 </template>
 
 <script>

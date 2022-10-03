@@ -43,15 +43,15 @@
             <template v-if="highestKillLegendStats">
               <v-img
                 :src="highestKillLegendStats.ImgAssets.banner"
-                :max-height="maxHeight"
-                :min-height="minHeight"
+                :max-height="max_height"
+                :min-height="min_height"
               />
             </template>
             <template v-else>
               <v-img
-                :src="commonImageSrc"
-                :max-height="maxHeight"
-                :min-height="minHeight"
+                :src="common_img_src"
+                :max-height="max_height"
+                :min-height="min_height"
               />
             </template>
           </v-card>
@@ -149,7 +149,7 @@
                   fab
                   style="z-index: 10;"
                   nuxt
-                  to="/profile/edit"
+                  :to="{ name: 'profile-edit' }"
                   x-large
                   v-bind="attrs"
                   v-on="on"
@@ -174,8 +174,9 @@ export default {
       user: {
         age: ''
       },
-      maxHeight: 400,
-      minHeight: 180
+      max_height: 400,
+      min_height: 180,
+      common_img_src: this.$store.getters.commonImageSrc
     }
   },
   computed: {
@@ -203,12 +204,6 @@ export default {
     },
     isPlayerTotalStatsExist () {
       return this.playerTotalStats.length !== 0
-    },
-    defaultAvatarSrc () {
-      return this.$store.getters.defaultAvatarSrc
-    },
-    commonImageSrc () {
-      return this.$store.getters.commonImageSrc
     }
   },
   created () {

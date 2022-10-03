@@ -5,7 +5,7 @@
     color="primary"
     class="mr-3"
     nuxt
-    to="/register"
+    :to="{ name: 'register' }"
   >
     {{ $t('pages.register') }}
   </v-btn>

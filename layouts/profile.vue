@@ -34,7 +34,7 @@
           </div>
           <div v-else>
             <v-list-item-avatar size="60">
-              <v-img :src="defaultAvatarSrc" alt="プロフィール画像です" />
+              <v-img :src="default_avatar_src" alt="プロフィール画像です" />
             </v-list-item-avatar>
           </div>
           <v-list-item-content>
@@ -116,17 +116,18 @@ export default {
       nav_lists: [
         { name: 'rooms' },
         { name: 'rooms-create' },
-        { name: 'applications' }
+        { name: 'applications' },
+        { name: 'clans' },
+        { name: 'clans-create' },
+        { name: 'clans-my_clan' }
       ],
-      drawer: false
+      drawer: false,
+      default_avatar_src: this.$store.getters.defaultAvatarSrc
     }
   },
   computed: {
     routeName () {
       return this.$route.name
-    },
-    defaultAvatarSrc () {
-      return this.$store.getters.defaultAvatarSrc
     }
   },
   methods: {

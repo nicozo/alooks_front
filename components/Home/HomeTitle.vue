@@ -19,30 +19,13 @@
           color="success"
           class="pa-4"
           nuxt
-          to="/rooms"
+          :to="{ name: 'rooms' }"
         >
           {{ $t('btn.to_rooms_page') }}
         </v-btn>
       </div>
     </v-col>
   </v-row>
-
-  <!-- <div class="ml-1">
-    <div class="text-h3 mb-5">
-      {{ appName }}
-    </div>
-    <div class="text-h5">
-      Apex Legendsでスクワッドを募集・参加しよう！
-    </div>
-    <div class="mt-5">
-      <v-btn
-        color="success"
-        to="/"
-      >
-        スクワッドを探す
-      </v-btn>
-    </div>
-  </div> -->
 </template>
 
 <script>

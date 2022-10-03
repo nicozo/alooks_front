@@ -23,18 +23,23 @@
       >
         <validation-observer v-slot="{ invalid }">
           <form @submit.prevent="login">
-            <v-container fluid>
-              <user-form-email :email.sync="user.email" />
+            <v-container>
+              <v-row dense>
+                <v-col cols="12">
+                  <user-form-email :email.sync="user.email" />
+                </v-col>
 
-              <user-form-password :password.sync="user.password" />
+                <v-col cols="12">
+                  <user-form-password :password.sync="user.password" />
+                </v-col>
 
-              <v-row>
-                <v-col>
+                <v-col cols="12">
                   <v-btn
                     type="submit"
                     block
                     color="primary"
                     :disabled="invalid"
+                    :loading="btnLoading"
                   >
                     {{ $t('btn.login') }}
                   </v-btn>
@@ -54,23 +59,30 @@
         cols="12"
         class="text-center"
       >
-        <NuxtLink
-          to="/register"
-          class="text-decoration-none"
+        <v-btn
+          plain
+          text
+          nuxt
+          color="primary"
+          :to="{ name: 'register' }"
         >
           {{ $t('btn.do_not_have_account') }}
-        </NuxtLink>
+        </v-btn>
       </v-col>
+
       <v-col
         cols="12"
         class="text-center"
       >
-        <NuxtLink
-          to="/reset_password/create"
-          class="text-decoration-none"
+        <v-btn
+          plain
+          text
+          nuxt
+          color="primary"
+          :to="{ name: 'reset_password-create' }"
         >
           {{ $t('btn.password_forget') }}
-        </NuxtLink>
+        </v-btn>
       </v-col>
     </v-row>
   </v-container>
@@ -86,14 +98,21 @@ export default {
         email: '',
         password: ''
       },
-      redirectPath: this.$store.state.loggedIn.rememberPath,
+      redirect_path: this.$store.state.loggedIn.rememberPath,
       loggedInHomePath: this.$store.state.loggedIn.homePath,
       pageTitle: this.$t(`pages.${$route.name}`)
+    }
+  },
+  computed: {
+    btnLoading () {
+      return this.$store.getters.btnLoading
     }
   },
   methods: {
     async login () {
       if (!this.invalid) {
+        this.$store.dispatch('getBtnLoading', true)
+
         await this.$axios.$post(
           'api/v1/sessions',
           this.user
@@ -104,21 +123,17 @@ export default {
     },
     authSuccessful (res) {
       this.$auth.login(res)
-      this.$router.push(this.redirectPath)
+      this.$router.push(this.redirect_path)
       this.$store.dispatch('getRememberPath', this.loggedInHomePath)
-      // TODO setTimeout以外でログイン後のトースターを表示
-      // setTimeout(() => {
-      //   this.setToaster()
-      // }, 500)
       this.setToaster()
+      this.$store.dispatch('getBtnLoading', false)
     },
     authFailure ({ response }) {
       if (response && response.status === 404) {
         const msg = 'メールアドレスまたはパスワードが一致しません'
         return this.$store.dispatch('getToast', { msg })
       }
-      // TODO エラー処理
-      console.log(response)
+      this.$store.dispatch('getBtnLoading', false)
     },
     setToaster () {
       const msg = 'ログインしました'

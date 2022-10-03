@@ -4,16 +4,21 @@
     "register": "ユーザー登録（無料）",
     "login": "ログイン",
     "logout": "ログアウト",
-    "rooms": "スクワッド一覧",
-    "rooms-create": "スクワッド作成",
-    "rooms-id": "スクワッド詳細",
+    "rooms": "スクワッド募集一覧",
+    "rooms-create": "スクワッドメンバーを募集",
+    "rooms-id": "スクワッドの詳細",
     "applications": "参加リクエスト一覧",
     "profile": "プロフィール",
-    "profile-edit": "プロフィール編集",
+    "profile-edit": "プロフィールを編集",
     "reset_password-create": "パスワードをリセット",
     "reset_password-update": "パスワードをリセット",
     "privacy_policy": "プライバシーポリシー",
-    "tos": "利用規約"
+    "tos": "利用規約",
+    "clans": "クランメンバー募集一覧",
+    "clans-id": "クランの詳細",
+    "clans-create": "クランメンバーを募集",
+    "clans-id-update": "クランを編集",
+    "clans-my_clan": "Myクラン"
   },
   "items": {
     "about": "エペスクとは？",
@@ -33,45 +38,78 @@
     "date_of_birth": "生年月日",
     "platform": "プラットフォーム",
     "sex": "性別",
-    "game_id": "ゲームID"
+    "game_id": "ゲームID",
+    "kd": "KD",
+    "highest_damage": "最高ダメージ",
+    "favorite_weapons": "好きな武器"
   },
   "room": {
     "title": "タイトル",
-    "platform": "プラットフォーム",
-    "game_mode": "ゲームモード",
-    "rank_tier": "ランク帯",
     "recruitment_number": "募集人数",
     "application_deadline": "募集期間",
     "host": {
       "title": "募集主"
+    },
+    "platform": {
+      "title": "プラットフォーム",
+      "PlayStation": "PlayStation",
+      "Xbox": "Xbox",
+      "PC": "PC"
+    },
+    "game_mode": {
+      "title": "ゲームモード",
+      "casual": "カジュアル",
+      "ranked": "ランク",
+      "arena": "アリーナ",
+      "event": "イベントモード"
+    },
+    "rank_tier": {
+      "title": "ランク帯",
+      "rookie": "ルーキー",
+      "bronze": "ブロンズ",
+      "silver": "シルバー",
+      "gold": "ゴールド",
+      "platinum": "プラチナ",
+      "diamond": "ダイアモンド",
+      "master": "マスター",
+      "predator": "プレデター",
+      "casual": "なし（カジュアル）"
     }
   },
   "btn": {
     "invitation_request": "参加リクエスト",
     "login": "ログイン",
     "register": "新規登録",
+    "update": "更新する",
     "password_forget": "パスワードをお忘れですか？",
     "do_not_have_account": "アカウントお持ちでないですか？",
     "already_have_account": "アカウントをお持ちですか？",
     "to_rooms_page": "スクワッドを探す",
     "to_top_page": "トップページへ戻る",
-    "back_to_rooms_page": "スクワッド一覧へ戻る",
+    "back_to_rooms_page": "スクワッド募集一覧へ戻る",
+    "back_to_clans_page": "クランメンバー募集一覧へ戻る",
     "accept_request": "リクエスト承諾",
     "cancel": "取り消し",
     "submit": "送信",
-    "create": "スクワッド募集",
-    "friend_requested": "送信しました"
+    "create": "スクワッドを募集",
+    "clan_create": "クランメンバーを募集",
+    "clan_edit": "クランを編集",
+    "clan_destroy": "クランを削除",
+    "friend_requested": "送信しました",
+    "uncheck": "チェックを外す"
   },
   "gender": {
     "male": "男性",
     "female": "女性"
   },
   "message": {
-    "now_closed": "募集を締め切りました",
+    "now_closed": "このスクワッドは募集を締め切りました",
     "loading": "Now Loading Your Apex Legends Stats...",
     "no_data": "No Data",
-    "no_requests": "参加リクエストはありません",
-    "loading_stats": "Now Loading..."
+    "no_requests": "現在参加リクエストはありません",
+    "loading_stats": "Now Loading...",
+    "no_rooms": "スクワッドの募集はありません",
+    "no_clans": "クランメンバーの募集はありません"
   },
   "profile": {
     "legend": {
@@ -99,7 +137,7 @@
       "title": "リクエストフォーム"
     },
     "unread": "New!!",
-    "applied_for": "応募先" 
+    "applied_for": "応募先スクワッド" 
   },
   "agreement": {
     "form": {
@@ -118,5 +156,55 @@
       "tos": "利用規約",
       "privacy_policy": "プライバシーポリシー"
     }
-  }
+  },
+  "clan": {
+    "concept": "コンセプト",
+    "joining_process": "入団までの流れ",
+    "prohibited_matters": "禁止事項",
+    "requirements": "募集要項",
+    "information": "クラン情報",
+    "platform": {
+      "title": "-プラットフォーム-",
+      "unlimited": "制限なし",
+      "PlayStation": "PlayStation",
+      "Xbox": "Xbox",
+      "PC": "PC"
+    },
+    "age": {
+      "title": "-年齢-",
+      "unlimited": "制限なし",
+      "high_school_student": "高校生以上",
+      "adult": "成人以上"
+    },
+    "required_login": {
+      "title": "-ログイン数-",
+      "unlimited": "制限なし",
+      "everyday": "ほぼ毎日",
+      "a_couple_of_times_a_week": "週1~2日",
+      "three_or_four_times_a_week": "週3~4日"
+    },
+    "required_ranked": {
+      "title": "-最低ランク-",
+      "unlimited": "制限なし",
+      "bronze": "ブロンズ",
+      "silver": "シルバー",
+      "gold": "ゴールド",
+      "platinum": "プラチナ",
+      "diamond": "ダイアモンド",
+      "master": "マスター",
+      "predator": "プレデター"
+    },
+    "required_vc": {
+      "title": "-VCの有無-",
+      "true": "VCあり",
+      "false": "VCなし"
+    },
+    "personality": "-求めるプレイヤー-",
+    "enrollment": "-在籍人数-",
+    "enrollment_age": "-年齢層-",
+    "activity_time": "-活動時間-",
+    "snipe": "-スナイプや大会等-",
+    "contact_means": "-クラン内の連絡手段-"
+  },
+  "search_title": "絞り込み検索"
 }

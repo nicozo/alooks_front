@@ -1,46 +1,86 @@
 <template>
   <v-container>
     <v-row dense>
-      <v-col>
-        <v-card flat>
-          <form
-            id="search-form"
-            class="step-2"
-            @submit.prevent
-          >
-            <v-container>
-              <room-form-search-keyword :keyword.sync="search.keyword" />
+      <v-expansion-panels accordion>
+        <v-expansion-panel>
+          <v-expansion-panel-header>
+            {{ $t('search_title') }}
+          </v-expansion-panel-header>
+          <v-expansion-panel-content>
+            <v-card flat>
+              <form
+                id="search-form"
+                class="step-2"
+              >
+                <v-container>
+                  <room-form-search-keyword :keyword.sync="search.keyword" />
 
-              <room-form-search-platform :platform.sync="search.platform" />
+                  <room-form-search-platform :platform.sync="search.platform" />
 
-              <room-form-search-game-mode :game-mode.sync="search.game_mode" />
+                  <room-form-search-game-mode :game-mode.sync="search.game_mode" />
 
-              <room-form-search-rank-tier :rank-tier.sync="search.rank_tier" />
+                  <room-form-search-rank-tier :rank-tier.sync="search.rank_tier" />
 
-              <v-checkbox
-                v-model="search.opening"
-                label="募集中のみ表示"
-              />
-            </v-container>
-          </form>
-        </v-card>
-      </v-col>
+                  <v-checkbox
+                    v-model="search.opening"
+                    label="募集中のみ表示"
+                  />
+
+                  <v-row
+                    dense
+                    justify="end"
+                  >
+                    <v-btn
+                      color="error"
+                      @click="uncheck"
+                    >
+                      {{ $t('btn.uncheck') }}
+                    </v-btn>
+                  </v-row>
+                </v-container>
+              </form>
+            </v-card>
+          </v-expansion-panel-content>
+        </v-expansion-panel>
+      </v-expansion-panels>
     </v-row>
 
     <v-row>
-      <v-col
-        v-for="(room, i) in displayRooms"
-        :key="i"
-        cols="12"
-        sm="6"
-        md="6"
-        lg="4"
-        xl="4"
-      >
-        <RoomItem
-          :room="room"
-        />
-      </v-col>
+      <template v-if="displayRoomsExist">
+        <v-col
+          v-for="(room, i) in displayRooms"
+          :key="i"
+          cols="12"
+          sm="6"
+          md="6"
+          lg="4"
+          xl="4"
+        >
+          <RoomItem
+            :room="room"
+          />
+        </v-col>
+      </template>
+
+      <template v-else>
+        <v-row
+          justify="center"
+          align="center"
+        >
+          <v-col>
+            <v-card
+              flat
+              class="text-center"
+            >
+              <v-container>
+                <v-card-text>
+                  {{ $t('message.no_rooms') }}
+                </v-card-text>
+              </v-container>
+            </v-card>
+          </v-col>
+        </v-row>
+      </template>
 
       <v-tooltip
         left
@@ -58,7 +98,7 @@
               fab
               style="z-index: 10;"
               nuxt
-              to="/rooms/create"
+              :to="{ name: 'rooms-create' }"
               x-large
               v-bind="attrs"
               v-on="on"
@@ -71,7 +111,7 @@
       </v-tooltip>
     </v-row>
 
-    <v-row>
+    <v-row dense>
       <v-col>
         <v-pagination
           v-model="page"
@@ -153,6 +193,9 @@ export default {
     displayRooms () {
       this.returnTop()
       return this.pageNumber !== 0 ? this.filteredRooms.slice(this.pageSize * (this.pageNumber - 1), this.pageSize * this.pageNumber) : this.filteredRooms.slice(0, this.pageSize)
+    },
+    displayRoomsExist () {
+      return this.displayRooms.length !== 0
     }
   },
   mounted () {
@@ -169,6 +212,22 @@ export default {
       const now = new Date()
       const deadline = this.$dayjs(roomDeadline).$d
       return now < deadline
+    },
+    uncheck () {
+      // Todo チェックを外した後、同じラジオボタンをクリックできない。
+      const activeButtons = document.querySelectorAll('.v-radio.theme--light.v-item--active')
+      console.log(activeButtons)
+      if (activeButtons.length !== 0) {
+        for (const activeButton of activeButtons) {
+          const activeButtonChild = activeButton.firstChild.firstChild
+          activeButtonChild.classList.remove('primary--text')
+          activeButtonChild.classList.remove('mdi-radiobox-marked')
+          activeButtonChild.classList.add('mdi-radiobox-blank')
+        }
+      }
+      this.search.platform = ''
+      this.search.game_mode = ''
+      this.search.rank_tier = ''
     }
   }
 }

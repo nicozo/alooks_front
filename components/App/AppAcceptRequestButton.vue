@@ -29,12 +29,12 @@
             >
               <validation-provider
                 v-slot="{ errors }"
-                name="ひとこと"
+                name="一言コメント"
                 rules="required|max:25"
               >
                 <v-text-field
                   v-model="message"
-                  label="ひとこと"
+                  label="一言コメント"
                   counter="25"
                   :error-messages="errors"
                   required
@@ -58,6 +58,7 @@
             <v-btn
               color="blue darken-1"
               text
+              :loading="btnLoading"
               @click="accept(application)"
             >
               {{ $t('btn.submit') }}
@@ -202,8 +203,15 @@ export default {
       message: ''
     }
   },
+  computed: {
+    btnLoading () {
+      return this.$store.getters.btnLoading
+    }
+  },
   methods: {
     async accept (application) {
+      this.$store.dispatch('getBtnLoading', true)
+
       await this.$axios.$post(
         '/api/v1/agreements',
         {
@@ -222,6 +230,7 @@ export default {
       this.closeDialog()
       this.setToaster()
       this.openDialog2()
+      this.$store.dispatch('getBtnLoading', false)
     },
     requestFailure ({ response }) {
       if (response && response.status === 400) {
@@ -229,6 +238,7 @@ export default {
 
         this.$store.dispatch('getToast', { msg })
       }
+      this.$store.dispatch('getBtnLoading', false)
     },
     closeDialog () {
       this.dialog = false

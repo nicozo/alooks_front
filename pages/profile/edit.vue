@@ -6,31 +6,38 @@
   >
     <v-card
       flat
-      width="80%"
-      max-width="400"
+      width="800"
+      max-width="1000"
     >
       <validation-observer v-slot="{ invalid }">
         <form @submit.prevent="updateProfile">
           <v-container fluid>
-            <v-row>
-              <v-col>
-                <v-layout justify-center>
-                  <div v-if="user.avatar_url">
+            <v-row dense>
+              <v-col cols="12">
+                <div v-if="avatar_preview_url">
+                  <v-layout justify-center>
                     <v-avatar size="200">
-                      <img :src="user.avatar_url" alt="プロフィール画像です">
+                      <img :src="avatar_preview_url" alt="プロフィール画像です">
                     </v-avatar>
-                  </div>
-                  <div v-else>
-                    <v-avatar size="200">
-                      <img :src="defaultAvatarSrc" alt="プロフィール画像です">
-                    </v-avatar>
-                  </div>
-                </v-layout>
+                  </v-layout>
+                </div>
+                <div v-else>
+                  <v-layout justify-center>
+                    <div v-if="user.avatar_url">
+                      <v-avatar size="200">
+                        <img :src="user.avatar_url" alt="プロフィール画像です">
+                      </v-avatar>
+                    </div>
+                    <div v-else>
+                      <v-avatar size="200">
+                        <img :src="default_avatar_src" alt="プロフィール画像です">
+                      </v-avatar>
+                    </div>
+                  </v-layout>
+                </div>
               </v-col>
-            </v-row>
 
-            <v-row>
-              <v-col>
+              <v-col cols="12">
                 <validation-provider
                   v-slot="{errors}"
                   name="プロフィール画像"
@@ -38,38 +45,66 @@
                 >
                   <v-file-input
                     id="avatar"
-                    v-model="uploadAvatar"
+                    v-model="upload_avatar"
                     label="プロフィール画像"
                     accept="image/png, image/jpeg"
                     :error-messages="errors"
                     outlined
                     hint="推奨サイズ:640x590"
                     persistent-hint
+                    @change="setPreview"
                   />
                 </validation-provider>
               </v-col>
-            </v-row>
 
-            <user-form-name :name.sync="user.name" />
+              <v-col cols="12">
+                <user-form-name :name.sync="user.name" />
+              </v-col>
 
-            <user-form-self-introduction :self-introduction.sync="user.self_introduction" />
+              <v-col cols="12">
+                <user-form-self-introduction :self-introduction.sync="user.self_introduction" />
+              </v-col>
 
-            <user-form-date-of-birth :date-of-birth.sync="user.date_of_birth" />
+              <v-col cols="12">
+                <user-form-date-of-birth :date-of-birth.sync="user.date_of_birth" />
+              </v-col>
 
-            <user-form-sex :sex.sync="user.sex" />
+              <v-col cols="12">
+                <user-form-sex :sex.sync="user.sex" />
+              </v-col>
 
-            <user-form-game-id :game-id.sync="user.game_id" />
+              <v-col cols="12">
+                <user-form-game-id :game-id.sync="user.game_id" />
+              </v-col>
 
-            <user-form-platform :platform.sync="user.platform" />
-            <v-row>
-              <v-col>
+              <v-col cols="12">
+                <user-form-platform :platform.sync="user.platform" />
+              </v-col>
+
+              <v-col cols="12">
+                <user-form-kd
+                  :kd="user.kd"
+                  @change="changeKd"
+                />
+              </v-col>
+
+              <v-col cols="12">
+                <user-form-highest-damage :highest-damage.sync="user.highest_damage" />
+              </v-col>
+
+              <v-col cols="12">
+                <user-form-favorite-weapons :favorite-weapons.sync="user.favorite_weapons" />
+              </v-col>
+
+              <v-col cols="12">
                 <v-btn
                   type="submit"
                   block
                   color="primary"
                   :disabled="invalid"
+                  :loading="btnLoading"
                 >
-                  更新する
+                  {{ $t('btn.update') }}
                 </v-btn>
               </v-col>
             </v-row>
@@ -92,18 +127,23 @@ export default {
         sex: '',
         game_id: '',
         avatar_url: '',
-        platform: ''
+        platform: '',
+        kd: null,
+        highest_damage: null,
+        favorite_weapons: ''
       },
-      uploadAvatar: null,
-      redirectPath: this.$store.state.loggedIn.rememberPath
+      upload_avatar: null,
+      avatar_preview_url: null,
+      redirect_path: this.$store.state.loggedIn.rememberPath,
+      default_avatar_src: this.$store.getters.defaultAvatarSrc
     }
   },
   computed: {
     authUser () {
       return this.$auth.user
     },
-    defaultAvatarSrc () {
-      return this.$store.getters.defaultAvatarSrc
+    btnLoading () {
+      return this.$store.getters.btnLoading
     }
   },
   created () {
@@ -112,34 +152,49 @@ export default {
   },
   methods: {
     async updateProfile () {
-      const formData = new FormData()
-      formData.append('user[name]', this.user.name)
-      formData.append('user[self_introduction]', this.user.self_introduction)
-      formData.append('user[date_of_birth]', this.user.date_of_birth)
-      formData.append('user[sex]', this.user.sex)
-      formData.append('user[game_id]', this.user.game_id)
-      formData.append('user[platform]', this.user.platform)
-      if (this.uploadAvatar !== null) {
-        formData.append('user[avatar]', this.uploadAvatar)
-      }
-      // console.log(...formData.entries())
+      if (!this.invalid) {
+        this.$store.dispatch('getBtnLoading', true)
 
-      await this.$axios.$patch(
-        `/api/v1/profile/${this.authUser.id}`,
-        formData
-      )
-        .then(res => this.uploadSuccessful(res))
-        .catch(e => console.log(e))
+        const formData = new FormData()
+        formData.append('user[name]', this.user.name)
+        formData.append('user[self_introduction]', this.user.self_introduction)
+        formData.append('user[date_of_birth]', this.user.date_of_birth)
+        formData.append('user[sex]', this.user.sex)
+        formData.append('user[game_id]', this.user.game_id)
+        formData.append('user[platform]', this.user.platform)
+        formData.append('user[kd]', this.user.kd)
+        formData.append('user[highest_damage]', this.user.highest_damage)
+        formData.append('user[favorite_weapons]', this.user.favorite_weapons)
+        if (this.upload_avatar !== null) {
+          formData.append('user[avatar]', this.upload_avatar)
+        }
+        // console.log(...formData.entries())
+
+        await this.$axios.$patch(
+          `/api/v1/profile/${this.authUser.id}`,
+          formData
+        )
+          .then(res => this.uploadSuccessful(res))
+          .catch(e => console.log(e))
+      }
     },
     uploadSuccessful (res) {
       this.setToaster()
       this.$auth.login(res)
-      this.$router.push(this.redirectPath)
+      this.$router.push(this.redirect_path)
+      this.$store.dispatch('getBtnLoading', false)
     },
     setToaster () {
       const msg = 'プロフィール画像を更新しました'
       const color = 'success'
       return this.$store.dispatch('getToast', { msg, color })
+    },
+    changeKd (newVal) {
+      this.user.kd = newVal
+    },
+    setPreview () {
+      const avatarImg = event.target.files[0]
+      this.avatar_preview_url = URL.createObjectURL(avatarImg)
     }
   }
 }
