@@ -274,15 +274,7 @@
 <script>
 export default {
   name: 'RoomIdIndex',
-  async asyncData ({ $axios, params }) {
-    const room = await $axios.$get(
-      'api/v1/rooms/' + params.id
-    )
-
-    // console.log('部屋情報:', room)
-    // console.log('募集主情報:', room.host)
-    return { room }
-  },
+  middleware: ['room'],
   data () {
     return {
       invalid: false,
@@ -291,7 +283,8 @@ export default {
         age: ''
       },
       defaultAvatarSrc: this.$store.getters.defaultAvatarSrc,
-      authUser: this.$auth.user
+      authUser: this.$auth.user,
+      room: this.$store.getters['rooms/room']
     }
   },
   computed: {
