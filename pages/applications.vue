@@ -243,8 +243,8 @@
           <application-item
             :applications="applications"
             :auth-user="authUser"
-            @child-request-event="requestApi"
-            @child-read-event="read"
+            @child-request-method="requestApi"
+            @child-read-method="read"
           />
         </template>
 
