@@ -129,13 +129,7 @@
 <script>
 export default {
   name: 'RoomsIndexPage',
-  async asyncData ({ $axios }) {
-    const rooms = await $axios.$get(
-      'api/v1/rooms'
-    )
-
-    return { rooms }
-  },
+  middleware: ['rooms'],
   data () {
     return {
       page: 1,
@@ -168,6 +162,12 @@ export default {
     }
   },
   computed: {
+    rooms () {
+      return this.$store.getters['rooms/rooms']
+    },
+    pageLength () {
+      return Math.ceil(this.filteredRooms.length / this.pageSize)
+    },
     filteredRooms () {
       const rooms = []
 
@@ -188,9 +188,6 @@ export default {
         }
       }
       return rooms
-    },
-    pageLength () {
-      return Math.ceil(this.filteredRooms.length / this.pageSize)
     },
     displayRooms () {
       this.returnTop()
