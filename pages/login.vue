@@ -98,7 +98,7 @@ export default {
         email: '',
         password: ''
       },
-      redirect_path: this.$store.state.loggedIn.rememberPath,
+      redirectPath: this.$store.state.loggedIn.rememberPath,
       loggedInHomePath: this.$store.state.loggedIn.homePath,
       pageTitle: this.$t(`pages.${$route.name}`)
     }
@@ -123,7 +123,7 @@ export default {
     },
     authSuccessful (res) {
       this.$auth.login(res)
-      this.$router.push(this.redirect_path)
+      this.$router.push(this.redirectPath)
       this.$store.dispatch('getRememberPath', this.loggedInHomePath)
       this.setToaster()
       this.$store.dispatch('getBtnLoading', false)

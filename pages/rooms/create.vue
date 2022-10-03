@@ -59,7 +59,7 @@
       </v-card>
     </v-row>
 
-    <app-guide-profile :profile-dialog.sync="profile_dialog" />
+    <app-guide-profile :profile-dialog.sync="profileDialog" />
   </v-container>
 </template>
 
@@ -77,9 +77,9 @@ export default {
         recruitment_number: null,
         is_draft: false
       },
-      redirect_path: this.$store.state.loggedIn.rememberPath,
+      redirectPath: this.$store.state.loggedIn.rememberPath,
       pageTitle: this.$t(`pages.${$route.name}`),
-      profile_dialog: false
+      profileDialog: false
     }
   },
   computed: {
@@ -99,14 +99,14 @@ export default {
           .then(res => this.recruitSuccessful(res))
           .catch(e => this.recruitFailure(e))
       } else {
-        this.profile_dialog = true
+        this.profileDialog = true
         const msg = 'まずはプロフィールを完成させましょう！'
         return this.$store.dispatch('getToast', { msg })
       }
     },
     recruitSuccessful (res) {
       // console.log('作成されたroomオブジェクト', res)
-      this.$router.push(this.redirect_path)
+      this.$router.push(this.redirectPath)
       this.setToaster()
       this.$store.dispatch('getBtnLoading', false)
     },

@@ -73,7 +73,7 @@ export default {
   },
   data () {
     return {
-      redirect_path: this.$store.state.loggedIn.homePath
+      redirectPath: this.$store.state.loggedIn.homePath
     }
   },
   computed: {
@@ -99,7 +99,7 @@ export default {
     updateRoomSuccessful () {
       this.$store.dispatch('getBtnLoading', false)
       this.setToaster()
-      this.$router.push(this.redirect_path)
+      this.$router.push(this.redirectPath)
     },
     updateRoomFailure ({ response }) {
       this.$store.dispatch('getBtnLoading', false)

@@ -103,7 +103,7 @@ export default {
         contact_means: ''
       },
       store_clan: this.$store.getters['clans/clan'],
-      redirect_path: this.$store.state.loggedIn.clansPath
+      redirectPath: this.$store.state.loggedIn.clansPath
     }
   },
   computed: {
@@ -129,7 +129,7 @@ export default {
       this.$store.dispatch('clans/updateClan', res)
       this.$store.dispatch('getBtnLoading', false)
       this.setToaster()
-      this.$router.push(this.redirect_path)
+      this.$router.push(this.redirectPath)
     },
     updateClanFailure ({ response }) {
       this.$store.dispatch('getBtnLoading', false)

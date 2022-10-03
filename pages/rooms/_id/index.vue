@@ -290,13 +290,11 @@ export default {
       host: {
         age: ''
       },
-      defaultAvatarSrc: this.$store.getters.defaultAvatarSrc
+      defaultAvatarSrc: this.$store.getters.defaultAvatarSrc,
+      authUser: this.$auth.user
     }
   },
   computed: {
-    authUser () {
-      return this.$auth.user
-    },
     data () {
       return this.$game.data
     },

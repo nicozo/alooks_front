@@ -134,7 +134,7 @@ export default {
       },
       upload_avatar: null,
       avatar_preview_url: null,
-      redirect_path: this.$store.state.loggedIn.rememberPath,
+      redirectPath: this.$store.state.loggedIn.rememberPath,
       defaultAvatarSrc: this.$store.getters.defaultAvatarSrc
     }
   },
@@ -181,7 +181,7 @@ export default {
     uploadSuccessful (res) {
       this.setToaster()
       this.$auth.login(res)
-      this.$router.push(this.redirect_path)
+      this.$router.push(this.redirectPath)
       this.$store.dispatch('getBtnLoading', false)
     },
     setToaster () {
