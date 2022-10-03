@@ -78,7 +78,6 @@ export default {
         is_draft: false
       },
       redirectPath: this.$store.state.loggedIn.rememberPath,
-      pageTitle: this.$t(`pages.${$route.name}`),
       profileDialog: false
     }
   },
