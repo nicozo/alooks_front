@@ -133,8 +133,11 @@ export default {
     },
     updateClanFailure ({ response }) {
       this.$store.dispatch('getBtnLoading', false)
+      if (response && response.status === 400) {
+        const msg = '編集できませんでした。入力間違いがないか確認してください。'
 
-      console.log(response)
+        return this.$store.dispatch('getToast', { msg })
+      }
     },
     setToaster () {
       const msg = 'クランを編集しました'
