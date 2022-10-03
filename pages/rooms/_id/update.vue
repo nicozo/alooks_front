@@ -73,13 +73,16 @@ export default {
   },
   data () {
     return {
-      redirect_path: this.$store.state.loggedIn.clansPath
+      redirect_path: this.$store.state.loggedIn.homePath
     }
   },
   computed: {
     btnLoading () {
       return this.$store.getters.btnLoading
     }
+  },
+  created () {
+    this.resetApplicationDeadline()
   },
   methods: {
     async updateRoom () {
@@ -111,6 +114,9 @@ export default {
       const color = 'success'
 
       return this.$store.dispatch('getToast', { msg, color })
+    },
+    resetApplicationDeadline () {
+      this.room.application_deadline = null
     }
   }
 }
