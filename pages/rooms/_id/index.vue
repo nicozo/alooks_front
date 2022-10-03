@@ -133,11 +133,20 @@
                   </v-card-text>
 
                   <v-card-actions>
-                    <app-join-request-button
-                      :room="room"
-                      :auth-user="authUser"
-                      :invalid="invalid"
-                    />
+                    <template v-if="roomIsOwn()">
+                      <room-edit-and-delete-button
+                        :id="room.id"
+                        @child-delete-method="deleteRoom"
+                      />
+                    </template>
+
+                    <template v-else>
+                      <app-join-request-button
+                        :room="room"
+                        :auth-user="authUser"
+                        :invalid="invalid"
+                      />
+                    </template>
                   </v-card-actions>
                 </v-container>
               </v-list-item>
@@ -275,7 +284,8 @@ export default {
       },
       defaultAvatarSrc: this.$store.getters.defaultAvatarSrc,
       authUser: this.$auth.user,
-      room: this.$store.getters['rooms/room']
+      room: this.$store.getters['rooms/room'],
+      redirectPath: this.$store.state.loggedIn.homePath
     }
   },
   computed: {
@@ -356,6 +366,29 @@ export default {
       const age = today.getFullYear() - ymd[0]
 
       return today < thisYearsBirthday ? age - 1 : age
+    },
+    roomIsOwn () {
+      return this.authUser.id === this.room.user_id
+    },
+    async deleteRoom (roomId) {
+      this.$store.dispatch('getBtnLoading', true)
+
+      await this.$axios.$delete(
+        `api/v1/rooms/${roomId}`
+      )
+        .then(res => this.deleteSuccessful(res))
+    },
+    deleteSuccessful (res) {
+      this.$store.dispatch('rooms/deleteRoom', res)
+      this.$store.dispatch('getBtnLoading', false)
+      this.setToaster()
+      this.$router.push(this.redirectPath)
+    },
+    setToaster () {
+      const msg = 'クランを削除しました'
+      const color = 'success'
+
+      return this.$store.dispatch('getToast', { msg, color })
     }
   }
 }

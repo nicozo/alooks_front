@@ -89,27 +89,10 @@
 
     <v-card-actions>
       <template v-if="roomIsOwn()">
-        <v-row dense>
-          <v-col cols="12">
-            <v-btn
-              color="success"
-              block
-              nuxt
-              :to="{ name: 'rooms-id-update', params: { id: room.id } }"
-            >
-              {{ $t('btn.room_edit') }}
-            </v-btn>
-          </v-col>
-          <v-col cols="12">
-            <v-btn
-              color="error"
-              block
-              @click="deleteRoom"
-            >
-              {{ $t('btn.room_destroy') }}
-            </v-btn>
-          </v-col>
-        </v-row>
+        <room-edit-and-delete-button
+          :id="room.id"
+          @child-delete-method="deleteRoom"
+        />
       </template>
 
       <template v-else>
@@ -188,27 +171,19 @@ export default {
     isInvalid () {
       this.invalid = true
     },
-    isRoomClosing (roomDeadline) {
-      if (roomDeadline) {
-        const now = new Date()
-        const deadline = this.$dayjs(roomDeadline).$d
-        return deadline < now
-      } else {
-        return true
-      }
-    },
     roomIsOwn () {
       return this.authUser.id === this.room.user_id
     },
-    async deleteRoom () {
+    async deleteRoom (roomId) {
       this.$store.dispatch('getBtnLoading', true)
 
       await this.$axios.$delete(
-        `api/v1/rooms/${this.room.id}`
+        `api/v1/rooms/${roomId}`
       )
         .then(res => this.deleteSuccessful(res))
     },
     deleteSuccessful (res) {
+      this.$store.dispatch('rooms/deleteRoom', res)
       this.$store.dispatch('getBtnLoading', false)
       this.setToaster()
     },
