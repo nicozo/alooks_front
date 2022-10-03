@@ -30,7 +30,7 @@
                     </div>
                     <div v-else>
                       <v-avatar size="200">
-                        <img :src="default_avatar_src" alt="プロフィール画像です">
+                        <img :src="defaultAvatarSrc" alt="プロフィール画像です">
                       </v-avatar>
                     </div>
                   </v-layout>
@@ -135,7 +135,7 @@ export default {
       upload_avatar: null,
       avatar_preview_url: null,
       redirect_path: this.$store.state.loggedIn.rememberPath,
-      default_avatar_src: this.$store.getters.defaultAvatarSrc
+      defaultAvatarSrc: this.$store.getters.defaultAvatarSrc
     }
   },
   computed: {

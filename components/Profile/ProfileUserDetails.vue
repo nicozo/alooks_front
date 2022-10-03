@@ -11,7 +11,7 @@
       </div>
       <div v-else>
         <v-list-item-avatar :size="breakPointAvatarSize">
-          <v-img :src="default_avatar_src" />
+          <v-img :src="defaultAvatarSrc" />
         </v-list-item-avatar>
       </div>
 
@@ -102,7 +102,7 @@ export default {
   },
   data () {
     return {
-      default_avatar_src: this.$store.getters.defaultAvatarSrc
+      defaultAvatarSrc: this.$store.getters.defaultAvatarSrc
     }
   },
   computed: {

@@ -46,7 +46,7 @@
           </template>
           <template v-else>
             <v-avatar size="100" class="my-4">
-              <img :src="default_avatar_src" alt="プロフィール画像です">
+              <img :src="defaultAvatarSrc" alt="プロフィール画像です">
             </v-avatar>
           </template>
         </v-layout>
@@ -91,7 +91,7 @@
             dark
             outlined
           >
-            {{ time_to_deadline }}
+            {{ timeToDeadline }}
           </v-chip>
         </v-card-text>
       </v-container>
@@ -171,9 +171,9 @@ export default {
   },
   data () {
     return {
-      time_to_deadline: '',
+      timeToDeadline: '',
       invalid: false,
-      default_avatar_src: this.$store.getters.defaultAvatarSrc
+      defaultAvatarSrc: this.$store.getters.defaultAvatarSrc
     }
   },
   mounted () {
@@ -183,7 +183,7 @@ export default {
     changeDateFormat () {
       const roomDeadline = this.room.application_deadline
       const minutesToDeadline = this.$dayjs(roomDeadline).fromNow()
-      this.time_to_deadline = this.replaceFormat(minutesToDeadline)
+      this.timeToDeadline = this.replaceFormat(minutesToDeadline)
     },
     replaceFormat (str) {
       // console.log('渡された文字列', str)

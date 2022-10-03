@@ -25,7 +25,7 @@
                   </div>
                   <div v-else>
                     <v-list-item-avatar size="70">
-                      <v-img :src="default_avatar_src" />
+                      <v-img :src="defaultAvatarSrc" />
                     </v-list-item-avatar>
                   </div>
 
@@ -273,7 +273,7 @@ export default {
   data () {
     return {
       min_width: 200,
-      default_avatar_src: this.$store.getters.defaultAvatarSrc
+      defaultAvatarSrc: this.$store.getters.defaultAvatarSrc
     }
   },
   computed: {
