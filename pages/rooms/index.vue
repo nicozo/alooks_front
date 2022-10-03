@@ -58,6 +58,7 @@
         >
           <RoomItem
             :room="room"
+            :auth-user="authUser"
           />
         </v-col>
       </template>
@@ -162,7 +163,8 @@ export default {
             placement: 'top'
           }
         }
-      ]
+      ],
+      authUser: this.$auth.user
     }
   },
   computed: {

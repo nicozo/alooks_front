@@ -162,6 +162,11 @@ export default {
         default: () => {},
         required: true
       }
+    },
+    authUser: {
+      type: Object,
+      default: () => {},
+      required: true
     }
   },
   data () {
@@ -169,11 +174,6 @@ export default {
       time_to_deadline: '',
       invalid: false,
       default_avatar_src: this.$store.getters.defaultAvatarSrc
-    }
-  },
-  computed: {
-    authUser () {
-      return this.$auth.user
     }
   },
   mounted () {
@@ -208,7 +208,7 @@ export default {
       }
     },
     roomIsOwn () {
-      return this.$auth.user.id === this.room.user_id
+      return this.authUser.id === this.room.user_id
     },
     async deleteRoom () {
       this.$store.dispatch('getBtnLoading', true)
