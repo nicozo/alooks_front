@@ -266,9 +266,9 @@ export default {
       } else {
         console.log('Panel is opening/now open.')
         if (this.dataNullOrCheckAnotherApplication(application)) {
-          this.$emit('child-request-event', application)
+          this.$emit('child-request-method', application)
           if (this.isUnread(application)) {
-            this.$emit('child-read-event', application)
+            this.$emit('child-read-method', application)
           }
         }
       }
