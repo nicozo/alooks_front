@@ -64,15 +64,19 @@
 <script>
 export default {
   name: 'RoomUpdatePage',
-  async asyncData ({ $axios, route }) {
-    const room = await $axios.$get(
-      `api/v1/rooms/${route.params.id}/edit`
-    )
-
-    return { room }
-  },
+  middleware: ['room-edit'],
   data () {
     return {
+      room: {
+        title: '',
+        platform: '',
+        game_mode: '',
+        rank_tier: '',
+        application_deadline: null,
+        recruitment_number: null,
+        is_draft: false
+      },
+      storeRoom: this.$store.getters['rooms/room'],
       redirectPath: this.$store.state.loggedIn.homePath
     }
   },
@@ -82,7 +86,7 @@ export default {
     }
   },
   created () {
-    this.resetApplicationDeadline()
+    this.copyRoom()
   },
   methods: {
     async updateRoom () {
@@ -117,6 +121,10 @@ export default {
     },
     resetApplicationDeadline () {
       this.room.application_deadline = null
+    },
+    copyRoom () {
+      this.room = Object.assign({}, this.storeRoom)
+      this.resetApplicationDeadline()
     }
   }
 }
