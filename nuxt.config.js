@@ -6,15 +6,25 @@ export default {
 
   // Global page headers: https://go.nuxtjs.dev/config-head
   head: {
-    title: '【Apex Legends】エペスク|Apex Legendsスクワッド募集サイト',
+    title: process.env.APP_TITLE,
     htmlAttrs: {
-      lang: 'en'
+      lang: 'ja',
+      prefix: 'og: http://ogp.me/ns#'
     },
     meta: [
       { charset: 'utf-8' },
       { name: 'viewport', content: 'width=device-width, initial-scale=1' },
-      { hid: 'description', name: 'description', content: '' },
-      { name: 'format-detection', content: 'telephone=no' }
+      { name: 'keywords', content: 'Apex Legends,Apex,エーペックス,エペスク' },
+      { hid: 'description', name: 'description', content: process.env.APP_DESCRIPTION },
+      { name: 'format-detection', content: 'telephone=no' },
+      { hid: 'og:site_name', property: 'og:site_name', content: process.env.APP_NAME },
+      { hid: 'og:type', property: 'og:type', content: 'website' },
+      { hid: 'og:url', property: 'og:url', content: process.env.APP_FRONT_URL },
+      { hid: 'og:title', property: 'og:title', content: process.env.APP_TITLE },
+      { hid: 'og:description', property: 'og:description', content: process.env.APP_DESCRIPTION },
+      { hid: 'og:image', property: 'og:image', content: process.env.APP_OGP_IMG_URL },
+      { hid: 'og:locale', property: 'og:locale', content: 'ja_JP' },
+      { name: 'twitter:card', content: 'summary_large_image' }
     ],
     link: [
       { rel: 'icon', type: 'image/x-icon', href: '/favicon.ico' }
