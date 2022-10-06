@@ -6,7 +6,6 @@
 
 <script>
 export default {
-  name: 'AdminDefaultPage',
-  layout: 'admin'
+  name: 'AdminDefaultPage'
 }
 </script>
