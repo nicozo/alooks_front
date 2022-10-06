@@ -19,7 +19,10 @@
     "clans-id": "クランの詳細",
     "clans-create": "クランメンバーを募集",
     "clans-id-update": "クランを編集",
-    "clans-my_clan": "Myクラン"
+    "clans-my_clan": "Myクラン",
+    "admin": "ユーザー一覧",
+    "admin-login": "管理画面ログイン",
+    "admin-rooms": "スクワッド一覧"
   },
   "items": {
     "about": "エペスクとは？",
