@@ -110,11 +110,11 @@ export default {
       this.$store.dispatch('getBtnLoading', false)
     },
     recruitFailure ({ response }) {
+      this.$store.dispatch('getBtnLoading', false)
       if (response && response.status === 400) {
         const msg = '投稿に失敗しました'
         return this.$store.dispatch('getToast', { msg })
       }
-      this.$store.dispatch('getBtnLoading', false)
     },
     setToaster () {
       const msg = 'スクワッドを投稿しました'

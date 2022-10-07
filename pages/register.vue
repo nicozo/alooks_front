@@ -122,11 +122,11 @@ export default {
       this.$store.dispatch('getBtnLoading', false)
     },
     registerFailure ({ response }) {
+      this.$store.dispatch('getBtnLoading', false)
       if (response && response.status === 400) {
         const msg = 'ユーザーを作成できませんでした。既に使用されているメールアドレスです。'
         return this.$store.dispatch('getToast', { msg })
       }
-      this.$store.dispatch('getBtnLoading', false)
     },
     setToaster () {
       const msg = 'ユーザーを作成しました'

@@ -129,11 +129,11 @@ export default {
       this.$store.dispatch('getBtnLoading', false)
     },
     authFailure ({ response }) {
+      this.$store.dispatch('getBtnLoading', false)
       if (response && response.status === 404) {
         const msg = 'メールアドレスまたはパスワードが一致しません'
         return this.$store.dispatch('getToast', { msg })
       }
-      this.$store.dispatch('getBtnLoading', false)
     },
     setToaster () {
       const msg = 'ログインしました'

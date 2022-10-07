@@ -140,13 +140,12 @@ export default {
       this.$router.push(this.redirectPath)
     },
     recruitFailure ({ response }) {
-      console.log(response)
+      this.$store.dispatch('getBtnLoading', false)
       if (response && response.status === 400) {
         const msg = '投稿に失敗しました'
 
         return this.$store.dispatch('getToast', { msg })
       }
-      this.$store.dispatch('getBtnLoading', false)
     },
     setToaster () {
       const msg = 'クランを投稿しました'

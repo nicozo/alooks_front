@@ -233,12 +233,12 @@ export default {
       this.$store.dispatch('getBtnLoading', false)
     },
     requestFailure ({ response }) {
+      this.$store.dispatch('getBtnLoading', false)
       if (response && response.status === 400) {
         const msg = response.data.errors[0]
 
-        this.$store.dispatch('getToast', { msg })
+        return this.$store.dispatch('getToast', { msg })
       }
-      this.$store.dispatch('getBtnLoading', false)
     },
     closeDialog () {
       this.dialog = false
