@@ -37,7 +37,7 @@
             </template>
             <template v-else>
               <v-avatar size="100" class="my-4">
-                <img :src="default_avatar_src" alt="プロフィール画像です">
+                <img :src="defaultAvatarSrc" alt="プロフィール画像です">
               </v-avatar>
             </template>
           </v-layout>
@@ -100,7 +100,7 @@ export default {
   data () {
     return {
       recent_rooms: [],
-      default_avatar_src: this.$store.getters.defaultAvatarSrc
+      defaultAvatarSrc: this.$store.getters.defaultAvatarSrc
     }
   },
   created () {

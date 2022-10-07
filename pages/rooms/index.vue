@@ -58,6 +58,8 @@
         >
           <RoomItem
             :room="room"
+            :auth-user="authUser"
+            @child-delete-method="deleteRoom"
           />
         </v-col>
       </template>
@@ -128,13 +130,7 @@
 <script>
 export default {
   name: 'RoomsIndexPage',
-  async asyncData ({ $axios }) {
-    const rooms = await $axios.$get(
-      'api/v1/rooms'
-    )
-
-    return { rooms }
-  },
+  middleware: ['rooms'],
   data () {
     return {
       page: 1,
@@ -162,10 +158,17 @@ export default {
             placement: 'top'
           }
         }
-      ]
+      ],
+      authUser: this.$auth.user
     }
   },
   computed: {
+    rooms () {
+      return this.$store.getters['rooms/rooms']
+    },
+    pageLength () {
+      return Math.ceil(this.filteredRooms.length / this.pageSize)
+    },
     filteredRooms () {
       const rooms = []
 
@@ -186,9 +189,6 @@ export default {
         }
       }
       return rooms
-    },
-    pageLength () {
-      return Math.ceil(this.filteredRooms.length / this.pageSize)
     },
     displayRooms () {
       this.returnTop()
@@ -228,6 +228,25 @@ export default {
       this.search.platform = ''
       this.search.game_mode = ''
       this.search.rank_tier = ''
+    },
+    async deleteRoom (roomId) {
+      this.$store.dispatch('getBtnLoading', true)
+
+      await this.$axios.$delete(
+        `api/v1/rooms/${roomId}`
+      )
+        .then(res => this.deleteSuccessful(res))
+    },
+    deleteSuccessful (res) {
+      this.$store.dispatch('rooms/deleteRoom', res)
+      this.$store.dispatch('getBtnLoading', false)
+      this.setToaster()
+    },
+    setToaster () {
+      const msg = 'クランを削除しました'
+      const color = 'success'
+
+      return this.$store.dispatch('getToast', { msg, color })
     }
   }
 }

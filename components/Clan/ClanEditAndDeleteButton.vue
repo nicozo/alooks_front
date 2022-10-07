@@ -14,13 +14,53 @@
         </v-col>
 
         <v-col cols="12">
-          <v-btn
-            color="error"
-            block
-            @click="deleteClan"
+          <v-dialog
+            v-model="dialog"
+            persistent
+            max-width="600px"
           >
-            {{ $t('btn.clan_destroy') }}
-          </v-btn>
+            <template #activator="{ on, attrs }">
+              <v-btn
+                color="error"
+                block
+                v-bind="attrs"
+                v-on="on"
+              >
+                {{ $t('btn.clan_destroy') }}
+              </v-btn>
+            </template>
+
+            <v-card>
+              <v-container>
+                <v-card-title>
+                  <span class="text-h5">
+                    削除しますか？
+                  </span>
+                </v-card-title>
+
+                <v-card-actions>
+                  <v-spacer />
+
+                  <v-btn
+                    color="red darken-1"
+                    text
+                    @click="closeDialog"
+                  >
+                    {{ $t('btn.cancel') }}
+                  </v-btn>
+
+                  <v-btn
+                    color="blue darken-1"
+                    text
+                    :loading="btnLoading"
+                    @click="handleDelete"
+                  >
+                    {{ $t('btn.delete') }}
+                  </v-btn>
+                </v-card-actions>
+              </v-container>
+            </v-card>
+          </v-dialog>
         </v-col>
       </v-row>
     </v-card-actions>
@@ -42,32 +82,25 @@ export default {
   },
   data () {
     return {
-      redirect_path: this.$store.state.loggedIn.clansPath
+      dialog: false,
+      redirectPath: this.$store.state.loggedIn.clansPath
+    }
+  },
+  computed: {
+    btnLoading () {
+      return this.$store.getters.btnLoading
     }
   },
   methods: {
     clanIsOwn () {
       return this.$auth.user.id === this.user_id
     },
-    async deleteClan () {
-      this.$store.dispatch('getBtnLoading', true)
-
-      await this.$axios.$delete(
-        `api/v1/clans/${this.id}`
-      )
-        .then(res => this.deleteSuccessful(res))
+    handleDelete () {
+      this.$emit('child-delete-method', this.id)
+      this.closeDialog()
     },
-    deleteSuccessful (res) {
-      this.$store.dispatch('getBtnLoading', false)
-      this.setToaster()
-      this.$store.dispatch('clans/deleteClan', res)
-      this.$router.push(this.redirect_path)
-    },
-    setToaster () {
-      const msg = 'クランを削除しました'
-      const color = 'success'
-
-      return this.$store.dispatch('getToast', { msg, color })
+    closeDialog () {
+      this.dialog = false
     }
   }
 }

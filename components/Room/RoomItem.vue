@@ -5,17 +5,7 @@
     hover
     raised
   >
-    <div v-show="isRoomClosing(room.application_deadline)">
-      <v-overlay
-        absolute
-        opacity="0.9"
-        z-index="2"
-      >
-        <v-card-text class="font-weight-bold">
-          {{ $t('message.now_closed') }}
-        </v-card-text>
-      </v-overlay>
-    </div>
+    <room-item-overlay :application-deadline="room.application_deadline" />
 
     <v-card
       flat
@@ -46,7 +36,7 @@
           </template>
           <template v-else>
             <v-avatar size="100" class="my-4">
-              <img :src="default_avatar_src" alt="プロフィール画像です">
+              <img :src="defaultAvatarSrc" alt="プロフィール画像です">
             </v-avatar>
           </template>
         </v-layout>
@@ -91,18 +81,28 @@
             dark
             outlined
           >
-            {{ time_to_deadline }}
+            {{ timeToDeadline }}
           </v-chip>
         </v-card-text>
       </v-container>
     </v-card>
 
     <v-card-actions>
-      <app-join-request-button
-        :room="room"
-        :auth-user="authUser"
-        :invalid="invalid"
-      />
+      <template v-if="roomIsOwn()">
+        <room-edit-and-delete-button
+          :id="room.id"
+          :invalid="invalid"
+          @child-delete-method="childDeleteMethod"
+        />
+      </template>
+
+      <template v-else>
+        <app-join-request-button
+          :room="room"
+          :auth-user="authUser"
+          :invalid="invalid"
+        />
+      </template>
     </v-card-actions>
   </v-card>
 </template>
@@ -136,18 +136,18 @@ export default {
         default: () => {},
         required: true
       }
+    },
+    authUser: {
+      type: Object,
+      default: () => {},
+      required: true
     }
   },
   data () {
     return {
-      time_to_deadline: '',
+      timeToDeadline: '',
       invalid: false,
-      default_avatar_src: this.$store.getters.defaultAvatarSrc
-    }
-  },
-  computed: {
-    authUser () {
-      return this.$auth.user
+      defaultAvatarSrc: this.$store.getters.defaultAvatarSrc
     }
   },
   mounted () {
@@ -157,8 +157,7 @@ export default {
     changeDateFormat () {
       const roomDeadline = this.room.application_deadline
       const minutesToDeadline = this.$dayjs(roomDeadline).fromNow()
-      this.time_to_deadline = this.replaceFormat(minutesToDeadline)
-      // console.log('締め切り', this.time_to_deadline)
+      this.timeToDeadline = this.replaceFormat(minutesToDeadline)
     },
     replaceFormat (str) {
       // console.log('渡された文字列', str)
@@ -173,10 +172,11 @@ export default {
     isInvalid () {
       this.invalid = true
     },
-    isRoomClosing (roomDeadline) {
-      const now = new Date()
-      const deadline = this.$dayjs(roomDeadline).$d
-      return deadline < now
+    roomIsOwn () {
+      return this.authUser.id === this.room.user_id
+    },
+    childDeleteMethod (roomId) {
+      this.$emit('child-delete-method', roomId)
     }
   }
 }

@@ -70,7 +70,7 @@
       </v-container>
     </v-card>
 
-    <app-guide-profile :profile-dialog.sync="profile_dialog" />
+    <app-guide-profile :profile-dialog.sync="profileDialog" />
   </v-dialog>
 </template>
 
@@ -98,7 +98,7 @@ export default {
     return {
       dialog: false,
       message: '',
-      profile_dialog: false
+      profileDialog: false
     }
   },
   computed: {
@@ -141,7 +141,7 @@ export default {
           .then(res => this.requestSuccessful(res))
           .catch(e => this.requestFailure(e))
       } else {
-        this.profile_dialog = true
+        this.profileDialog = true
         const msg = 'まずはプロフィールを完成させましょう！'
         return this.$store.dispatch('getToast', { msg })
       }
@@ -167,7 +167,7 @@ export default {
       this.message = ''
     },
     closeProfileDialog () {
-      this.profile_dialog = false
+      this.profileDialog = false
     },
     appliedForThis () {
       if (this.isAlreadyAppliedFor) {

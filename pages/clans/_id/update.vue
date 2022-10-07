@@ -102,8 +102,8 @@ export default {
         snipe: '',
         contact_means: ''
       },
-      store_clan: this.$store.getters['clans/clan'],
-      redirect_path: this.$store.state.loggedIn.clansPath
+      storeClan: this.$store.getters['clans/clan'],
+      redirectPath: this.$store.state.loggedIn.clansPath
     }
   },
   computed: {
@@ -112,7 +112,7 @@ export default {
     }
   },
   created () {
-    this.clan = Object.assign({}, this.store_clan)
+    this.copyClan()
   },
   methods: {
     async updateClan () {
@@ -129,18 +129,24 @@ export default {
       this.$store.dispatch('clans/updateClan', res)
       this.$store.dispatch('getBtnLoading', false)
       this.setToaster()
-      this.$router.push(this.redirect_path)
+      this.$router.push(this.redirectPath)
     },
     updateClanFailure ({ response }) {
       this.$store.dispatch('getBtnLoading', false)
+      if (response && response.status === 400) {
+        const msg = '編集できませんでした。入力間違いがないか確認してください。'
 
-      console.log(response)
+        return this.$store.dispatch('getToast', { msg })
+      }
     },
     setToaster () {
       const msg = 'クランを編集しました'
       const color = 'success'
 
       return this.$store.dispatch('getToast', { msg, color })
+    },
+    copyClan () {
+      this.clan = Object.assign({}, this.storeClan)
     }
   }
 }

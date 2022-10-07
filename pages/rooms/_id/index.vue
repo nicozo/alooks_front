@@ -32,7 +32,7 @@
                   </div>
                   <div v-show="!room.host.avatar_url">
                     <v-list-item-avatar size="70">
-                      <v-img :src="default_avatar_src" />
+                      <v-img :src="defaultAvatarSrc" />
                     </v-list-item-avatar>
                   </div>
 
@@ -70,16 +70,7 @@
               :id="'room' + room.id"
             >
               <v-list-item>
-                <div v-show="isRoomClosing(room.application_deadline)">
-                  <v-overlay
-                    absolute
-                    opacity="0.9"
-                  >
-                    <v-card-text class="font-weight-bold">
-                      {{ $t('message.now_closed') }}
-                    </v-card-text>
-                  </v-overlay>
-                </div>
+                <room-item-overlay :application-deadline="room.application_deadline" />
 
                 <v-container>
                   <div class="text-right">
@@ -137,16 +128,25 @@
                       dark
                       outlined
                     >
-                      {{ time_to_deadline }}
+                      {{ timeToDeadline }}
                     </v-chip>
                   </v-card-text>
 
                   <v-card-actions>
-                    <app-join-request-button
-                      :room="room"
-                      :auth-user="authUser"
-                      :invalid="invalid"
-                    />
+                    <template v-if="roomIsOwn()">
+                      <room-edit-and-delete-button
+                        :id="room.id"
+                        @child-delete-method="deleteRoom"
+                      />
+                    </template>
+
+                    <template v-else>
+                      <app-join-request-button
+                        :room="room"
+                        :auth-user="authUser"
+                        :invalid="invalid"
+                      />
+                    </template>
                   </v-card-actions>
                 </v-container>
               </v-list-item>
@@ -274,29 +274,21 @@
 <script>
 export default {
   name: 'RoomIdIndex',
-  async asyncData ({ $axios, params }) {
-    const room = await $axios.$get(
-      'api/v1/rooms/' + params.id
-    )
-
-    // console.log('部屋情報:', room)
-    // console.log('募集主情報:', room.host)
-    return { room }
-  },
+  middleware: ['room'],
   data () {
     return {
       invalid: false,
-      time_to_deadline: '',
+      timeToDeadline: '',
       host: {
         age: ''
       },
-      default_avatar_src: this.$store.getters.defaultAvatarSrc
+      defaultAvatarSrc: this.$store.getters.defaultAvatarSrc,
+      authUser: this.$auth.user,
+      room: this.$store.getters['rooms/room'],
+      redirectPath: this.$store.state.loggedIn.homePath
     }
   },
   computed: {
-    authUser () {
-      return this.$auth.user
-    },
     data () {
       return this.$game.data
     },
@@ -350,8 +342,8 @@ export default {
     changeDateFormat () {
       const roomDeadline = this.room.application_deadline
       const minutesToDeadline = this.$dayjs(roomDeadline).fromNow()
-      this.time_to_deadline = this.replaceFormat(minutesToDeadline)
-      // console.log('締め切り', this.time_to_deadline)
+      this.timeToDeadline = this.replaceFormat(minutesToDeadline)
+      // console.log('締め切り', this.timeToDeadline)
     },
     replaceFormat (str) {
       // console.log('渡された文字列', str)
@@ -374,6 +366,29 @@ export default {
       const age = today.getFullYear() - ymd[0]
 
       return today < thisYearsBirthday ? age - 1 : age
+    },
+    roomIsOwn () {
+      return this.authUser.id === this.room.user_id
+    },
+    async deleteRoom (roomId) {
+      this.$store.dispatch('getBtnLoading', true)
+
+      await this.$axios.$delete(
+        `api/v1/rooms/${roomId}`
+      )
+        .then(res => this.deleteSuccessful(res))
+    },
+    deleteSuccessful (res) {
+      this.$store.dispatch('rooms/deleteRoom', res)
+      this.$store.dispatch('getBtnLoading', false)
+      this.setToaster()
+      this.$router.push(this.redirectPath)
+    },
+    setToaster () {
+      const msg = 'クランを削除しました'
+      const color = 'success'
+
+      return this.$store.dispatch('getToast', { msg, color })
     }
   }
 }

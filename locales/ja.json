@@ -7,6 +7,7 @@
     "rooms": "スクワッド募集一覧",
     "rooms-create": "スクワッドメンバーを募集",
     "rooms-id": "スクワッドの詳細",
+    "rooms-id-update": "スクワッドを編集",
     "applications": "参加リクエスト一覧",
     "profile": "プロフィール",
     "profile-edit": "プロフィールを編集",
@@ -96,7 +97,10 @@
     "clan_edit": "クランを編集",
     "clan_destroy": "クランを削除",
     "friend_requested": "送信しました",
-    "uncheck": "チェックを外す"
+    "uncheck": "チェックを外す",
+    "room_edit": "スクワッドを編集",
+    "room_destroy": "スクワッドを削除",
+    "delete": "削除"
   },
   "gender": {
     "male": "男性",

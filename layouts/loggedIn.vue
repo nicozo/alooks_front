@@ -34,7 +34,7 @@
           </div>
           <div v-else>
             <v-list-item-avatar size="60">
-              <v-img :src="default_avatar_src" alt="プロフィール画像です" />
+              <v-img :src="defaultAvatarSrc" alt="プロフィール画像です" />
             </v-list-item-avatar>
           </div>
           <v-list-item-content>
@@ -134,7 +134,7 @@ export default {
         { name: 'clans-my_clan' }
       ],
       drawer: false,
-      default_avatar_src: this.$store.getters.defaultAvatarSrc
+      defaultAvatarSrc: this.$store.getters.defaultAvatarSrc
     }
   },
   computed: {

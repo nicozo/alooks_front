@@ -14,10 +14,10 @@
           <v-container fluid>
             <v-row dense>
               <v-col cols="12">
-                <div v-if="avatar_preview_url">
+                <div v-if="avatarPreviewUrl">
                   <v-layout justify-center>
                     <v-avatar size="200">
-                      <img :src="avatar_preview_url" alt="プロフィール画像です">
+                      <img :src="avatarPreviewUrl" alt="プロフィール画像です">
                     </v-avatar>
                   </v-layout>
                 </div>
@@ -30,7 +30,7 @@
                     </div>
                     <div v-else>
                       <v-avatar size="200">
-                        <img :src="default_avatar_src" alt="プロフィール画像です">
+                        <img :src="defaultAvatarSrc" alt="プロフィール画像です">
                       </v-avatar>
                     </div>
                   </v-layout>
@@ -45,7 +45,7 @@
                 >
                   <v-file-input
                     id="avatar"
-                    v-model="upload_avatar"
+                    v-model="uploadAvatar"
                     label="プロフィール画像"
                     accept="image/png, image/jpeg"
                     :error-messages="errors"
@@ -132,16 +132,14 @@ export default {
         highest_damage: null,
         favorite_weapons: ''
       },
-      upload_avatar: null,
-      avatar_preview_url: null,
-      redirect_path: this.$store.state.loggedIn.rememberPath,
-      default_avatar_src: this.$store.getters.defaultAvatarSrc
+      uploadAvatar: null,
+      avatarPreviewUrl: null,
+      redirectPath: this.$store.state.loggedIn.rememberPath,
+      defaultAvatarSrc: this.$store.getters.defaultAvatarSrc,
+      authUser: this.$auth.user
     }
   },
   computed: {
-    authUser () {
-      return this.$auth.user
-    },
     btnLoading () {
       return this.$store.getters.btnLoading
     }
@@ -165,8 +163,8 @@ export default {
         formData.append('user[kd]', this.user.kd)
         formData.append('user[highest_damage]', this.user.highest_damage)
         formData.append('user[favorite_weapons]', this.user.favorite_weapons)
-        if (this.upload_avatar !== null) {
-          formData.append('user[avatar]', this.upload_avatar)
+        if (this.uploadAvatar !== null) {
+          formData.append('user[avatar]', this.uploadAvatar)
         }
         // console.log(...formData.entries())
 
@@ -181,7 +179,7 @@ export default {
     uploadSuccessful (res) {
       this.setToaster()
       this.$auth.login(res)
-      this.$router.push(this.redirect_path)
+      this.$router.push(this.redirectPath)
       this.$store.dispatch('getBtnLoading', false)
     },
     setToaster () {
@@ -194,7 +192,7 @@ export default {
     },
     setPreview () {
       const avatarImg = event.target.files[0]
-      this.avatar_preview_url = URL.createObjectURL(avatarImg)
+      this.avatarPreviewUrl = URL.createObjectURL(avatarImg)
     }
   }
 }

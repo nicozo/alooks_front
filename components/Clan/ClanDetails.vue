@@ -78,6 +78,7 @@
       <clan-edit-and-delete-button
         :id="clan.id"
         :user_id="clan.user_id"
+        @child-delete-method="childDeleteMethod"
       />
     </v-container>
   </v-card>
@@ -91,6 +92,11 @@ export default {
       type: Object,
       require: true,
       default: () => {}
+    }
+  },
+  methods: {
+    childDeleteMethod (clanId) {
+      this.$emit('child-delete-method', clanId)
     }
   }
 }

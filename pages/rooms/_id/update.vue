@@ -16,11 +16,11 @@
         max-width="900"
       >
         <v-card-text class="br pt-0">
-          ここではスクワッドメンバーを募集するための掲示板を作成できます。
+          ここでは投稿したスクワッドメンバー掲示板を編集できます。
           さっそく以下のフォームを記入して、スクワッドメンバーを募集しよう！
         </v-card-text>
         <validation-observer v-slot="{ invalid }">
-          <form @submit.prevent="recruit">
+          <form @submit.prevent="updateRoom">
             <v-container fluid>
               <room-form-title :title.sync="room.title" />
 
@@ -49,7 +49,7 @@
                     :disabled="invalid"
                     :loading="btnLoading"
                   >
-                    {{ $t('btn.create') }}
+                    {{ $t('btn.update') }}
                   </v-btn>
                 </v-col>
               </v-row>
@@ -58,15 +58,14 @@
         </validation-observer>
       </v-card>
     </v-row>
-
-    <app-guide-profile :profile-dialog.sync="profileDialog" />
   </v-container>
 </template>
 
 <script>
 export default {
-  name: 'RoomsCreatePage',
-  data ({ $route }) {
+  name: 'RoomUpdatePage',
+  middleware: ['room-edit'],
+  data () {
     return {
       room: {
         title: '',
@@ -77,8 +76,8 @@ export default {
         recruitment_number: null,
         is_draft: false
       },
-      redirectPath: this.$store.state.loggedIn.rememberPath,
-      profileDialog: false
+      storeRoom: this.$store.getters['rooms/room'],
+      redirectPath: this.$store.state.loggedIn.homePath
     }
   },
   computed: {
@@ -86,47 +85,47 @@ export default {
       return this.$store.getters.btnLoading
     }
   },
+  created () {
+    this.copyRoom()
+  },
   methods: {
-    async recruit () {
-      if (!this.invalid && this.$auth.profileCompleted()) {
-        this.$store.dispatch('getBtnLoading', true)
+    async updateRoom () {
+      this.$store.dispatch('getBtnLoading', true)
 
-        await this.$axios.$post(
-          'api/v1/rooms',
-          this.room
-        )
-          .then(res => this.recruitSuccessful(res))
-          .catch(e => this.recruitFailure(e))
-      } else {
-        this.profileDialog = true
-        const msg = 'まずはプロフィールを完成させましょう！'
-        return this.$store.dispatch('getToast', { msg })
-      }
+      await this.$axios.$patch(
+        `api/v1/rooms/${this.room.id}`,
+        this.room
+      )
+
+        .then(res => this.updateRoomSuccessful(res))
+        .catch(e => this.updateRoomFailure(e))
     },
-    recruitSuccessful (res) {
-      // console.log('作成されたroomオブジェクト', res)
-      this.$router.push(this.redirectPath)
+    updateRoomSuccessful () {
+      this.$store.dispatch('getBtnLoading', false)
       this.setToaster()
-      this.$store.dispatch('getBtnLoading', false)
+      this.$router.push(this.redirectPath)
     },
-    recruitFailure ({ response }) {
+    updateRoomFailure ({ response }) {
+      this.$store.dispatch('getBtnLoading', false)
       if (response && response.status === 400) {
-        const msg = '投稿に失敗しました'
+        const msg = '編集できませんでした。入力間違いがないか確認してください。'
+
         return this.$store.dispatch('getToast', { msg })
       }
-      this.$store.dispatch('getBtnLoading', false)
     },
     setToaster () {
-      const msg = 'スクワッドを投稿しました'
+      const msg = 'スクワッドを編集しました'
       const color = 'success'
+
       return this.$store.dispatch('getToast', { msg, color })
+    },
+    resetApplicationDeadline () {
+      this.room.application_deadline = null
+    },
+    copyRoom () {
+      this.room = Object.assign({}, this.storeRoom)
+      this.resetApplicationDeadline()
     }
   }
 }
 </script>
-
-<style scoped>
-  .br{
-    white-space: pre-line;
-  }
-</style>
