@@ -8,7 +8,7 @@
 
 <script>
 export default {
-  layout: 'admin',
-  name: 'AdminDefaultPage'
+  name: 'AdminDefaultPage',
+  layout: 'admin'
 }
 </script>
