@@ -18,29 +18,28 @@
         max-width="600"
       >
         <validation-observer v-slot="{ invalid }">
-            <form @submit.prevent="login">
-              <v-row dense>
-                <v-col cols="12">
-                  <user-form-email :email.sync="user.email" />
-                </v-col>
+          <form @submit.prevent="login">
+            <v-row dense>
+              <v-col cols="12">
+                <user-form-email :email.sync="user.email" />
+              </v-col>
 
-                <v-col cols="12">
-                  <user-form-password :password.sync="user.password" />
-                </v-col>
+              <v-col cols="12">
+                <user-form-password :password.sync="user.password" />
+              </v-col>
 
-                <v-col cols="12">
-                  <v-btn
-                    type="submit"
-                    block
-                    color="primary"
-                    :disabled="invalid"
-                    :loading="btnLoading"
-                  >
-                    {{ $t('btn.login') }}
-                  </v-btn>
-                </v-col>
-              </v-row>
-            </form>
+              <v-col cols="12">
+                <v-btn
+                  type="submit"
+                  block
+                  color="primary"
+                  :disabled="invalid"
+                >
+                  {{ $t('btn.login') }}
+                </v-btn>
+              </v-col>
+            </v-row>
+          </form>
         </validation-observer>
       </v-card>
     </v-row>
@@ -85,11 +84,11 @@ export default {
       this.$store.dispatch('getBtnLoading', false)
     },
     authFailure ({ response }) {
+      this.$store.dispatch('getBtnLoading', false)
       if (response && response.status === 404) {
         const msg = 'メールアドレスまたはパスワードが一致しません'
         return this.$store.dispatch('getToast', { msg })
       }
-      this.$store.dispatch('getBtnLoading', false)
     },
     setToaster () {
       const msg = 'ログインしました'
