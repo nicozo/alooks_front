@@ -3,6 +3,7 @@
   "pages": {
     "register": "ユーザー登録（無料）",
     "login": "ログイン",
+    "login-admin": "管理者ログイン",
     "logout": "ログアウト",
     "rooms": "スクワッド募集一覧",
     "rooms-create": "スクワッドメンバーを募集",
@@ -21,7 +22,6 @@
     "clans-id-update": "クランを編集",
     "clans-my_clan": "Myクラン",
     "admin": "ユーザー一覧",
-    "admin-login": "管理者ログイン",
     "admin-rooms": "スクワッド一覧"
   },
   "items": {
@@ -213,5 +213,9 @@
     "snipe": "-スナイプや大会等-",
     "contact_means": "-クラン内の連絡手段-"
   },
-  "search_title": "絞り込み検索"
+  "search_title": "絞り込み検索",
+  "admin": {
+    "users": "ユーザー一覧",
+    "user_create": "ユーザー作成"
+  }
 }
