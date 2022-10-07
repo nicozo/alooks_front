@@ -1,5 +1,7 @@
 <template>
   <v-main>
+    <app-toaster />
+
     <NuxtChild />
   </v-main>
 </template>
