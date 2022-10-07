@@ -88,6 +88,10 @@ export default {
       if (response && response.status === 404) {
         const msg = 'メールアドレスまたはパスワードが一致しません'
         return this.$store.dispatch('getToast', { msg })
+      } else if (response && response.status === 401) {
+        const msg = '権限がありません'
+        this.$router.push('/login')
+        return this.$store.dispatch('getToast', { msg })
       }
     },
     setToaster () {
