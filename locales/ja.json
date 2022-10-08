@@ -23,7 +23,7 @@
     "clans-my_clan": "Myクラン",
     "admin": "ユーザー一覧",
     "admin-rooms": "スクワッド一覧",
-    "admin-applications": "スクワッド一覧",
+    "admin-applications": "参加リクエスト一覧",
     "admin-clans": "クラン一覧"
   },
   "items": {
@@ -217,12 +217,9 @@
   },
   "search_title": "絞り込み検索",
   "admin": {
-    "users": "ユーザー一覧",
     "user_create": "ユーザー作成",
     "user_edit": "ユーザー編集",
-    "rooms": "スクワッド一覧",
-    "room_create": "スクワッド作成",
     "room_edit": "スクワッド作成",
-    "applications": "参加リクエスト一覧"
+    "application_edit": "参加リクエスト編集"
   }
 }
