@@ -222,6 +222,7 @@
     "user_edit": "ユーザー編集",
     "rooms": "スクワッド一覧",
     "room_create": "スクワッド作成",
+    "room_edit": "スクワッド作成",
     "applications": "参加リクエスト一覧"
   }
 }

@@ -8,7 +8,7 @@
       <template #top>
         <v-toolbar flat>
           <v-toolbar-title>
-            {{ $t('admin.rooms') }}
+            {{ $t(`pages.${routeName}`) }}
           </v-toolbar-title>
 
           <v-divider
@@ -19,106 +19,101 @@
 
           <v-spacer />
 
+          <!-- スクワッド編集モーダル -->
           <v-dialog
-            v-model="dialog"
+            v-model="editDialog"
             max-width="500px"
           >
-            <template #activator="{ on, attrs }">
-              <v-btn
-                color="primary"
-                dark
-                class="mb-2"
-                v-bind="attrs"
-                v-on="on"
-              >
-                {{ $t('admin.room_create') }}
-              </v-btn>
-            </template>
             <v-card>
               <v-card-title>
                 <span class="text-h5">
-                  {{ formTitle }}
+                  {{ $t('admin.room_edit') }}
                 </span>
               </v-card-title>
 
-              <v-card-text>
+              <validation-observer v-slot="{ invalid }">
                 <v-container>
-                  <v-row>
+                  <v-row dense>
                     <v-col cols="12">
-                      <room-form-title :title.sync="editedItem.title" />
+                      <room-form-title :title.sync="room.title" />
+                    </v-col>
+
+                    <v-col cols="12">
+                      <room-form-platform :platform.sync="room.platform"  />
+                    </v-col>
+
+                    <v-col cols="12">
+                      <room-form-game-mode :game-mode.sync="room.game_mode" />
                     </v-col>
 
                     <v-col
                       cols="12"
-                      lg="6"
+                      sm="4"
+                      md="4"
+                      lg="4"
                     >
-                      <room-form-platform :platform.sync="editedItem.platform" />
+                      <room-form-rank-tier :rank-tier.sync="room.rank_tier" />
                     </v-col>
 
                     <v-col
                       cols="12"
-                      lg="6"
+                      sm="4"
+                      md="4"
+                      lg="4"
                     >
-                      <room-form-game-mode :game-mode.sync="editedItem.game_mode" />
+                      <room-form-application-deadline :application-deadline.sync="room.application_deadline" />
                     </v-col>
 
                     <v-col
                       cols="12"
-                      lg="6"
+                      sm="4"
+                      md="4"
+                      lg="4"
                     >
-                      <room-form-rank-tier :rank-tier.sync="editedItem.rank_tier" />
+                      <room-form-recruitment-number :recruitment-number.sync="room.recruitment_number" />
                     </v-col>
 
-                    <v-col
-                      cols="12"
-                      lg="6"
-                    >
-                      <room-form-application-deadline :application.sync="editedItem.application_deadline" />
-                    </v-col>
+                    <v-card-actions>
+                      <v-spacer />
 
-                    <v-col
-                      cols="12"
-                      lg="6"
-                    >
-                      <room-form-recruitment-number :application.sync="editedItem.recruitment_number" />
-                    </v-col>
+                      <v-btn
+                        color="error"
+                        text
+                        @click="closeDialog"
+                      >
+                        {{ $t('btn.cancel') }}
+                      </v-btn>
+
+                      <v-btn
+                        color="blue darken-1"
+                        text
+                        :disabled="invalid"
+                        :loading="btnLoading"
+                        @click="update(room)"
+                      >
+                        {{ $t('btn.update') }}
+                      </v-btn>
+                    </v-card-actions>
                   </v-row>
                 </v-container>
-              </v-card-text>
+              </validation-observer>
+            </v-card>
+          </v-dialog>
+
+          <!-- スクワッド削除モーダル -->
+          <v-dialog
+            v-model="deleteDialog"
+            max-width="500px"
+          >
+            <v-card>
+              <v-card-title class="text-h5">
+                スクワッドを削除しますか？
+              </v-card-title>
 
               <v-card-actions>
                 <v-spacer />
                 <v-btn
                   color="error"
-                  text
-                  @click="close"
-                >
-                  {{ $t('btn.cancel') }}
-                </v-btn>
-
-                <v-btn
-                  color="blue darken-1"
-                  text
-                  @click="save"
-                >
-                  {{ $t('btn.submit') }}
-                </v-btn>
-              </v-card-actions>
-            </v-card>
-          </v-dialog>
-
-          <v-dialog
-            v-model="dialogDelete"
-            max-width="500px"
-          >
-            <v-card>
-              <v-card-title class="text-h5">
-                ユーザーを削除しますか？
-              </v-card-title>
-              <v-card-actions>
-                <v-spacer />
-                <v-btn
-                  color="blue darken-1"
                   text
                   @click="closeDelete"
                 >
@@ -128,7 +123,7 @@
                 <v-btn
                   color="blue darken-1"
                   text
-                  @click="deleteItemConfirm"
+                  @click="roomDelete(room)"
                 >
                   {{ $t('btn.delete') }}
                 </v-btn>
@@ -143,17 +138,18 @@
         <v-icon
           small
           class="mr-2"
-          @click="editItem(item)"
+          @click="openEditDialog(item)"
         >
           mdi-pencil
         </v-icon>
         <v-icon
           small
-          @click="deleteItem(item)"
+          @click="openDeleteDialog(item)"
         >
           mdi-delete
         </v-icon>
       </template>
+
       <template #no-data>
         <v-btn
           color="primary"
@@ -177,27 +173,20 @@ export default {
 
     return { rooms }
   },
-  data () {
+  data ({ $route }) {
     return {
+      routeName: $route.name,
       activePicker: null,
       menu: false,
-      dialog: false,
-      dialogDelete: false,
+      editDialog: false,
+      deleteDialog: false,
       editedIndex: -1,
-      editedItem: {
+      room: {
         name: '',
         platform: '',
         game_mode: '',
         rank_tier: '',
-        application_deadline: 'male',
-        recruitment_number: ''
-      },
-      defaultItem: {
-        name: '',
-        platform: '',
-        game_mode: '',
-        rank_tier: '',
-        application_deadline: 'male',
+        application_deadline: '',
         recruitment_number: ''
       },
       number: 10,
@@ -214,54 +203,73 @@ export default {
     }
   },
   computed: {
-    formTitle () {
-      return this.editedIndex === -1 ? 'ユーザー作成' : 'ユーザー編集'
-    }
-  },
-  watch: {
-    menu (val) {
-      val && setTimeout(() => (this.activePicker = 'YEAR'))
+    btnLoading () {
+      return this.$store.getters.btnLoading
     }
   },
   methods: {
-    editItem (item) {
-      this.editedIndex = this.rooms.indexOf(item)
-      this.editedItem = Object.assign({}, item)
-      this.dialog = true
+    async update (room) {
+      this.$store.dispatch('getBtnLoading', true)
+
+      await this.$axios.$patch(
+        `/api/v1/admin/rooms/${room.id}`,
+        this.room
+      )
+        .then(res => this.updateSuccessful(res))
+        .catch(e => this.updateFailure(e))
     },
-    deleteItem (item) {
-      this.editedIndex = this.rooms.indexOf(item)
-      this.editedItem = Object.assign({}, item)
-      this.dialogDelete = true
+    updateSuccessful (res) {
+      console.log(res)
+      this.$router.go({ path: this.$router.currentRoute.path, force: true })
+      const msg = `スクワッドID${res.id}を更新しました`
+      const color = 'success'
+      this.setToaster(msg, color)
+      this.$store.dispatch('getBtnLoading', false)
+      this.closeDialog()
     },
-    deleteItemConfirm () {
-      this.rooms.splice(this.editedIndex, 1)
-      this.closeDelete()
-    },
-    close () {
-      this.dialog = false
-      this.$nextTick(() => {
-        this.editedItem = Object.assign({}, this.defaultItem)
-        this.editedIndex = -1
-      })
-    },
-    closeDelete () {
-      this.dialogDelete = false
-      this.$nextTick(() => {
-        this.editedItem = Object.assign({}, this.defaultItem)
-        this.editedIndex = -1
-      })
-    },
-    save () {
-      if (this.editedIndex > -1) {
-        Object.assign(this.rooms[this.editedIndex], this.editedItem)
-      } else {
-        this.rooms.push(this.editedItem)
+    updateFailure ({ response }) {
+      this.$store.dispatch('getBtnLoading', false)
+      if (response && response.status === 400) {
+        const msg = 'スクワッドの更新に失敗しました'
+        return this.$store.dispatch('getToast', { msg })
       }
-      this.close()
     },
-    saveDate (date) {
-      this.$refs.menu.save(date)
+    async roomDelete (room) {
+      this.$store.dispatch('getBtnLoading', false)
+
+      await this.$axios.$delete(
+        `/api/v1/admin/rooms/${room.id}`
+      )
+        .then(res => this.deleteSuccessful(res))
+    },
+    deleteSuccessful (res) {
+      console.log(res)
+      this.$router.go({ path: this.$router.currentRoute.path, force: true })
+      const msg = `スクワッドID${res.id}を削除しました`
+      const color = 'success'
+      this.setToaster(msg, color)
+      this.$store.dispatch('getBtnLoading', false)
+      this.closeDialog()
+    },
+    setRoom (room) {
+      this.editedIndex = this.rooms.indexOf(room)
+      this.room = Object.assign({}, room)
+    },
+    openEditDialog (room) {
+      this.setRoom(room)
+      this.editDialog = true
+    },
+    openDeleteDialog (room) {
+      this.setRoom(room)
+      this.deleteDialog = true
+    },
+    closeDialog () {
+      this.newDialog = false
+      this.editDialog = false
+      this.deleteDialog = false
+    },
+    setToaster (msg, color) {
+      return this.$store.dispatch('getToast', { msg, color })
     }
   }
 }
