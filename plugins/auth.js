@@ -59,6 +59,16 @@ class Authentication {
     this.resetVuex()
   }
 
+  async adminLogout () {
+    await this.$axios.delete(
+      '/api/v1/admin/sessions',
+      {
+        validateStatus: status => this.allowUnauthorized(status)
+      }
+    )
+    this.resetVuex()
+  }
+
   // ユーザーが存在する場合にtrueを返す
   isExistUser () {
     return this.user.sub &&

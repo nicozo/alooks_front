@@ -1,9 +1,11 @@
+<template>
+  <div>
+    <NuxtChild />
+  </div>
+</template>
+
 <script>
 export default {
-  name: 'LogoutPage',
-  async middleware ({ $auth, redirect }) {
-    await $auth.logout()
-    return redirect('/login')
-  }
+  name: 'LogoutDefaultPage'
 }
 </script>

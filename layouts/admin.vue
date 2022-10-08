@@ -32,6 +32,18 @@
             </v-list-item-title>
           </v-list-item-content>
         </v-list-item>
+
+        <v-list-item>
+          <v-list-item-content>
+            <v-btn
+              nuxt
+              color="red"
+              to="/logout/admin"
+            >
+              {{ $t('pages.logout') }}
+            </v-btn>
+          </v-list-item-content>
+        </v-list-item>
       </v-list>
     </v-navigation-drawer>
 
