@@ -196,6 +196,7 @@
                 <v-btn
                   color="blue darken-1"
                   text
+                  :loading="btnLoading"
                   @click="userDelete(user)"
                 >
                   {{ $t('btn.delete') }}

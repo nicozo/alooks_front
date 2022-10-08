@@ -123,6 +123,7 @@
                 <v-btn
                   color="blue darken-1"
                   text
+                  :loading="btnLoading"
                   @click="roomDelete(room)"
                 >
                   {{ $t('btn.delete') }}
@@ -167,8 +168,6 @@ export default {
   data ({ $route }) {
     return {
       routeName: $route.name,
-      activePicker: null,
-      menu: false,
       editDialog: false,
       deleteDialog: false,
       editedIndex: -1,
