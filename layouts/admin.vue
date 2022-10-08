@@ -35,6 +35,11 @@
       </v-list>
     </v-navigation-drawer>
 
+    <admin-header
+      :drawer="drawer"
+      @handle-toggle-drawer="handleToggleDrawer"
+    />
+
     <Nuxt />
   </v-app>
 </template>
@@ -51,6 +56,11 @@ export default {
         { name: 'admin-applications' },
         { name: 'admin-clans' }
       ]
+    }
+  },
+  methods: {
+    handleToggleDrawer () {
+      this.drawer = !this.drawer
     }
   }
 }
