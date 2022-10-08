@@ -1,74 +1,342 @@
 <template>
-  <v-card
-    :id="'room' + room.id"
-    rounded-xl
-  >
-    <v-list
-      max-width="900"
-      class="mx-auto"
-    >
-      <!-- Todo: v-forで省略できないか検討 -->
-      <v-list-item>
-        <v-list-item-content>
-          <div class="text-h4">
-            {{ room.title }}
-          </div>
-          <div class="d-flex align-center py-3">
-            <div
-              class="text-subtitle-1 font-weight-bold text-right"
-              style="width: 150px"
-            >
-              {{ $t('room.platform.title') }}：
-            </div>
-            <div>
-              {{ $t(`room.platform.${room.platform}`) }}
-            </div>
-          </div>
-          <div class="d-flex align-center py-3">
-            <div
-              class="text-subtitle-1 font-weight-bold text-right"
-              style="width: 150px"
-            >
-              {{ $t('room.game_mode.title') }}：
-            </div>
-            <div>
-              {{ $t(`room.game_mode.${room.game_mode}`) }}
-            </div>
-          </div>
-          <div class="d-flex align-center py-3">
-            <div
-              class="text-subtitle-1 font-weight-bold text-right"
-              style="width: 150px"
-            >
-              {{ $t('room.rank_tier.title') }}：
-            </div>
-            <div>
-              {{ $t(`room.rank_tier.${room.rank_tier}`) }}
-            </div>
-          </div>
-          <div class="d-flex align-center py-3">
-            <div
-              class="text-subtitle-1 font-weight-bold text-right"
-              style="width: 150px"
-            >
-              {{ $t('room.rank_tier') }}：
-            </div>
-            <div>
-              {{ timeToDeadline }}
-            </div>
-          </div>
-        </v-list-item-content>
-      </v-list-item>
-    </v-list>
-    <v-card-actions>
-      <v-btn
-        color="success"
-        class="mx-auto mb-6 pa-6"
-        :disabled="invalid"
+  <v-card>
+    <v-tabs v-model="tab">
+      <v-tabs-slider color="success" />
+
+      <v-tab
+        v-for="item in items"
+        :key="item"
       >
-        {{ $t('btn.invitation_request') }}
-      </v-btn>
-    </v-card-actions>
+        {{ item }}
+      </v-tab>
+    </v-tabs>
+
+    <v-tabs-items v-model="tab">
+      <v-tab-item
+        v-for="item in items"
+        :key="item"
+      >
+        <div v-show="item==='ホストプロフィール'">
+          <v-card
+            id="host-profile"
+            max-width="600"
+            flat
+          >
+            <v-container>
+              <v-layout justify-center>
+                <div v-show="room.host.avatar_url">
+                  <v-avatar size="150">
+                    <v-img :src="room.host.avatar_url" />
+                  </v-avatar>
+                </div>
+                <div v-show="!room.host.avatar_url">
+                  <v-avatar size="150">
+                    <v-img :src="defaultAvatarSrc" />
+                  </v-avatar>
+                </div>
+              </v-layout>
+
+              <v-card-subtitle class="font-weight-bold">
+                -{{ $t('user.name') }}-
+              </v-card-subtitle>
+              <v-card-text>
+                {{ room.host.name }}
+              </v-card-text>
+
+              <v-card-subtitle class="pb-0 font-weight-bold">
+                -{{ $t('user.self_introduction') }}-
+              </v-card-subtitle>
+              <v-card-text class="br pt-0">
+                {{ room.host.self_introduction }}
+              </v-card-text>
+
+              <v-card-subtitle class="font-weight-bold">
+                -{{ $t('user.sex') }}-
+              </v-card-subtitle>
+              <v-card-text>
+                {{ $t(`gender.${room.host.sex}`) }}
+              </v-card-text>
+
+              <v-card-subtitle class="font-weight-bold">
+                -{{ $t('user.age') }}-
+              </v-card-subtitle>
+              <div v-show="room.host.date_of_birth">
+                <v-card-text>
+                  {{ host.age }}歳
+                </v-card-text>
+              </div>
+              <div v-show="!room.host.date_of_birth">
+                <v-card-text>
+                  {{ $t('Unregistered') }}
+                </v-card-text>
+              </div>
+
+              <v-card-subtitle class="font-weight-bold">
+                -{{ $t('user.platform') }}-
+              </v-card-subtitle>
+              <v-card-text>
+                {{ room.host.platform }}
+              </v-card-text>
+
+              <v-card-subtitle class="font-weight-bold">
+                -{{ $t('user.kd') }}-
+              </v-card-subtitle>
+              <div v-show="room.host.kd">
+                <v-card-text>
+                  {{ room.host.kd }}
+                </v-card-text>
+              </div>
+              <div v-show="!room.host.kd">
+                <v-card-text>
+                  {{ $t('Unregistered') }}
+                </v-card-text>
+              </div>
+
+              <v-card-subtitle class="font-weight-bold">
+                -{{ $t('user.highest_damage') }}-
+              </v-card-subtitle>
+              <div v-show="room.host.highest_damage">
+                <v-card-text>
+                  {{ room.host.highest_damage }}
+                </v-card-text>
+              </div>
+              <div v-show="!room.host.highest_damage">
+                <v-card-text>
+                  {{ $t('Unregistered') }}
+                </v-card-text>
+              </div>
+
+              <v-card-subtitle class="font-weight-bold">
+                -{{ $t('user.favorite_weapons') }}-
+              </v-card-subtitle>
+              <div v-show="room.host.favorite_weapons">
+                <v-card-text>
+                  {{ room.host.favorite_weapons }}
+                </v-card-text>
+              </div>
+              <div v-show="!room.host.favorite_weapons">
+                <v-card-text>
+                  {{ $t('Unregistered') }}
+                </v-card-text>
+              </div>
+            </v-container>
+          </v-card>
+        </div>
+
+        <div v-show="item==='プレイヤーデータ'">
+          <v-card flat>
+            <v-container>
+              <v-row dense>
+                <v-col
+                  cols="12"
+                  sm="6"
+                  md="6"
+                  lg="6"
+                >
+                  <v-card
+                    id="host-rank-stats"
+                    :loading="loading"
+                    flat
+                  >
+                    <v-container>
+                      <v-card-title>
+                        {{ $t('profile.ranked_stats.title.current_ranked_stats') }}
+                      </v-card-title>
+
+                      <v-divider />
+
+                      <template v-if="loading">
+                        <app-loading />
+                      </template>
+
+                      <template v-else>
+                        <template v-if="$game.isRankedStatsExist()">
+                          <profile-ranked-stats :ranked-stats="rankedStats" />
+                        </template>
+
+                        <template v-else>
+                          <div>
+                            {{ $t('message.no_data') }}
+                          </div>
+                        </template>
+                      </template>
+                    </v-container>
+                  </v-card>
+                </v-col>
+
+                <v-col
+                  cols="12"
+                  sm="6"
+                  md="6"
+                  lg="6"
+                >
+                  <v-card
+                    id="host-total-stats"
+                    :loading="loading"
+                    flat
+                  >
+                    <v-container>
+                      <v-card-title>
+                        {{ $t('profile.total_stats.title.current_player_stats') }}
+                      </v-card-title>
+
+                      <v-divider />
+
+                      <template v-if="loading">
+                        <app-loading />
+                      </template>
+
+                      <template v-else>
+                        <template v-if="$game.isPlayerTotalStatsExist()">
+                          <v-row dense>
+                            <v-col
+                              cols="12"
+                              sm="5"
+                              md="5"
+                            >
+                              <template v-if="highestKillLegendStats">
+                                <v-img :src="highestKillLegendStats.ImgAssets.icon" :width="isBreakPointImgWidth" />
+                              </template>
+                            </v-col>
+
+                            <v-col
+                              cols="12"
+                              sm="7"
+                              md="7"
+                            >
+                              <v-row
+                                dense
+                                align="center"
+                                justify="center"
+                              >
+                                <v-col
+                                  v-for="(data, i) in filteredPlayerTotalStats"
+                                  :key="i"
+                                  cols="6"
+                                  md="4"
+                                  lg="4"
+                                >
+                                  <v-list-item>
+                                    <v-list-item-content>
+                                      <v-list-item-subtitle class="white-space">
+                                        {{ data.value.name }}
+                                      </v-list-item-subtitle>
+                                      <v-list-item-title>
+                                        {{ data.value.value }}
+                                      </v-list-item-title>
+                                    </v-list-item-content>
+                                  </v-list-item>
+                                </v-col>
+                              </v-row>
+                            </v-col>
+                          </v-row>
+                        </template>
+
+                        <template v-else>
+                          <div>
+                            {{ $t('message.no_data') }}
+                          </div>
+                        </template>
+                      </template>
+                    </v-container>
+                  </v-card>
+                </v-col>
+              </v-row>
+            </v-container>
+          </v-card>
+        </div>
+
+        <div v-show="item==='募集スクワッド'">
+          <v-card
+            :id="'room' + room.id"
+            max-width="600"
+            flat
+          >
+            <v-list-item>
+              <room-item-overlay :application-deadline="room.application_deadline" />
+
+              <v-container>
+                <div class="text-right">
+                  <v-chip
+                    color="red"
+                    dark
+                  >
+                    あと{{ room.recruitment_number }}人募集
+                  </v-chip>
+                </div>
+
+                <v-card-title>
+                  {{ room.title }}
+                </v-card-title>
+
+                <v-divider />
+
+                <v-card-text>
+                  {{ $t('room.platform.title') }}：
+                  <v-chip
+                    color="indigo darken-3"
+                    dark
+                    outlined
+                  >
+                    {{ $t(`room.platform.${room.platform}`) }}
+                  </v-chip>
+                </v-card-text>
+
+                <v-card-text>
+                  {{ $t('room.game_mode.title') }}：
+                  <v-chip
+                    color="deep-orange darken-3"
+                    dark
+                    outlined
+                  >
+                    {{ $t(`room.game_mode.${room.game_mode}`) }}
+                  </v-chip>
+                </v-card-text>
+
+                <v-card-text>
+                  {{ $t('room.rank_tier.title') }}：
+                  <v-chip
+                    color="teal darken-3"
+                    dark
+                    outlined
+                  >
+                    {{ $t(`room.rank_tier.${room.rank_tier}`) }}
+                  </v-chip>
+                </v-card-text>
+
+                <v-card-text>
+                  {{ $t('room.application_deadline') }}：
+                  <v-chip
+                    color="pink darken-3"
+                    dark
+                    outlined
+                  >
+                    {{ timeToDeadline }}
+                  </v-chip>
+                </v-card-text>
+
+                <v-card-actions>
+                  <template v-if="roomIsOwn()">
+                    <room-edit-and-delete-button
+                      :id="room.id"
+                      @child-delete-method="childRoomDelete"
+                    />
+                  </template>
+
+                  <template v-else>
+                    <app-join-request-button
+                      :room="room"
+                      :auth-user="authUser"
+                      :invalid="invalid"
+                    />
+                  </template>
+                </v-card-actions>
+              </v-container>
+            </v-list-item>
+          </v-card>
+        </div>
+      </v-tab-item>
+    </v-tabs-items>
   </v-card>
 </template>
 
@@ -79,34 +347,73 @@ export default {
     room: {
       type: Object,
       default: () => {},
-      id: {
-        type: String,
-        required: true
-      },
-      title: {
-        type: String,
-        required: true
-      },
-      current_squad_member: {
-        type: Number,
-        required: true
-      },
-      application_deadline: {
-        type: Date,
-        required: true
-      }
+      require: true
+    },
+    authUser: {
+      type: Object,
+      default: () => {},
+      require: true
     }
   },
   data () {
     return {
+      items: [
+        'ホストプロフィール',
+        'プレイヤーデータ',
+        '募集スクワッド'
+      ],
+      tab: null,
+      invalid: false,
       timeToDeadline: '',
-      invalid: false
+      host: {
+        age: ''
+      },
+      defaultAvatarSrc: this.$store.getters.defaultAvatarSrc
     }
   },
-  mounted () {
+  computed: {
+    data () {
+      return this.$game.data
+    },
+    highestKillLegendStats () {
+      return this.$game.highestKillLegendStats
+    },
+    rankedStats () {
+      return this.$game.rankedStats
+    },
+    playerTotalStats () {
+      return this.$game.playerTotalStats
+    },
+    loading () {
+      return this.$game.loading
+    },
+    filteredPlayerTotalStats () {
+      return this.playerTotalStats.filter((val) => {
+        // return val.key.includes('kills', 'damage', 'wins', 'headshots')
+        return val.key === 'specialEvent_kills' ||
+               val.key === 'specialEvent_damage' ||
+               val.key === 'specialEvent_wins' ||
+               val.key === 'headshots'
+      })
+    },
+    isBreakPointImgWidth () {
+      return this.$vuetify.breakpoint.xs ? 100 : 150
+    }
+  },
+  created () {
+    this.childRequestApi()
     this.changeDateFormat()
+    this.setUserAge()
   },
   methods: {
+    setUserAge () {
+      this.host.age = this.getUserAge(this.room.host.date_of_birth)
+    },
+    isRoomClosing (roomDeadline) {
+      const now = new Date()
+      const deadline = this.$dayjs(roomDeadline).$d
+      return deadline < now
+    },
     changeDateFormat () {
       const roomDeadline = this.room.application_deadline
       const minutesToDeadline = this.$dayjs(roomDeadline).fromNow()
@@ -123,7 +430,31 @@ export default {
     },
     isInvalid () {
       this.invalid = true
+    },
+    getUserAge (birthday) {
+      if (!birthday) { return }
+      const today = new Date()
+      const ymd = birthday.split('-')
+      const thisYearsBirthday = new Date(today.getFullYear(), ymd[1] - 1, ymd[2])
+      const age = today.getFullYear() - ymd[0]
+
+      return today < thisYearsBirthday ? age - 1 : age
+    },
+    roomIsOwn () {
+      return this.authUser.id === this.room.user_id
+    },
+    childRequestApi () {
+      this.$emit('child-request-api', this.room.host)
+    },
+    childRoomDelete (roomId) {
+      this.$emit('child-delete-method', roomId)
     }
   }
 }
 </script>
+
+<style scoped>
+  .br{
+    white-space: pre-line;
+  }
+</style>

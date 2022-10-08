@@ -42,6 +42,7 @@
     "name": "ユーザー名",
     "self_introduction": "自己紹介",
     "date_of_birth": "生年月日",
+    "age": "年齢",
     "platform": "プラットフォーム",
     "sex": "性別",
     "game_id": "ゲームID",
@@ -146,7 +147,7 @@
       "title": "リクエストフォーム"
     },
     "unread": "New!!",
-    "applied_for": "応募先スクワッド" 
+    "applied_for": "応募先スクワッド"
   },
   "agreement": {
     "form": {
