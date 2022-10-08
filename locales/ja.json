@@ -23,7 +23,8 @@
     "clans-my_clan": "Myクラン",
     "admin": "ユーザー一覧",
     "admin-rooms": "スクワッド一覧",
-    "admin-applications": "スクワッド一覧"
+    "admin-applications": "スクワッド一覧",
+    "admin-clans": "クラン一覧"
   },
   "items": {
     "about": "エペスクとは？",

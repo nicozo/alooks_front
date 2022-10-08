@@ -48,7 +48,8 @@ export default {
       nav_lists: [
         { name: 'admin' },
         { name: 'admin-rooms' },
-        { name: 'admin-applications' }
+        { name: 'admin-applications' },
+        { name: 'admin-clans' }
       ]
     }
   }
