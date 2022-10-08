@@ -38,7 +38,7 @@
             <v-btn
               nuxt
               color="red"
-              to="/logout/admin"
+              :to="{ name: 'logout-admin' }"
             >
               {{ $t('pages.logout') }}
             </v-btn>
