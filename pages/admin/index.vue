@@ -182,7 +182,7 @@
               <v-card-title class="text-h5">
                 ユーザーを削除しますか？
               </v-card-title>
-              {{ user }}
+
               <v-card-actions>
                 <v-spacer />
                 <v-btn
@@ -306,6 +306,7 @@ export default {
       this.setToaster(msg, color)
       this.$store.dispatch('getBtnLoading', false)
       this.closeDialog()
+      this.$router.go({ path: this.$router.currentRoute.path, force: true })
     },
     saveFailure ({ response }) {
       this.$store.dispatch('getBtnLoading', false)
@@ -331,6 +332,7 @@ export default {
       this.setToaster(msg, color)
       this.$store.dispatch('getBtnLoading', false)
       this.closeDialog()
+      this.$router.go({ path: this.$router.currentRoute.path, force: true })
     },
     updateFailure ({ response }) {
       this.$store.dispatch('getBtnLoading', false)
@@ -354,6 +356,7 @@ export default {
       this.setToaster(msg, color)
       this.$store.dispatch('getBtnLoading', false)
       this.closeDialog()
+      this.$router.go({ path: this.$router.currentRoute.path, force: true })
     },
     setUser (user) {
       this.editedIndex = this.users.indexOf(user)
