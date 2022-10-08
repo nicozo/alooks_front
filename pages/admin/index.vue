@@ -31,7 +31,7 @@
                 v-bind="attrs"
                 v-on="on"
               >
-                ${{ $t('admin.user_create') }}
+                {{ $t('admin.user_create') }}
               </v-btn>
             </template>
             <v-card>
@@ -44,45 +44,19 @@
               <v-card-text>
                 <v-container>
                   <v-row>
-                    <v-col
-                      cols="12"
-                      sm="6"
-                      md="4"
-                    >
-                      <v-text-field
-                        v-model="editedItem.name"
-                        label="ユーザー名"
-                      />
+                    <v-col cols="12">
+                      <user-form-name :name.sync="editedItem.name" />
                     </v-col>
-                    <v-col
-                      cols="12"
-                      sm="6"
-                      md="8"
-                    >
-                      <v-text-field
-                        v-model="editedItem.email"
-                        label="メールアドレス"
-                      />
+
+                    <v-col cols="12">
+                      <user-form-email :email.sync="editedItem.email" />
                     </v-col>
-                    <v-col
-                      cols="12"
-                    >
-                      <v-text-field
-                        v-model="editedItem.self_introduction"
-                        label="自己紹介"
-                      />
-                    </v-col>
-                    <v-col
-                      cols="12"
-                      sm="6"
-                      md="4"
-                    >
-                      <v-text-field
-                        v-model="editedItem.sex"
-                        label="性別"
-                      />
-                    </v-col>
-                    <v-col
+
+                    <!-- <v-col cols="12">
+                      <user-form-sex :sex.sync="editedItem.sex" />
+                    </v-col> -->
+
+                    <!-- <v-col
                       cols="12"
                       sm="6"
                       md="4"
@@ -105,6 +79,7 @@
                             v-on="on"
                           />
                         </template>
+
                         <v-date-picker
                           v-model="editedItem.date_of_birth"
                           no-title
@@ -116,6 +91,14 @@
                           @change="saveDate"
                         />
                       </v-menu>
+                    </v-col> -->
+
+                    <v-col cols="12">
+                      <user-form-password :password.sync="editedItem.password" />
+                    </v-col>
+
+                    <v-col cols="12">
+                      <user-form-password-confirmation :password-confirmation.sync="editedItem.password_confirmation" />
                     </v-col>
                   </v-row>
                 </v-container>
@@ -205,7 +188,6 @@
 export default {
   name: 'AdminIndexPage',
   layout: 'admin',
-  middleware: ['authentication'],
   async asyncData ({ $axios }) {
     const users = await $axios.$get(
       '/api/v1/admin/users'
@@ -226,7 +208,9 @@ export default {
         self_introduction: '',
         game_id: '',
         sex: 'male',
-        date_of_birth: ''
+        date_of_birth: '',
+        password: '',
+        password_confirmation: ''
       },
       defaultItem: {
         name: '',
@@ -234,7 +218,9 @@ export default {
         self_introduction: '',
         game_id: '',
         sex: 'male',
-        date_of_birth: ''
+        date_of_birth: '',
+        password: '',
+        password_confirmation: ''
       },
       number: 10,
       headers: [
