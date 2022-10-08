@@ -5,7 +5,6 @@
         color="success"
         block
         nuxt
-        :disabled="invalid"
         :to="{ name: 'rooms-id-update', params: { id: id } }"
       >
         {{ $t('btn.room_edit') }}
@@ -23,7 +22,6 @@
             color="error"
             block
             v-bind="attrs"
-            :disabled="invalid"
             v-on="on"
           >
             {{ $t('btn.room_destroy') }}
