@@ -47,7 +47,8 @@ export default {
       drawer: true,
       nav_lists: [
         { name: 'admin' },
-        { name: 'admin-rooms' }
+        { name: 'admin-rooms' },
+        { name: 'admin-applications' }
       ]
     }
   }

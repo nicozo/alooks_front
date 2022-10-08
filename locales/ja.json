@@ -22,7 +22,8 @@
     "clans-id-update": "クランを編集",
     "clans-my_clan": "Myクラン",
     "admin": "ユーザー一覧",
-    "admin-rooms": "スクワッド一覧"
+    "admin-rooms": "スクワッド一覧",
+    "admin-applications": "スクワッド一覧"
   },
   "items": {
     "about": "エペスクとは？",
@@ -218,6 +219,7 @@
     "users": "ユーザー一覧",
     "user_create": "ユーザー作成",
     "rooms": "スクワッド一覧",
-    "room_create": "スクワッド作成"
+    "room_create": "スクワッド作成",
+    "applications": "参加リクエスト一覧"
   }
 }
