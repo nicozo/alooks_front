@@ -19,20 +19,80 @@
 
           <v-spacer />
 
+          <!-- クラン編集モーダル -->
           <v-dialog
-            v-model="dialogDelete"
+            v-model="editDialog"
+            max-width="500px"
+          >
+            <v-card>
+              <v-card-title>
+                <span class="text-h5">
+                  {{ $t('admin.room_edit') }}
+                </span>
+              </v-card-title>
+
+              <validation-observer v-slot="{ invalid }">
+                <v-container>
+                  <v-row dense>
+                    <v-col cols="12">
+                      <clan-form-name :name.sync="clan.name" />
+                    </v-col>
+
+                    <v-col cols="12">
+                      <clan-form-concept :concept.sync="clan.concept" />
+                    </v-col>
+
+                    <v-col cols="12">
+                      <clan-form-joining-process :joining_process.sync="clan.joining_process" />
+                    </v-col>
+
+                    <v-col cols="12">
+                      <clan-form-prohibited-matters :prohibited-matters.sync="clan.prohibited_matters" />
+                    </v-col>
+
+                    <v-card-actions>
+                      <v-spacer />
+
+                      <v-btn
+                        color="error"
+                        text
+                        @click="closeDialog"
+                      >
+                        {{ $t('btn.cancel') }}
+                      </v-btn>
+
+                      <v-btn
+                        color="blue darken-1"
+                        text
+                        :disabled="invalid"
+                        :loading="btnLoading"
+                        @click="update(clan)"
+                      >
+                        {{ $t('btn.update') }}
+                      </v-btn>
+                    </v-card-actions>
+                  </v-row>
+                </v-container>
+              </validation-observer>
+            </v-card>
+          </v-dialog>
+
+          <!-- クラン削除モーダル -->
+          <v-dialog
+            v-model="deleteDialog"
             max-width="500px"
           >
             <v-card>
               <v-card-title class="text-h5">
-                クランを削除しますか？
+                クランID{{ clan.id }}を削除しますか？
               </v-card-title>
+
               <v-card-actions>
                 <v-spacer />
                 <v-btn
-                  color="blue darken-1"
+                  color="error"
                   text
-                  @click="closeDelete"
+                  @click="closeDialog"
                 >
                   {{ $t('btn.cancel') }}
                 </v-btn>
@@ -40,7 +100,8 @@
                 <v-btn
                   color="blue darken-1"
                   text
-                  @click="deleteItemConfirm"
+                  :loading="btnLoading"
+                  @click="clanDelete(clan)"
                 >
                   {{ $t('btn.delete') }}
                 </v-btn>
@@ -55,13 +116,13 @@
         <v-icon
           small
           class="mr-2"
-          @click="editItem(item)"
+          @click="openEditDialog(item)"
         >
           mdi-pencil
         </v-icon>
         <v-icon
           small
-          @click="deleteItem(item)"
+          @click="openDeleteDialog(item)"
         >
           mdi-delete
         </v-icon>
@@ -84,44 +145,14 @@ export default {
   data ({ $route }) {
     return {
       routeName: $route.name,
-      activePicker: null,
-      menu: false,
-      dialog: false,
-      dialogDelete: false,
+      editDialog: false,
+      deleteDialog: false,
       editedIndex: -1,
-      editedItem: {
+      clan: {
         name: '',
         concept: '',
         joining_process: '',
-        prohibited_matters: '',
-        enrollment: 'male',
-        activity_time: '',
-        enrollment_age: '',
-        snipe: '',
-        contact_means: '',
-        platform: '',
-        age: '',
-        required_login: '',
-        required_ranked: '',
-        required_vc: '',
-        personality: ''
-      },
-      defaultItem: {
-        name: '',
-        concept: '',
-        joining_process: '',
-        prohibited_matters: '',
-        enrollment: 'male',
-        activity_time: '',
-        enrollment_age: '',
-        snipe: '',
-        contact_means: '',
-        platform: '',
-        age: '',
-        required_login: '',
-        required_ranked: '',
-        required_vc: '',
-        personality: ''
+        prohibited_matters: ''
       },
       number: 10,
       headers: [
@@ -135,43 +166,73 @@ export default {
     }
   },
   computed: {
-    formTitle () {
-      return this.editedIndex === -1 ? 'クラン作成' : 'クラン編集'
-    }
-  },
-  watch: {
-    menu (val) {
-      val && setTimeout(() => (this.activePicker = 'YEAR'))
+    btnLoading () {
+      return this.$store.getters.btnLoading
     }
   },
   methods: {
-    editItem (item) {
-      this.editedIndex = this.rooms.indexOf(item)
-      this.editedItem = Object.assign({}, item)
-      this.dialog = true
+    async update (clan) {
+      this.$store.dispatch('getBtnLoading', true)
+
+      await this.$axios.$patch(
+        `/api/v1/admin/clans/${clan.id}`,
+        this.clan
+      )
+        .then(res => this.updateSuccessful(res))
+        .catch(e => this.updateFailure(e))
     },
-    deleteItem (item) {
-      this.editedIndex = this.rooms.indexOf(item)
-      this.editedItem = Object.assign({}, item)
-      this.dialogDelete = true
+    updateSuccessful (res) {
+      console.log(res)
+      this.$router.go({ path: this.$router.currentRoute.path, force: true })
+      const msg = `クランID${res.id}を更新しました`
+      const color = 'success'
+      this.setToaster(msg, color)
+      this.$store.dispatch('getBtnLoading', false)
+      this.closeDialog()
     },
-    deleteItemConfirm () {
-      this.rooms.splice(this.editedIndex, 1)
-      this.closeDelete()
+    updateFailure ({ response }) {
+      this.$store.dispatch('getBtnLoading', false)
+      if (response && response.status === 400) {
+        const msg = 'クランの更新に失敗しました'
+        return this.$store.dispatch('getToast', { msg })
+      }
     },
-    close () {
-      this.dialog = false
-      this.$nextTick(() => {
-        this.editedItem = Object.assign({}, this.defaultItem)
-        this.editedIndex = -1
-      })
+    async clanDelete (clan) {
+      this.$store.dispatch('getBtnLoading', false)
+
+      await this.$axios.$delete(
+        `/api/v1/admin/clans/${clan.id}`
+      )
+        .then(res => this.deleteSuccessful(res))
     },
-    closeDelete () {
-      this.dialogDelete = false
-      this.$nextTick(() => {
-        this.editedItem = Object.assign({}, this.defaultItem)
-        this.editedIndex = -1
-      })
+    deleteSuccessful (res) {
+      console.log(res)
+      this.$router.go({ path: this.$router.currentRoute.path, force: true })
+      const msg = `クランID${res.id}を削除しました`
+      const color = 'success'
+      this.setToaster(msg, color)
+      this.$store.dispatch('getBtnLoading', false)
+      this.closeDialog()
+    },
+    setClan (clan) {
+      this.editedIndex = this.clans.indexOf(clan)
+      this.clan = Object.assign({}, clan)
+    },
+    openEditDialog (clan) {
+      this.setClan(clan)
+      this.editDialog = true
+    },
+    openDeleteDialog (clan) {
+      this.setClan(clan)
+      this.deleteDialog = true
+    },
+    closeDialog () {
+      this.newDialog = false
+      this.editDialog = false
+      this.deleteDialog = false
+    },
+    setToaster (msg, color) {
+      return this.$store.dispatch('getToast', { msg, color })
     }
   }
 }
