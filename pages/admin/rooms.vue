@@ -185,7 +185,7 @@ export default {
       dialogDelete: false,
       editedIndex: -1,
       editedItem: {
-        title: '',
+        name: '',
         platform: '',
         game_mode: '',
         rank_tier: '',
