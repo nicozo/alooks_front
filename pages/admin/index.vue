@@ -8,7 +8,7 @@
       <template #top>
         <v-toolbar flat>
           <v-toolbar-title>
-            {{ $t('admin.users') }}
+            {{ $t(`pages.${routeName}`) }}
           </v-toolbar-title>
 
           <v-divider
@@ -19,8 +19,9 @@
 
           <v-spacer />
 
+          <!-- ユーザー作成モーダル -->
           <v-dialog
-            v-model="dialog"
+            v-model="newDialog"
             max-width="500px"
           >
             <template #activator="{ on, attrs }">
@@ -34,111 +35,160 @@
                 {{ $t('admin.user_create') }}
               </v-btn>
             </template>
+
             <v-card>
               <v-card-title>
                 <span class="text-h5">
-                  {{ formTitle }}
+                  {{ $t('admin.user_create') }}
                 </span>
               </v-card-title>
 
-              <v-card-text>
+              <validation-observer v-slot="{ invalid }">
                 <v-container>
-                  <v-row>
+                  <v-row dense>
                     <v-col cols="12">
-                      <user-form-name :name.sync="editedItem.name" />
+                      <user-form-name :name.sync="user.name" />
                     </v-col>
 
                     <v-col cols="12">
-                      <user-form-email :email.sync="editedItem.email" />
+                      <user-form-email :email.sync="user.email" />
                     </v-col>
 
-                    <!-- <v-col cols="12">
-                      <user-form-sex :sex.sync="editedItem.sex" />
-                    </v-col> -->
+                    <v-col cols="12">
+                      <user-form-password :password.sync="user.password" />
+                    </v-col>
 
-                    <!-- <v-col
-                      cols="12"
-                      sm="6"
-                      md="4"
-                    >
-                      <v-menu
-                        ref="menu"
-                        v-model="menu"
-                        :close-on-content-click="false"
-                        transition="scale-transition"
-                        offset-y
-                        min-width="auto"
+                    <v-col cols="12">
+                      <user-form-password-confirmation :password-confirmation.sync="user.password_confirmation" />
+                    </v-col>
+
+                    <v-card-actions>
+                      <v-spacer />
+                      <v-btn
+                        color="error"
+                        text
+                        @click="closeDialog"
                       >
-                        <template #activator="{ on, attrs }">
-                          <v-text-field
-                            id="date_of_birth"
-                            v-model="editedItem.date_of_birth"
-                            label="生年月日"
-                            readonly
-                            v-bind="attrs"
-                            v-on="on"
-                          />
-                        </template>
+                        {{ $t('btn.cancel') }}
+                      </v-btn>
 
-                        <v-date-picker
-                          v-model="editedItem.date_of_birth"
-                          no-title
-                          locale="jp-ja"
-                          :day-format="date => new Date(date).getDate()"
-                          :active-picker.sync="activePicker"
-                          :max="(new Date(Date.now() - (new Date()).getTimezoneOffset() * 60000)).toISOString().substr(0, 10)"
-                          min="1950-01-01"
-                          @change="saveDate"
-                        />
-                      </v-menu>
-                    </v-col> -->
-
-                    <v-col cols="12">
-                      <user-form-password :password.sync="editedItem.password" />
-                    </v-col>
-
-                    <v-col cols="12">
-                      <user-form-password-confirmation :password-confirmation.sync="editedItem.password_confirmation" />
-                    </v-col>
+                      <v-btn
+                        color="blue darken-1"
+                        text
+                        :disabled="invalid"
+                        :loading="btnLoading"
+                        @click="save"
+                      >
+                        {{ $t('btn.submit') }}
+                      </v-btn>
+                    </v-card-actions>
                   </v-row>
                 </v-container>
-              </v-card-text>
-
-              <v-card-actions>
-                <v-spacer />
-                <v-btn
-                  color="blue darken-1"
-                  text
-                  @click="close"
-                >
-                  {{ $t('btn.cancel') }}
-                </v-btn>
-
-                <v-btn
-                  color="blue darken-1"
-                  text
-                  @click="save"
-                >
-                  {{ $t('btn.submit') }}
-                </v-btn>
-              </v-card-actions>
+              </validation-observer>
             </v-card>
           </v-dialog>
 
+          <!-- ユーザー編集モーダル -->
           <v-dialog
-            v-model="dialogDelete"
+            v-model="editDialog"
+            max-width="500px"
+          >
+            <v-card>
+              <v-card-title>
+                <span class="text-h5">
+                  {{ $t('admin.user_edit') }}
+                </span>
+              </v-card-title>
+
+              <validation-observer v-slot="{ invalid }">
+                <v-container>
+                  <v-row dense>
+                    <v-col cols="12">
+                      <user-form-name :name.sync="user.name" />
+                    </v-col>
+
+                    <v-col cols="12">
+                      <user-form-email :email.sync="user.email" />
+                    </v-col>
+
+                    <v-col cols="12">
+                      <user-form-self-introduction :self-introduction.sync="user.self_introduction" />
+                    </v-col>
+
+                    <v-col
+                      cols="12"
+                      sm="6"
+                      md="6"
+                    >
+                      <user-form-date-of-birth :date-of-birth.sync="user.date_of_birth" />
+                    </v-col>
+
+                    <v-col
+                      cols="12"
+                      sm="6"
+                      md="6"
+                    >
+                      <user-form-game-id :game-id.sync="user.game_id" />
+                    </v-col>
+
+                    <v-col
+                      cols="12"
+                      sm="6"
+                      md="6"
+                    >
+                      <user-form-sex :sex.sync="user.sex" />
+                    </v-col>
+
+                    <v-col
+                      cols="12"
+                      sm="6"
+                      md="6"
+                    >
+                      <user-form-platform :platform.sync="user.platform" />
+                    </v-col>
+
+                    <v-card-actions>
+                      <v-spacer />
+                      <v-btn
+                        color="error"
+                        text
+                        @click="closeDialog"
+                      >
+                        {{ $t('btn.cancel') }}
+                      </v-btn>
+
+                      <v-btn
+                        color="blue darken-1"
+                        text
+                        :disabled="invalid"
+                        :loading="btnLoading"
+                        @click="update(user)"
+                      >
+                        {{ $t('btn.update') }}
+                      </v-btn>
+                    </v-card-actions>
+                  </v-row>
+                </v-container>
+              </validation-observer>
+            </v-card>
+          </v-dialog>
+
+          <!-- ユーザー削除モーダル -->
+          <v-dialog
+            v-model="deleteDialog"
             max-width="500px"
           >
             <v-card>
               <v-card-title class="text-h5">
                 ユーザーを削除しますか？
               </v-card-title>
+              {{ user }}
               <v-card-actions>
                 <v-spacer />
                 <v-btn
-                  color="blue darken-1"
+                  color="error"
                   text
-                  @click="closeDelete"
+                  @click="closeDialog"
                 >
                   {{ $t('btn.cancel') }}
                 </v-btn>
@@ -146,7 +196,7 @@
                 <v-btn
                   color="blue darken-1"
                   text
-                  @click="deleteItemConfirm"
+                  @click="userDelete(user)"
                 >
                   {{ $t('btn.delete') }}
                 </v-btn>
@@ -161,17 +211,18 @@
         <v-icon
           small
           class="mr-2"
-          @click="editItem(item)"
+          @click="openEditDialog(item)"
         >
           mdi-pencil
         </v-icon>
         <v-icon
           small
-          @click="deleteItem(item)"
+          @click="openDeleteDialog(item)"
         >
           mdi-delete
         </v-icon>
       </template>
+
       <template #no-data>
         <v-btn
           color="primary"
@@ -195,29 +246,21 @@ export default {
 
     return { users }
   },
-  data () {
+  data ({ $route }) {
     return {
+      routeName: $route.name,
       activePicker: null,
       menu: false,
-      dialog: false,
-      dialogDelete: false,
+      newDialog: false,
+      editDialog: false,
+      deleteDialog: false,
       editedIndex: -1,
-      editedItem: {
+      user: {
         name: '',
         email: '',
         self_introduction: '',
         game_id: '',
-        sex: 'male',
-        date_of_birth: '',
-        password: '',
-        password_confirmation: ''
-      },
-      defaultItem: {
-        name: '',
-        email: '',
-        self_introduction: '',
-        game_id: '',
-        sex: 'male',
+        sex: '',
         date_of_birth: '',
         password: '',
         password_confirmation: ''
@@ -236,8 +279,8 @@ export default {
     }
   },
   computed: {
-    formTitle () {
-      return this.editedIndex === -1 ? 'ユーザー作成' : 'ユーザー編集'
+    btnLoading () {
+      return this.$store.getters.btnLoading
     }
   },
   watch: {
@@ -246,44 +289,94 @@ export default {
     }
   },
   methods: {
-    editItem (item) {
-      this.editedIndex = this.users.indexOf(item)
-      this.editedItem = Object.assign({}, item)
-      this.dialog = true
+    async save () {
+      this.$store.dispatch('getBtnLoading', true)
+
+      await this.$axios.$post(
+        '/api/v1/admin/users',
+        this.user
+      )
+        .then(res => this.saveSuccessful(res))
+        .catch(e => this.saveFailure(e))
     },
-    deleteItem (item) {
-      this.editedIndex = this.users.indexOf(item)
-      this.editedItem = Object.assign({}, item)
-      this.dialogDelete = true
+    saveSuccessful (res) {
+      console.log(res)
+      const msg = `ユーザーID${res.id}を作成しました`
+      const color = 'success'
+      this.setToaster(msg, color)
+      this.$store.dispatch('getBtnLoading', false)
+      this.closeDialog()
     },
-    deleteItemConfirm () {
-      this.users.splice(this.editedIndex, 1)
-      this.closeDelete()
-    },
-    close () {
-      this.dialog = false
-      this.$nextTick(() => {
-        this.editedItem = Object.assign({}, this.defaultItem)
-        this.editedIndex = -1
-      })
-    },
-    closeDelete () {
-      this.dialogDelete = false
-      this.$nextTick(() => {
-        this.editedItem = Object.assign({}, this.defaultItem)
-        this.editedIndex = -1
-      })
-    },
-    save () {
-      if (this.editedIndex > -1) {
-        Object.assign(this.users[this.editedIndex], this.editedItem)
-      } else {
-        this.users.push(this.editedItem)
+    saveFailure ({ response }) {
+      this.$store.dispatch('getBtnLoading', false)
+      if (response && response.status === 400) {
+        const msg = 'ユーザーを作成できませんでした。既に使用されているメールアドレスです。'
+        return this.$store.dispatch('getToast', { msg })
       }
-      this.close()
+    },
+    async update (user) {
+      this.$store.dispatch('getBtnLoading', true)
+
+      await this.$axios.$patch(
+        `/api/v1/admin/users/${user.id}`,
+        this.user
+      )
+        .then(res => this.updateSuccessful(res))
+        .catch(e => this.updateFailure(e))
+    },
+    updateSuccessful (res) {
+      console.log(res)
+      const msg = `ユーザーID${res.id}を更新しました`
+      const color = 'success'
+      this.setToaster(msg, color)
+      this.$store.dispatch('getBtnLoading', false)
+      this.closeDialog()
+    },
+    updateFailure ({ response }) {
+      this.$store.dispatch('getBtnLoading', false)
+      if (response && response.status === 400) {
+        const msg = 'ユーザーの更新に失敗しました'
+        return this.$store.dispatch('getToast', { msg })
+      }
+    },
+    async userDelete (user) {
+      this.$store.dispatch('getBtnLoading', false)
+
+      await this.$axios.$delete(
+        `/api/v1/admin/users/${user.id}`
+      )
+        .then(res => this.deleteSuccessful(res))
+    },
+    deleteSuccessful (res) {
+      console.log(res)
+      const msg = `ユーザーID${res.id}を削除しました`
+      const color = 'success'
+      this.setToaster(msg, color)
+      this.$store.dispatch('getBtnLoading', false)
+      this.closeDialog()
+    },
+    setUser (user) {
+      this.editedIndex = this.users.indexOf(user)
+      this.user = Object.assign({}, user)
+    },
+    openEditDialog (user) {
+      this.setUser(user)
+      this.editDialog = true
+    },
+    openDeleteDialog (user) {
+      this.setUser(user)
+      this.deleteDialog = true
+    },
+    closeDialog () {
+      this.newDialog = false
+      this.editDialog = false
+      this.deleteDialog = false
     },
     saveDate (date) {
       this.$refs.menu.save(date)
+    },
+    setToaster (msg, color) {
+      return this.$store.dispatch('getToast', { msg, color })
     }
   }
 }

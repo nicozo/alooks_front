@@ -219,6 +219,7 @@
   "admin": {
     "users": "ユーザー一覧",
     "user_create": "ユーザー作成",
+    "user_edit": "ユーザー編集",
     "rooms": "スクワッド一覧",
     "room_create": "スクワッド作成",
     "applications": "参加リクエスト一覧"
