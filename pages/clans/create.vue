@@ -29,7 +29,7 @@
 
               <clan-form-prohibited-matters :prohibited-matters.sync="clan.prohibited_matters" />
 
-              <clan-form-joining-process :joining_process.sync="clan.joining_process" />
+              <clan-form-joining-process :joining-process.sync="clan.joining_process" />
 
               <v-card-title>
                 {{ $t('clan.requirements') }}

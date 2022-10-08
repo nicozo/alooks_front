@@ -43,7 +43,7 @@
                     </v-col>
 
                     <v-col cols="12">
-                      <clan-form-joining-process :joining_process.sync="clan.joining_process" />
+                      <clan-form-joining-process :joining-process.sync="clan.joining_process" />
                     </v-col>
 
                     <v-col cols="12">

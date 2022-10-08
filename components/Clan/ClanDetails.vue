@@ -77,7 +77,7 @@
 
       <clan-edit-and-delete-button
         :id="clan.id"
-        :user_id="clan.user_id"
+        :user-id="clan.user_id"
         @child-delete-method="childDeleteMethod"
       />
     </v-container>

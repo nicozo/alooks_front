@@ -39,7 +39,7 @@
                     </v-col>
 
                     <v-col cols="12">
-                      <room-form-platform :platform.sync="room.platform"  />
+                      <room-form-platform :platform.sync="room.platform" />
                     </v-col>
 
                     <v-col cols="12">

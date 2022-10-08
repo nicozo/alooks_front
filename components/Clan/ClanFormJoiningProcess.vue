@@ -5,8 +5,8 @@
     rules="required|max:100"
   >
     <v-textarea
-      id="joining_process"
-      :value="joining_process"
+      id="joining-process"
+      :value="joiningProcess"
       label="入団までの流れ"
       placeholder="戦績を見て数戦遊ぶ形で面接をします！希望の場合はこちらのツイッターアカウントまで連絡してください！@sample"
       persistent-placeholder
@@ -17,7 +17,7 @@
       outlined
       clearable
       required
-      @input="$emit('update:joining_process', $event)"
+      @input="$emit('update:joiningProcess', $event)"
     />
   </validation-provider>
 </template>
@@ -26,7 +26,7 @@
 export default {
   name: 'ClanFormJoiningProcess',
   props: {
-    joining_process: {
+    joiningProcess: {
       type: String,
       require: true,
       default: ''

@@ -1,6 +1,6 @@
 <template>
   <v-dialog
-    v-model="profileDialog"
+    :value="profileDialog"
     persistent
     max-width="600px"
   >

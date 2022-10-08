@@ -71,12 +71,13 @@
 export default {
   name: 'ClanEditAndDeleteButton',
   props: {
-    user_id: {
+    userId: {
       type: Number,
       required: true
     },
     id: {
       type: Number,
+      default: null,
       require: true
     }
   },
@@ -93,7 +94,7 @@ export default {
   },
   methods: {
     clanIsOwn () {
-      return this.$auth.user.id === this.user_id
+      return this.$auth.user.id === this.userId
     },
     handleDelete () {
       this.$emit('child-delete-method', this.id)
