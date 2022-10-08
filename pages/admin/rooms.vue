@@ -149,15 +149,6 @@
           mdi-delete
         </v-icon>
       </template>
-
-      <template #no-data>
-        <v-btn
-          color="primary"
-          @click="initialize"
-        >
-          Reset
-        </v-btn>
-      </template>
     </v-data-table>
   </v-container>
 </template>
