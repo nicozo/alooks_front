@@ -25,6 +25,7 @@
         />
       </validation-provider>
     </template>
+
     <v-date-picker
       :value="dateOfBirth"
       no-title
@@ -33,7 +34,7 @@
       :active-picker.sync="activePicker"
       :max="(new Date(Date.now() - (new Date()).getTimezoneOffset() * 60000)).toISOString().substr(0, 10)"
       min="1950-01-01"
-      @change="save, $emit('update:dateOfBirth', $event)"
+      @change="save(dateOfBirth, $event)"
     />
   </v-menu>
 </template>
@@ -59,8 +60,9 @@ export default {
     }
   },
   methods: {
-    save (date) {
+    save (date, event) {
       this.$refs.menu.save(date)
+      this.$emit('update:dateOfBirth', event)
     }
   }
 }
