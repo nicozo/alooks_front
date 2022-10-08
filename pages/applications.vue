@@ -295,8 +295,6 @@ export default {
       }
     },
     async read (application) {
-      // console.log('既読')
-
       await this.$axios.$patch(
         `api/v1/applies/${application.id}/read`
       )
@@ -304,8 +302,6 @@ export default {
         .catch(e => console.log(e))
     },
     requestSuccessful (res) {
-      // console.log(res)
-      // console.log(this.applications)
       this.$store.dispatch('applications/getReadApplication', res)
     },
     isApplicationExist () {

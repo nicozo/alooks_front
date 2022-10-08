@@ -108,8 +108,6 @@ export default {
   },
   methods: {
     async getRecentRooms () {
-      console.log('loading recent rooms')
-
       await this.$axios.$get(
         'api/v1/rooms/recent'
       )
@@ -118,7 +116,6 @@ export default {
     },
     requestSuccessful (res) {
       this.recent_rooms = res
-      console.log('recent rooms', this.recent_rooms)
     }
   }
 }

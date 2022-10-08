@@ -64,7 +64,6 @@ export default {
   },
   methods: {
     getUserAge (birthday) {
-      // console.log(birthday)
       if (!birthday) { return }
       const today = new Date()
       const ymd = birthday.split('-')

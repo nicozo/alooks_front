@@ -115,7 +115,6 @@ export default {
       }
     },
     registerSuccessful (res) {
-      console.log(res)
       this.$router.push('/login')
 
       this.setToaster()

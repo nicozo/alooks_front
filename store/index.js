@@ -60,7 +60,6 @@ export const actions = {
   },
   getRememberPath ({ state, commit }, { path, params }) {
     // ログイン前パスが渡された場合はloggedIn.homepathに書き換える
-    // console.log(state.loggedIn.redirectPaths.includes(path))
     if (state.loggedIn.redirectPaths.includes(path)) {
       path = state.loggedIn.homePath.path
     }

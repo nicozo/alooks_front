@@ -306,12 +306,11 @@ export default {
     },
     filteredPlayerTotalStats () {
       return this.playerTotalStats.filter((val) => {
-        // console.log(`${val.key}:${val.value.name}-${val.value.value}`)
-        return val.key.includes('kills', 'damage', 'wins', 'headshots')
-        // return val.key === 'specialEvent_kills' ||
-        //        val.key === 'specialEvent_damage' ||
-        //        val.key === 'specialEvent_wins' ||
-        //        val.key === 'headshots'
+        // return val.key.includes('kills', 'damage', 'wins', 'headshots')
+        return val.key === 'specialEvent_kills' ||
+               val.key === 'specialEvent_damage' ||
+               val.key === 'specialEvent_wins' ||
+               val.key === 'headshots'
       })
     },
     isBreakPointImgWidth () {
@@ -343,10 +342,8 @@ export default {
       const roomDeadline = this.room.application_deadline
       const minutesToDeadline = this.$dayjs(roomDeadline).fromNow()
       this.timeToDeadline = this.replaceFormat(minutesToDeadline)
-      // console.log('締め切り', this.timeToDeadline)
     },
     replaceFormat (str) {
-      // console.log('渡された文字列', str)
       if (str.includes('後')) {
         str = str.replace('後', 'で締め切り')
       } else {

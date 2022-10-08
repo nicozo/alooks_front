@@ -71,8 +71,6 @@ export default {
       }
     },
     sendEmailSuccessful (res) {
-      console.log(res)
-
       this.setToaster()
     },
     setToaster () {

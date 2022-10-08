@@ -48,7 +48,6 @@ class GameStats {
     this.resetStats()
     this.isLoading()
     this.isDisabled()
-    console.log('loading stats')
 
     await this.$axios.$get(
       'search',
@@ -82,7 +81,6 @@ class GameStats {
 
   async getMapData () {
     this.isLoading()
-    console.log('loading map data')
 
     await this.$axios.$get(
       'map_rotation'
@@ -127,7 +125,6 @@ class GameStats {
     const legendStats = this.allLegendStats[targetLegend.name]
 
     this.store.dispatch('game-stats/getHighestKillLegendStats', legendStats)
-    // console.log('highestKillLegendStats', this.highestKillLegendStats)
   }
 
   setRankedStats () {
@@ -153,7 +150,6 @@ class GameStats {
       playerTotalStats.push(obj)
     }
 
-    // console.log('total:', playerTotalStats)
     return playerTotalStats
   }
 
@@ -176,7 +172,7 @@ class GameStats {
         })
       }
     })
-    // console.log('allLegendKillData:', allLegendKillData)
+
     return allLegendKillData
   }
 
@@ -189,7 +185,7 @@ class GameStats {
         hightestKillLegendData = el
       }
     })
-    // console.log('hightestKillLegendData:', hightestKillLegendData)
+
     return hightestKillLegendData
   }
 

@@ -207,10 +207,7 @@ export default {
       const end = new Date(this.currentMap.end * 1000)
       const remainTime = end - now
 
-      // if (remainTime < 0) { return false }
-
       if (remainTime < 0) {
-        console.log('cont end')
         this.$router.push('/')
       }
 
@@ -219,12 +216,6 @@ export default {
 
       this.timeMin = this.timeMin < 10 ? '0' + this.timeMin : this.timeMin
       this.timeSec = this.timeSec < 10 ? '0' + this.timeSec : this.timeSec
-
-      // if (remainTime < 0) {
-      //   console.log('cont end')
-      //   // clearInterval(this.countDown())
-      //   this.$game.getMapData()
-      // }
     }
   }
 }

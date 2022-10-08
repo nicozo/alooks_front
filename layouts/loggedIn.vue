@@ -153,7 +153,6 @@ export default {
   methods: {
     handleToggleDrawer () {
       this.drawer = !this.drawer
-      // console.log('ドロワーリンククリック！', this.drawer)
     },
     isApplicationsLink (navName) {
       return navName === 'applications'

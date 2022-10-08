@@ -113,7 +113,6 @@ export default {
       this.timeToDeadline = this.replaceFormat(minutesToDeadline)
     },
     replaceFormat (str) {
-      // console.log('渡された文字列', str)
       if (str.includes('後')) {
         str = str.replace('後', 'で締め切り')
       } else {

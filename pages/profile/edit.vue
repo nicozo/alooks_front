@@ -146,7 +146,6 @@ export default {
   },
   created () {
     this.user = Object.assign({}, this.authUser)
-    // console.log('ログインユーザー情報：', this.user)
   },
   methods: {
     async updateProfile () {
@@ -166,7 +165,6 @@ export default {
         if (this.uploadAvatar !== null) {
           formData.append('user[avatar]', this.uploadAvatar)
         }
-        // console.log(...formData.entries())
 
         await this.$axios.$patch(
           `/api/v1/profile/${this.authUser.id}`,

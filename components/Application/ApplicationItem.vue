@@ -245,12 +245,11 @@ export default {
     },
     filteredPlayerTotalStats () {
       return this.playerTotalStats.filter((val) => {
-        // console.log(`${val.key}:${val.value.name}-${val.value.value}`)
-        return val.key.includes('kills', 'damage', 'wins', 'headshots')
-        // return val.key === 'specialEvent_kills' ||
-        //        val.key === 'specialEvent_damage' ||
-        //        val.key === 'specialEvent_wins' ||
-        //        val.key === 'headshots'
+        // return val.key.includes('kills', 'damage', 'wins', 'headshots')
+        return val.key === 'specialEvent_kills' ||
+               val.key === 'specialEvent_damage' ||
+               val.key === 'specialEvent_wins' ||
+               val.key === 'headshots'
       })
     },
     isUnread () {

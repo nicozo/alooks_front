@@ -147,9 +147,6 @@ export default {
       return this.editedIndex === -1 ? 'クラン作成' : 'クラン編集'
     }
   },
-  created () {
-    console.log(this.$route)
-  },
   watch: {
     menu (val) {
       val && setTimeout(() => (this.activePicker = 'YEAR'))

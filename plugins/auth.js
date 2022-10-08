@@ -34,9 +34,7 @@ class Authentication {
     this.store.dispatch('auth-user/getAuthPayload', jwtPayload)
   }
 
-  // ログイン
   login (data) {
-    // console.log('ログイン情報', data)
     this.setAuth(data)
   }
 
@@ -51,7 +49,6 @@ class Authentication {
     return (status >= 200 && status < 300) || (status === 401)
   }
 
-  // ログアウト
   async logout () {
     await this.$axios.delete(
       '/api/v1/sessions',
@@ -81,8 +78,6 @@ class Authentication {
 
   // ユーザーが存在かつ有効期限内の場合にtrueを返す
   loggedIn () {
-    // console.log('isExistUser', this.isExistUser())
-    // console.log('isAuthenticated', this.isAuthenticated())
     return this.isExistUser() && this.isAuthenticated()
   }
 
@@ -91,7 +86,6 @@ class Authentication {
   }
 }
 
-// 共通化
 export default ({ store, $axios }, inject) => {
   inject('auth', new Authentication({ store, $axios }))
 }

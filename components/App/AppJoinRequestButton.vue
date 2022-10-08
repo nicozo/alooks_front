@@ -124,8 +124,6 @@ export default {
   },
   methods: {
     async apply () {
-      console.log('Join Request')
-
       if (this.$auth.profileCompleted()) {
         this.$store.dispatch('getBtnLoading', true)
 
@@ -147,7 +145,6 @@ export default {
       }
     },
     requestSuccessful (res) {
-      // console.log('res', res)
       this.$store.dispatch('applications/getMyApplication', res)
       this.appliedForThis()
       this.closeDialog()
