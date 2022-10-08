@@ -216,6 +216,8 @@
   "search_title": "絞り込み検索",
   "admin": {
     "users": "ユーザー一覧",
-    "user_create": "ユーザー作成"
+    "user_create": "ユーザー作成",
+    "rooms": "スクワッド一覧",
+    "room_create": "スクワッド作成"
   }
 }
