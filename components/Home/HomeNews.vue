@@ -1,5 +1,8 @@
 <template>
-  <v-expansion-panels inset>
+  <v-expansion-panels
+    inset
+    focusable
+  >
     <v-expansion-panel
       v-for="(item,i) in apexNews"
       :key="i"
@@ -25,7 +28,7 @@ export default {
   name: 'HomeNews',
   computed: {
     apexNews () {
-      return this.$game.news
+      return this.$game.news.slice(0, 7)
     }
   },
   created () {
