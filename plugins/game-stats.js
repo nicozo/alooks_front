@@ -44,6 +44,10 @@ class GameStats {
     return this.store.getters['game-stats/nextMap']
   }
 
+  get news () {
+    return this.store.getters['game-stats/news']
+  }
+
   async getStats (gameId, platform) {
     this.resetStats()
     this.isLoading()
@@ -103,8 +107,32 @@ class GameStats {
     this.isLoading()
   }
 
+  async getNews () {
+    this.isLoading()
+
+    await this.$axios.$get(
+      '/news'
+    )
+      .then(res => this.newsRequestSuccessful(res))
+      .catch(e => this.newsRequestFailure(e))
+  }
+
+  newsRequestSuccessful (res) {
+    this.setNews(res)
+    this.isLoading()
+  }
+
+  newsRequestFailure (e) {
+    console.log(e)
+    this.isLoading()
+  }
+
   responseHasErrorMessage (res) {
     return 'Error' in res
+  }
+
+  setNews (res) {
+    this.store.dispatch('game-stats/getNews', res)
   }
 
   setMapData (res) {

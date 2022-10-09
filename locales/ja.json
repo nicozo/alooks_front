@@ -30,7 +30,8 @@
     "about": "エペスクとは？",
     "usage": "使い方",
     "rooms": "最近の募集スクワッド",
-    "map-rotation": "マップローテーション"
+    "map-rotation": "マップローテーション",
+    "news": "Apexニュース"
   },
   "error": {
     "Unauthorized": "認証に失敗しました",

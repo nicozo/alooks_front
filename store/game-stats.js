@@ -8,7 +8,8 @@ export const state = () => ({
   loading: false,
   disabled: false,
   currentMap: '',
-  nextMap: ''
+  nextMap: '',
+  news: []
 })
 
 export const getters = {
@@ -21,7 +22,8 @@ export const getters = {
   loading: state => state.loading,
   disabled: state => state.disabled,
   currentMap: state => state.currentMap,
-  nextMap: state => state.nextMap
+  nextMap: state => state.nextMap,
+  news: state => state.news
 }
 
 export const mutations = {
@@ -54,6 +56,9 @@ export const mutations = {
   },
   setNextMap (state, nextMap) {
     state.nextMap = nextMap
+  },
+  setNews (state, news) {
+    state.news = news
   }
 }
 
@@ -87,5 +92,8 @@ export const actions = {
   },
   getNextMap ({ commit }, nextMap) {
     commit('setNextMap', nextMap)
+  },
+  getNews ({ commit }, news) {
+    commit('setNews', news)
   }
 }

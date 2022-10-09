@@ -114,6 +114,7 @@ import HomeAbout from '../components/Home/HomeAbout'
 // import HomeUsage from '../components/Home/HomeUsage'
 import HomeRooms from '../components/Home/HomeRooms'
 import HomeMapRotation from '../components/Home/HomeMapRotation'
+import HomeNews from '../components/Home/HomeNews'
 
 export default {
   name: 'IndexPage',
@@ -121,7 +122,8 @@ export default {
     HomeAbout,
     // HomeUsage,
     HomeRooms,
-    HomeMapRotation
+    HomeMapRotation,
+    HomeNews
   },
   middleware: [
     'logged-in-redirect'
@@ -133,7 +135,8 @@ export default {
         { title: 'about' },
         // { title: 'usage' },
         { title: 'rooms' },
-        { title: 'map-rotation' }
+        { title: 'map-rotation' },
+        { title: 'news' }
       ],
       drawer: false
     }
