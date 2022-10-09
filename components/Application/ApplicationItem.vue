@@ -270,7 +270,7 @@
                                 <v-list-item-subtitle class="white-space">
                                   {{ data.value.name }}
                                 </v-list-item-subtitle>
-                                <v-list-item-title>
+                                <v-list-item-title class="white-space">
                                   {{ data.value.value }}
                                 </v-list-item-title>
                               </v-list-item-content>
@@ -353,11 +353,10 @@ export default {
     },
     filteredPlayerTotalStats () {
       return this.playerTotalStats.filter((val) => {
-        // return val.key.includes('kills', 'damage', 'wins', 'headshots')
-        return val.key === 'specialEvent_kills' ||
-               val.key === 'specialEvent_damage' ||
-               val.key === 'specialEvent_wins' ||
-               val.key === 'headshots'
+        return val.key.includes('kills') ||
+               val.key.includes('damage') ||
+               val.key.includes('wins') ||
+               val.key.includes('headshots')
       })
     },
     isUnread () {
