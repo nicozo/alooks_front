@@ -94,6 +94,10 @@ class Authentication {
   profileCompleted () {
     return this.user.game_id
   }
+
+  isAdmin () {
+    return this.user.role === 'admin'
+  }
 }
 
 export default ({ store, $axios }, inject) => {

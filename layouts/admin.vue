@@ -59,6 +59,10 @@
 <script>
 export default {
   name: 'AdminLayout',
+  middleware: [
+    'authentication',
+    'admin-authentication'
+  ],
   data () {
     return {
       drawer: true,

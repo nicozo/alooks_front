@@ -9,7 +9,6 @@
 <script>
 export default {
   name: 'AdminDefaultPage',
-  layout: 'admin',
-  middleware: ['authentication']
+  layout: 'admin'
 }
 </script>
