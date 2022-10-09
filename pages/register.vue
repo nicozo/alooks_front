@@ -1,5 +1,5 @@
 <template>
-  <v-container fluid>
+  <v-container fill-height>
     <app-back-home-button />
 
     <v-row
