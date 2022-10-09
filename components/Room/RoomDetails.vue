@@ -36,86 +36,86 @@
                 </div>
               </v-layout>
 
-              <v-card-subtitle class="font-weight-bold">
+              <v-card-subtitle class="pa-1 font-weight-bold">
                 -{{ $t('user.name') }}-
               </v-card-subtitle>
-              <v-card-text>
+              <v-card-text class="pa-1">
                 {{ room.host.name }}
               </v-card-text>
 
-              <v-card-subtitle class="pb-0 font-weight-bold">
+              <v-card-subtitle class="pb-0 pa-1 font-weight-bold">
                 -{{ $t('user.self_introduction') }}-
               </v-card-subtitle>
-              <v-card-text class="br pt-0">
+              <v-card-text class="white-space pa-1">
                 {{ room.host.self_introduction }}
               </v-card-text>
 
-              <v-card-subtitle class="font-weight-bold">
+              <v-card-subtitle class="pa-1 font-weight-bold">
                 -{{ $t('user.sex') }}-
               </v-card-subtitle>
-              <v-card-text>
+              <v-card-text class="pa-1">
                 {{ $t(`gender.${room.host.sex}`) }}
               </v-card-text>
 
-              <v-card-subtitle class="font-weight-bold">
+              <v-card-subtitle class="pa-1 font-weight-bold">
                 -{{ $t('user.age') }}-
               </v-card-subtitle>
               <div v-show="room.host.date_of_birth">
-                <v-card-text>
+                <v-card-text class="pa-1">
                   {{ host.age }}歳
                 </v-card-text>
               </div>
               <div v-show="!room.host.date_of_birth">
-                <v-card-text>
+                <v-card-text class="pa-1">
                   {{ $t('Unregistered') }}
                 </v-card-text>
               </div>
 
-              <v-card-subtitle class="font-weight-bold">
+              <v-card-subtitle class="pa-1 font-weight-bold">
                 -{{ $t('user.platform') }}-
               </v-card-subtitle>
-              <v-card-text>
+              <v-card-text class="pa-1">
                 {{ room.host.platform }}
               </v-card-text>
 
-              <v-card-subtitle class="font-weight-bold">
+              <v-card-subtitle class="pa-1 font-weight-bold">
                 -{{ $t('user.kd') }}-
               </v-card-subtitle>
               <div v-show="room.host.kd">
-                <v-card-text>
+                <v-card-text class="pa-1">
                   {{ room.host.kd }}
                 </v-card-text>
               </div>
               <div v-show="!room.host.kd">
-                <v-card-text>
+                <v-card-text class="pa-1">
                   {{ $t('Unregistered') }}
                 </v-card-text>
               </div>
 
-              <v-card-subtitle class="font-weight-bold">
+              <v-card-subtitle class="pa-1 font-weight-bold">
                 -{{ $t('user.highest_damage') }}-
               </v-card-subtitle>
               <div v-show="room.host.highest_damage">
-                <v-card-text>
+                <v-card-text class="pa-1">
                   {{ room.host.highest_damage }}
                 </v-card-text>
               </div>
               <div v-show="!room.host.highest_damage">
-                <v-card-text>
+                <v-card-text class="pa-1">
                   {{ $t('Unregistered') }}
                 </v-card-text>
               </div>
 
-              <v-card-subtitle class="font-weight-bold">
+              <v-card-subtitle class="pa-1 font-weight-bold">
                 -{{ $t('user.favorite_weapons') }}-
               </v-card-subtitle>
               <div v-show="room.host.favorite_weapons">
-                <v-card-text>
+                <v-card-text class="pa-1">
                   {{ room.host.favorite_weapons }}
                 </v-card-text>
               </div>
               <div v-show="!room.host.favorite_weapons">
-                <v-card-text>
+                <v-card-text class="pa-1">
                   {{ $t('Unregistered') }}
                 </v-card-text>
               </div>
@@ -213,8 +213,6 @@
                                   v-for="(data, i) in filteredPlayerTotalStats"
                                   :key="i"
                                   cols="6"
-                                  md="4"
-                                  lg="4"
                                 >
                                   <v-list-item>
                                     <v-list-item-content>
@@ -314,29 +312,27 @@
                     {{ timeToDeadline }}
                   </v-chip>
                 </v-card-text>
-
-                <v-card-actions>
-                  <template v-if="roomIsOwn()">
-                    <room-edit-and-delete-button
-                      :id="room.id"
-                      @child-delete-method="childRoomDelete"
-                    />
-                  </template>
-
-                  <template v-else>
-                    <app-join-request-button
-                      :room="room"
-                      :auth-user="authUser"
-                      :invalid="invalid"
-                    />
-                  </template>
-                </v-card-actions>
               </v-container>
             </v-list-item>
           </v-card>
         </div>
       </v-tab-item>
     </v-tabs-items>
+
+    <template v-if="roomIsOwn()">
+      <room-edit-and-delete-button
+        :id="room.id"
+        @child-delete-method="childRoomDelete"
+      />
+    </template>
+
+    <template v-else>
+      <app-join-request-button
+        :room="room"
+        :auth-user="authUser"
+        :invalid="invalid"
+      />
+    </template>
   </v-card>
 </template>
 
@@ -454,9 +450,6 @@ export default {
 </script>
 
 <style scoped>
-  .br{
-    white-space: pre-line;
-  }
   .white-space {
     white-space: normal;
   }
