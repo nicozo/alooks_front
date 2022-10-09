@@ -12,7 +12,7 @@
       </v-expansion-panel-header>
       <v-expansion-panel-content>
         <a :href="item.link">
-          <v-img :src="item.img"/>
+          <v-img :src="item.img" />
         </a>
 
         <v-card-text>
