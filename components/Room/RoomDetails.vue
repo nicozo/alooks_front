@@ -384,7 +384,6 @@ export default {
       return this.$game.loading
     },
     filteredPlayerTotalStats () {
-      console.log(this.playerTotalStats)
       return this.playerTotalStats.filter((val) => {
         return val.key.includes('kills') ||
                val.key.includes('damage') ||
