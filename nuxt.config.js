@@ -71,11 +71,16 @@ export default {
     // https://i18n.nuxtjs.org/setup
     '@nuxtjs/i18n',
     // https://www.npmjs.com/package/@nuxtjs/dayjs
-    '@nuxtjs/dayjs'
+    '@nuxtjs/dayjs',
+    // https://google-analytics.nuxtjs.org/setup
+    '@nuxtjs/google-analytics'
   ],
 
   publicRuntimeConfig: {
-    appName: process.env.APP_NAME
+    appName: process.env.APP_NAME,
+    googleAnalytics: {
+      id: process.env.GOOGLE_ANALYTICS_ID
+    }
   },
 
   router: {
@@ -136,5 +141,9 @@ export default {
       'timezone', // import 'dayjs/plugin/timezone'
       'relativeTime' // import 'dayjs/plugin/relativeTime'
     ]
+  },
+
+  googleAnalytics: {
+    id: process.env.GOOGLE_ANALYTICS_ID
   }
 }
