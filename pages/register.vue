@@ -41,6 +41,26 @@
                   <user-form-password-confirmation :password-confirmation.sync="user.password_confirmation" />
                 </v-col>
 
+                <v-btn
+                  plain
+                  text
+                  nuxt
+                  color="primary"
+                  :to="{ name: 'privacy_policy' }"
+                >
+                  {{ $t('home.bottom_navigation.privacy_policy') }}
+                </v-btn>
+
+                <v-btn
+                  plain
+                  text
+                  nuxt
+                  color="primary"
+                  :to="{ name: 'tos' }"
+                >
+                  {{ $t('home.bottom_navigation.tos') }}
+                </v-btn>
+
                 <v-col cols="12">
                   <v-btn
                     type="submit"
