@@ -22,7 +22,8 @@ export default {
       { hid: 'og:description', property: 'og:description', content: process.env.APP_DESCRIPTION },
       { hid: 'og:image', property: 'og:image', content: process.env.APP_OGP_IMG_URL },
       { hid: 'og:locale', property: 'og:locale', content: 'ja_JP' },
-      { name: 'twitter:card', content: 'summary_large_image' }
+      { name: 'twitter:card', content: 'summary_large_image' },
+      { name: 'google-site-verification', content: 'eKA4aSvn3Xm0Ijs05QQ9oRMmVMnH3BkaTf1_Bh4UObc' }
     ],
     link: [
       { rel: 'icon', type: 'image/x-icon', href: '/favicon.ico' }
