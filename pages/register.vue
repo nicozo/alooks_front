@@ -30,6 +30,10 @@
                 </v-col>
 
                 <v-col cols="12">
+                  <user-form-game-id :game-id.sync="user.game_id" />
+                </v-col>
+
+                <v-col cols="12">
                   <user-form-email :email.sync="user.email" />
                 </v-col>
 
@@ -109,6 +113,7 @@ export default {
     return {
       user: {
         name: '',
+        game_id: '',
         email: '',
         password: '',
         password_confirmation: ''

@@ -10,6 +10,8 @@
       label="ゲームID"
       placeholder="abcdefg11"
       :error-messages="errors"
+      hint="Apex Legends内で使用しているIDを入力しよう"
+      persistent-hint
       outlined
       clearable
       required
