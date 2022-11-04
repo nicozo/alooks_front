@@ -15,7 +15,6 @@
       :error-messages="errors"
       outlined
       clearable
-      required
       @input="$emit('update:prohibitedMatters', $event)"
     />
   </validation-provider>

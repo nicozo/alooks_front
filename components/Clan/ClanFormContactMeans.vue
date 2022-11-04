@@ -13,7 +13,6 @@
       placeholder="クラン内の交流には主にディスコードを使っています！強制ではありませんが、ぜひグループに入っていただけると助かります！"
       outlined
       clearable
-      required
       @input="$emit('update:contactMeans', $event)"
     />
   </validation-provider>

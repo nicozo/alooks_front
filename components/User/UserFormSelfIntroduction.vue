@@ -13,7 +13,6 @@
       outlined
       clearable
       counter="50"
-      required
       @input="$emit('update:selfIntroduction', $event)"
     />
   </validation-provider>

@@ -15,8 +15,7 @@
       counter="100"
       :error-messages="errors"
       outlined
-      clearable
-      required
+      clearablez
       @input="$emit('update:joiningProcess', $event)"
     />
   </validation-provider>

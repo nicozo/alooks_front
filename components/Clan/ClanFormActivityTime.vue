@@ -13,7 +13,6 @@
       :error-messages="errors"
       outlined
       clearable
-      required
       @input="$emit('update:activityTime', $event)"
     />
   </validation-provider>

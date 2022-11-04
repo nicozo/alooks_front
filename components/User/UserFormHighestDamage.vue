@@ -11,7 +11,6 @@
       placeholder="4000"
       outlined
       clearable
-      required
       :error-messages="errors"
       @input="$emit('update:highestDamage', $event)"
     />

@@ -13,7 +13,6 @@
       label="性別"
       :error-messages="errors"
       outlined
-      required
       @change="$emit('update:sex', $event)"
     />
   </validation-provider>
