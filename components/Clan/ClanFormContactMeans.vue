@@ -2,7 +2,7 @@
   <validation-provider
     v-slot="{ errors }"
     name="クラン内連絡手段"
-    rules="required|max:50"
+    rules="max:50"
   >
     <v-textarea
       id="contact_means"
@@ -24,7 +24,6 @@ export default {
   props: {
     contactMeans: {
       type: String,
-      require: true,
       default: ''
     }
   }

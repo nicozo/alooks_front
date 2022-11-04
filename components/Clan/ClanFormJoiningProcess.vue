@@ -2,7 +2,7 @@
   <validation-provider
     v-slot="{ errors }"
     name="入団までの流れ"
-    rules="required|max:100"
+    rules="max:100"
   >
     <v-textarea
       id="joining-process"
@@ -27,7 +27,6 @@ export default {
   props: {
     joiningProcess: {
       type: String,
-      require: true,
       default: ''
     }
   }

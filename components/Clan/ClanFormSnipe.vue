@@ -2,7 +2,7 @@
   <validation-provider
     v-slot="{ errors }"
     name="スナイプや大会等"
-    rules="required|max:100"
+    rules="max:100"
   >
     <v-textarea
       id="snipe"
@@ -26,7 +26,6 @@ export default {
   props: {
     snipe: {
       type: String,
-      require: true,
       default: ''
     }
   }

@@ -2,7 +2,7 @@
   <validation-provider
     v-slot="{ errors }"
     name="当クランに適切なプレイヤー"
-    rules="required|max:100"
+    rules="max:100"
   >
     <v-textarea
       id="personality"
@@ -26,7 +26,6 @@ export default {
   props: {
     personality: {
       type: String,
-      require: true,
       default: ''
     }
   }

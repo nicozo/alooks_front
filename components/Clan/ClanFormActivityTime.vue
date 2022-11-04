@@ -2,7 +2,7 @@
   <validation-provider
     v-slot="{ errors }"
     name="活動時間"
-    rules="required|max:50"
+    rules="max:50"
   >
     <v-text-field
       id="activity_time"
@@ -24,7 +24,6 @@ export default {
   props: {
     activityTime: {
       type: String,
-      require: true,
       default: ''
     }
   }

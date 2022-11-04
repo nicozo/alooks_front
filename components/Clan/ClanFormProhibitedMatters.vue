@@ -2,7 +2,7 @@
   <validation-provider
     v-slot="{ errors }"
     name="禁止事項"
-    rules="required|max:100"
+    rules="max:100"
   >
     <v-textarea
       id="prohibited_matters"
@@ -26,7 +26,6 @@ export default {
   props: {
     prohibitedMatters: {
       type: String,
-      require: true,
       default: ''
     }
   }

@@ -2,7 +2,7 @@
   <validation-provider
     v-slot="{ errors }"
     name="在籍人数"
-    rules="required|max:50"
+    rules="max:50"
   >
     <v-text-field
       id="enrollment"
@@ -24,7 +24,6 @@ export default {
   props: {
     enrollment: {
       type: String,
-      require: true,
       default: ''
     }
   }

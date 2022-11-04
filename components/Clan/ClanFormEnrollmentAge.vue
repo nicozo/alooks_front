@@ -2,7 +2,7 @@
   <validation-provider
     v-slot="{ errors }"
     name="年齢層"
-    rules="required|max:50"
+    rules="max:50"
   >
     <v-text-field
       id="enrollment_age"
@@ -24,7 +24,6 @@ export default {
   props: {
     enrollmentAge: {
       type: String,
-      require: true,
       default: ''
     }
   }
