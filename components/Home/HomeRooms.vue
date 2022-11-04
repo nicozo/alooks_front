@@ -78,19 +78,21 @@
       </v-card>
     </v-col>
 
-    <div
-      align="center"
-      class="mt-5"
-    >
-      <v-btn
-        color="success"
-        class="pa-5"
-        nuxt
-        :to="{ name: 'rooms' }"
+    <v-col cols="12">
+      <div
+        align="center"
+        class="mt-5"
       >
-        {{ $t('btn.to_rooms_page') }}
-      </v-btn>
-    </div>
+        <v-btn
+          color="success"
+          class="pa-5"
+          nuxt
+          :to="{ name: 'rooms' }"
+        >
+          {{ $t('btn.to_rooms_page') }}
+        </v-btn>
+      </div>
+    </v-col>
   </v-row>
 </template>
 
