@@ -1,3 +1,5 @@
+const axios = require('axios')
+
 export default {
   // Disable server-side rendering: https://go.nuxtjs.dev/ssr-mode
   ssr: false,
@@ -148,5 +150,28 @@ export default {
 
   googleAnalytics: {
     id: process.env.GOOGLE_ANALYTICS_ID
+  },
+
+  sitemap: {
+    hostname: process.env.APP_FRONT_URL,
+    path: '/sitemap.xml',
+    gzip: true,
+    exclude: [
+      '/admin',
+      '/admin/**',
+      '/login/admin',
+      '/logout/admin'
+    ]
+    // routes: async () => {
+    //   const { data } = await axios.get(
+    //     process.env.API_URL_ROOMS,
+    //     {
+    //       headers: {
+    //         'X-Requested-With': 'XMLHttpRequest'
+    //       }
+    //     }
+    //   )
+    //   return data.map((room) => `/rooms/${room.id}`)
+    // }
   }
 }
