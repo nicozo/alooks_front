@@ -74,7 +74,9 @@ export default {
     // https://www.npmjs.com/package/@nuxtjs/dayjs
     '@nuxtjs/dayjs',
     // https://google-analytics.nuxtjs.org/setup
-    '@nuxtjs/google-analytics'
+    '@nuxtjs/google-analytics',
+    // https://sitemap.nuxtjs.org/guide/setup
+    '@nuxtjs/sitemap'
   ],
 
   publicRuntimeConfig: {
