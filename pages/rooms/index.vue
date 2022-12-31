@@ -154,6 +154,7 @@ export default {
 
       for (const i in this.rooms) {
         const room = this.rooms[i]
+
         if (room.title.includes(this.search.keyword) &&
             room.platform.includes(this.search.platform) &&
             room.game_mode.includes(this.search.game_mode) &&
@@ -172,6 +173,7 @@ export default {
     },
     displayRooms () {
       this.returnTop()
+
       return this.pageNumber !== 0 ? this.filteredRooms.slice(this.pageSize * (this.pageNumber - 1), this.pageSize * this.pageNumber) : this.filteredRooms.slice(0, this.pageSize)
     },
     displayRoomsExist () {
@@ -188,12 +190,13 @@ export default {
     isOpening (roomDeadline) {
       const now = new Date()
       const deadline = this.$dayjs(roomDeadline).$d
+
       return now < deadline
     },
     uncheck () {
       // Todo チェックを外した後、同じラジオボタンをクリックできない。
       const activeButtons = document.querySelectorAll('.v-radio.theme--light.v-item--active')
-      console.log(activeButtons)
+
       if (activeButtons.length !== 0) {
         for (const activeButton of activeButtons) {
           const activeButtonChild = activeButton.firstChild.firstChild
