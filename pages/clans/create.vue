@@ -93,6 +93,9 @@
 <script>
 export default {
   name: 'ClansCreatePage',
+  middleware: [
+    'authentication'
+  ],
   data () {
     return {
       clan: {

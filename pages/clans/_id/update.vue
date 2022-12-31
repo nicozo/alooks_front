@@ -82,7 +82,10 @@
 <script>
 export default {
   name: 'ClanUpdatePage',
-  middleware: ['clan-edit'],
+  middleware: [
+    'authentication',
+    'clan-edit'
+  ],
   data () {
     return {
       clan: {

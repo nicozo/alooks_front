@@ -7,9 +7,6 @@
 <script>
 export default {
   name: 'RoomsDefaultPage',
-  layout: 'loggedIn',
-  middleware: [
-    'my-applications'
-  ]
+  layout: 'loggedIn'
 }
 </script>

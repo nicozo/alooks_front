@@ -66,7 +66,10 @@
 <script>
 export default {
   name: 'RoomsCreatePage',
-  data ({ $route }) {
+  middleware: [
+    'authentication'
+  ],
+  data () {
     return {
       room: {
         title: '',

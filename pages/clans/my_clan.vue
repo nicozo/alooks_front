@@ -50,7 +50,10 @@
 <script>
 export default {
   name: 'MyClanPage',
-  middleware: ['my-clan'],
+  middleware: [
+    'authentication',
+    'my-clan'
+  ],
   data () {
     return {
       my_clan: this.$store.getters['clans/myClan']
