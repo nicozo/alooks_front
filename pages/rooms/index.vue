@@ -118,8 +118,6 @@
         />
       </v-col>
     </v-row>
-
-    <v-tour name="roomsTour" :steps="steps" />
   </v-container>
 </template>
 
