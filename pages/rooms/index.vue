@@ -8,10 +8,7 @@
           </v-expansion-panel-header>
           <v-expansion-panel-content>
             <v-card flat>
-              <form
-                id="search-form"
-                class="step-2"
-              >
+              <form id="search-form">
                 <v-container>
                   <room-form-search-keyword :keyword.sync="search.keyword" />
 
@@ -91,7 +88,6 @@
         <template #activator="{ on, attrs }">
           <v-fab-transition>
             <v-btn
-              class="step-1"
               color="primary"
               dark
               fixed
@@ -143,22 +139,6 @@ export default {
         rank_tier: '',
         opening: ''
       },
-      steps: [
-        {
-          target: '.step-1',
-          content: 'スクワッドの募集を作成できます',
-          params: {
-            placement: 'left'
-          }
-        },
-        {
-          target: '.step-2',
-          content: 'スクワッドの検索ができます',
-          params: {
-            placement: 'top'
-          }
-        }
-      ],
       authUser: this.$auth.user
     }
   },
@@ -197,9 +177,6 @@ export default {
     displayRoomsExist () {
       return this.displayRooms.length !== 0
     }
-  },
-  mounted () {
-    this.$tours.roomsTour.start()
   },
   methods: {
     setPageNumber (number) {
@@ -243,7 +220,7 @@ export default {
       this.setToaster()
     },
     setToaster () {
-      const msg = 'クランを削除しました'
+      const msg = 'スクワッドを削除しました'
       const color = 'success'
 
       return this.$store.dispatch('getToast', { msg, color })
