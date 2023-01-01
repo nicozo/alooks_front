@@ -10,7 +10,7 @@
         lg="4"
         xl="4"
       >
-        <PlayerItem :player="player"/>
+        <PlayerItem :player="player" />
       </v-col>
     </v-row>
 
