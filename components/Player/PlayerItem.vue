@@ -5,7 +5,11 @@
     hover
     raised
   >
-    <v-card flat>
+    <v-card
+      flat
+      nuxt
+      :to="{ name: 'players-id', params: { id: player.id } }"
+    >
       <v-container>
         <v-list-item>
           <template v-if="player.host.avatar_url">

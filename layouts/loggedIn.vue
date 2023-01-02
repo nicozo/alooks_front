@@ -169,7 +169,8 @@ export default {
         { name: 'applications' },
         { name: 'clans' },
         { name: 'clans-create' },
-        { name: 'clans-my_clan' }
+        { name: 'clans-my_clan' },
+        { name: 'players' }
       ],
       drawer: false,
       defaultAvatarSrc: this.$store.getters.defaultAvatarSrc
