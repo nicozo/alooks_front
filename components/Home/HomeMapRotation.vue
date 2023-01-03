@@ -136,7 +136,8 @@ export default {
       kingsCanyonSrc: require('@/static/kings_canyon.jpg'),
       worldEdgeSrc: require('@/static/world_edge.jpg'),
       olympusSrc: require('@/static/olympus.jpg'),
-      stormPointSrc: require('@/static/storm_point.jpg')
+      stormPointSrc: require('@/static/storm_point.jpg'),
+      brokenMoonSrc: require('@/static/broken_moon.png')
     }
   },
   computed: {
@@ -176,6 +177,10 @@ export default {
 
         case 'Kings Canyon':
           src = this.kingsCanyonSrc
+          break
+
+        case 'Broken Moon':
+          src = this.brokenMoonSrc
           break
 
         default:
