@@ -252,6 +252,12 @@
         </div>
       </v-tab-item>
     </v-tabs-items>
+
+    <player-edit-and-delete-button
+      :id="player.id"
+      :user-id="player.user_id"
+      @child-delete-method="childDeleteMethod"
+    />
   </v-card>
 </template>
 
@@ -325,7 +331,16 @@ export default {
     },
     childRequestApi () {
       this.$emit('child-request-api', this.player.host)
+    },
+    childDeleteMethod (clanId) {
+      this.$emit('child-delete-method', clanId)
     }
   }
 }
 </script>
+
+<style scoped>
+  .white-space {
+    white-space: normal;
+  }
+</style>
