@@ -51,7 +51,7 @@ export default {
       this.$router.push(this.redirectPath)
     },
     setToaster () {
-      const msg = 'フレンド募集を削除しました'
+      const msg = 'フレンド募集投稿を削除しました'
       const color = 'success'
 
       return this.$store.dispatch('getToast', { msg, color })

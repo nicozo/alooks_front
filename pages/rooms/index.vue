@@ -101,11 +101,16 @@
               v-bind="attrs"
               v-on="on"
             >
-              <v-icon>mdi-plus</v-icon>
+              <v-icon>
+                mdi-plus
+              </v-icon>
             </v-btn>
           </v-fab-transition>
         </template>
-        <span>{{ $t('pages.rooms-create') }}</span>
+
+        <span>
+          {{ $t('pages.rooms-create') }}
+        </span>
       </v-tooltip>
     </v-row>
 

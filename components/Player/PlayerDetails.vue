@@ -332,8 +332,8 @@ export default {
     childRequestApi () {
       this.$emit('child-request-api', this.player.host)
     },
-    childDeleteMethod (clanId) {
-      this.$emit('child-delete-method', clanId)
+    childDeleteMethod (playerId) {
+      this.$emit('child-delete-method', playerId)
     }
   }
 }

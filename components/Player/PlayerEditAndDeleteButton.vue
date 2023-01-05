@@ -1,5 +1,5 @@
 <template>
-  <div v-show="clanIsOwn()">
+  <div v-show="playerIsOwn()">
     <v-card-actions>
       <v-row dense>
         <v-col cols="12">
@@ -93,7 +93,7 @@ export default {
     }
   },
   methods: {
-    clanIsOwn () {
+    playerIsOwn () {
       return this.$auth.user.id === this.userId
     },
     handleDelete () {

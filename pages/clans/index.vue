@@ -97,11 +97,16 @@
               v-bind="attrs"
               v-on="on"
             >
-              <v-icon>mdi-plus</v-icon>
+              <v-icon>
+                mdi-plus
+              </v-icon>
             </v-btn>
           </v-fab-transition>
         </template>
-        <span>{{ $t('pages.clans-create') }}</span>
+
+        <span>
+          {{ $t('pages.clans-create') }}
+        </span>
       </v-tooltip>
     </v-row>
 
@@ -227,7 +232,7 @@ export default {
       this.$store.dispatch('clans/deleteClan', res)
     },
     setToaster () {
-      const msg = 'クランを削除しました'
+      const msg = 'クラン募集投稿を削除しました'
       const color = 'success'
 
       return this.$store.dispatch('getToast', { msg, color })

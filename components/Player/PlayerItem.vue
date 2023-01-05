@@ -29,6 +29,12 @@
         </v-list-item>
       </v-container>
     </v-card>
+
+    <player-edit-and-delete-button
+      :id="player.id"
+      :user-id="player.user_id"
+      @child-delete-method="childDeleteMethod"
+    />
   </v-card>
 </template>
 
@@ -57,6 +63,11 @@ export default {
   data () {
     return {
       defaultAvatarSrc: this.$store.getters.defaultAvatarSrc
+    }
+  },
+  methods: {
+    childDeleteMethod (playerId) {
+      this.$emit('child-delete-method', playerId)
     }
   }
 }

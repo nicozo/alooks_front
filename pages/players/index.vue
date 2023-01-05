@@ -10,7 +10,10 @@
         lg="4"
         xl="4"
       >
-        <PlayerItem :player="player" />
+        <PlayerItem
+          :player="player"
+          @child-delete-method="deletePlayer"
+        />
       </v-col>
     </v-row>
 
@@ -35,12 +38,16 @@
               v-bind="attrs"
               v-on="on"
             >
-              <v-icon>mdi-plus</v-icon>
+              <v-icon>
+                mdi-plus
+              </v-icon>
             </v-btn>
           </v-fab-transition>
         </template>
 
-        <span>{{ $t('pages.rooms-create') }}</span>
+        <span>
+          {{ $t('pages.rooms-create') }}
+        </span>
       </v-tooltip>
     </v-row>
 
@@ -89,6 +96,25 @@ export default {
     },
     returnTop () {
       window.scroll({ top: 0, behavior: 'smooth' })
+    },
+    async deletePlayer (playerId) {
+      this.$store.dispatch('getBtnLoading', true)
+
+      await this.$axios.$delete(
+        `api/v1/players/${playerId}`
+      )
+        .then(res => this.deleteSuccessful(res))
+    },
+    deleteSuccessful (res) {
+      this.$store.dispatch('getBtnLoading', false)
+      this.setToaster()
+      this.$store.dispatch('players/deletePlayer', res)
+    },
+    setToaster () {
+      const msg = 'フレンド募集投稿を削除しました'
+      const color = 'success'
+
+      return this.$store.dispatch('getToast', { msg, color })
     }
   }
 }
