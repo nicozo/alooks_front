@@ -33,7 +33,7 @@
               fab
               style="z-index: 10;"
               nuxt
-              :to="{ name: 'rooms-create' }"
+              :to="{ name: 'players-create' }"
               x-large
               v-bind="attrs"
               v-on="on"
@@ -46,7 +46,7 @@
         </template>
 
         <span>
-          {{ $t('pages.rooms-create') }}
+          {{ $t('pages.players-create') }}
         </span>
       </v-tooltip>
     </v-row>

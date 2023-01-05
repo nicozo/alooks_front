@@ -26,7 +26,8 @@
     "admin-applications": "参加リクエスト一覧",
     "admin-clans": "クラン一覧",
     "players": "フレンド募集一覧",
-    "players-id": "フレンド募集詳細"
+    "players-id": "フレンド募集詳細",
+    "players-create": "フレンドを募集"
   },
   "items": {
     "about": "エペスクとは？",

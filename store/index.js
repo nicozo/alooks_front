@@ -1,5 +1,6 @@
 const homePath = '/rooms'
 const clansPath = '/clans'
+const playersPath = '/players'
 
 export const state = () => ({
   toast: {
@@ -17,6 +18,10 @@ export const state = () => ({
     },
     clansPath: {
       path: clansPath,
+      params: {}
+    },
+    playersPath: {
+      path: playersPath,
       params: {}
     },
     redirectPaths: [
