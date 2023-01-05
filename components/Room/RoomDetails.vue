@@ -210,17 +210,17 @@
                                 justify="center"
                               >
                                 <v-col
-                                  v-for="(data, i) in filteredPlayerTotalStats"
+                                  v-for="(stats, i) in filteredPlayerTotalStats"
                                   :key="i"
                                   cols="6"
                                 >
                                   <v-list-item>
                                     <v-list-item-content>
                                       <v-list-item-subtitle class="white-space">
-                                        {{ data.value.name }}
+                                        {{ stats.value.name }}
                                       </v-list-item-subtitle>
                                       <v-list-item-title class="white-space">
-                                        {{ data.value.value }}
+                                        {{ stats.value.value }}
                                       </v-list-item-title>
                                     </v-list-item-content>
                                   </v-list-item>

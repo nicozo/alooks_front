@@ -34,7 +34,7 @@
           <v-container>
             <v-card-title>
               <span class="text-h5">
-                削除しますか？
+                {{ $t('message.confirm_delete') }}
               </span>
             </v-card-title>
 

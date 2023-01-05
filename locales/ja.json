@@ -128,7 +128,8 @@
     "no_requests": "現在参加リクエストはありません",
     "loading_stats": "Now Loading...",
     "no_rooms": "スクワッドの募集はありません",
-    "no_clans": "クランメンバーの募集はありません"
+    "no_clans": "クランメンバーの募集はありません",
+    "confirm_delete": "削除しますか？"
   },
   "profile": {
     "legend": {
@@ -224,6 +225,9 @@
     "activity_time": "-活動時間-",
     "snipe": "-スナイプや大会等-",
     "contact_means": "-クラン内の連絡手段-"
+  },
+  "player": {
+    "body": "募集メッセージ"
   },
   "search_title": "絞り込み検索",
   "admin": {
