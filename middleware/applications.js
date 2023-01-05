@@ -1,4 +1,4 @@
-export default async ({ $auth, $axios, store, route, redirect }) => {
+export default async ({ $auth, $axios, store }) => {
   if ($auth.loggedIn()) {
     const res = await $axios.$get('api/v1/applies')
 
