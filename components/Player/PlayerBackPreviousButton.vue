@@ -2,7 +2,7 @@
   <v-btn
     id="back-previous-page-button"
     plain
-    @click="$router.push('/players')"
+    @click="$router.push(playersPath)"
   >
     <v-icon>
       mdi-chevron-double-left
@@ -13,6 +13,11 @@
 
 <script>
 export default {
-  name: 'PlayerBackPreviousButton'
+  name: 'PlayerBackPreviousButton',
+  data () {
+    return {
+      playersPath: this.$store.state.loggedIn.playersPath
+    }
+  }
 }
 </script>

@@ -13,6 +13,7 @@
 
 <script>
 export default {
+  name: 'RoomBackPreviousButton',
   data () {
     return {
       homePath: this.$store.state.loggedIn.homePath.path
