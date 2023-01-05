@@ -7,7 +7,7 @@
             color="success"
             block
             nuxt
-            to="/"
+            :to="{ name: 'players-id-update', params: { id: id } }"
           >
             {{ $t('btn.player_edit') }}
           </v-btn>

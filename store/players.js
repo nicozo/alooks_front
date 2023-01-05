@@ -19,9 +19,9 @@ export const mutations = {
     state.players = state.players.unshift(player)
   },
   editPlayer (state, updatedPlayer) {
-    const index = state.player.find(player => player.id === updatedPlayer.id)
+    const index = state.players.find(player => player.id === updatedPlayer.id)
     if (index !== -1) {
-      state.player.splice(index, 1, updatedPlayer)
+      state.players.splice(index, 1, updatedPlayer)
     }
   },
   deletePlayer (state, deletePlayer) {
