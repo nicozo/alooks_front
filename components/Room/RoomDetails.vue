@@ -16,7 +16,7 @@
         v-for="item in items"
         :key="item"
       >
-        <div v-show="item === 'ホストプロフィール'">
+        <div v-show="item === 'プロフィール'">
           <v-card
             id="host-profile"
             max-width="600"
@@ -244,7 +244,7 @@
           </v-card>
         </div>
 
-        <div v-show="item === '募集スクワッド'">
+        <div v-show="item === '投稿'">
           <v-card
             :id="'room' + room.id"
             max-width="600"
@@ -354,9 +354,9 @@ export default {
   data () {
     return {
       items: [
-        'ホストプロフィール',
+        'プロフィール',
         'ステータス',
-        '募集スクワッド'
+        '投稿'
       ],
       tab: null,
       invalid: false,
