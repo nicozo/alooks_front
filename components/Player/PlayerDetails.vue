@@ -254,8 +254,8 @@
     </v-tabs-items>
 
     <v-row
-      dense
       v-show="playerIsOwn()"
+      dense
     >
       <v-col
         cols="12"
@@ -361,7 +361,7 @@ export default {
     twitterShare () {
       const shareURL =
         'https://twitter.com/intent/tweet?text=' +
-        'エペスクでフレンドを募集したよ！' +
+        'Apex Legendsで一緒に遊べる方を募集しています！' +
         `%0A${this.appFrontUrl}/players/${this.$route.params.id}` +
         '%20%23apex' + '%20%23apex募集' + '%20%23エペスク' + '%20%23apexフレンド募集'
 
