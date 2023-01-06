@@ -112,10 +112,11 @@
 
               <v-card-actions>
                 <v-spacer />
+
                 <v-btn
                   color="error"
                   text
-                  @click="closeDelete"
+                  @click="closeDialog"
                 >
                   {{ $t('btn.cancel') }}
                 </v-btn>
