@@ -70,7 +70,8 @@ export default {
         { name: 'admin' },
         { name: 'admin-rooms' },
         { name: 'admin-applications' },
-        { name: 'admin-clans' }
+        { name: 'admin-clans' },
+        { name: 'admin-players' }
       ]
     }
   },
