@@ -178,7 +178,6 @@ export default {
         .catch(e => this.updateFailure(e))
     },
     updateSuccessful (res) {
-      console.log(res)
       const msg = `参加リクエストID${res.id}を更新しました`
       const color = 'success'
       this.setToaster(msg, color)
@@ -202,7 +201,6 @@ export default {
         .then(res => this.deleteSuccessful(res))
     },
     deleteSuccessful (res) {
-      console.log(res)
       const msg = `参加リクエストID${res.id}を削除しました`
       const color = 'success'
       this.setToaster(msg, color)

@@ -182,7 +182,6 @@ export default {
         .catch(e => this.updateFailure(e))
     },
     updateSuccessful (res) {
-      console.log(res)
       this.$router.go({ path: this.$router.currentRoute.path, force: true })
       const msg = `クランID${res.id}を更新しました`
       const color = 'success'
@@ -206,7 +205,6 @@ export default {
         .then(res => this.deleteSuccessful(res))
     },
     deleteSuccessful (res) {
-      console.log(res)
       this.$router.go({ path: this.$router.currentRoute.path, force: true })
       const msg = `クランID${res.id}を削除しました`
       const color = 'success'
