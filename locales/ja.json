@@ -34,6 +34,7 @@
     "about": "エペスクとは？",
     "usage": "使い方",
     "rooms": "最近の募集スクワッド",
+    "players": "最近のフレンド募集",
     "map-rotation": "マップローテーション",
     "news": "Apexニュース"
   },
@@ -97,6 +98,7 @@
     "do_not_have_account": "アカウントお持ちでないですか？",
     "already_have_account": "アカウントをお持ちですか？",
     "to_rooms_page": "スクワッドを探す",
+    "to_players_page": "フレンドを探す",
     "to_top_page": "トップページへ戻る",
     "back_to_rooms_page": "スクワッド募集一覧へ戻る",
     "back_to_clans_page": "クランメンバー募集一覧へ戻る",

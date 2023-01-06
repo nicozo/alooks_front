@@ -17,6 +17,7 @@
               <v-img :src="player.host.avatar_url" alt="プロフィール画像です" />
             </v-list-item-avatar>
           </template>
+
           <template v-else>
             <v-list-item-avatar>
               <v-img :src="defaultAvatarSrc" alt="プロフィール画像です" />

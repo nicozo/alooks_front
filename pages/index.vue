@@ -113,6 +113,7 @@
 import HomeAbout from '../components/Home/HomeAbout'
 // import HomeUsage from '../components/Home/HomeUsage'
 import HomeRooms from '../components/Home/HomeRooms'
+import HomePlayers from '../components/Home/HomePlayers'
 import HomeMapRotation from '../components/Home/HomeMapRotation'
 import HomeNews from '../components/Home/HomeNews'
 
@@ -122,6 +123,7 @@ export default {
     HomeAbout,
     // HomeUsage,
     HomeRooms,
+    HomePlayers,
     HomeMapRotation,
     HomeNews
   },
@@ -135,6 +137,7 @@ export default {
         { title: 'about' },
         // { title: 'usage' },
         { title: 'rooms' },
+        { title: 'players' },
         { title: 'map-rotation' },
         { title: 'news' }
       ],
