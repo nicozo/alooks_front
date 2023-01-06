@@ -2,7 +2,7 @@
   <v-btn
     id="back-previous-page-button"
     plain
-    @click="$router.push('/clans')"
+    @click="$router.push(clansPath)"
   >
     <v-icon>
       mdi-chevron-double-left
@@ -13,6 +13,11 @@
 
 <script>
 export default {
-  name: 'ClanBackPreviousButton'
+  name: 'ClanBackPreviousButton',
+  data () {
+    return {
+      clansPath: this.$store.state.loggedIn.clansPath
+    }
+  }
 }
 </script>

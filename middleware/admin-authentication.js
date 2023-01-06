@@ -1,4 +1,4 @@
-export default ({ $auth, store, route, redirect }) => {
+export default ({ $auth, store, redirect }) => {
   // ログインユーザーの管理画面遷移前処理
   // 通常ログイン後、管理者でないユーザーが管理画面に遷移するとエラー画面が表示される為元々のページへリダイレクトさせる
   if ($auth.loggedIn() && !$auth.isAdmin()) {

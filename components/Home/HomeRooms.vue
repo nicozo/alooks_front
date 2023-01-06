@@ -114,7 +114,6 @@ export default {
         'api/v1/rooms/recent'
       )
         .then(res => this.requestSuccessful(res))
-        .catch(e => console.log(e))
     },
     requestSuccessful (res) {
       this.recent_rooms = res

@@ -1,5 +1,5 @@
 <template>
-  <div v-show="clanIsOwn()">
+  <div v-show="playerIsOwn()">
     <v-card-actions>
       <v-row dense>
         <v-col cols="12">
@@ -7,9 +7,9 @@
             color="success"
             block
             nuxt
-            :to="{ name: 'clans-id-update', params: { id: id } }"
+            :to="{ name: 'players-id-update', params: { id: id } }"
           >
-            {{ $t('btn.clan_edit') }}
+            {{ $t('btn.player_edit') }}
           </v-btn>
         </v-col>
 
@@ -26,7 +26,7 @@
                 v-bind="attrs"
                 v-on="on"
               >
-                {{ $t('btn.clan_destroy') }}
+                {{ $t('btn.player_destroy') }}
               </v-btn>
             </template>
 
@@ -93,7 +93,7 @@ export default {
     }
   },
   methods: {
-    clanIsOwn () {
+    playerIsOwn () {
       return this.$auth.user.id === this.userId
     },
     handleDelete () {

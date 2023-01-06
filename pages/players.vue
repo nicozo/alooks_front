@@ -6,7 +6,7 @@
 
 <script>
 export default {
-  name: 'RoomsDefaultPage',
+  name: 'PlayersDefaultPage',
   layout: 'loggedIn'
 }
 </script>

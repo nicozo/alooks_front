@@ -37,11 +37,22 @@
               <v-img :src="defaultAvatarSrc" alt="プロフィール画像です" />
             </v-list-item-avatar>
           </div>
-          <v-list-item-content>
-            <v-list-item-subtitle>
-              {{ $auth.user.name }}
-            </v-list-item-subtitle>
-          </v-list-item-content>
+
+          <div v-if="guestLoggedIn()">
+            <v-list-item-content>
+              <v-list-item-subtitle>
+                ゲストログイン中
+              </v-list-item-subtitle>
+            </v-list-item-content>
+          </div>
+
+          <div v-else>
+            <v-list-item-content>
+              <v-list-item-subtitle>
+                {{ $auth.user.name }}
+              </v-list-item-subtitle>
+            </v-list-item-content>
+          </div>
         </v-list-item>
 
         <v-divider />
@@ -81,17 +92,45 @@
           </template>
         </v-list-item>
 
-        <v-list-item>
-          <v-list-item-content>
-            <v-btn
-              nuxt
-              color="red"
-              :to="{ name: 'logout' }"
-            >
-              {{ $t('pages.logout') }}
-            </v-btn>
-          </v-list-item-content>
-        </v-list-item>
+        <div v-if="guestLoggedIn()">
+          <v-list-item>
+            <v-list-item-content>
+              <v-btn
+                nuxt
+                color="primary"
+                :to="{ name: 'register' }"
+              >
+                {{ $t('pages.register') }}
+              </v-btn>
+            </v-list-item-content>
+          </v-list-item>
+
+          <v-list-item>
+            <v-list-item-content>
+              <v-btn
+                nuxt
+                color="success"
+                :to="{ name: 'login' }"
+              >
+                {{ $t('pages.login') }}
+              </v-btn>
+            </v-list-item-content>
+          </v-list-item>
+        </div>
+
+        <div v-else>
+          <v-list-item>
+            <v-list-item-content>
+              <v-btn
+                nuxt
+                color="red"
+                :to="{ name: 'logout' }"
+              >
+                {{ $t('pages.logout') }}
+              </v-btn>
+            </v-list-item-content>
+          </v-list-item>
+        </div>
       </v-list>
     </v-navigation-drawer>
 
@@ -119,7 +158,6 @@
 export default {
   name: 'LoggedInLayout',
   middleware: [
-    'authentication',
     'applications'
   ],
   data ({ $config: { appName } }) {
@@ -131,7 +169,8 @@ export default {
         { name: 'applications' },
         { name: 'clans' },
         { name: 'clans-create' },
-        { name: 'clans-my_clan' }
+        { name: 'clans-my_clan' },
+        { name: 'players' }
       ],
       drawer: false,
       defaultAvatarSrc: this.$store.getters.defaultAvatarSrc
@@ -156,6 +195,9 @@ export default {
     },
     isApplicationsLink (navName) {
       return navName === 'applications'
+    },
+    guestLoggedIn () {
+      return !this.$auth.isExistUser()
     }
   }
 }

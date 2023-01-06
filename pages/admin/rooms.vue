@@ -112,10 +112,11 @@
 
               <v-card-actions>
                 <v-spacer />
+
                 <v-btn
                   color="error"
                   text
-                  @click="closeDelete"
+                  @click="closeDialog"
                 >
                   {{ $t('btn.cancel') }}
                 </v-btn>
@@ -156,7 +157,7 @@
 
 <script>
 export default {
-  name: 'AdminIRoomsPage',
+  name: 'AdminRoomsPage',
   layout: 'admin',
   async asyncData ({ $axios }) {
     const rooms = await $axios.$get(
@@ -209,7 +210,6 @@ export default {
         .catch(e => this.updateFailure(e))
     },
     updateSuccessful (res) {
-      console.log(res)
       this.$router.go({ path: this.$router.currentRoute.path, force: true })
       const msg = `スクワッドID${res.id}を更新しました`
       const color = 'success'
@@ -233,7 +233,6 @@ export default {
         .then(res => this.deleteSuccessful(res))
     },
     deleteSuccessful (res) {
-      console.log(res)
       this.$router.go({ path: this.$router.currentRoute.path, force: true })
       const msg = `スクワッドID${res.id}を削除しました`
       const color = 'success'

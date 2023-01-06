@@ -1,5 +1,5 @@
 <template>
-  <v-card>
+  <v-card id="player-details">
     <v-tabs v-model="tab">
       <v-tabs-slider color="success" />
 
@@ -16,20 +16,20 @@
         v-for="item in items"
         :key="item"
       >
-        <div v-show="item === 'プロフィール'">
+        <div v-show="item === '詳細'">
           <v-card
-            id="host-profile"
+            id="friend-recruit-details"
             max-width="600"
             flat
           >
             <v-container>
               <v-layout justify-center>
-                <div v-show="room.host.avatar_url">
+                <div v-show="player.host.avatar_url">
                   <v-avatar size="150">
-                    <v-img :src="room.host.avatar_url" />
+                    <v-img :src="player.host.avatar_url" />
                   </v-avatar>
                 </div>
-                <div v-show="!room.host.avatar_url">
+                <div v-show="!player.host.avatar_url">
                   <v-avatar size="150">
                     <v-img :src="defaultAvatarSrc" />
                   </v-avatar>
@@ -37,35 +37,42 @@
               </v-layout>
 
               <v-card-subtitle class="pa-1 font-weight-bold">
+                -{{ $t('player.body') }}-
+              </v-card-subtitle>
+              <v-card-text>
+                {{ player.body }}
+              </v-card-text>
+
+              <v-card-subtitle class="pa-1 font-weight-bold">
                 -{{ $t('user.name') }}-
               </v-card-subtitle>
               <v-card-text class="pa-1">
-                {{ room.host.name }}
+                {{ player.host.name }}
               </v-card-text>
 
               <v-card-subtitle class="pb-0 pa-1 font-weight-bold">
                 -{{ $t('user.self_introduction') }}-
               </v-card-subtitle>
               <v-card-text class="white-space pa-1">
-                {{ room.host.self_introduction }}
+                {{ player.host.self_introduction }}
               </v-card-text>
 
               <v-card-subtitle class="pa-1 font-weight-bold">
                 -{{ $t('user.sex') }}-
               </v-card-subtitle>
               <v-card-text class="pa-1">
-                {{ $t(`gender.${room.host.sex}`) }}
+                {{ $t(`gender.${player.host.sex}`) }}
               </v-card-text>
 
               <v-card-subtitle class="pa-1 font-weight-bold">
                 -{{ $t('user.age') }}-
               </v-card-subtitle>
-              <div v-show="room.host.date_of_birth">
+              <div v-show="player.host.date_of_birth">
                 <v-card-text class="pa-1">
                   {{ host.age }}歳
                 </v-card-text>
               </div>
-              <div v-show="!room.host.date_of_birth">
+              <div v-show="!player.host.date_of_birth">
                 <v-card-text class="pa-1">
                   {{ $t('Unregistered') }}
                 </v-card-text>
@@ -75,18 +82,18 @@
                 -{{ $t('user.platform') }}-
               </v-card-subtitle>
               <v-card-text class="pa-1">
-                {{ room.host.platform }}
+                {{ player.host.platform }}
               </v-card-text>
 
               <v-card-subtitle class="pa-1 font-weight-bold">
                 -{{ $t('user.kd') }}-
               </v-card-subtitle>
-              <div v-show="room.host.kd">
+              <div v-show="player.host.kd">
                 <v-card-text class="pa-1">
-                  {{ room.host.kd }}
+                  {{ player.host.kd }}
                 </v-card-text>
               </div>
-              <div v-show="!room.host.kd">
+              <div v-show="!player.host.kd">
                 <v-card-text class="pa-1">
                   {{ $t('Unregistered') }}
                 </v-card-text>
@@ -95,12 +102,12 @@
               <v-card-subtitle class="pa-1 font-weight-bold">
                 -{{ $t('user.highest_damage') }}-
               </v-card-subtitle>
-              <div v-show="room.host.highest_damage">
+              <div v-show="player.host.highest_damage">
                 <v-card-text class="pa-1">
-                  {{ room.host.highest_damage }}
+                  {{ player.host.highest_damage }}
                 </v-card-text>
               </div>
-              <div v-show="!room.host.highest_damage">
+              <div v-show="!player.host.highest_damage">
                 <v-card-text class="pa-1">
                   {{ $t('Unregistered') }}
                 </v-card-text>
@@ -109,12 +116,12 @@
               <v-card-subtitle class="pa-1 font-weight-bold">
                 -{{ $t('user.favorite_weapons') }}-
               </v-card-subtitle>
-              <div v-show="room.host.favorite_weapons">
+              <div v-show="player.host.favorite_weapons">
                 <v-card-text class="pa-1">
-                  {{ room.host.favorite_weapons }}
+                  {{ player.host.favorite_weapons }}
                 </v-card-text>
               </div>
-              <div v-show="!room.host.favorite_weapons">
+              <div v-show="!player.host.favorite_weapons">
                 <v-card-text class="pa-1">
                   {{ $t('Unregistered') }}
                 </v-card-text>
@@ -243,128 +250,61 @@
             </v-container>
           </v-card>
         </div>
-
-        <div v-show="item === '投稿'">
-          <v-card
-            :id="'room' + room.id"
-            max-width="600"
-            flat
-          >
-            <v-list-item>
-              <room-item-overlay :application-deadline="room.application_deadline" />
-
-              <v-container>
-                <div class="text-right">
-                  <v-chip
-                    color="red"
-                    dark
-                  >
-                    あと{{ room.recruitment_number }}人募集
-                  </v-chip>
-                </div>
-
-                <v-card-title>
-                  {{ room.title }}
-                </v-card-title>
-
-                <v-divider />
-
-                <v-card-text>
-                  {{ $t('room.platform.title') }}：
-                  <v-chip
-                    color="indigo darken-3"
-                    dark
-                    outlined
-                  >
-                    {{ $t(`room.platform.${room.platform}`) }}
-                  </v-chip>
-                </v-card-text>
-
-                <v-card-text>
-                  {{ $t('room.game_mode.title') }}：
-                  <v-chip
-                    color="deep-orange darken-3"
-                    dark
-                    outlined
-                  >
-                    {{ $t(`room.game_mode.${room.game_mode}`) }}
-                  </v-chip>
-                </v-card-text>
-
-                <v-card-text>
-                  {{ $t('room.rank_tier.title') }}：
-                  <v-chip
-                    color="teal darken-3"
-                    dark
-                    outlined
-                  >
-                    {{ $t(`room.rank_tier.${room.rank_tier}`) }}
-                  </v-chip>
-                </v-card-text>
-
-                <v-card-text>
-                  {{ $t('room.application_deadline') }}：
-                  <v-chip
-                    color="pink darken-3"
-                    dark
-                    outlined
-                  >
-                    {{ timeToDeadline }}
-                  </v-chip>
-                </v-card-text>
-              </v-container>
-            </v-list-item>
-          </v-card>
-        </div>
       </v-tab-item>
     </v-tabs-items>
 
-    <template v-if="roomIsOwn()">
-      <room-edit-and-delete-button
-        :id="room.id"
-        @child-delete-method="childRoomDelete"
-      />
-    </template>
+    <v-row
+      v-show="playerIsOwn()"
+      dense
+    >
+      <v-col
+        cols="12"
+        align="center"
+      >
+        <v-btn
+          dark
+          color="#1d9bf0"
+          width="250"
+          @click="twitterShare"
+        >
+          <v-icon left>
+            mdi-twitter
+          </v-icon>
+          {{ $t('btn.twitter_share') }}
+        </v-btn>
+      </v-col>
+    </v-row>
 
-    <template v-else>
-      <app-join-request-button
-        :room="room"
-        :auth-user="authUser"
-        :invalid="invalid"
-      />
-    </template>
+    <player-edit-and-delete-button
+      :id="player.id"
+      :user-id="player.user_id"
+      @child-delete-method="childDeleteMethod"
+    />
   </v-card>
 </template>
 
 <script>
 export default {
-  name: 'RoomDetails',
+  name: 'PlayerDetails',
   props: {
-    room: {
+    player: {
       type: Object,
-      default: () => {},
-      require: true
-    },
-    authUser: {
-      type: Object,
-      default: () => {},
-      require: true
+      require: true,
+      default: () => {}
     }
   },
-  data () {
+  data ({ $config: { appFrontUrl } }) {
     return {
       items: [
-        'プロフィール',
-        'ステータス',
-        '投稿'
+        '詳細',
+        'ステータス'
       ],
-      tab: null,
-      invalid: false,
-      timeToDeadline: '',
       host: {
         age: ''
       },
-      defaultAvatarSrc: this.$store.getters.defaultAvatarSrc
+      tab: null,
+      defaultAvatarSrc: this.$store.getters.defaultAvatarSrc,
+      appFrontUrl
     }
   },
   computed: {
@@ -396,37 +336,12 @@ export default {
     }
   },
   created () {
-    this.childRequestApi()
-    this.changeDateFormat()
     this.setUserAge()
+    this.childRequestApi()
   },
   methods: {
     setUserAge () {
-      this.host.age = this.getUserAge(this.room.host.date_of_birth)
-    },
-    isRoomClosing (roomDeadline) {
-      const now = new Date()
-      const deadline = this.$dayjs(roomDeadline).$d
-
-      return deadline < now
-    },
-    changeDateFormat () {
-      const roomDeadline = this.room.application_deadline
-      const minutesToDeadline = this.$dayjs(roomDeadline).fromNow()
-
-      this.timeToDeadline = this.replaceFormat(minutesToDeadline)
-    },
-    replaceFormat (str) {
-      if (str.includes('後')) {
-        str = str.replace('後', 'で締め切り')
-      } else {
-        str = '締め切りました'
-        this.isInvalid()
-      }
-      return str
-    },
-    isInvalid () {
-      this.invalid = true
+      this.host.age = this.getUserAge(this.player.host.date_of_birth)
     },
     getUserAge (birthday) {
       if (!birthday) { return }
@@ -437,14 +352,23 @@ export default {
 
       return today < thisYearsBirthday ? age - 1 : age
     },
-    roomIsOwn () {
-      return this.authUser.id === this.room.user_id
-    },
     childRequestApi () {
-      this.$emit('child-request-api', this.room.host)
+      this.$emit('child-request-api', this.player.host)
     },
-    childRoomDelete (roomId) {
-      this.$emit('child-delete-method', roomId)
+    childDeleteMethod (playerId) {
+      this.$emit('child-delete-method', playerId)
+    },
+    twitterShare () {
+      const shareURL =
+        'https://twitter.com/intent/tweet?text=' +
+        'Apex Legendsで一緒に遊べる方を募集しています！' +
+        `%0A${this.appFrontUrl}/players/${this.$route.params.id}` +
+        '%20%23apex' + '%20%23apex募集' + '%20%23エペスク' + '%20%23apexフレンド募集'
+
+      location.href = shareURL
+    },
+    playerIsOwn () {
+      return this.$auth.user.id === this.player.user_id
     }
   }
 }

@@ -2,21 +2,21 @@
   <v-btn
     id="back-previous-page-button"
     plain
-    @click="$router.push(homePath)"
+    @click="$router.push(playersPath)"
   >
     <v-icon>
       mdi-chevron-double-left
     </v-icon>
-    {{ $t('btn.back_to_rooms_page') }}
+    {{ $t('btn.back_to_players_page') }}
   </v-btn>
 </template>
 
 <script>
 export default {
-  name: 'RoomBackPreviousButton',
+  name: 'PlayerBackPreviousButton',
   data () {
     return {
-      homePath: this.$store.state.loggedIn.homePath.path
+      playersPath: this.$store.state.loggedIn.playersPath
     }
   }
 }

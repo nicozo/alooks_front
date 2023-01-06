@@ -64,7 +64,10 @@
 <script>
 export default {
   name: 'RoomUpdatePage',
-  middleware: ['room-edit'],
+  middleware: [
+    'authentication',
+    'room-edit'
+  ],
   data () {
     return {
       room: {

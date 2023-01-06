@@ -8,10 +8,7 @@
           </v-expansion-panel-header>
           <v-expansion-panel-content>
             <v-card flat>
-              <form
-                id="search-form"
-                class="step-2"
-              >
+              <form id="search-form">
                 <v-container>
                   <room-form-search-keyword :keyword.sync="search.keyword" />
 
@@ -91,7 +88,6 @@
         <template #activator="{ on, attrs }">
           <v-fab-transition>
             <v-btn
-              class="step-1"
               color="primary"
               dark
               fixed
@@ -105,11 +101,16 @@
               v-bind="attrs"
               v-on="on"
             >
-              <v-icon>mdi-plus</v-icon>
+              <v-icon>
+                mdi-plus
+              </v-icon>
             </v-btn>
           </v-fab-transition>
         </template>
-        <span>{{ $t('pages.rooms-create') }}</span>
+
+        <span>
+          {{ $t('pages.rooms-create') }}
+        </span>
       </v-tooltip>
     </v-row>
 
@@ -122,8 +123,6 @@
         />
       </v-col>
     </v-row>
-
-    <v-tour name="roomsTour" :steps="steps" />
   </v-container>
 </template>
 
@@ -143,22 +142,6 @@ export default {
         rank_tier: '',
         opening: ''
       },
-      steps: [
-        {
-          target: '.step-1',
-          content: 'スクワッドの募集を作成できます',
-          params: {
-            placement: 'left'
-          }
-        },
-        {
-          target: '.step-2',
-          content: 'スクワッドの検索ができます',
-          params: {
-            placement: 'top'
-          }
-        }
-      ],
       authUser: this.$auth.user
     }
   },
@@ -174,6 +157,7 @@ export default {
 
       for (const i in this.rooms) {
         const room = this.rooms[i]
+
         if (room.title.includes(this.search.keyword) &&
             room.platform.includes(this.search.platform) &&
             room.game_mode.includes(this.search.game_mode) &&
@@ -192,14 +176,12 @@ export default {
     },
     displayRooms () {
       this.returnTop()
+
       return this.pageNumber !== 0 ? this.filteredRooms.slice(this.pageSize * (this.pageNumber - 1), this.pageSize * this.pageNumber) : this.filteredRooms.slice(0, this.pageSize)
     },
     displayRoomsExist () {
       return this.displayRooms.length !== 0
     }
-  },
-  mounted () {
-    this.$tours.roomsTour.start()
   },
   methods: {
     setPageNumber (number) {
@@ -211,12 +193,13 @@ export default {
     isOpening (roomDeadline) {
       const now = new Date()
       const deadline = this.$dayjs(roomDeadline).$d
+
       return now < deadline
     },
     uncheck () {
       // Todo チェックを外した後、同じラジオボタンをクリックできない。
       const activeButtons = document.querySelectorAll('.v-radio.theme--light.v-item--active')
-      console.log(activeButtons)
+
       if (activeButtons.length !== 0) {
         for (const activeButton of activeButtons) {
           const activeButtonChild = activeButton.firstChild.firstChild
@@ -243,7 +226,7 @@ export default {
       this.setToaster()
     },
     setToaster () {
-      const msg = 'クランを削除しました'
+      const msg = 'スクワッドを削除しました'
       const color = 'success'
 
       return this.$store.dispatch('getToast', { msg, color })

@@ -24,12 +24,18 @@
     "admin": "ユーザー一覧",
     "admin-rooms": "スクワッド一覧",
     "admin-applications": "参加リクエスト一覧",
-    "admin-clans": "クラン一覧"
+    "admin-clans": "クラン一覧",
+    "admin-players": "フレンド募集一覧",
+    "players": "フレンド募集一覧",
+    "players-id": "フレンド募集詳細",
+    "players-create": "フレンドを募集",
+    "players-id-update": "フレンド募集を編集"
   },
   "items": {
     "about": "エペスクとは？",
     "usage": "使い方",
     "rooms": "最近の募集スクワッド",
+    "players": "最近のフレンド募集",
     "map-rotation": "マップローテーション",
     "news": "Apexニュース"
   },
@@ -93,9 +99,11 @@
     "do_not_have_account": "アカウントお持ちでないですか？",
     "already_have_account": "アカウントをお持ちですか？",
     "to_rooms_page": "スクワッドを探す",
+    "to_players_page": "フレンドを探す",
     "to_top_page": "トップページへ戻る",
     "back_to_rooms_page": "スクワッド募集一覧へ戻る",
     "back_to_clans_page": "クランメンバー募集一覧へ戻る",
+    "back_to_players_page": "フレンド募集一覧へ戻る",
     "accept_request": "リクエスト承諾",
     "cancel": "取り消し",
     "submit": "送信",
@@ -107,7 +115,11 @@
     "uncheck": "チェックを外す",
     "room_edit": "スクワッドを編集",
     "room_destroy": "スクワッドを削除",
-    "delete": "削除"
+    "delete": "削除",
+    "player_create": "フレンドを募集",
+    "player_edit": "フレンド募集を編集",
+    "player_destroy": "フレンド募集を削除",
+    "twitter_share": "Twitterでシェアする"
   },
   "gender": {
     "male": "男性",
@@ -120,7 +132,8 @@
     "no_requests": "現在参加リクエストはありません",
     "loading_stats": "Now Loading...",
     "no_rooms": "スクワッドの募集はありません",
-    "no_clans": "クランメンバーの募集はありません"
+    "no_clans": "クランメンバーの募集はありません",
+    "confirm_delete": "削除しますか？"
   },
   "profile": {
     "legend": {
@@ -216,6 +229,9 @@
     "activity_time": "-活動時間-",
     "snipe": "-スナイプや大会等-",
     "contact_means": "-クラン内の連絡手段-"
+  },
+  "player": {
+    "body": "募集メッセージ"
   },
   "search_title": "絞り込み検索",
   "admin": {

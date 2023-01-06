@@ -2,7 +2,7 @@
   <v-container>
     <v-data-table
       :headers="headers"
-      :items="clans"
+      :items="players"
       class="elevation-1"
     >
       <template #top>
@@ -19,7 +19,7 @@
 
           <v-spacer />
 
-          <!-- クラン編集モーダル -->
+          <!-- フレンド募集編集モーダル -->
           <v-dialog
             v-model="editDialog"
             max-width="500px"
@@ -35,19 +35,7 @@
                 <v-container>
                   <v-row dense>
                     <v-col cols="12">
-                      <clan-form-name :name.sync="clan.name" />
-                    </v-col>
-
-                    <v-col cols="12">
-                      <clan-form-concept :concept.sync="clan.concept" />
-                    </v-col>
-
-                    <v-col cols="12">
-                      <clan-form-joining-process :joining-process.sync="clan.joining_process" />
-                    </v-col>
-
-                    <v-col cols="12">
-                      <clan-form-prohibited-matters :prohibited-matters.sync="clan.prohibited_matters" />
+                      <player-form-body :body.sync="player.body" />
                     </v-col>
 
                     <v-card-actions>
@@ -66,7 +54,7 @@
                         text
                         :disabled="invalid"
                         :loading="btnLoading"
-                        @click="update(clan)"
+                        @click="update(player)"
                       >
                         {{ $t('btn.update') }}
                       </v-btn>
@@ -84,7 +72,7 @@
           >
             <v-card>
               <v-card-title class="text-h5">
-                クランID{{ clan.id }}を削除しますか？
+                フレンド募集掲示板ID{{ player.id }}を削除しますか？
               </v-card-title>
 
               <v-card-actions>
@@ -101,7 +89,7 @@
                   color="blue darken-1"
                   text
                   :loading="btnLoading"
-                  @click="clanDelete(clan)"
+                  @click="playerDelete(player)"
                 >
                   {{ $t('btn.delete') }}
                 </v-btn>
@@ -133,14 +121,14 @@
 
 <script>
 export default {
-  name: 'AdminClansPage',
+  name: 'AdminPlayersPage',
   layout: 'admin',
   async asyncData ({ $axios }) {
-    const clans = await $axios.$get(
-      '/api/v1/admin/clans'
+    const players = await $axios.$get(
+      '/api/v1/admin/players'
     )
 
-    return { clans }
+    return { players }
   },
   data ({ $route }) {
     return {
@@ -148,19 +136,13 @@ export default {
       editDialog: false,
       deleteDialog: false,
       editedIndex: -1,
-      clan: {
-        name: '',
-        concept: '',
-        joining_process: '',
-        prohibited_matters: ''
+      player: {
+        body: ''
       },
       number: 10,
       headers: [
         { text: 'ID', value: 'id' },
-        { text: 'クラン名', value: 'name' },
-        { text: 'コンセプト', value: 'concept' },
-        { text: '入団まで', value: 'joining_process' },
-        { text: '禁止事項', value: 'prohibited_matters' },
+        { text: '募集文', value: 'body' },
         { text: 'Actions', value: 'actions', sortable: false }
       ]
     }
@@ -171,19 +153,19 @@ export default {
     }
   },
   methods: {
-    async update (clan) {
+    async update (player) {
       this.$store.dispatch('getBtnLoading', true)
 
       await this.$axios.$patch(
-        `/api/v1/admin/clans/${clan.id}`,
-        this.clan
+        `/api/v1/admin/players/${player.id}`,
+        this.player
       )
         .then(res => this.updateSuccessful(res))
         .catch(e => this.updateFailure(e))
     },
     updateSuccessful (res) {
       this.$router.go({ path: this.$router.currentRoute.path, force: true })
-      const msg = `クランID${res.id}を更新しました`
+      const msg = `フレンド募集掲示板ID${res.id}を更新しました`
       const color = 'success'
       this.setToaster(msg, color)
       this.$store.dispatch('getBtnLoading', false)
@@ -192,36 +174,36 @@ export default {
     updateFailure ({ response }) {
       this.$store.dispatch('getBtnLoading', false)
       if (response && response.status === 400) {
-        const msg = 'クランの更新に失敗しました'
+        const msg = 'フレンド募集掲示板の更新に失敗しました'
         return this.$store.dispatch('getToast', { msg })
       }
     },
-    async clanDelete (clan) {
+    async playerDelete (player) {
       this.$store.dispatch('getBtnLoading', false)
 
       await this.$axios.$delete(
-        `/api/v1/admin/clans/${clan.id}`
+        `/api/v1/admin/players/${player.id}`
       )
         .then(res => this.deleteSuccessful(res))
     },
     deleteSuccessful (res) {
       this.$router.go({ path: this.$router.currentRoute.path, force: true })
-      const msg = `クランID${res.id}を削除しました`
+      const msg = `フレンド募集掲示板ID${res.id}を削除しました`
       const color = 'success'
       this.setToaster(msg, color)
       this.$store.dispatch('getBtnLoading', false)
       this.closeDialog()
     },
-    setClan (clan) {
-      this.editedIndex = this.clans.indexOf(clan)
-      this.clan = Object.assign({}, clan)
+    setPlayer (player) {
+      this.editedIndex = this.players.indexOf(player)
+      this.player = Object.assign({}, player)
     },
-    openEditDialog (clan) {
-      this.setClan(clan)
+    openEditDialog (player) {
+      this.setPlayer(player)
       this.editDialog = true
     },
-    openDeleteDialog (clan) {
-      this.setClan(clan)
+    openDeleteDialog (player) {
+      this.setPlayer(player)
       this.deleteDialog = true
     },
     closeDialog () {
