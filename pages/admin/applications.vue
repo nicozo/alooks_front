@@ -132,7 +132,7 @@
 
 <script>
 export default {
-  name: 'AdminIApplicationsPage',
+  name: 'AdminApplicationsPage',
   layout: 'admin',
   async asyncData ({ $axios }) {
     const applications = await $axios.$get(

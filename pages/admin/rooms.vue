@@ -156,7 +156,7 @@
 
 <script>
 export default {
-  name: 'AdminIRoomsPage',
+  name: 'AdminRoomsPage',
   layout: 'admin',
   async asyncData ({ $axios }) {
     const rooms = await $axios.$get(

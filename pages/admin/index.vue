@@ -229,7 +229,7 @@
 
 <script>
 export default {
-  name: 'AdminIndexPage',
+  name: 'AdminndexPage',
   layout: 'admin',
   async asyncData ({ $axios }) {
     const users = await $axios.$get(

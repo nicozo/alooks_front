@@ -133,7 +133,7 @@
 
 <script>
 export default {
-  name: 'AdminIClansPage',
+  name: 'AdminClansPage',
   layout: 'admin',
   async asyncData ({ $axios }) {
     const clans = await $axios.$get(

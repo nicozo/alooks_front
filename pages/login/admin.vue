@@ -48,7 +48,7 @@
 
 <script>
 export default {
-  name: 'AdminILoginPage',
+  name: 'AdminLoginPage',
   layout: 'signup',
   data ({ $route }) {
     return {
