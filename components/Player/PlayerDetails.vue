@@ -253,6 +253,28 @@
       </v-tab-item>
     </v-tabs-items>
 
+    <v-row
+      dense
+      v-show="playerIsOwn()"
+    >
+      <v-col
+        cols="12"
+        align="center"
+      >
+        <v-btn
+          dark
+          color="#1d9bf0"
+          width="250"
+          @click="twitterShare"
+        >
+          <v-icon left>
+            mdi-twitter
+          </v-icon>
+          {{ $t('btn.twitter_share') }}
+        </v-btn>
+      </v-col>
+    </v-row>
+
     <player-edit-and-delete-button
       :id="player.id"
       :user-id="player.user_id"
@@ -271,7 +293,7 @@ export default {
       default: () => {}
     }
   },
-  data () {
+  data ({ $config: { appFrontUrl } }) {
     return {
       items: [
         '詳細',
@@ -281,7 +303,8 @@ export default {
         age: ''
       },
       tab: null,
-      defaultAvatarSrc: this.$store.getters.defaultAvatarSrc
+      defaultAvatarSrc: this.$store.getters.defaultAvatarSrc,
+      appFrontUrl
     }
   },
   computed: {
@@ -334,6 +357,18 @@ export default {
     },
     childDeleteMethod (playerId) {
       this.$emit('child-delete-method', playerId)
+    },
+    twitterShare () {
+      const shareURL =
+        'https://twitter.com/intent/tweet?text=' +
+        'エペスクでフレンドを募集したよ！' +
+        `%0A${this.appFrontUrl}/players/${this.$route.params.id}` +
+        '%20%23apex' + '%20%23apex募集' + '%20%23エペスク' + '%20%23apexフレンド募集'
+
+      location.href = shareURL
+    },
+    playerIsOwn () {
+      return this.$auth.user.id === this.player.user_id
     }
   }
 }

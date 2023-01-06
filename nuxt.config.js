@@ -84,7 +84,8 @@ export default {
     appName: process.env.APP_NAME,
     googleAnalytics: {
       id: process.env.GOOGLE_ANALYTICS_ID
-    }
+    },
+    appFrontUrl: process.env.APP_FRONT_URL
   },
 
   router: {
